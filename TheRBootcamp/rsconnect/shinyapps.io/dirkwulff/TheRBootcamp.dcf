@@ -5,9 +5,9 @@ account: dirkwulff
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8416284
-bundleId: 6890424
+bundleId: 6894181
 url: https://dirkwulff.shinyapps.io/TheRBootcamp/
-when: 1677452059.60046
-lastSyncTime: 1677452059.60046
+when: 1677528682.58795
+lastSyncTime: 1677528682.58797
 asMultiple: FALSE
 asStatic: FALSE
