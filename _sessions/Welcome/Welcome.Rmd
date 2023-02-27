@@ -1,0 +1,262 @@
+---
+title: "Willkommen"
+author: "R 4 Data Science<br>
+  <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
+  <br>
+  <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
+    <i class='fas fa-clock' style='font-size:.9em;'></i>
+  </a>&#8239; 
+  <a href='https://therbootcamp.github.io'>
+    <i class='fas fa-home' style='font-size:.9em;' ></i>
+  </a>&#8239;
+  <a href='mailto:therbootcamp@gmail.com'>
+    <i class='fas fa-envelope' style='font-size: .9em;'></i>
+  </a>&#8239;
+  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
+    <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+  </a>"
+date: "März 2023"
+output:
+  xaringan::moon_reader:
+    css: ["default", "baselrbootcamp.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+layout: true
+
+<div class="my-footer">
+  <span style="text-align:center">
+    <span> 
+      <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png" height=14 style="vertical-align: middle"/>
+    </span>
+    <a href="https://therbootcamp.github.io/">
+      <span style="padding-left:82px"> 
+        <font color="#7E7E7E">
+          www.therbootcamp.com
+        </font>
+      </span>
+    </a>
+    <a href="https://therbootcamp.github.io/">
+      <font color="#7E7E7E">
+       Dashboards mit Shiny | März 2023
+      </font>
+    </a>
+    </span>
+  </div> 
+
+---
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(width=110)
+options(digits = 4)
+
+knitr::opts_chunk$set(fig.align = 'center')
+```
+
+
+
+.pull-left6[
+
+<br><br><br><br><br>
+
+# Ziel
+
+>###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
+
+]
+
+.pull-right4[
+
+<br><br><br><br>
+<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/target.png" height="350"></p>
+
+]
+
+
+---
+
+# Dashboards
+
+
+---
+
+.pull-left3[
+
+# Shiny
+
+<ul>
+  <li class="m1"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
+  <ul class="level">
+    <li><span>Eine Auswahl nutzerfreundlicher <high>Pakete</high> für die Analyse von <high>tidy data</high></span></li><br>
+    <li><span>Ein <high>Ökosystem</high> für Analytics und Data Science mit konsistenten Designprinzipien</span></li><br>
+    <li><span>Ein <high>Dialekt</high> von R</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right65[
+<br><br>
+<p align="center">
+<img src="image/tidyverse.png" height = "520px">
+</p>
+]
+
+---
+
+# Beispiele
+
+dashboard day 1
+dashboard day 2
+Fragezeichen (Wettbewerb)
+
+
+---
+
+.pull-left35[
+
+<br>
+# Agenda 
+
+<ul>
+  <li class="m1"><span><high>Workshop</high></span></li>
+  <ul class="level">
+    <li><span>Einführung</span></li>
+    <li><span>Session zu Data IO</span></li>
+    <li><span>Sessions zu Wrangling</span></li>
+    <li><span>Sessions zu Plotting</span></li>
+    <li><span>Wettbewerb</span></li>
+  </ul><br>
+  <li class="m2"><span><high>Block</high></span></li>
+  <ul class="level">
+    <li><span>Folien-basierte Einführung</span></li>
+    <li><span>Viele Übungen</span></li>
+    <li><span>Interaktive Zusammenfassung</span></li>
+  </ul>
+  </span></li>
+</ul>
+
+]
+
+.pull-right55[
+<br><br>
+<img src="image/schedule.png" height="525" align="center">
+
+]
+
+---
+
+
+# Einführung
+
+.pull-left45[
+<br2>
+
+<ul>
+  <li class="m1"><span><high>Inhalt</high>
+  <br><br>
+  <ul class="level">
+    <li><span>Konzepte</span></li>
+    <li><span>Code Beispiele</span></li>
+  </ul><br>
+  <li class="m1"><span><high>Tag 1</high>
+  <br><br>
+  <ul class="level">
+    <li><span>15-30 min</span></li>
+  </ul><br>
+  <li class="m1"><span><high>Tag 2 & 3</high>
+  <br><br>
+  <ul class="level">
+    <li><span>30-60 min</span></li>
+  </ul><br>
+</ul>
+
+]
+
+.pull-right55[
+
+<p align="center">
+<img src="image/present.jpg" style="width:420px">
+<br>
+<font style="font-size:10px">from <a href="www.Freepik.com">Freepik.com</a></font>
+</p>
+
+]
+
+
+---
+
+.pull-left45[
+
+# Übungen
+
+
+<ul>
+  <li class="m1"><span><high>Inhalt</high>
+  <br><br>
+  <ul class="level">
+    <li><span>Learn-by-doing</span></li>
+    <li><span>Steigende Schwierigkeit</span></li>
+    <li><span>Lösungen später</span></li>
+  </ul><br>
+  <li class="m2"><span><high>Tag 1</high>
+  <br><br>
+  <ul class="level">
+    <li><span>10-20 Aufgaben in 10-20 Minuten</span></li>
+    <li><span>Skripte im Projektordner</span></li>
+  </ul><br>
+  <li class="m3"><span><high>Tag 2 & 3</high>
+  <br><br>
+  <ul class="level">
+    <li><span>25-50 Aufgaben in 45-90 Minuten</span></li>
+    <li><span>Links auf der Kursseite</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+<br>
+
+  <iframe src="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html" height="480px" width = "500px"></iframe>
+
+  Beispiel:<a href="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html"> Daten </a>
+
+]
+
+---
+
+# Vorstellung
+
+.pull-left5[
+
+<ul>
+  <li class="m1"><span>Wie heisst Du?</span></li>
+  <li class="m2"><span>Was ist Deine Rolle in der CSS?</span></li>
+  <li class="m3"><span>Hast Du Programmiererfahrung mit R oder anderen Programmiersprachen?</span></li>
+  <li class="m4"><span>Welche Probleme möchtest Du mit R lösen?</span></li>
+</ul>
+
+]
+
+.pull-right45[
+
+<p align="center">
+<img src="https://therbootcamp.github.io/ML_2022DHLab/_sessions/Intro/image/intro.jpg" height="360px">
+<br>
+<font style="font-size:10px">from <a href="https://unsplash.com/photos/SymZoeE8quA">unsplash.com</a></font>
+</p>
+
+]
+
+---
+class: middle, center
+
+<h1><a href=https://therbootcamp.github.io/Shiny_2023CSS/index.html>Agenda</a></h1>

@@ -1,0 +1,157 @@
+---
+title: "Erste App"
+author: "Dashboards mit Shiny<br>
+  <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
+  <br>
+  <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
+    <i class='fas fa-clock' style='font-size:.9em;'></i>
+  </a>&#8239; 
+  <a href='https://therbootcamp.github.io'>
+    <i class='fas fa-home' style='font-size:.9em;' ></i>
+  </a>&#8239;
+  <a href='mailto:therbootcamp@gmail.com'>
+    <i class='fas fa-envelope' style='font-size: .9em;'></i>
+  </a>&#8239;
+  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
+    <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+  </a>"
+date: "März 2023"
+output:
+  xaringan::moon_reader:
+    css: ["default", "baselrbootcamp.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+layout: true
+
+<div class="my-footer">
+  <span style="text-align:center">
+    <span> 
+      <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png" height=14 style="vertical-align: middle"/>
+    </span>
+    <a href="https://therbootcamp.github.io/">
+      <span style="padding-left:82px"> 
+        <font color="#7E7E7E">
+          www.therbootcamp.com
+        </font>
+      </span>
+    </a>
+    <a href="https://therbootcamp.github.io/">
+      <font color="#7E7E7E">
+       Dashboards mit Shiny | März 2023
+      </font>
+    </a>
+    </span>
+  </div> 
+
+---
+
+
+```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
+# Code to knit slides
+baselers <- readr::read_csv("1_Data/basel.csv")
+```
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+# see: https://github.com/yihui/xaringan
+# install.packages("xaringan")
+# see: 
+# https://github.com/yihui/xaringan/wiki
+# https://github.com/gnab/remark/wiki/Markdown
+options(width=110)
+options(digits = 4)
+```
+
+```{r, echo = FALSE ,message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
+                      message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
+library(tidyverse)
+library(ggthemes)
+basel = read_csv('1_Data/basel.csv')
+```
+
+
+# Agenda
+
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Erste app.</span></li>
+  <li class="m2"><span><high>Separate Funktionen</high> für verschiedene Plots</span></li>
+</ul>
+
+<br>
+
+```{r, eval = FALSE}
+# Histogram in base R
+hist(x = basel$alter,
+     xlab = "Alter",
+     ylab = "Häufigkeit",
+     main = "Histogramm Alter")
+```
+
+]
+
+.pull-right5[
+
+```{r, echo = F}
+# Histogram in base R
+hist(x = basel$alter,
+     xlab = "Alter",
+     ylab = "Häufigkeit",
+     main = "Histogramm Alter")
+```
+
+]
+
+---
+
+# Erste App
+
+
+.pull-left35[
+
+<ul>
+  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li>
+  <ul class = "level">
+    <li><span>ui - Frontend</span></li><br>
+    <li><span>server - Backend</span></li><br>
+    <li><span>shinyApp - Starter</span></li><br>
+  </ul>
+</ul>
+
+]
+
+.pull-right55[
+
+<p align = "center">
+  <img src = "image/ersteapp.png" height = 420px>
+</p>
+
+]
+---
+
+# Workflow
+
+
+1. shinyapp
+2. template
+3. projects
+
+---
+
+class: middle, center
+
+<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html">Practical</a></h1>
+
+
+
+

@@ -1,0 +1,13 @@
+name: TheRBootcamp
+title: TheRBootcamp
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8416284
+bundleId: 6890424
+url: https://dirkwulff.shinyapps.io/TheRBootcamp/
+when: 1677452059.60046
+lastSyncTime: 1677452059.60046
+asMultiple: FALSE
+asStatic: FALSE
