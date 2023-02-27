@@ -98,15 +98,19 @@ knitr::opts_chunk$set(fig.align = 'center')
     <li><span>Ein <high>Ökosystem</high> für Analytics und Data Science mit konsistenten Designprinzipien</span></li><br>
     <li><span>Ein <high>Dialekt</high> von R</span></li>
   </ul>
+  <li class="m2"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
+
 </ul>
 
 ]
 
 .pull-right65[
+
 <br><br>
 <p align="center">
 <img src="image/tidyverse.png" height = "520px">
 </p>
+
 ]
 
 ---
@@ -190,13 +194,41 @@ Fragezeichen (Wettbewerb)
 
 ]
 
+---
+
+# header
+
+.pull-left4[
+
+lists
+
+]
+
+.pull-left5[
+
+```{r, eval = FALSE, echo = TRUE}
+
+
+
+
+```
+
+```{r, eval = TRUE, echo = FALSE}
+
+
+
+
+```
+
+
+]
+
 
 ---
 
 .pull-left45[
 
 # Übungen
-
 
 <ul>
   <li class="m1"><span><high>Inhalt</high>

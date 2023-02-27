@@ -16,10 +16,10 @@ class: center, middle, inverse, title-slide
 # Willkommen
 ]
 .author[
-### R 4 Data Science<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/R4DS_2022CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
+### R 4 Data Science<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
 ]
 .date[
-### Dezember 2022
+### März 2023
 ]
 
 ---
@@ -41,7 +41,7 @@ layout: true
     &lt;/a&gt;
     &lt;a href="https://therbootcamp.github.io/"&gt;
       &lt;font color="#7E7E7E"&gt;
-       R 4 Data Science | Dezember 2022
+       Dashboards mit Shiny | März 2023
       &lt;/font&gt;
     &lt;/a&gt;
     &lt;/span&gt;
@@ -60,7 +60,7 @@ layout: true
 
 # Ziel
 
-&gt;###Das Ziel dieses Kurses ist Euch den kompetenten Umgang mit R für die Aufbereitung, Exploration, und Visualisierung von Daten zu vermitteln. 
+&gt;###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
 
 ]
 
@@ -74,44 +74,14 @@ layout: true
 
 ---
 
-# R Welt
-
-&lt;br&gt;
-&lt;table class="tg"  style="cellspacing:0; cellpadding:0; border:none;" width="100%"&gt;
-&lt;col width="25%"&gt;
-&lt;col width="35%"&gt;
-&lt;col width="25%"&gt;
-&lt;tr valign="top"&gt;
-  &lt;td style="padding:20px"&gt;
-  &lt;p align = "center"&gt;
-  &lt;font style="font-size:28px"&gt;&lt;i&gt;R&lt;/i&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="image/R.png" height = 130px&gt;&lt;br&gt;
-  &lt;font style="font-size:10px"&gt;adapted from &lt;a href="https://cei.org/file/internet-server-farm"&gt;cei.org&lt;/a&gt;&lt;/font&gt;
-  &lt;/p&gt;
-  &lt;/td&gt;
-  &lt;td style="padding:20px"&gt;
-  &lt;p align = "center"&gt;
-  &lt;font style="font-size:28px"&gt;&lt;i&gt;RStudio&lt;/i&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="image/rstudio2.png" height = 130px&gt;&lt;br&gt;
-  &lt;font style="font-size:10px"&gt;adapted from &lt;a href="https://rstudio.com/"&gt;rstudio.com&lt;/a&gt;&lt;/font&gt;
-&lt;/p&gt;
-  &lt;/td&gt;
-  &lt;td style="padding:20px"&gt;
-  &lt;p align = "center"&gt;
-  &lt;font style="font-size:28px"&gt;&lt;i&gt;R Packages&lt;/i&gt;&lt;/font&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="image/packages.png" height = 130px&gt;&lt;br&gt;
-  &lt;font style="font-size:10px"&gt;adapted from &lt;a href="https://towardsdatascience.com/ten-random-useful-things-in-r-that-you-might-not-know-about-54b2044a3868"&gt;towardsdatascience.com&lt;/a&gt;&lt;/font&gt;
-&lt;/p&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
+# Dashboards
 
 
 ---
 
 .pull-left3[
 
-# Tidyverse
+# Shiny
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Das &lt;mono&gt;tidyverse&lt;/mono&gt; ist...&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
@@ -120,41 +90,28 @@ layout: true
     &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Ökosystem&lt;/high&gt; für Analytics und Data Science mit konsistenten Designprinzipien&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
     &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Dialekt&lt;/high&gt; von R&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Das &lt;mono&gt;tidyverse&lt;/mono&gt; ist...&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+
 &lt;/ul&gt;
 
 ]
 
 .pull-right65[
+
 &lt;br&gt;&lt;br&gt;
 &lt;p align="center"&gt;
 &lt;img src="image/tidyverse.png" height = "520px"&gt;
 &lt;/p&gt;
+
 ]
 
 ---
 
-.pull-left3[
+# Beispiele
 
-# Tidyverse
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Das &lt;mono&gt;tidyverse&lt;/mono&gt; ist...&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Eine Auswahl nutzerfreundlicher &lt;high&gt;Pakete&lt;/high&gt; für die Analyse von &lt;high&gt;tidy data&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Ökosystem&lt;/high&gt; für Analytics und Data Science mit konsistenten Designprinzipien&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Dialekt&lt;/high&gt; von R&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/ul&gt;
-
-]
-
-.pull-right65[
-&lt;br&gt;&lt;br&gt;
-&lt;p align="center"&gt;
-&lt;img src="image/tidyverse_high.png" height = "520px"&gt;
-&lt;/p&gt;
-]
-
+dashboard day 1
+dashboard day 2
+Fragezeichen (Wettbewerb)
 
 
 ---
@@ -298,7 +255,7 @@ layout: true
 ---
 class: middle, center
 
-&lt;h1&gt;&lt;a href=https://therbootcamp.github.io/R4DS_2022CSS/index.html&gt;Agenda&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href=https://therbootcamp.github.io/Shiny_2023CSS/index.html&gt;Agenda&lt;/a&gt;&lt;/h1&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

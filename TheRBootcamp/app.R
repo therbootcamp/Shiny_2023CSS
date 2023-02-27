@@ -15,7 +15,7 @@ körper_farbe = viridis::viridis(5, option = "G", end = .9)[5]
 
 ui = navbarPage(
   "InjuryViewer",
-  theme = shinytheme("lumen"),
+  theme = shinytheme("cosmo"),
   
   tabPanel(
     "Dashboard",
