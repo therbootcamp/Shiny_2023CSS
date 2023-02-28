@@ -9,12 +9,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content=" ¶  ¶  ¶  ¶  ¶ Explorative Datenanalyse                The R Bootcamp @ CSS    ¶  ¶  ¶  ¶  ¶  ¶ " />
+<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
 
 
-<title>Wettbewerb: COVID-19 Shiny Dashboard</title>
+<title>Wettbewerb</title>
 
-<script src="wettbewerb_practical_files/header-attrs-2.19/header-attrs.js"></script>
+<script src="wettbewerb_practical_files/header-attrs-2.20/header-attrs.js"></script>
 <script src="wettbewerb_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="wettbewerb_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -162,34 +162,24 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Wettbewerb: COVID-19 Shiny Dashboard</h1>
-<h4 class="author"><table style='table-layout:fixed;width:100%;border:0;padding:0;margin:0'>
-¶ <col width='10%'> ¶ <col width='10%'> ¶ <tr style="border:none"> ¶
-<td style="display:block;width:100%;text-align:left;vertical-align:bottom;padding:0;margin:0;border:none" nowrap>
-¶ <font style='font-style:normal'>Explorative Datenanalyse</font> <br>
-<a href='https://therbootcamp.github.io/R4DS_2022CSS/'>
-<i class='fas fa-clock' style='font-size:.9em;' ></i> </a>
-<a href='https://therbootcamp.github.io'>
-<i class='fas fa-home' style='font-size:.9em;'></i> </a>
-<a href='mailto:therbootcamp@gmail.com'>
-<i class='fas fa-envelope' style='font-size: .9em;'></i> </a>
-<a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
-<i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
-<a href='https://therbootcamp.github.io'>
-<font style='font-style:normal'>The R Bootcamp @ CSS</font> </a>   ¶
-</td> ¶
-<td style="width:100%;vertical-align:bottom;text-align:right;padding:0;margin:0;border:none">
-¶
-<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/>
-¶ </td> ¶ </tr> ¶ </table></h4>
+<h1 class="title toc-ignore">Wettbewerb</h1>
+<h4 class="author"><font style='font-style:normal'>Explorative
+Datenanalyse</font><br>
+<a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
+<a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
+<a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
+<a href='https://www.linkedin.com/company/basel-r-bootcamp/'><i class='fab fa-linkedin' style='font-size: .9em;'></i></a>
+<a href='https://therbootcamp.github.io'><font style='font-style:normal'>The
+R Bootcamp @ CSS</font></a><br>
+<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/></h4>
 
 </div>
 
 
 <p align="center">
-<p><img src="image/dashboard-example.jpg" width="100%" margin="0"/><br>
+<p><img src="image/dashboard.jpg" width="100%" margin="0"/><br>
 <font style="font-size:10px">from <a
-href="https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux">justinmind.com</a></font></p>
+href="https://unsplash.com/photos/qwtCeJ5cLYs">unsplash.com</a></font></p>
 </p>
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
@@ -339,9 +329,10 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche&quot;) +
   theme_minimal()</code></pre>
-<div class="figure">
-<img src="image/timeline_schweiz.png" style="width: 75%;" alt="" />
-<p class="caption">Beispielplot Schweiz</p>
+<div class="float">
+<img src="image/timeline_schweiz.png" style="width: 75%;"
+alt="Beispielplot Schweiz" />
+<div class="figcaption">Beispielplot Schweiz</div>
 </div>
 <pre class="r"><code>covid-daten %&gt;% 
   mutate(pro_kopf = anzahl / population) %&gt;% 
@@ -353,23 +344,26 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche pro Kopf&quot;) +
   theme_minimal()</code></pre>
-<div class="figure">
-<img src="image/timeline_fr_lu.png" style="width: 75%;" alt="" />
-<p class="caption">Beispielplot Kantone</p>
+<div class="float">
+<img src="image/timeline_fr_lu.png" style="width: 75%;"
+alt="Beispielplot Kantone" />
+<div class="figcaption">Beispielplot Kantone</div>
 </div>
 </div>
 <div id="interaktivität" class="section level3">
 <h3>Interaktivität</h3>
-<div class="figure">
-<img src="image/slider-plot.png" style="width: 75%;" alt="" />
-<p class="caption">Beispiel für Inputs und Outputs</p>
+<div class="float">
+<img src="image/slider-plot.png" style="width: 75%;"
+alt="Beispiel für Inputs und Outputs" />
+<div class="figcaption">Beispiel für Inputs und Outputs</div>
 </div>
 </div>
 <div id="layouts" class="section level3">
 <h3>Layouts</h3>
-<div class="figure">
-<img src="image/color-layout.png" style="width: 75%;" alt="" />
-<p class="caption">Farben und Layout Entwurf</p>
+<div class="float">
+<img src="image/color-layout.png" style="width: 75%;"
+alt="Farben und Layout Entwurf" />
+<div class="figcaption">Farben und Layout Entwurf</div>
 </div>
 </div>
 </div>

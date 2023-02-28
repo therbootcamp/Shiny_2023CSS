@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+
+
+<title>Graphiken</title>
+
+<script src="Graphiken_practical_files/header-attrs-2.20/header-attrs.js"></script>
+<script src="Graphiken_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="Graphiken_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="Graphiken_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="Graphiken_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="Graphiken_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="Graphiken_practical_files/navigation-1.1/tabsets.js"></script>
+<link href="Graphiken_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="Graphiken_practical_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="practical.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Graphiken</h1>
+<h4 class="author"><font style='font-style:normal'>Explorative
+Datenanalyse</font><br>
+<a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
+<a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
+<a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
+<a href='https://www.linkedin.com/company/basel-r-bootcamp/'><i class='fab fa-linkedin' style='font-size: .9em;'></i></a>
+<a href='https://therbootcamp.github.io'><font style='font-style:normal'>The
+R Bootcamp @ CSS</font></a><br>
+<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/></h4>
+
+</div>
+
+
+<p align="center" width="100%">
+<img src="image/brushes.jpg" alt="Trulli" style="width:100%"> <br>
+<font style="font-size:10px">from
+<a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
+</p>
+<div id="section" class="section level1 tabset">
+<h1 class="tabset"></h1>
+<div id="überblick" class="section level2">
+<h2>Überblick</h2>
+<p>In diesem Practical wirst du üben mit <code>ggplot2</code> Grafiken
+zu erstellen.</p>
+<p>Am Ende des Practicals wirst du wissen wie man:</p>
+<ol style="list-style-type: decimal">
+<li>Einen Plot Schritt-für-Schritt aufbaut.</li>
+<li>Verschiedene <code>geom</code>s verwendet.</li>
+<li>Farben verändert.</li>
+</ol>
+</div>
+<div id="aufgaben" class="section level2">
+<h2>Aufgaben</h2>
+<div id="a---setup" class="section level3">
+<h3>A - Setup</h3>
+<ol style="list-style-type: decimal">
+<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
+Projekt.</p></li>
+<li><p>Speichere das neue Skript unter dem Namen
+<code>erste_app.R</code> im <code>2_Code</code> Ordner.</p></li>
+<li><p>Lade <code>shiny</code>.</p></li>
+</ol>
+<pre class="r"><code>library(shiny)</code></pre>
+</div>
+<div id="b---lade-den-datensatz" class="section level3">
+<h3>B - Lade den Datensatz</h3>
+</div>
+</div>
+<div id="app" class="section level2">
+<h2>App</h2>
+<div id="a---setup-1" class="section level3">
+<h3>A - Setup</h3>
+<ol style="list-style-type: decimal">
+<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
+Projekt.</p></li>
+<li><p>Speichere das neue Skript unter dem Namen
+<code>InjuryViewer.R</code> im top-level Ordner
+<code>TheRBootcamp</code>.</p></li>
+<li><p>Lade <code>shiny</code>.</p></li>
+</ol>
+<pre class="r"><code>library(shiny)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Lade den Datensatz .</li>
+</ol>
+<pre class="r"><code># Lese Daten
+mcdonalds &lt;- readRDS(&#39;1_Data/verletzungen&#39;)</code></pre>
+</div>
+<div id="a---setup-2" class="section level3">
+<h3>A - Setup</h3>
+</div>
+</div>
+<div id="datensatz" class="section level2">
+<h2>Datensatz</h2>
+<p>Der Datensatz stammt von dem National Electronic Injury Surveillance
+System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem
+repräsentativen Stichprobe von Krankenhäusern sammelt.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
