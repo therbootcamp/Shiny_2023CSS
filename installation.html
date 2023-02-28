@@ -52,19 +52,20 @@
             <h2>2 - Installiere zusätzliche Pakete</h2>
             <h4>
             Wir werden verschieden R Pakete verwenden, die vorher installiert werden müssen. Bitte führe den folgenden Code in der R Console in RStudio aus:<br><br>
-
+          
+          <code>
            install.packages(c(
-           "shiny", <!--- main --->
-           "shinyFeedback", "waiter", "reactlog", "shinyloadtest",
-           "thematic", "bslib", "shinythemes", "shinycssloaders", "shinydashboard", "shiny.collections", <!--- layout --->  
-           "viridis", "ggthemes", "ggrepel", "packcircles", "treemap", "ggstance",
-           "tidyverse", "glue", "lubridate",<!--- data --->
-           "tools", "devtools", "usethis", "scales" <!--- general --->
-           ))
-           
+             "shiny", <!--- main --->
+             "shinyFeedback", "waiter", "reactlog", "shinyloadtest",
+             "thematic", "bslib", "shinythemes", "shinycssloaders", "shinydashboard", "shiny.collections", <!--- layout --->  
+             "viridis", "ggthemes", "ggrepel", "packcircles", "treemap", "ggstance",
+             "tidyverse", "glue", "lubridate",<!--- data --->
+             "tools", "devtools", "usethis", "scales", "datasets" <!--- general --->
+             ), dependencies = TRUE)
+           </code>
            <br><br>
 
-            Wenn Du gefragt wirst, ob du Pakete from source installieren möchtest, gebe <b>n</b> ein und drücke Enter. Dies sollte es ermöglichen die Pakete ohne Admin-Rechte zu installieren.<br>
+            Wenn Du gefragt wirst, ob du Pakete <i>from source</i> installieren möchtest, gebe <b>n</b> ein und drücke Enter. Dies sollte es ermöglichen die Pakete ohne Admin-Rechte zu installieren.<br>
           </h4>
           </td>
         </tr>
@@ -76,11 +77,7 @@
           <td align=left>
             <h2>3 - Optional: Zusätzliche Software installieren</h2>
             <h4>
-            Falls das Installationsskrip aus 2) Fehlermeldungen anzeigt (oder du Pakete from source kompilieren möchtest), installiere bitte folgende Software und lasse das Skript nochmal laufen. Installation dieser Software benötigt Admin-Rechte.<br><br>
-
-            Windows: <a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/files/rtools42-5355-5357.exe">RTools</a><br>
-            Mac: <a href="https://developer.apple.com/download/more/">Command line tools</a> (kein direkter Link verfügbar)
-
+            Falls das Installationsskrip aus 2) Fehlermeldungen anzeigt (oder du Pakete from source kompilieren möchtest), installiere bitte <a href="https://cran.r-project.org/bin/windows/Rtools">RTools</a> (Windows) oder <a href="https://developer.apple.com/download/more/">Command Line Tools</a> (Mac) und lasse den Code nochmal laufen.
           </h4>
           </td>
         </tr>
@@ -94,7 +91,7 @@
             <h4>
               Unter diesem Link <a href="https://therbootcamp.github.io/Shiny_2023CSS">https://therbootcamp.github.io/Shiny_2023CSS</a> findest Du die Kursseite mit allen Materialien.<br><br>
 
-              Bitte lade vor Kursbeginn das <a href="https://therbootcamp.github.io/Shiny_2023CSS/TheRBootcamp.zip">Projekt</a> herunter, entpacke es (Doppelklick), und bewegt den darin enthaltenen Ordner “TheRBootcamp” auf den Desktop oder in einen anderen Ordner Deiner Wahl.
+              Bitte lade vor Kursbeginn das <a href="https://therbootcamp.github.io/Shiny_2023CSS/TheRBootcamp.zip">Projekt</a> herunter, entpacke es (Doppelklick), und bewegt den darin enthaltenen Ordner <code>TheRBootcamp</code> auf den Desktop oder in einen anderen Ordner Deiner Wahl.
           </h4>
           </td>
         </tr>
@@ -104,9 +101,21 @@
         <col width=100%>
         <tr>
           <td align=left>
-            <h2>5 - Eingangsfragebogen</h2>
+            <h2>5 - Test</h2>
             <h4>
-             Bitte nehmt Euch ein paar Minuten und füllt diesen <a href="https://forms.gle/MfUVJoZcixFMt47X6">Fragebogen</a> aus. Er hilft uns den Kurs auf Euch zuzuschneiden. 
+            Wenn ihr den <code>TheRBootcamp</code> Ordner verschoben habt, öffnet RStudio indem Ihr die darin enthaltene TheRBootcamp.Rproj Datei ausführt (Doppelklick). Danach öffnet die Skriptdatei <code>test_app.R</code> und lasst die App über den "Run App" Schalter (oben rechts im Skriptfenster) laufen. Wenn sich dann ein Fenster öffnet (bzw. unten rechts erscheint), in dem <code>Hello world!</code> und nichts weiter steht, dann seid ihr bereit für den Kurs.      
+          </h4>
+          </td>
+        </tr>
+      </table>
+      
+      <table width=50% cellspacing=0 cellpadding=0 class="downloads">
+        <col width=100%>
+        <tr>
+          <td align=left>
+            <h2>6 - Eingangsfragebogen</h2>
+            <h4>
+             Bitte nehmt Euch ein paar Minuten und füllt diesen <a href="https://forms.gle/CCkNBPh4gNTnyiFW7">Fragebogen</a> aus. Eure Antworten helfen uns den Kurs auf Euch zuzuschneiden. 
           </h4>
           </td>
         </tr>

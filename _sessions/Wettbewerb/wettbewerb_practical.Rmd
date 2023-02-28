@@ -1,31 +1,13 @@
 ---
-title: "Wettbewerb: COVID-19 Shiny Dashboard"
+title: "Wettbewerb"
 subtitle: ""
-author: "<table style='table-layout:fixed;width:100%;border:0;padding:0;margin:0'><col width='10%'><col width='10%'>
-  <tr style='border:none'>
-    <td style='display:block;width:100%;text-align:left;vertical-align:bottom;padding:0;margin:0;border:none' nowrap>
-      <font style='font-style:normal'>Explorative Datenanalyse</font>
-      <br>
-      <a href='https://therbootcamp.github.io/R4DS_2022CSS/'>
-        <i class='fas fa-clock' style='font-size:.9em;' ></i>
-      </a>
-      <a href='https://therbootcamp.github.io'>
-        <i class='fas fa-home' style='font-size:.9em;'></i>
-      </a>
-      <a href='mailto:therbootcamp@gmail.com'>
-        <i class='fas fa-envelope' style='font-size: .9em;'></i>
-      </a>
-      <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
-        <i class='fab fa-linkedin' style='font-size: .9em;'></i>
-      </a>
-            <a href='https://therbootcamp.github.io'>
-        <font style='font-style:normal'>The R Bootcamp @ CSS</font>
-      </a>&nbsp;&nbsp;
-    </td>
-    <td style='width:100%;vertical-align:bottom;text-align:right;padding:0;margin:0;border:none'>
-      <img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/>
-    </td>
-  </tr></table>"
+author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+<a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
+<a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
+<a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
+<a href='https://www.linkedin.com/company/basel-r-bootcamp/'><i class='fab fa-linkedin' style='font-size: .9em;'></i></a>  
+<a href='https://therbootcamp.github.io'><font style='font-style:normal'>The R Bootcamp @ CSS</font></a><br>  
+<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/>"
 output:
   html_document:
     css: practical.css
@@ -47,7 +29,7 @@ options(digits = 3)
 
 <p align="center">
 
-<img src="image/dashboard-example.jpg" width="100%" margin="0"/><br> <font style="font-size:10px">from [justinmind.com](https://www.justinmind.com/ui-design/dashboard-design-best-practices-ux)</font>
+<img src="image/dashboard.jpg" width="100%" margin="0"/><br> <font style="font-size:10px">from [unsplash.com](https://unsplash.com/photos/qwtCeJ5cLYs)</font>
 
 </p>
 

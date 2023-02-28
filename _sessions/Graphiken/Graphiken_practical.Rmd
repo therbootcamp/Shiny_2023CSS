@@ -1,0 +1,85 @@
+---
+title: "Graphiken"
+subtitle: ""
+author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+<a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
+<a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
+<a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
+<a href='https://www.linkedin.com/company/basel-r-bootcamp/'><i class='fab fa-linkedin' style='font-size: .9em;'></i></a>  
+<a href='https://therbootcamp.github.io'><font style='font-style:normal'>The R Bootcamp @ CSS</font></a><br>  
+<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/>"
+output:
+  html_document:
+    css: practical.css
+    self_contained: no
+---
+
+<p align="center" width="100%">
+  <img src="image/brushes.jpg" alt="Trulli" style="width:100%">
+  <br>
+  <font style="font-size:10px">from <a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
+</p>
+
+# {.tabset}
+
+## Überblick
+
+In diesem Practical wirst du üben mit `ggplot2` Grafiken zu erstellen. 
+
+Am Ende des Practicals wirst du wissen wie man:
+
+1. Einen Plot Schritt-für-Schritt aufbaut.
+2. Verschiedene `geom`s verwendet.
+3. Farben verändert.
+
+## Aufgaben
+
+### A - Setup
+
+1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+
+2. Speichere das neue Skript unter dem Namen `erste_app.R` im `2_Code` Ordner.
+
+3. Lade `shiny`.
+
+```{r, echo = TRUE, eval = FALSE}
+library(shiny)
+```
+
+
+### B - Lade den Datensatz
+
+
+## App
+
+### A - Setup
+
+1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+
+2. Speichere das neue Skript unter dem Namen `InjuryViewer.R` im top-level Ordner `TheRBootcamp`. 
+
+3. Lade `shiny`.
+
+```{r, echo = TRUE, eval = FALSE}
+library(shiny)
+```
+
+4. Lade den Datensatz .
+
+```{r, eval = F, message = F}
+# Lese Daten
+mcdonalds <- readRDS('1_Data/verletzungen')
+```
+
+
+### A - Setup
+
+
+## Datensatz
+
+Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt.      
+
+
+
+
+

@@ -60,233 +60,205 @@ options(digits = 4)
 knitr::opts_chunk$set(fig.align = 'center')
 ```
 
+.pull-left3[
 
-
-.pull-left6[
-
-<br><br><br><br><br>
-
-# Ziel
-
->###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
-
+# Einleitung
+<ul>
+  <li class="m1">
+    <span>Was ist mit Styling gemeint?</span>
+    <ul class="level">
+      <li><span>Aussehen des User Interfaces</span></li>
+      <li><span>Farben, Fonts, Aussehen der Elemente</span></li>
+    </ul>
+  </li>
+  <br>
+  <li class="m2"><span>Was wird damit erreicht?</span></li>
+    <ul class="level">
+      <li><span>bessere User Experience</span></li>
+      <li><span>Branding</span></li>
+      <li><span>Corporate Design</span></li>
+    </ul>
+</ul>
 ]
 
-.pull-right4[
-
-<br><br><br><br>
-<p align="center"><img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/target.png" height="350"></p>
-
+.pull-right6[
+<br><br>
+<p align="center">
+<img src="image/styleguide.png"><br>
+<font style="font-size:10px">from <a href="https://www.behance.net/gallery/146851995/Design-System-Free-Download">behance.net</a></font>
+</p>
 ]
-
-
----
-
-# Dashboards
-
 
 ---
 
 .pull-left3[
-
-# Shiny
-
+# Default Style
 <ul>
-  <li class="m1"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
-  <ul class="level">
-    <li><span>Eine Auswahl nutzerfreundlicher <high>Pakete</high> für die Analyse von <high>tidy data</high></span></li><br>
-    <li><span>Ein <high>Ökosystem</high> für Analytics und Data Science mit konsistenten Designprinzipien</span></li><br>
-    <li><span>Ein <high>Dialekt</high> von R</span></li>
-  </ul>
-  <li class="m2"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
-
+  <li class="m1">
+    <span>Den default Style kennt ihr schon</span>
+    <ul class="level">
+      <li><span>macht vieles gut</span></li>
+      <li><span>eignet sich bestens zum entwickeln der App</span></li>
+    </ul>
+  </li>
+  <li class="m2"><span>ist standardmässig aktiv</span></li>
 </ul>
-
 ]
 
-.pull-right65[
-
-<br><br>
-<p align="center">
-<img src="image/tidyverse.png" height = "520px">
-</p>
-
-]
-
----
-
-# Beispiele
-
-dashboard day 1
-dashboard day 2
-Fragezeichen (Wettbewerb)
-
-
----
-
-.pull-left35[
-
+.pull-right6[
 <br>
-# Agenda 
-
-<ul>
-  <li class="m1"><span><high>Workshop</high></span></li>
-  <ul class="level">
-    <li><span>Einführung</span></li>
-    <li><span>Session zu Data IO</span></li>
-    <li><span>Sessions zu Wrangling</span></li>
-    <li><span>Sessions zu Plotting</span></li>
-    <li><span>Wettbewerb</span></li>
-  </ul><br>
-  <li class="m2"><span><high>Block</high></span></li>
-  <ul class="level">
-    <li><span>Folien-basierte Einführung</span></li>
-    <li><span>Viele Übungen</span></li>
-    <li><span>Interaktive Zusammenfassung</span></li>
-  </ul>
-  </span></li>
-</ul>
-
-]
-
-.pull-right55[
-<br><br>
-<img src="image/schedule.png" height="525" align="center">
-
-]
-
----
-
-
-# Einführung
-
-.pull-left45[
-<br2>
-
-<ul>
-  <li class="m1"><span><high>Inhalt</high>
-  <br><br>
-  <ul class="level">
-    <li><span>Konzepte</span></li>
-    <li><span>Code Beispiele</span></li>
-  </ul><br>
-  <li class="m1"><span><high>Tag 1</high>
-  <br><br>
-  <ul class="level">
-    <li><span>15-30 min</span></li>
-  </ul><br>
-  <li class="m1"><span><high>Tag 2 & 3</high>
-  <br><br>
-  <ul class="level">
-    <li><span>30-60 min</span></li>
-  </ul><br>
-</ul>
-
-]
-
-.pull-right55[
-
 <p align="center">
-<img src="image/present.jpg" style="width:420px">
-<br>
-<font style="font-size:10px">from <a href="www.Freepik.com">Freepik.com</a></font>
+<img src="image/default.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
 </p>
-
 ]
 
 ---
 
-# header
+# Theming mit <mono>shinythemes</mono>
 
 .pull-left4[
-
-lists
-
-]
-
-.pull-left5[
-
-```{r, eval = FALSE, echo = TRUE}
-
-
-
-
-```
-
-```{r, eval = TRUE, echo = FALSE}
-
-
-
-
-```
-
-
-]
-
-
----
-
-.pull-left45[
-
-# Übungen
-
 <ul>
-  <li class="m1"><span><high>Inhalt</high>
-  <br><br>
-  <ul class="level">
-    <li><span>Learn-by-doing</span></li>
-    <li><span>Steigende Schwierigkeit</span></li>
-    <li><span>Lösungen später</span></li>
-  </ul><br>
-  <li class="m2"><span><high>Tag 1</high>
-  <br><br>
-  <ul class="level">
-    <li><span>10-20 Aufgaben in 10-20 Minuten</span></li>
-    <li><span>Skripte im Projektordner</span></li>
-  </ul><br>
-  <li class="m3"><span><high>Tag 2 & 3</high>
-  <br><br>
-  <ul class="level">
-    <li><span>25-50 Aufgaben in 45-90 Minuten</span></li>
-    <li><span>Links auf der Kursseite</span></li>
-  </ul>
+  <li class="m1"><span>bietet einfaches Theming "out of the box"</span></li><br>
+  <li class="m2"><span>funktioniert in Umgebungen mit eingeschränktem Internetzugang</span></li>
+  <br>
 </ul>
-
 ]
 
 .pull-right5[
-<br>
+<p align="center">
+<img src="image/shinythemes.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
+</p>
+]
 
-  <iframe src="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html" height="480px" width = "500px"></iframe>
+---
 
-  Beispiel:<a href="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html"> Daten </a>
+# Theme benutzen
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Package <mono>shinythemes</mono> muss einmalig installiert werden</span></li>
+  <br>
+  <li class="m2"><span>Danach muss das Paket in <mono>app.R</mono> geladen werden</span></li>
+  <br>
+  <li class="m3"><span>und dem Argument <mono>theme</mono> in der Funktion <mono>fluidPage()</mono> die Funktion <mono>shinytheme("THEME-NAME")</mono> zugewiesen werden.</span></li>
+</ul>
+]
+
+.pull-right5[
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages("shinythemes")
+```
+
+in <mono>app.R</mono>:
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(shinythemes)
+
+ui <- fluidPage(
+  theme = shinytheme("THEME-NAME")
+)
+
+server <- function(input, output, session) {}
+
+shinyApp(ui, server)
+
+```
 
 ]
 
 ---
 
-# Vorstellung
+# Theme auswählen
 
-.pull-left5[
-
+.pull-left4[
 <ul>
-  <li class="m1"><span>Wie heisst Du?</span></li>
-  <li class="m2"><span>Was ist Deine Rolle in der CSS?</span></li>
-  <li class="m3"><span>Hast Du Programmiererfahrung mit R oder anderen Programmiersprachen?</span></li>
-  <li class="m4"><span>Welche Probleme möchtest Du mit R lösen?</span></li>
+  <li class="m1"><span>Ein passendes Theme auswählen</span>
+    <ul class="level">
+      <li><span>auf der Website <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li>
+      <li><span>oder interaktiv ausprobieren auf <a href="https://gallery.shinyapps.io/117-shinythemes/">https://gallery.shinyapps.io/117-shinythemes/</a></span></li>
+    </ul>
+  </li>
+  
+  <li class="m2"><span><mono>shinytheme()</mono> den Namen (in Kleinbuchstaben) als String übergeben.</span>
+    <ul class="level">
+      <li><span>z.B. <mono>shinytheme("superhero")</mono></span></li>
+    </ul>
+  </li>
+  <br>
 </ul>
-
 ]
 
-.pull-right45[
-
+.pull-right5[
 <p align="center">
-<img src="https://therbootcamp.github.io/ML_2022DHLab/_sessions/Intro/image/intro.jpg" height="360px">
-<br>
-<font style="font-size:10px">from <a href="https://unsplash.com/photos/SymZoeE8quA">unsplash.com</a></font>
+<img src="image/superhero.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
 </p>
-
 ]
+
+---
+
+# Fortgeschrittenes theming mit <mono>bslib</mono>
+
+.pull-left3[
+<ul>
+  <li class="m1"><span>Moderne und ansprechende Themes</span></li>
+  <li class="m2"><span>mehr Optionen zum einfachen Anpassen von Themes in R</span></li>
+    <ul class="level">
+      <li><span>inkl. interaktivem Theme-Builder</span></li>
+    </ul>
+  <li class="m3"><span>Funktioniert nur in Umgebungen mit vollem Internetzugriff</span></li>
+</ul>
+]
+
+.pull-right65[
+<p align="center">
+<img src="image/live_theming.gif"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Dynamisches theming mit <mono>bslib</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Lässt User in der Session das Aussehen ändern</span></li>
+  <ul class="level">
+    <li><span>z.B. dark-modes</span></li>
+  </ul>
+</ul>
+<img src="image/dark-mode.gif">
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/quarz.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Fortgeschrittenes <mono>bslib</mono>
+
+.pull-left3[
+<ul>
+  <li class="m1"><span>Lässt sehr umfangreiche Anpassungen zu</span></li>
+</ul>
+]
+
+.pull-right65[
+<p align="center">
+<img src="image/nes.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
 
 ---
 class: middle, center
