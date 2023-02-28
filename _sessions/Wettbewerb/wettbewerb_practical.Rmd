@@ -221,7 +221,7 @@ covid-daten %>%
 ##### Variablenbeschreibungen `covid-daten.csv`
 
 | Name         | Bedeutung                                                                                     |
-|:--------------------|:--------------------------------------------------|
+|:---------------------|:-------------------------------------------------|
 | `region`     | Region auf die sich die Daten in dieser Zeile beziehen. `CH` oder einer von 26 Kantonen.      |
 | `datum`      | Datum, an dem die Woche beginnt, für welche diese Zeile Daten liefert.                        |
 | `anzahl`     | Anzahl COVID-19 Fälle, welche in dieser Woche in dieser Region gemeldet wurden.               |
@@ -231,7 +231,7 @@ covid-daten %>%
 ##### Variablenbeschreibungen `covid-daten-alter.csv`
 
 | Name           | Bedeutung                                                                                                            |
-|:--------------------|:--------------------------------------------------|
+|:---------------------|:-------------------------------------------------|
 | `altersgruppe` | Altersgruppe, auf die sich die Daten in dieser Zeile beziehen.                                                       |
 | `region`       | Region auf die sich die Daten in dieser Zeile beziehen. `CH` oder einer von 26 Kantonen.                             |
 | `datum`        | Datum, an dem die Woche beginnt, für welche diese Zeile Daten liefert.                                               |
