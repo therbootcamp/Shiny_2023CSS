@@ -258,6 +258,26 @@ shinyApp(ui, server)
 </p>
 ]
 
+---
+
+# Fortgeschrittenes <mono>bslib</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Lässt Benutzer z.B. Google Fonts verwenden</span></li>
+    <ul class="level">
+    <li><span><a href="https://fonts.google.com">https://fonts.google.com</a></span></li>
+  </ul>
+</ul>
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/google-fonts.png"><br>
+<font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
+</p>
+]
+
 
 ---
 class: middle, center
