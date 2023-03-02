@@ -201,82 +201,185 @@ shinyApp(ui, server)
 
 ---
 
-# Fortgeschrittenes theming mit <mono>bslib</mono>
+.pull-left35[
 
-.pull-left3[
+# Manuelles Styling
+
 <ul>
-  <li class="m1"><span>Modernere und ansprechende Themes von Bootswatch</span></li>
-  <li class="m2"><span>Funktioniert nur in Umgebungen mit vollem Internetzugriff</span></li>
+  <li class="m1"><span>Das Paket <mono>bslib</mono> erlaubt manuelles theming</span></li>
+  <li class="m2"><span>Die Funktion <mono>bs_theme()</mono> unterstützt einige Argumente für visuelle Anpassungen</span></li>
 </ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(
+    version = 3
+  )
+)
+
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+<br><br>
 <p align="center">
-<img src="image/quarz.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+<img src="image/bslib/bslib.png">
 </p>
 ]
 
 ---
 
-# Dynamisches theming mit <mono>bslib</mono>
+.pull-left35[
 
-.pull-left3[
+# Hintergrund
+
 <ul>
-  <li class="m1"><span>Lässt User in der Session das Aussehen ändern</span></li>
-  <ul class="level">
-    <li><span>z.B. dark-modes</span></li>
-  </ul>
-  <li class="m2"><span>mehr Optionen zum einfachen Anpassen von Themes in R</span></li>
-    <ul class="level">
-      <li><span>inkl. interaktivem Theme-Builder</span></li>
-    </ul>
+  <li class="m1"><span>Mit den Argumenten <mono>bg</mono> und <mono>fg</mono> lassen sich Hintergrund- und Vordergrundfarbe definieren</span></li>
 </ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff"
+  )
+)
+
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+<br><br>
 <p align="center">
-<img src="image/live_theming.gif"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+<img src="image/bslib/bslib_bg.png">
+</p>
+]
+
+
+---
+
+.pull-left35[
+
+# Akzentfarben
+
+<ul>
+  <li class="m1"><span>Mit den Argumenten <mono>primary</mono> und <mono>danger</mono> lassen sich Akzentfarben von Buttons und anderen Elementen anpassen</span></li>
+</ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef"
+  )
+)
+
+```
+
+]
+
+.pull-right6[
+<br><br>
+<p align="center">
+<img src="image/bslib/bslib_bg_statecols.png">
 </p>
 ]
 
 ---
 
-# Fortgeschrittenes <mono>bslib</mono>
+.pull-left35[
 
-.pull-left3[
+# Fonts
+
 <ul>
-  <li class="m1"><span>Lässt sehr umfangreiche Anpassungen zu</span></li>
+  <li class="m1"><span>Mit den Argumenten <mono>base_font</mono> und <mono>heading_font</mono> lassen sich Fonts anpassen</span></li>
 </ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef",
+    base_font = "Arial",
+    heading_font = "Courier"
+  )
+)
+
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+<br><br>
 <p align="center">
-<img src="image/nes.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+<img src="image/bslib/bslib_bg_statecols_fonts.png">
 </p>
 ]
 
 ---
 
-# Fortgeschrittenes <mono>bslib</mono>
+.pull-left35[
 
-.pull-left4[
+# Schriftgrösse
+
 <ul>
-  <li class="m1"><span>Lässt Benutzer z.B. Google Fonts verwenden</span></li>
-    <ul class="level">
-    <li><span><a href="https://fonts.google.com">https://fonts.google.com</a></span></li>
-  </ul>
+  <li class="m1"><span>Mit dem Argument <mono>font_scale</mono> lässt sich die Schriftgrösse ändern</span></li>
 </ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef",
+    base_font = "Arial",
+    heading_font = "Courier",
+    font_scale = 1.2
+  )
+)
+
+```
+
 ]
 
-.pull-right5[
+.pull-right6[
+<br><br>
 <p align="center">
-<img src="image/google-fonts.png"><br>
-<font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
+<img src="image/bslib/bslib_bg_statecols_fonts_size.png">
 </p>
 ]
+
 
 
 ---

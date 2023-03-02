@@ -193,82 +193,180 @@ shinyApp(ui, server)
 
 ---
 
-# Fortgeschrittenes theming mit &lt;mono&gt;bslib&lt;/mono&gt;
+.pull-left35[
 
-.pull-left3[
+# Manuelles Styling
+
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Modernere und ansprechende Themes von Bootswatch&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Funktioniert nur in Umgebungen mit vollem Internetzugriff&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Das Paket &lt;mono&gt;bslib&lt;/mono&gt; erlaubt manuelles theming&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Die Funktion &lt;mono&gt;bs_theme()&lt;/mono&gt; unterstützt einige Argumente für visuelle Anpassungen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+
+```r
+library(shiny)
+library(bslib)
+
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    version = 3
+  )
+)
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
 &lt;p align="center"&gt;
-&lt;img src="image/quarz.png"&gt;&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://rstudio.github.io/bslib/articles/bslib.html"&gt;rstudio.github.io&lt;/a&gt;&lt;/font&gt;
+&lt;img src="image/bslib/bslib.png"&gt;
 &lt;/p&gt;
 ]
 
 ---
 
-# Dynamisches theming mit &lt;mono&gt;bslib&lt;/mono&gt;
+.pull-left35[
 
-.pull-left3[
+# Hintergrund
+
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Lässt User in der Session das Aussehen ändern&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;z.B. dark-modes&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;mehr Optionen zum einfachen Anpassen von Themes in R&lt;/span&gt;&lt;/li&gt;
-    &lt;ul class="level"&gt;
-      &lt;li&gt;&lt;span&gt;inkl. interaktivem Theme-Builder&lt;/span&gt;&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Mit den Argumenten &lt;mono&gt;bg&lt;/mono&gt; und &lt;mono&gt;fg&lt;/mono&gt; lassen sich Hintergrund- und Vordergrundfarbe definieren&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+
+```r
+library(shiny)
+library(bslib)
+
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff"
+  )
+)
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
 &lt;p align="center"&gt;
-&lt;img src="image/live_theming.gif"&gt;&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://rstudio.github.io/bslib/articles/bslib.html"&gt;rstudio.github.io&lt;/a&gt;&lt;/font&gt;
+&lt;img src="image/bslib/bslib_bg.png"&gt;
+&lt;/p&gt;
+]
+
+
+---
+
+.pull-left35[
+
+# Akzentfarben
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Mit den Argumenten &lt;mono&gt;primary&lt;/mono&gt; und &lt;mono&gt;danger&lt;/mono&gt; lassen sich Akzentfarben von Buttons und anderen Elementen anpassen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+library(shiny)
+library(bslib)
+
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef"
+  )
+)
+```
+
+]
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/bslib/bslib_bg_statecols.png"&gt;
 &lt;/p&gt;
 ]
 
 ---
 
-# Fortgeschrittenes &lt;mono&gt;bslib&lt;/mono&gt;
+.pull-left35[
 
-.pull-left3[
+# Fonts
+
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Lässt sehr umfangreiche Anpassungen zu&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Mit den Argumenten &lt;mono&gt;base_font&lt;/mono&gt; und &lt;mono&gt;heading_font&lt;/mono&gt; lassen sich Fonts anpassen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+
+```r
+library(shiny)
+library(bslib)
+
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef",
+    base_font = "Arial",
+    heading_font = "Courier"
+  )
+)
+```
+
 ]
 
-.pull-right65[
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
 &lt;p align="center"&gt;
-&lt;img src="image/nes.png"&gt;&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://rstudio.github.io/bslib/articles/bslib.html"&gt;rstudio.github.io&lt;/a&gt;&lt;/font&gt;
+&lt;img src="image/bslib/bslib_bg_statecols_fonts.png"&gt;
 &lt;/p&gt;
 ]
 
 ---
 
-# Fortgeschrittenes &lt;mono&gt;bslib&lt;/mono&gt;
+.pull-left35[
 
-.pull-left4[
+# Schriftgrösse
+
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Lässt Benutzer z.B. Google Fonts verwenden&lt;/span&gt;&lt;/li&gt;
-    &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;&lt;a href="https://fonts.google.com"&gt;https://fonts.google.com&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Mit dem Argument &lt;mono&gt;font_scale&lt;/mono&gt; lässt sich die Schriftgrösse ändern&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+
+```r
+library(shiny)
+library(bslib)
+
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    version = 3,
+    bg = "#0b0f19", 
+    fg = "#ffffff",
+    primary = "#6366f1",
+    danger = "#cf48ef",
+    base_font = "Arial",
+    heading_font = "Courier",
+    font_scale = 1.2
+  )
+)
+```
+
 ]
 
-.pull-right5[
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
 &lt;p align="center"&gt;
-&lt;img src="image/google-fonts.png"&gt;&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://fonts.google.com"&gt;https://fonts.google.com&lt;/a&gt;&lt;/font&gt;
+&lt;img src="image/bslib/bslib_bg_statecols_fonts_size.png"&gt;
 &lt;/p&gt;
 ]
+
 
 
 ---
