@@ -65,7 +65,16 @@ knitr::opts_chunk$set(fig.align = 'center')
 # Gratulation!
 
 <ul>
-  <li class="m1"><span>Nach 3 Tagen kennt ihr nun die Grundlagen von Shiny!</span></li>
+  <li class="m1"><span>Nach 3 intensiven Tagen kennt ihr nun die Grundlagen von Shiny!</span></li>
+  <ul class="level">
+    <li><span>Basics</span></li>
+    <li><span>Reaktivität</span></li>
+    <li><span>Layout</span></li>
+    <li><span>Daten IO</span></li>
+    <li><span>Interaktivität</span></li>
+    <li><span>Graphiken</span></li>
+    <li><span>Styling</span></li>
+  </ul>
 </ul>
 ]
 
@@ -79,18 +88,40 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
+# Wie geht's weiter?
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Erweitertes theming</span></li>
+  <li class="m2"><span>Zusätzliche UI Elemente</span></li>
+  <li class="m3"><span>Datenverbindungen</span></li>
+  <li class="m4"><span>Modularität</span></li>
+  <li class="m5"><span>Deployment</span></li>
+  <li class="m6"><span>Packages und Erweiterungen</span></li>
+</ul>
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/road.jpg"><br>
+<font style="font-size:10px">from <a href="https://www.pexels.com/de-de/foto/leere-autobahn-mit-blick-auf-berg-unter-dunklem-himmel-1955134/">https://www.pexels.com</a></font>
+</p>
+]
+
+---
+
 # Fortgeschrittenes theming mit <mono>bslib</mono>
 
 .pull-left3[
 <ul>
-  <li class="m1"><span>Modernere und ansprechende Themes von Bootswatch</span></li>
-  <li class="m2"><span>Funktioniert nur in Umgebungen mit vollem Internetzugriff</span></li>
+  <li class="m1"><span>Moderne und ansprechende Themes von Bootswatch</span></li>
+  <li class="m2"><span></span></li>
 </ul>
 ]
 
 .pull-right65[
 <p align="center">
-<img src="image/quarz.png"><br>
+<img src="image/quartz_detail.jpg"><br>
 <font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
 </p>
 ]
