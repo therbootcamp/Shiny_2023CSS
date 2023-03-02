@@ -1,0 +1,163 @@
+---
+title: "Aussicht"
+author: "Dashboards mit Shiny<br>
+  <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
+  <br>
+  <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
+    <i class='fas fa-clock' style='font-size:.9em;'></i>
+  </a>&#8239; 
+  <a href='https://therbootcamp.github.io'>
+    <i class='fas fa-home' style='font-size:.9em;' ></i>
+  </a>&#8239;
+  <a href='mailto:therbootcamp@gmail.com'>
+    <i class='fas fa-envelope' style='font-size: .9em;'></i>
+  </a>&#8239;
+  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
+    <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+  </a>"
+date: "März 2023"
+output:
+  xaringan::moon_reader:
+    css: ["default", "baselrbootcamp.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+---
+
+layout: true
+
+<div class="my-footer">
+  <span style="text-align:center">
+    <span> 
+      <img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png" height=14 style="vertical-align: middle"/>
+    </span>
+    <a href="https://therbootcamp.github.io/">
+      <span style="padding-left:82px"> 
+        <font color="#7E7E7E">
+          www.therbootcamp.com
+        </font>
+      </span>
+    </a>
+    <a href="https://therbootcamp.github.io/">
+      <font color="#7E7E7E">
+       Dashboards mit Shiny | März 2023
+      </font>
+    </a>
+    </span>
+  </div> 
+
+---
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(width=110)
+options(digits = 4)
+
+knitr::opts_chunk$set(fig.align = 'center')
+```
+
+.pull-left5[
+
+# Gratulation!
+
+<ul>
+  <li class="m1"><span>Nach 3 Tagen kennt ihr nun die Grundlagen von Shiny!</span></li>
+</ul>
+]
+
+.pull-right4[
+<br><br>
+<p align="center">
+<img src="image/shiny.png"><br>
+<font style="font-size:10px">from <a href="https://swag.rstudio.com/s/shop">https://swag.rstudio.com</a></font>
+</p>
+]
+
+---
+
+# Fortgeschrittenes theming mit <mono>bslib</mono>
+
+.pull-left3[
+<ul>
+  <li class="m1"><span>Modernere und ansprechende Themes von Bootswatch</span></li>
+  <li class="m2"><span>Funktioniert nur in Umgebungen mit vollem Internetzugriff</span></li>
+</ul>
+]
+
+.pull-right65[
+<p align="center">
+<img src="image/quarz.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Dynamisches theming mit <mono>bslib</mono>
+
+.pull-left3[
+<ul>
+  <li class="m1"><span>Lässt User in der Session das Aussehen ändern</span></li>
+  <ul class="level">
+    <li><span>z.B. dark-modes</span></li>
+  </ul>
+  <li class="m2"><span>mehr Optionen zum einfachen Anpassen von Themes in R</span></li>
+    <ul class="level">
+      <li><span>inkl. interaktivem Theme-Builder</span></li>
+    </ul>
+</ul>
+]
+
+.pull-right65[
+<p align="center">
+<img src="image/live_theming.gif"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Fortgeschrittenes <mono>bslib</mono>
+
+.pull-left3[
+<ul>
+  <li class="m1"><span>Lässt sehr umfangreiche Anpassungen zu</span></li>
+</ul>
+]
+
+.pull-right65[
+<p align="center">
+<img src="image/nes.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Fortgeschrittenes <mono>bslib</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Lässt Benutzer z.B. Google Fonts verwenden</span></li>
+    <ul class="level">
+    <li><span><a href="https://fonts.google.com">https://fonts.google.com</a></span></li>
+  </ul>
+</ul>
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/google-fonts.png"><br>
+<font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
+</p>
+]
+
+
+---
+class: middle, center
+
+<h1><a href=https://therbootcamp.github.io/Shiny_2023CSS/index.html>Agenda</a></h1>
