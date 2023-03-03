@@ -1,7 +1,7 @@
 ---
 title: "Erste App"
 subtitle: ""
-author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+author: "<font style='font-style:normal'>Dashboards mit Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -206,7 +206,7 @@ verletzungen = readRDS("data/verletzungen.RDS")
 
 ```
 
-2. Baue nun eine UI mit zwei Inputs, einem `selectInput` mit ID `"körperteil"` zur Auswahl der von der Verletzung betroffenen Körperteil und einen `sliderInput` ID `"alter"` zur Auswahl einer Altersspanne. Als drittes ergänze einen `plotOutput` mit ID `linien_plot`, der den ersten Plot der App zeigen wird. Entwickle erst einmal die Struktur - um die weiteren Inhalte der Inhalte der Inputs kümmern wir uns gleich. 
+2. Baue nun eine UI mit zwei Inputs, einem `selectInput` mit ID `"körperteil"` zur Auswahl der von der Verletzung betroffenen Körperteile und einen `sliderInput` ID `"alter"` zur Auswahl einer Altersspanne. Als drittes ergänze einen `plotOutput` mit ID `linien_plot`, der den ersten Plot der App zeigen wird. Entwickle erst einmal die Struktur - um die weiteren Inhalte der Inhalte der Inputs kümmern wir uns gleich. Keine Sorge, wenn noch Fehlermeldungen aufgrund fehlender Argumente entstehen.
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -218,7 +218,7 @@ ui <- fluidPage(
 
 ```
 
-3. Der `selectInput` soll ermöglichen, dass der Nutzer ein oder mehrere Körperteile auswählt. Damit dies funktioniert, stelle der `selectInput` Funktion per `choices` Argument einen Vektor mit möglichen Körperteilen bereit, den du mit `unique(unique(verletzungen$körperteil))` aus dem Datensatz ziehen kannst. Zudem setze `multiple` auf `TRUE`, damit mehrere Auswahlen möglich sind. Natürlich solltest du zudem noch ein Label vergeben - setze es auf `"Körperteil"`.    
+3. Der `selectInput` soll ermöglichen, dass der Nutzer ein oder mehrere Körperteile auswählt. Damit dies funktioniert, stelle der `selectInput` Funktion per `choices` Argument einen Vektor mit möglichen Körperteilen bereit, den du mit `unique(verletzungen$körperteil)` aus dem Datensatz ziehen kannst. Zudem setze `multiple` auf `TRUE`, damit mehrere Auswahlen möglich sind. Natürlich solltest du zudem noch ein Label vergeben - setze es auf `"Körperteil"`.    
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -242,7 +242,7 @@ ui <- fluidPage(
 
 ```
 
-5. Definiere nun den Server. Innerhalb des benutze `renderPlot`, um einen Plot, zu dem wir gleich noch kommen, dem richtigen Output zuzuweisen. Erinerre der Name des Output Elements muss identisch mit der ID des Outputs in der UI sein. 
+5. Definiere nun den Server. Benutze `renderPlot`, um einen Plot, zu dem wir gleich noch kommen, dem richtigen Output zuzuweisen. Erinnere, der Name des Output Elements muss identisch mit der ID des Outputs in der UI sein. 
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -256,7 +256,7 @@ server <- function(input, output, session) {
 
 ```
 
-6. Innerhalb der geschweiften Klammern setze nun diesen Plot, der die Häufigkeit von Verletzungen separat für männliche und weibliche Patienten anzeigt. Damit der Plot funkioniert musst du vorher noch das `tidyverse` Paket (bzw. `ggplot2`) laben. Setze hier `library(tidyverse)` (bzw. `library(ggplot2)`) unter `library(shiny)` in deinem Skript. Beachte wie innerhalb des `filter` die Inputs verwendet werden um die gewünschten Fälle aus dem Datensatz auszuwählen.
+6. Innerhalb der geschweiften Klammern setze nun diesen Plot, der die Häufigkeit von Verletzungen separat für männliche und weibliche Patienten anzeigt. Damit der Plot funkioniert musst du vorher noch das `tidyverse` Paket (bzw. `ggplot2` und `dplyr`) laden. Setze hier `library(tidyverse)` (bzw. `library(ggplot2)` und `library(dplyr)`) unter `library(shiny)` in deinem Skript. Beachte wie innerhalb des `filter` die Inputs verwendet werden um die gewünschten Fälle aus dem Datensatz auszuwählen.
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -282,7 +282,6 @@ server <- function(input, output, session) {
                           end = .8) +
     labs(x = "Alter",
          y = "Geschätzte Anzahl Verletzungen")
-          })
 
 ```
 
@@ -330,7 +329,7 @@ output$linien_plot = renderPlot({
                           end = .8) +
     labs(x = "Alter",
          y = "Geschätzte Anzahl Verletzungen")
-          })
+  })
   
   
 }
