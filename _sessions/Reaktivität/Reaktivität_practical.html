@@ -9,18 +9,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Reaktivität</title>
 
-<script src="Reaktivität_practical_files/header-attrs-2.20/header-attrs.js"></script>
-<script src="Reaktivität_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="Reaktivität_practical_files/header-attrs-2.20/header-attrs.js"></script>
+<script src="Reaktivität_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="Reaktivität_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="Reaktivität_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="Reaktivität_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -30,9 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="Reaktivität_practical_files/navigation-1.1/tabsets.js"></script>
-<link href="Reaktivität_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="Reaktivität_practical_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="Reaktivität_practical_files/navigation-1.1/tabsets.js"></script>
+<link href="Reaktivität_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="Reaktivität_practical_files/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Reaktivität</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -206,7 +206,7 @@ Abschnittsberschrift. Denk dran bei jedem neuen Skript
 <code>library(shiny)</code> an den Anfang zu setzen. Falls weitere
 Pakete nötig sind, werden sie in der jeweileigen Abschnitten
 erwähnt.</p>
-<p>Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du
+<p>Gerade am Anfang stellen wir Code-Templates zur Verfügung in denen du
 allein die <code>XX</code> durch den richtigen Code bzw. die richtigen
 Objekte erstezen musst.</p>
 </div>
@@ -245,36 +245,20 @@ funnktionieren und enstprechend Klammern brauchen.</li>
   
   }</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Lasse die App nun einmal laufen mit
+<li><p>Lasse die App nun einmal laufen mit
 <code>shinyApp(ui, server)</code>. Alles sollte funktionieren wie zuvor.
-Dieses Beispiel illustriert, dass inputs in Objekten speichern kann,
-aber nur wenn man sie z.B. als <code>reactive speichert</code>. Versuche
-einmal die App laufen, wenn du <code>reactive</code> entfernst und das
-Ergebnis von <code>paste</code> direkt zuweist. Natürlich musst du dann
-auch die Klammern von <code>gruss_text</code> im renderText entfernen,
-da <code>gruss_text</code> nun kein <code>reactive</code> mehr ist.
-Funnktionert die App nun immer noch?</li>
-</ol>
-<pre class="r"><code>ui &lt;- fluidPage(
-  textInput(&quot;name&quot;, &quot;Wie heisst Du?&quot;),
-  textOutput(&quot;gruss&quot;)
-)
-
-server &lt;- function(input, output, session) {
-  gruss_text &lt;- reactive(paste0(&quot;Hello &quot;, input$name, &quot;!&quot;))
-  
-  output$gruss &lt;- renderText(gruss_text())
-  observeEvent(input$name, {
-    message(&quot;Gruss ausgerichtet&quot;)
-  })
-}
-
-shinyApp(ui, server)</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li>Du siehst ein Input kann nicht einfach in ein Objekt abgelegt
+Dieses Beispiel illustriert, dass man Inputs in Objekten speichern kann,
+aber nur, wenn man sie z.B. als <code>reactive</code> speichert.
+Versuche einmal die App laufen zu lassen, wenn du <code>reactive</code>
+entfernst und das Ergebnis von <code>paste</code> direkt zuweist.
+Natürlich musst du dann auch die Klammern von <code>gruss_text</code> im
+renderText entfernen, da <code>gruss_text</code> nun kein
+<code>reactive</code> mehr ist. Funnktionert die App nun immer
+noch?</p></li>
+<li><p>Du siehst ein Input kann nicht einfach in ein Objekt abgelegt
 werden. Inputs können nur innerhalb eines “reactive consumers” verwendet
 werden. Mache diese Änderungen nun rückgängig, damit wir die nächste
-Iteration unserer “Wie heisst Du?” App bauen können.</li>
+Iteration unserer “Wie heisst Du?” App bauen können.</p></li>
 </ol>
 <pre class="r"><code>ui &lt;- fluidPage(
   textInput(&quot;name&quot;, &quot;Wie heisst Du?&quot;),
@@ -298,13 +282,13 @@ ein neues Skript (oder ändere einfach die vorherige Version). Nun wollen
 wir eine weitere Mitteilungen ergänzen, die uns rückmeldet, dass ein
 Gruss ausgerichtet wurde. Verwende hierzu <code>observeEvent</code>
 innerhalb des <code>servers</code>. Als erstes Argument stelle den Input
-bereit <code>input$name</code>. Der Input kontrollier dann den Code, den
-wir gleich für das zweite Argument bereitstellen ausgeführt in dem
-Sinne, dass anschliessende Code jedes mal ausgeführt wird wenn
-<code>input$name</code> validiert wird. Als Code für das zweite Argument
-weise <code>message("Gruss ausgerichtet")</code> zu, was zu einer
-Nachricht in der Console führen sollte, jedes mal wenn der geändert, bzw
-validiert wird Input bereitgestellt wird.</li>
+bereit: <code>input$name</code>. Der Input kontrolliert dann den Code,
+den wir gleich für das zweite Argument bereitstellen. Der nachfolgende
+Code wird jedes mal ausgeführt, wenn <code>input$name</code> validiert
+wird. Als Code für das zweite Argument weise
+<code>message("Gruss ausgerichtet")</code> zu, was jedes Mal wenn der
+Input geändert, bzw. validiert wird, zu einer Nachricht in der Console
+führen sollte.</li>
 </ol>
 <pre class="r"><code>server &lt;- function(input, output, session) {
   gruss_text &lt;- XX(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
@@ -318,8 +302,8 @@ validiert wird Input bereitgestellt wird.</li>
 <code>"Gruss ausgerichtet"</code> in die Console geprinted wurde bevor
 du etwas in den <code>textInput</code> eingegeben hast. Das hängt damit
 zusammen, dass Shiny zu Beginnn einmal den <em>reactive graph</em>
-validiert. Um dies zu verhindern kannst du die Funktion <code>req</code>
-(für “required”) um den Input im ersten Argument von
+validiert. Um dies zu verhindern, kannst du die Funktion
+<code>req</code> (für “required”) um den Input im ersten Argument von
 <code>observeEvent</code> setzen. Mach das mal und lass die App nochmal
 laufen.</li>
 </ol>
@@ -332,11 +316,11 @@ laufen.</li>
   }</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Die Konstruktion mit <code>observeEvent</code> und <code>req</code>
-ist nützlich, um streng zu kontrollieren, wann ein bestimmter laufen
-soll. Wir können dies zum Beispiel auch verwenden, um zu verhinden, dass
-<code>"Hallo *"</code> schon dort steht bevor wir etwas eingegeben
-haben. Dafür müssen wir jedoch zuerst <code>gruss_text</code> in ein
-anderes reaktives Format ändern und zwar in einen
+ist nützlich, um streng zu kontrollieren, wann ein bestimmter Code-Block
+laufen soll. Wir können dies zum Beispiel auch verwenden, um zu
+verhinden, dass <code>"Hallo *"</code> schon dort steht, bevor wir etwas
+eingegeben haben. Dafür müssen wir jedoch zuerst <code>gruss_text</code>
+in ein anderes reaktives Format ändern, und zwar in einen
 <code>reactiveVal</code>. <code>reactiveVal</code> erlauben die
 Definition eines noch undefiniertes Wertes, der zudem im Vergleich zu
 normalen <code>reactive</code> im Code überschrieben werden kann.
@@ -365,17 +349,6 @@ nachdem du einen Namen eingegeben hast.</li>
     message(&quot;Gruss ausgerichtet&quot;)
     })
   }</code></pre>
-<pre class="r"><code>server &lt;- function(input, output, session) {
-  
-gruss_text=reactiveVal()
-
-  output$gruss &lt;- renderText(gruss_text())
-  
-  observeEvent(req(input$name), {
-    gruss_text(paste0(&quot;Hello &quot;, input$name, &quot;!&quot;))
-    message(&quot;Gruss ausgerichtet&quot;)
-    })
-}</code></pre>
 </div>
 <div id="c---essen-oder-trinken" class="section level3">
 <h3>C - Essen oder Trinken</h3>
@@ -430,7 +403,7 @@ shinyApp(ui, server)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Du kannst dir den <em>reactive graph</em> ansehen indem du das
 <code>reactlog</code> Paket lädst und einmal
-<code>reactlog_enable</code> ausführst. Dann lasse die App nochmal
+<code>reactlog_enable()</code> ausführst. Dann lasse die App nochmal
 laufen lassen und schliesse sie wieder. Jetzt solltest du mit
 <code>reactlogShow()</code> dir den Graphen anzeigen lassen können.</li>
 </ol>
@@ -442,7 +415,7 @@ laufen lassen und schliesse sie wieder. Jetzt solltest du mit
 <li><p>An zwei Stellen bauen wir im InjuryViewer Reaktivität ein.
 Erstens, bewegen wir die Daten und die Auswahl der Körperteile und des
 Alters in einen <code>reactive</code>. Zweitens, entwickeln wir einen
-<code>reactiveVal</code>, der hilft zu entscheiden welche Versions eines
+<code>reactiveVal</code>, der hilft zu entscheiden welche Version eines
 zweiten Plots angezeigt wird. Öffne zunächst das Skript der InjuryViewer
 App.</p></li>
 <li><p>Zuerst kreiere im <code>server</code> das <code>reactive</code>,
@@ -458,11 +431,11 @@ dass die ausgewählten Daten enthält. Nennen das <code>reactive</code>
 <ol start="3" style="list-style-type: decimal">
 <li>Da die Daten nun in einem <code>reactive</code> sind, müssen wir den
 Code von <code>linien_plot</code> anpassen. Anstatt innerhalb der
-Plotcodes die Auswhal der Daten vorzunehmen, soll nun das
+Plot-Codes die Auswhal der Daten vorzunehmen, soll nun das
 <code>reactive</code> die Daten bereitsstellen. Entferne also den
-relevanten <code>dplyr</code> Code zu Beginn plots und ersetze ihn durch
-das <code>reactive</code>. Denke dran <code>reactive</code>s sind wie
-Funktionen und brauchen daher Klammern.</li>
+relevanten <code>dplyr</code> Code zu Beginn Plot-Codes und ersetze ihn
+durch das <code>reactive</code>. Denke dran <code>reactive</code>s sind
+(wie) Funktionen und brauchen daher Klammern.</li>
 </ol>
 <pre class="r"><code>output$linien_plot = renderPlot({
 
@@ -483,12 +456,11 @@ Funktionen und brauchen daher Klammern.</li>
                           option = &quot;G&quot;,
                           end = .8) +
     labs(x = &quot;Alter&quot;,
-         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
-          })</code></pre>
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Nun können wir uns daran machen einen zweiten Plot zu bauen, der je
 nach Einstellung eines weiteren reaktiven Elements die Diagnosen,
-Gegenstände, oder Unfallorte der Verletzungen zeigt. Zunächst kreiere
+Gegenstände, oder Unfallorte der Verletzungen zeigt. Kreiere zunächst
 den Plot mit <code>diagnose</code> als angezeigte Variable unter
 Verwendung des reaktiven Elements <code>daten</code>. Nenne den Plot
 <code>lollipop_plot</code> und ergänze ein entsprechendes
@@ -526,7 +498,7 @@ Verwendung des reaktiven Elements <code>daten</code>. Nenne den Plot
 <li><p>Lasse die App einmal laufen. Du solltest jetzt einen zweiten Plot
 sehen, der die Diagnosen separat für männliche und weibliche Patienten
 zeigt und wie <code>linien_plot</code> sich als Funktion der Körperteil-
-und Alterseinstellung ändert, dank des <code>daten</code>
+und Alterseinstellung ändert, dank des <code>daten()</code>
 <code>reactive</code>s.</p></li>
 <li><p>Damit der <code>lollipop_plot</code> unterschiedliche Variablen
 anzeigen kann, benötigen wir ein weiteres reaktives Element, eines das
@@ -544,7 +516,7 @@ Schaltern. Ergänze drei <code>actionButton</code> zwischen dem
 <code>diagnose_var</code>, <code>unfallort_var</code> und
 <code>gegenstand_var</code>, sowie die Labels <code>"Diagnosen"</code>,
 <code>"Unfallorte"</code>, und <code>"Gegenstände"</code>.</p></li>
-<li><p>Mit den IDs der drei Schaltern, kannst du jetzt drei
+<li><p>Mit den IDs der drei Schalter, kannst du jetzt drei
 <code>observeEvent</code> setzen, die jeweils den
 <code>lollipop_var</code> <code>reactiveVal</code> so ändern, das
 <code>lollipop_var</code> den Namen der jeweiligen Variable im Datensatz
@@ -628,10 +600,8 @@ output$linien_plot = renderPlot({
          y = &quot;Geschätzte Anzahl Verletzungen&quot;)
           })
 
- #  setze default
  lollipop_var = reactiveVal(&quot;diagnose&quot;)
  
- # wechsel lollipop var
   observeEvent(input$diagnose_var, {
     lollipop_var(&quot;diagnose&quot;)
   })
