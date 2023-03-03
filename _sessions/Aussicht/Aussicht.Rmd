@@ -115,7 +115,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 .pull-left3[
 <ul>
   <li class="m1"><span>Moderne und ansprechende Themes von Bootswatch</span></li>
-  <li class="m2"><span></span></li>
+  <li class="m2"><span>Aktuellere Versionen des UI Frameworks Bootstrap</span></li>
 </ul>
 ]
 
@@ -152,15 +152,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Fortgeschrittenes <mono>bslib</mono>
-
-.pull-left3[
-<ul>
-  <li class="m1"><span>Lässt sehr umfangreiche Anpassungen zu</span></li>
-</ul>
-]
-
-.pull-right65[
+.pull-left100[
 <p align="center">
 <img src="image/nes.png"><br>
 <font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
@@ -169,7 +161,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Fortgeschrittenes <mono>bslib</mono>
+# Google Fonts mit <mono>bslib</mono>
 
 .pull-left4[
 <ul>
@@ -186,6 +178,142 @@ knitr::opts_chunk$set(fig.align = 'center')
 <font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
 </p>
 ]
+
+---
+
+.pull-left35[
+
+# Cards mit <mono>bslib</mono>
+
+<ul>
+  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
+</ul>
+]
+
+.pull-right6[
+<p align="center">
+<img src="image/cards/cards_1.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
+</p>
+]
+
+
+---
+
+.pull-left35[
+
+# Cards mit <mono>bslib</mono>
+
+<ul>
+  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
+  <li class="m2"><span>Inhalte können zur besseren Ansicht vergrössert werden</span></li>
+</ul>
+]
+
+.pull-right6[
+<p align="center">
+<img src="image/cards/cards_2.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+.pull-left35[
+
+# Cards mit <mono>bslib</mono>
+
+<ul>
+  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
+  <li class="m2"><span>Inhalte können zur besseren Ansicht vergrössert werden</span></li>
+</ul>
+]
+
+.pull-right6[
+<p align="center">
+<img src="image/cards/cards_3.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
+</p>
+]
+
+
+---
+
+# Valueboxes mit <mono>bslib</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Valueboxes liefern wichtige Kennzahlen auf einen Blick</span></li>
+</ul>
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/valueboxes/valuebox_2.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/value-boxes.html">https://rstudio.github.io</a></font>
+</p>
+]
+
+---
+
+# Datenquellen
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>In unseren Übungen haben wir mit statischen Daten gearbeitet.</span></li>
+  <li class="m2"><span>R, und damit auch Shiny, bietet Interfaces zu vielen gängigen Datenbanken</span></li>
+</ul>
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/mysql.svg"><br>
+<font style="font-size:10px">from <a href="https://www.mysql.com/">https://www.mysql.com/</a></font>
+</p>
+]
+
+---
+
+.pull-left4[
+
+# Modularität
+
+<ul>
+  <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
+</ul>
+]
+
+.pull-right5[
+<br>
+<p align="center">
+<img src="image/no_modules.png"><br>
+<font style="font-size:10px">from <a href="https://mastering-shiny.org/scaling-modules.html">https://mastering-shiny.org</a></font>
+</p>
+]
+
+---
+
+.pull-left4[
+
+# Modularität
+
+<ul>
+  <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
+  <li class="m2"><span>Shiny Modules helfen, die App in kleinere, unabhängige Module zu unterteilen.</span></li>
+  <li class="m3"><span>Besonders für die parallele Zusammenarbeit von mehreren Entwickler:innen sinnvoll.</span></li>
+</ul>
+]
+
+.pull-right5[
+<br>
+<p align="center">
+<img src="image/modules.png"><br>
+<font style="font-size:10px">from <a href="https://mastering-shiny.org/scaling-modules.html">https://mastering-shiny.org</a></font>
+</p>
+]
+
+
+
 
 
 ---
