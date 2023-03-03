@@ -15,7 +15,7 @@ körper_farbe = viridis::viridis(5, option = "G", end = .9)[5]
 
 ui = navbarPage(
   "InjuryViewer",
-  theme = shinytheme("cosmo"),
+  theme = shinytheme("lumen"),
   
   tabPanel(
     "Dashboard",
@@ -69,7 +69,7 @@ ui = navbarPage(
       id = "Daten_eingeben",
       tabPanel(title = "Daten",
                h2("Aktuelle daten"),
-               dataTableOutput("daten"),),
+               dataTableOutput("daten")),
       tabPanel(
         title = "Upload",
         h2("Daten hochladen"),

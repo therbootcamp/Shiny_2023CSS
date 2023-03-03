@@ -22,63 +22,478 @@ output:
 
 # {.tabset}
 
-## Überblick
+## Information
 
-In diesem Practical wirst du üben mit `ggplot2` Grafiken zu erstellen. 
+Dieses Practical besteht aus zwei Teilen. 
 
-Am Ende des Practicals wirst du wissen wie man:
+1. Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte der Präsentation.  
+2. App: Über die Sessions hinweg entwickelst Du die <a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a> App
 
-1. Einen Plot Schritt-für-Schritt aufbaut.
-2. Verschiedene `geom`s verwendet.
-3. Farben verändert.
+Wie viel Zeit du in *Aufgaben* oder *App* verbringst ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue Themen einsteigen kannst ohne notwendigerweise alle Schritte der Appentwicklung abgeschlossen zu haben. 
+
+Für jede App in Aufgaben erstelle bitte ein **neues Skript** und speichere es unter dem Namen der Abschnittsberschrift. Denk dran bei jedem neuen Skript `library(shiny)` an den Anfang zu setzen. Falls weitere Pakete nötig sind, werden sie in der jeweileigen Abschnitten erwähnt. 
+
+Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein die `XX` durch den richtigen Code bzw. die richtigen Objekte erstezen musst.   
 
 ## Aufgaben
 
-### A - Setup
+### A - Wie heisst Du? 2.0
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+1. Bauen wir eine reaktive Variante der "Wie heisst Du"-App. Definiere hierzu erstmal folgende UI, die wir unverändert weiter verwenden können. 
 
-2. Speichere das neue Skript unter dem Namen `erste_app.R` im `2_Code` Ordner.
+```{r, eval = FALSE, echo = TRUE}
 
-3. Lade `shiny`.
+ui <- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  textOutput("gruss")
+  )
 
-```{r, echo = TRUE, eval = FALSE}
-library(shiny)
+```
+
+2. Definiere nun einen `server`, der als erstes den Grusstext als `reactive` definiert. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  
+  gruss_text <- XX(paste0("Hello ", input$name, "!"))
+  
+  }
+
+```
+
+3. Ergänze nun einen `renderText`, der den Inhalt des `reactive`s per ID dem `textOutput` der UI zuweist. Beachte das `reactive`s wie Funktionen funnktionieren und enstprechend Klammern brauchen. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  
+  gruss_text <- XX(paste0("Hello ", input$name, "!"))
+  output$XX <- renderText(XX())
+  
+  }
+
+
+```
+
+4. Lasse die App nun einmal laufen mit `shinyApp(ui, server)`. Alles sollte funktionieren wie zuvor. Dieses Beispiel illustriert, dass inputs in Objekten speichern kann, aber nur wenn man sie z.B. als `reactive speichert`. Versuche einmal die App laufen, wenn du `reactive` entfernst und das Ergebnis von `paste` direkt zuweist. Natürlich musst du dann auch die Klammern von `gruss_text` im renderText entfernen, da `gruss_text` nun kein `reactive` mehr ist. Funnktionert die App nun immer noch?
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  textOutput("gruss")
+)
+
+server <- function(input, output, session) {
+  gruss_text <- reactive(paste0("Hello ", input$name, "!"))
+  
+  output$gruss <- renderText(gruss_text())
+  observeEvent(input$name, {
+    message("Gruss ausgerichtet")
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+5. Du siehst ein Input kann nicht einfach in ein Objekt abgelegt werden. Inputs können nur innerhalb eines "reactive consumers" verwendet werden. Mache diese Änderungen nun rückgängig, damit wir die nächste Iteration unserer "Wie heisst Du?" App bauen können. 
+
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  textOutput("gruss")
+)
+
+server <- function(input, output, session) {
+  gruss_text <- reactive(paste0("Hallo ", input$name, "!"))
+  
+  output$gruss <- renderText(gruss_text)
+
+  }
+
+shinyApp(ui, server)
+
 ```
 
 
-### B - Lade den Datensatz
+### A - Wie heisst Du? 3.0
 
+1. Kopiere den Code der letzten Iteration der "Wie heisst Du?" App in ein neues Skript (oder ändere einfach die vorherige Version). Nun wollen wir eine weitere Mitteilungen ergänzen, die uns rückmeldet, dass ein Gruss ausgerichtet wurde. Verwende hierzu `observeEvent` innerhalb des `servers`. Als erstes Argument stelle den Input bereit `input$name`. Der Input kontrollier dann den Code, den wir gleich für das zweite Argument bereitstellen ausgeführt in dem Sinne, dass anschliessende Code jedes mal ausgeführt wird wenn `input$name` validiert wird. Als Code für das zweite Argument weise `message("Gruss ausgerichtet")` zu, was zu einer Nachricht in der Console führen sollte, jedes mal wenn der geändert, bzw validiert wird Input bereitgestellt wird.    
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  gruss_text <- XX(paste0("Hallo ", input$name, "!"))
+  output$XX <- renderText(XX())
+  observeEvent(XX, {
+    message("Gruss ausgerichtet")
+    })
+  }
+
+
+```
+
+
+2. Du hast vielleicht gemerkt, dass die Nachricht `"Gruss ausgerichtet"` in die Console geprinted wurde bevor du etwas in den `textInput` eingegeben hast. Das hängt damit zusammen, dass Shiny zu Beginnn einmal den *reactive graph* validiert. Um dies zu verhindern kannst du die Funktion `req` (für "required") um den Input im ersten Argument von `observeEvent` setzen. Mach das mal und lass die App nochmal laufen. 
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  gruss_text <- XX(paste0("Hallo ", input$name, "!"))
+  output$XX <- renderText(XX())
+  observeEvent(XX(XX), {
+    message("Gruss ausgerichtet")
+    })
+  }
+
+
+```
+
+3. Die Konstruktion mit `observeEvent` und `req` ist nützlich, um streng zu kontrollieren, wann ein bestimmter laufen soll. Wir können dies zum Beispiel auch verwenden, um zu verhinden, dass `"Hallo *"` schon dort steht bevor wir etwas eingegeben haben. Dafür müssen wir jedoch zuerst `gruss_text` in ein anderes reaktives Format ändern und zwar in einen `reactiveVal`. `reactiveVal` erlauben die Definition eines noch undefiniertes Wertes, der zudem im Vergleich zu normalen `reactive` im Code überschrieben werden kann. Definiere zunächst `gruss_text` als leeren `reactiveVal`. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  gruss_text <- XX()
+  output$XX <- renderText(XX())
+  observeEvent(XX(XX), {
+    message("Gruss ausgerichtet")
+    })
+  }
+
+```
+
+4. Nun überschreibe den `reactiveVal` innerhalb des `observeEvent` mit dem ursorünglichen `paste` Befehl. Beachte, dass das überschreiben keine Zuweisung erfordert. Lasse die App jetzt nochmal laufen. Der Text sollte nun erst erscheinen, nachdem du einen Namen eingegeben hast.  
+
+```{r, eval = FALSE, echo = TRUE}
+
+server <- function(input, output, session) {
+  gruss_text <- XX()
+  output$XX <- renderText(XX())
+  observeEvent(XX(XX), {
+    reactiveVal(paste0("Hallo ", input$name, "!"))
+    message("Gruss ausgerichtet")
+    })
+  }
+
+```
+
+
+
+```{r, eval = FALSE}
+
+server <- function(input, output, session) {
+  
+gruss_text=reactiveVal()
+
+  output$gruss <- renderText(gruss_text())
+  
+  observeEvent(req(input$name), {
+    gruss_text(paste0("Hello ", input$name, "!"))
+    message("Gruss ausgerichtet")
+    })
+}
+
+```
+
+### C - Essen oder Trinken
+
+1. Nachdem du jetzt etwas Erfahrung mit `reactiveVal` und `observeEvent` gesammelt hast, versuche einmal diese App zu vervollständigen. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  actionButton("drink", "drink me"),
+  actionButton("eat", "eat me"),
+  textOutput("notice")
+)
+server <- function(input, output, session) {
+  notice <- XX()
+  observeEvent(XX$XX, {
+   notice("You are no longer thirsty")
+  })
+  observeEvent(XX$XX, {
+    notice("You are no longer hungry")
+  })
+  output$XX <- renderText(XX())
+}
+
+shinyApp(ui, server)
+
+```
+
+
+### D - Fehler
+
+1. Im code siehst du eine funktionierende App. Probiere sie aus und überlege dann wie der *reactive graph* für die App aussehen könnte. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  checkboxInput("error", "error?"),
+  textOutput("result")
+)
+server <- function(input, output, session) {
+  a <- reactive({
+    if (input$error) {
+      stop("Error!")
+    } else {
+      1
+    }
+  })
+  b <- reactive(a() + 1)
+  c <- reactive(b() + 1)
+  output$result <- renderText(c())
+}
+
+shinyApp(ui, server)
+
+```
+
+2. Du kannst dir den *reactive graph* ansehen indem du das `reactlog` Paket lädst und einmal `reactlog_enable` ausführst. Dann lasse die App nochmal laufen lassen und schliesse sie wieder. Jetzt solltest du mit `reactlogShow()` dir den Graphen anzeigen lassen können. 
 
 ## App
 
-### A - Setup
+1. An zwei Stellen bauen wir im InjuryViewer Reaktivität ein. Erstens, bewegen wir die Daten und die Auswahl der Körperteile und des Alters in einen `reactive`. Zweitens, entwickeln wir einen `reactiveVal`, der hilft zu entscheiden welche Versions eines zweiten Plots angezeigt wird. Öffne zunächst das Skript der InjuryViewer App. 
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+2. Zuerst kreiere im `server` das `reactive`, dass die ausgewählten Daten enthält. Nennen das `reactive` `daten`. 
 
-2. Speichere das neue Skript unter dem Namen `InjuryViewer.R` im top-level Ordner `TheRBootcamp`. 
+```{r, eval = FALSE, echo = TRUE}
 
-3. Lade `shiny`.
+XX = XX({
+  verletzungen %>%
+    filter(körperteil %in% input$körperteil,
+           alter >= input$alter[1],
+           alter <= input$alter[2])
+  })
 
-```{r, echo = TRUE, eval = FALSE}
+```
+
+3. Da die Daten nun in einem `reactive` sind, müssen wir den Code von `linien_plot` anpassen. Anstatt innerhalb der Plotcodes die Auswhal der Daten vorzunehmen, soll nun das `reactive` die Daten bereitsstellen. Entferne also den relevanten `dplyr` Code zu Beginn plots und ersetze ihn durch das `reactive`. Denke dran `reactive`s sind wie Funktionen und brauchen daher Klammern. 
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+output$linien_plot = renderPlot({
+
+  XX %>% 
+    count(alter, geschlecht, wt = anzahl) %>%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = "cm"),
+      legend.position = "top"
+    ) +
+    scale_color_viridis_d(name = "Geschlecht",
+                          option = "G",
+                          end = .8) +
+    labs(x = "Alter",
+         y = "Geschätzte Anzahl Verletzungen")
+          })
+
+```
+
+4. Nun können wir uns daran machen einen zweiten Plot zu bauen, der je nach Einstellung eines weiteren reaktiven Elements die Diagnosen, Gegenstände, oder Unfallorte der Verletzungen zeigt. Zunächst kreiere den Plot mit `diagnose` als angezeigte Variable unter Verwendung des reaktiven Elements `daten`. Nenne den Plot `lollipop_plot` und ergänze ein entsprechendes `plotOutput` in der UI unter dem `linien_plot`. 
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+output$XX = renderPlot({
+    XX %>%
+      mutate(variable = XX) %>%
+      count(variable, geschlecht, wt = anzahl) %>%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = "G", end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = "cm"),
+        legend.position = "none"
+      ) +
+      labs(y = "Geschätzte Anzahl")
+    })
+
+```
+
+5. Lasse die App einmal laufen. Du solltest jetzt einen zweiten Plot sehen, der die Diagnosen separat für männliche und weibliche Patienten zeigt und wie `linien_plot` sich als Funktion der Körperteil- und Alterseinstellung ändert, dank des `daten` `reactive`s. 
+
+6. Damit der `lollipop_plot` unterschiedliche Variablen anzeigen kann, benötigen wir ein weiteres reaktives Element, eines das wir überschreiben können. Kreiere einen `reactiveVal` namens `lollipop_var` und setze den anfänglichen Wert auf `"diagnose"`.  
+
+```{r, eval = FALSE, echo = TRUE}
+
+ XX = XX(XX)
+
+```
+
+7. Nun bauen wir drei Schalter, die jeweils dazu führen sollen, dass sich der Wert in `lollipop_var` ändert. Dafür brauchen wir später noch ein `observeEvent`, aber erstmal zu den Schaltern. Ergänze drei `actionButton` zwischen dem `sliderInput` und dem ersten plot. Vergebe die IDs `diagnose_var`, `unfallort_var` und `gegenstand_var`, sowie die Labels `"Diagnosen"`, `"Unfallorte"`, und `"Gegenstände"`. 
+
+8. Mit den IDs der drei Schaltern, kannst du jetzt drei `observeEvent` setzen, die jeweils den `lollipop_var` `reactiveVal` so ändern, das `lollipop_var` den Namen der jeweiligen Variable im Datensatz (`"diagnose"`, `"unfallort"`, oder `"gegenstand"`) trägt. Denk dran, das erste Argument `observeEvent` ist hier der Input, der den Code des `observeEvent` im zweiten Argument triggern soll. 
+
+```{r, eval = FALSE, echo = TRUE}
+
+  XX(XX$XX, {
+    lollipop_var("diagnose")
+  })
+  XX(XX$XX, {
+    lollipop_var("unfallort")
+  })
+  XX(XX$XX, {
+    lollipop_var("gegenstand")
+  })
+
+```
+
+9. Zuletzt müssen wir noch eine Änderung am `lollipop_plot` vornehmen, damit jeweils die Variable in `lollipop_var` angezeigt wird. Ändere dafür die das `mutate` in der zweiten Zeile des `lollipop_plot` wie unten dargestellt. Anstelle von XX setze den `lollipop_var` `reactiveVal`. Denk an die Klammern. 
+
+
+```{r, eval = FALSE, echo = TRUE}
+
+mutate(variable = .data[[XX]])
+
+```
+
+10. Fertig. Lasse die einmal laufen. Ändert sich der `lollipop_plot`, wenn du auf die drei neuen Schalter klickst?
+
+
+## Lösung
+
+```{r, eval = FALSE, echo = TRUE}
 library(shiny)
+library(tidyverse)
+
+verletzungen = readRDS("data/verletzungen.RDS")
+
+ui <- fluidPage(
+  
+  selectInput("körperteil", "Körperteil", 
+              choices = unique(verletzungen$körperteil), 
+              multiple = TRUE),
+  sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
+  actionButton("diagnose_var", "Diagnosen"),
+  actionButton("unfallort_var", "Unfallorte"),
+  actionButton("gegenstand_var", "Gegenstände"),
+  plotOutput("linien_plot"),
+  plotOutput("lollipop_plot")
+  )
+
+server <- function(input, output, session) {
+
+daten = reactive({
+  verletzungen %>%
+    filter(körperteil %in% input$körperteil,
+           alter >= input$alter[1],
+           alter <= input$alter[2])
+  })
+  
+output$linien_plot = renderPlot({
+
+  daten() %>% 
+    count(alter, geschlecht, wt = anzahl) %>%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = "cm"),
+      legend.position = "top"
+    ) +
+    scale_color_viridis_d(name = "Geschlecht",
+                          option = "G",
+                          end = .8) +
+    labs(x = "Alter",
+         y = "Geschätzte Anzahl Verletzungen")
+          })
+
+ lollipop_var = reactiveVal("diagnose")
+ 
+  observeEvent(input$diagnose_var, {
+    lollipop_var("diagnose")
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var("unfallort")
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var("gegenstand")
+  })
+  
+  output$lollipop_plot = renderPlot({
+
+    daten() %>%
+      mutate(variable = .data[[lollipop_var()]]) %>%
+      count(variable, geschlecht, wt = anzahl) %>%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = "G", end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = "cm"),
+        legend.position = "none"
+      ) +
+      labs(y = "Geschätzte Anzahl")
+    })
+}
+
+shinyApp(ui, server)
 ```
-
-4. Lade den Datensatz .
-
-```{r, eval = F, message = F}
-# Lese Daten
-mcdonalds <- readRDS('1_Data/verletzungen')
-```
-
-
-### A - Setup
 
 
 ## Datensatz
 
-Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt.      
+Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz wurde ins Deutsche übersetzt und angepasst.     
+Es liegen zwei Ausschnitte des Datensatzes vor. `verletzungen.RDS` beinhaltet alle 251'545 Fälle des Jahres 2017, `verletzungen_jahresende.RDS` dagegen nur die 4'181 Fälle zwischen Heiligabend und Silvester. 
 
+Die beiden Datensätze beinhalten die folgenden Variablen:
+
+| Name   |      Beschreibung      |
+|----------|:------------- |
+| datum |  Datum des Unfalls / der Verletzung |
+| alter |   Alter der Person   |
+| geschlecht | Geschlecht der Person |
+| körperteil | Körperteil, das verletzt wurde  |
+| diagnose | Diagnose der Verletzung |
+| unfallort | Unfallort der Verletzung |
+| gegenstand | Gegenstand, der die Verletzung herbeigeführt hat |
+| anzahl | Anzahl an Verletzungen |
 
 
 

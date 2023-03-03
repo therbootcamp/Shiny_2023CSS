@@ -22,63 +22,646 @@ output:
 
 # {.tabset}
 
-## Überblick
+## Information
 
-In diesem Practical wirst du üben mit `ggplot2` Grafiken zu erstellen. 
+Dieses Practical besteht aus zwei Teilen. 
 
-Am Ende des Practicals wirst du wissen wie man:
+1. Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte der Präsentation.  
+2. App: Über die Sessions hinweg entwickelst Du die <a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a> App
 
-1. Einen Plot Schritt-für-Schritt aufbaut.
-2. Verschiedene `geom`s verwendet.
-3. Farben verändert.
+Wie viel Zeit du in *Aufgaben* oder *App* verbringst ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue Themen einsteigen kannst ohne notwendigerweise alle Schritte der Appentwicklung abgeschlossen zu haben. 
+
+Für jede App in Aufgaben erstelle bitte ein **neues Skript** und speichere es unter dem Namen der Abschnittsberschrift. Denk dran bei jedem neuen Skript `library(shiny)` an den Anfang zu setzen. Falls weitere Pakete nötig sind, werden sie in der jeweileigen Abschnitten erwähnt. 
+
+Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein die `XX` durch den richtigen Code bzw. die richtigen Objekte erstezen musst.   
 
 ## Aufgaben
 
-### A - Setup
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+### A - Lade den Datensatz
 
-2. Speichere das neue Skript unter dem Namen `erste_app.R` im `2_Code` Ordner.
+1. 
 
-3. Lade `shiny`.
+```{r}
 
-```{r, echo = TRUE, eval = FALSE}
-library(shiny)
+fluidPage(
+  titlePanel("Hallo Shiny!"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("beobachtungen", "Beobachtungen:", min = 0, max = 1000, value = 500)
+    ),
+    mainPanel(
+      plotOutput("distPlot")
+    )
+  )
+)
+
+shinyApp(ui, server = function(input, output, sesssion){})
+
 ```
 
 
-### B - Lade den Datensatz
+### B - Something with Tab / Nav
+
+```{r}
+
+ui <- fluidPage(
+  tabsetPanel(
+    tabPanel("Import data", 
+      fileInput("file", "Data", buttonLabel = "Upload..."),
+      textInput("delim", "Delimiter (leave blank to guess)", ""),
+      numericInput("skip", "Rows to skip", 0, min = 0),
+      numericInput("rows", "Rows to preview", 10, min = 1)
+    ),
+    tabPanel("Set parameters"),
+    tabPanel("Visualise results")
+  )
+)
+
+```
+
+### C - Something with HTML
+
 
 
 ## App
 
-### A - Setup
+1. Es ist an der Zeit das Layout der InjuryViewer App anzupassen. Es sind einige Änderungen nötig. Erstens, muss die UI in eine `navbarPage` mit drei `tabPanels` geändert werden. Zweitens muss im Hauptpanel ein `sidebarLayout` eingezogen werden. Drittens muss in den zusätzlichen Panels ein `tabsetPanel` erstellt werden und HTML eingesetzt werden um Spalten einzurücken und Überschriften zu setzen.      
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
-
-2. Speichere das neue Skript unter dem Namen `InjuryViewer.R` im top-level Ordner `TheRBootcamp`. 
-
-3. Lade `shiny`.
+2. Beginnen wir mit der `navbarPage`. Kreiere eine neue UI mit drei `tabPanel`s innerhalb einer `navbarPage`. Setze den `title` der `navbarPage` auf `InjuryViewer` und die der `tabPanels` auf `Dashboard`, `Daten`, und `Informationen`. Siehe die enstprechenden Kommentare, die uns später dabei helfen werden die UI Komponenten auseinander zu halten. Teste die App mit `shinyApp(ui, server = function(input, output, sesssion){})`. Hat's funktioniert?
 
 ```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX),
+  
+  # Daten
+  XX(title = XX),
+  
+  # Informationen
+  XX(title = XX)
+  )
+
+
+```
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- navbarPage(
+  title = "InjuryViewer",
+  tabPanel(title = "Dashboard"),
+  tabPanel(title = "Daten"),
+  tabPanel(title = "Informationen")
+  )
+
+shinyApp(ui, server = function(input, output, sesssion){})
+
+```
+
+3. Als nächstes ergänze Icons für die drei `tabPanel`. Für das Dashboard `tabPanel` ergänze icon("chart-bar"), für das Daten `tabPanel` `icon("clipboard")`, und für das Informationen `tabPanel` icon("info-circle"). Lasse App laufen, um zu testen ob die Icons angezeigt werden. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+4. Mit dem fertigen grundgerüst können wir anfangen das Layout der einzelnen `tabPanel`s näher zu definieren. Angefangen mit dem Dashboard ergänze ein `sidebarLayout` inklusive `sidebarPanel` und `mainPanel`.
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(),
+       XX()
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+5. Innerhalb des `sidebarPanel`s setze zunächst `width = 3` und liste dann die fünf Inputelemente der letzten App, den Select, den Slider, und die drei Schalter. Schaue dir die UI wieder mal mit `shinyApp(ui, server = function(input, output, sesssion){})` an. Passt alles?
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX()
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+6. Mit einer fertigen Sidebar, kümmern wir uns jetzt um das `mainPanel`. Ergänze innerhalb des Panels die zwei `plotOutput`s, den `lilien_plot` und den `lollipop_plot`, und teste die UI. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+7. Das Dashboard Layout ist fertig. Nun zum Daten Navbar Panel. Ergänze ein `tabsetPanel` mit wiederum drei `tabPanel`s mit den Titel `"Daten"`, `"Upload"`, und `"Download"`. Innerhalb der `tabPanel` ergänze die folgenden Überschriften auf zweiter Ebene: `""Aktuelle daten""`, `"Daten hochladen"`, und `"Daten runterladen"`. Teste die UI. Sind die Tabs unter dem Navbar-Tab Daten zu sehen?    
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+8. Innerhalb des neuen `tabPanel` Daten innerhalb des `tabsetPabel`, ergänze den Output `dataTableOutput("daten")`, was sobald wir im `server` einen entsprechenden `renderDataTable` uns erlauben wird mit den Daten in einer Tabelle zu interagieren. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX),
+          XX
+          )
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )
+
+
+```
+
+
+9. Bevor wir zum `server` kommen, müssen wir noch Änderungen am Informationen Navbar Panel durchführen. Ergänze innerhalb ein `navbarMenu` mit zwei `tabPanel`s mit den Titeln `"Datensatz"` und `"About"`. Teste die UI.  
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX),
+          XX
+          ),
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX),
+       XX(title = XX)
+     ))
+  )
+
+
+```
+ 
+10. Innerhalb der Datensatz und About `tabPanel`s füge jweils `fluidPage(fluidRow(column(6, HTML(XX))))` hinzu und ergänze die folgenden zwei Texte in an Stelle des XX ein. Teste die UI und siehe wie Shiny die HTML Elemente in den Texten in Formatierung übersetzt. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+"<h2>National Electronic Injury Surveillance System (NEISS)</h2><h4>Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.<br><br>NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.<br><br>Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.<br><br>Mehr Informationen zu NEISS unter <a>https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data</a></h4>"
+
+"<h2>The R Bootcamp</h2><h4>Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny<br><br>Mehr Informationen zu The R Bootcamp unter <a>https://therbootcamp.github.io/</a></h4>""
+
+```
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX))
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          ),
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          )
+     ))
+  )
+
+
+```
+ 
+11. Die UI ist vorerst fertig, das heisst wir können unsere Aufmerksamkeit dem `server` widment. Da wir primär am Layout gearbeitet haben ud wir nur einen neuen Output hinzugefügt haben, bleiben die Änderungen minimal. Ausgehend vom `server` der letzten session ergänze einzig `output$daten = renderDataTable(verletzungen, options = list(pageLength = 10))` an einer passenden Stelle. Das sollte dazu führen, dass die ersten zehn Zeilen des Gesamtdatensatzes in einem Data Table angezeigt werden. Alternative könnte man natürlich auch `daten()` als erstes Argument verwenden, was dazu führe würde, dass nur der im Dashboard zu sehen ist. Nach den Änderungen lasse die App mit `shinyApp(ui, server)` laufen. Funktioniert alles?   
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX))
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          ),
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          )
+     ))
+  )
+
+
+```
+ 
+
+
+## Lösung
+
+```{r, echo = TRUE, eval = FALSE}
+
 library(shiny)
+library(tidyverse)
+
+verletzungen = readRDS("daten/verletzungen.RDS")
+
+ui = navbarPage(
+  "InjuryViewer",
+  
+  tabPanel(
+    "Dashboard",
+    fluid = TRUE,
+    icon = icon("chart-bar"),
+    
+    sidebarLayout(
+      sidebarPanel(
+        width = 3,
+        selectInput("körperteil", "Körperteil", 
+                    choices = unique(verletzungen$körperteil), 
+                    multiple = TRUE),
+        sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
+        actionButton("diagnose_var", "Diagnosen"),
+        actionButton("unfallort_var", "Unfallorte"),
+        actionButton("gegenstand_var", "Gegenstände"),
+      ),
+      mainPanel(fluidRow(column(
+        12, plotOutput("linien_plot")
+      )),
+      fluidRow(
+        column(11, plotOutput("lollipop_plot")),
+      ))
+    )
+  ),
+  
+  tabPanel(
+    "Daten",
+    fluid = TRUE,
+    icon = icon("clipboard"),
+    tabsetPanel(
+      tabPanel(
+        title = "Daten",
+        h2("Aktuelle daten"),
+        dataTableOutput("daten")
+        ),
+      tabPanel(
+        title = "Upload",
+        h2("Daten hochladen")
+      ),
+      tabPanel(
+        title = "Download",
+        h2("Daten runterladen"),
+      )
+    )
+  ),
+  navbarMenu(
+    "Informationen",
+    icon = icon("info-circle"),
+    tabPanel("Datensatz",
+             fluidPage(fluidRow(
+               column(
+                 6,
+                 HTML("<h2>National Electronic Injury Surveillance System (NEISS)</h2>
+                      <h4>Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.<br><br>
+                      NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.<br><br>
+                      Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.<br><br>
+                      Mehr Informationen zu NEISS unter <a>https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data</a></h4>"
+                   )
+               )
+             ))),
+    tabPanel("About",
+             fluidPage(fluidRow(
+               column(6, HTML("<h2>The R Bootcamp</h2>
+                      <h4>Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny<br><br>
+                      Mehr Informationen zu The R Bootcamp unter <a>https://therbootcamp.github.io/</a></h4>"
+                 ))
+             ))),
+  )
+)
+
+server <- function(input, output, session) {
+  
+  daten = reactive({
+  verletzungen %>%
+    filter(körperteil %in% input$körperteil,
+           alter >= input$alter[1],
+           alter <= input$alter[2])
+  })
+  
+  output$daten = renderDataTable(verletzungen,
+                                 options = list(pageLength = 10))
+  
+  output$linien_plot = renderPlot({
+  
+  daten() %>% 
+    count(alter, geschlecht, wt = anzahl) %>%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = "cm"),
+      legend.position = "top"
+    ) +
+    scale_color_viridis_d(name = "Geschlecht",
+                          option = "G",
+                          end = .8) +
+    labs(x = "Alter",
+         y = "Geschätzte Anzahl Verletzungen")
+          })
+  
+  lollipop_var = reactiveVal("diagnose")
+  
+  observeEvent(input$diagnose_var, {
+    lollipop_var("diagnose")
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var("unfallort")
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var("gegenstand")
+  })
+  
+  output$lollipop_plot = renderPlot({
+  
+    daten() %>%
+      mutate(variable = .data[[lollipop_var()]]) %>%
+      count(variable, geschlecht, wt = anzahl) %>%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = "G", end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = "cm"),
+        legend.position = "none"
+      ) +
+      labs(y = "Geschätzte Anzahl")
+    })
+  }
+  
+  shinyApp(ui, server)
+
 ```
-
-4. Lade den Datensatz .
-
-```{r, eval = F, message = F}
-# Lese Daten
-mcdonalds <- readRDS('1_Data/verletzungen')
-```
-
-
-### A - Setup
 
 
 ## Datensatz
 
-Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt.      
+Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz wurde ins Deutsche übersetzt und angepasst.     
+Es liegen zwei Ausschnitte des Datensatzes vor. `verletzungen.RDS` beinhaltet alle 251'545 Fälle des Jahres 2017, `verletzungen_jahresende.RDS` dagegen nur die 4'181 Fälle zwischen Heiligabend und Silvester. 
 
+Die beiden Datensätze beinhalten die folgenden Variablen:
+
+| Name   |      Beschreibung      |
+|----------|:------------- |
+| datum |  Datum des Unfalls / der Verletzung |
+| alter |   Alter der Person   |
+| geschlecht | Geschlecht der Person |
+| körperteil | Körperteil, das verletzt wurde  |
+| diagnose | Diagnose der Verletzung |
+| unfallort | Unfallort der Verletzung |
+| gegenstand | Gegenstand, der die Verletzung herbeigeführt hat |
+| anzahl | Anzahl an Verletzungen |
 
 
 
