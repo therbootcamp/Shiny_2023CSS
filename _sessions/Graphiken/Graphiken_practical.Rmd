@@ -22,64 +22,619 @@ output:
 
 # {.tabset}
 
-## Überblick
+## Information
 
-In diesem Practical wirst du üben mit `ggplot2` Grafiken zu erstellen. 
+Dieses Practical besteht aus zwei Teilen. 
 
-Am Ende des Practicals wirst du wissen wie man:
+1. Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte der Präsentation.  
+2. App: Über die Sessions hinweg entwickelst Du die <a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a> App
 
-1. Einen Plot Schritt-für-Schritt aufbaut.
-2. Verschiedene `geom`s verwendet.
-3. Farben verändert.
+Wie viel Zeit du in *Aufgaben* oder *App* verbringst ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue Themen einsteigen kannst ohne notwendigerweise alle Schritte der Appentwicklung abgeschlossen zu haben. 
+
+Für jede App in Aufgaben erstelle bitte ein **neues Skript** und speichere es unter dem Namen der Abschnittsberschrift. Denk dran bei jedem neuen Skript `library(shiny)` an den Anfang zu setzen. Falls weitere Pakete nötig sind, werden sie in der jeweileigen Abschnitten erwähnt. 
+
+Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein die `XX` durch den richtigen Code bzw. die richtigen Objekte erstezen musst.   
+
 
 ## Aufgaben
 
-### A - Setup
+### A - Puppies
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+```{r}
 
-2. Speichere das neue Skript unter dem Namen `erste_app.R` im `2_Code` Ordner.
+puppies = read_csv("daten/puppies.csv")
 
-3. Lade `shiny`.
+ui = fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel("A puppy"),
+      htmlOutput("quelle"),
+      imageOutput("bild")
+    ),
+    column(4)
+    ))
 
-```{r, echo = TRUE, eval = FALSE}
-library(shiny)
+server = function(input, output, session){
+  
+  index = reactiveVal(1)
+  
+  output$bild = renderImage({
+    list(src = paste0("daten/puppies/",puppies$image[index()]),
+         width = "100%") 
+    }, deleteFile = FALSE)
+  
+  output$quelle = renderText(HTML(paste("Quelle: <a href=",puppies$url[index()],">Unsplash.com</a>")))
+  
+}
+
+shinyApp(ui, server)
+
 ```
 
+### B - Puppies 2.0
 
-### B - Lade den Datensatz
+```{r}
+
+puppies = read_csv("daten/puppies.csv")
+
+ui = fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel("A puppy"),
+      htmlOutput("quelle"),
+      imageOutput("bild", click = clickOpts(id = "weiter", clip = FALSE))
+    ),
+    column(4)
+    ))
+
+server = function(input, output, session){
+  
+  index = reactiveVal(1)
+  
+  observeEvent(input$weiter, {
+    index((index() %% 5 + 1))
+    })
+  
+  output$bild = renderImage({
+    list(src = paste0("daten/puppies/",puppies$image[index()]),
+         width = "500px") 
+    }, deleteFile = FALSE)
+  
+  output$quelle = renderText(HTML(paste("Quelle: <a href=",puppies$url[index()],">Unsplash.com</a>")))
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+### C - Scatter
+
+```{r}
+
+verletzungen_jung_alt = readRDS("daten/verletzungen.RDS")  %>% 
+    group_by(körperteil, alter = case_when(alter < 65 ~ "jünger", TRUE ~ "älter")) %>% 
+    summarize(n = log(sum(anzahl))) %>% 
+    ungroup() %>% 
+    pivot_wider(names_from = alter, values_from = n) %>% 
+    na.omit() 
+
+
+ui = fluidPage(
+  fluidRow(
+    column(3),
+    column(6,
+      plotOutput("scatter", brush = "auswahl"),
+      tableOutput("ausgewählte_daten")
+    ),
+    column(3)
+    ))
+
+server = function(input, output, session){
+
+  
+  
+  output$scatter = renderPlot({
+    verletzungen_jung_alt %>% 
+    ggplot(aes(x = jünger, y = älter)) +
+    geom_point() +
+    theme_minimal()
+    }, res = 96)
+
+  output$ausgewählte_daten <- renderTable({
+    brushedPoints(verletzungen_jung_alt, input$auswahl)
+  })
+      
+}
+
+
+shinyApp(ui, server)
+
+
+```
+
 
 
 ## App
 
-### A - Setup
+1. Jetzt geht es darum eine schematische Visualisierung des menschlichen Körpers als Teil des UI einzubauen. Als erster Schritt lade den `körper`. Printe dann den Datensatz in die Console, um ein Gefühl für dessen Inhalte zu entwickeln.
 
-1. Öffne ein neues R Skript in deinem `TheRBootcamp` Projekt.
+```{r}
 
-2. Speichere das neue Skript unter dem Namen `InjuryViewer.R` im top-level Ordner `TheRBootcamp`. 
+körper <- readRDS("daten/körper.RDS")
 
-3. Lade `shiny`.
+```
+
+2. Der `körper` Datensatz beinhaltet Körperteil Polygone, die über mehrere Zeilen von x und y Koordinaten definiert sind. Diese Struktur erlaubt uns den Körper sehr einfach zu plotten. Dabei behilflich ist die Tatsache, dass die zwei Variablen `körperteil` und `id` als Faktoren formatiert sind, die die richtige Plotreihenfolge erzeugen. Plotte den Körper mit folgendem Code. Stelle vorher jedoch sicher, dass `tidyverse` und `viridis` geladen wurden. 
+
+```{r}
+library(tidyverse)
+library(shiny)
+
+körper %>%
+  ggplot(aes(x, y, group = id)) +
+  geom_polygon() +
+  geom_polygon(
+    data = körper,
+    aes(group = id),
+    fill = viridis(5, option = "G", end = .9)[5],
+    col = "white") +
+  labs(title = "Verletzungen",
+       subtitle = "Klicke auf Körperteile") +
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text( 
+      hjust = .5, face = 2, size = 24),
+     plot.subtitle = element_text(hjust = .5, size = 16)
+    )
+
+```
+
+3. Die Graphik sollte zeigen, dass die Polygone verschiedene Körperteile oder Körperbereiche abdecken, die zu mit den Körperteilwerten in unserem Verletzungen Datensatz korrespondieren. Das erlaubt uns die Visualisierun als Alternative für `selectInput("körperteil")` zu verwenden. Vorausgesetzt natürlich, dass wir aus der Abbildung eine interaktive Abbildung machen. Bevor wir dazu kommen müssen wir jedoch erst einmal die Abbildung in unser `ui` und unseren `server`einbauen.  Setze dafür zunächst einen `plotOutput` mit ID `körper` in die `ui` (nicht den `server`) und zwar anstelle des `selectInput`. 
+   
+   
+```{r}
+
+sidebarLayout(
+  sidebarPanel(
+    width = 3,
+    XX(XX),
+    sliderInput(),
+    actionButton(),
+    actionButton(),
+    actionButton(),
+    actionButton()
+  ),
+  mainPanel(
+    plotOutput(),
+    plotOutput(),
+  )
+)
+
+```
+   
+  
+4. Als nächstes sorge dafür das Plot erscheint indem  du das Einlesen des Körpers in dein App Skript und den Code der Graphic in den `sever` bewegst. Denk dran da `viridis` Paket neben den bisherigen Paketen zu laden.
+   
+```{r}
+
+XX <- readRDS(XX)
+
+ui <- navbarPage()
+
+server <- function() {
+  
+  output$XX <- renderPlot({XX})
+  
+}
+
+```
+   
+5. Jetzte teste die App. Erscheint der Körper in der UI? Wenn das funktioniert hat, ist dir vielleicht aufgefallen, dass die Graphik keinen passenden Hintergrund hat. Das kannst du ändern, indem innerhalb `renderPlot` `bg` auf `"transparent"` setzt. Zudem könntest du innerhalb von `plotOutput` die Höhe mit `height = 550px` etwas raufsetzen.
+    
+    
+```{r}
+
+XX <- readRDS(XX)
+
+ui <- navbarPage()
+
+server <- function() {
+  
+  output$XX <- renderPlot({XX}, XX = XX)
+  
+}
+
+```
+ 
+6. Als letzte Anpassung der UI setze innerhalb von `plotOutput("körper")` das Argument `click` auf `"körperclick"`. Damit registrieren wir den Input, den wir im Server verwenden können, um die Körperteile zu identifizieren die angeklickt wurden und um im Anschluss die Liste der angewählten Körperteile zu ändern.  
+ 
+7. Kommen wir zum `server`. Als erstes gilt einmal wieder einen `reactiveVal` zu kreieren. Tue dies irgendwo im `server` und nenne ihn `körperteile`. Dieser `reactiveVal` wird uns erlauben das Menge der ausgewählten Körperteile als Funnktion der Klick-Inputs anzupassen.    
+
+8. Nun können wir uns daran machen die Klick-Mechanik zu bauen. Beginnen wir mit einem `reactiveEvent`, sodass unsere Klick-Mechanik nur dann läuft, wenn tatsächlich geklickt wurde. Setze den richtigen Input ein.  
+
+```{r}
+
+observeEvent(XX, {
+  
+  
+})
+
+```
+
+9. Innerhalb des `observeEvent`s müssen wir uns zunächst darum kümmern, dass wir identifizieren welches Körperteil angeklickt wurde. Dies können wir mittels dem folgenden `nearPoints`-Code erreichen. Die Funktion nimmt als erste beiden Argumente den Datensatz aus dem wir Punkte auswhählen wollen, hier der `körper` Datensatz, und den Klick-Input, hier der `click` Input mit ID aus dem `imageOutput`. Als nächstes muss bestimmt werden auf Basis welcher Variablen der nächste Punkt bestimmt werden soll, hier die `"x"` und `"y"` Koordinaten im `körper` Datensatz. Zuletzt werden zwei Einstellungen vorgenommen, die dazu führen, dass Distanz des Klicks zu den Punkten in `körper` aufgezeichnet wird und dass die Identifikation der Punkte etwas liberaler ist. Das Ergebnis von `nearPoints` ist ein Datensatz mit allen Punkten die unterhalb der `threshold` liegen. 
+
+```{r}
+
+observeEvent(XX, {
+  
+  points <- nearPoints(
+      df = XX,
+      brush = XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+})
+
+```
+
+10. Im zweiten Schritt gilt es aus dem `points` Datensatz, der eben kreiert wurde, dasjenige Körperteil zu identifizieren, dass am ehesten das tatsächliche Ziel des Klicks war. Dies erledigt der unten dargestellte Code-Block. Er identifiziert welches Körperteil die niedrigste Distanz zum Klick im Sinne des ersten Dezils der Distanzen (`quantile(dist_, .1)`) zwischen Punkten der jeweiligen Polygone und dem Klick aufwies. Das in diesem Sinne nächste Körperteil wird dann in `selected`. 
+
+```{r}
+
+observeEvent(XX, {
+  
+  points <- nearPoints(
+      df = XX,
+      brush = XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+    selected = points  %>%
+      group_by(körperteil, id) %>%
+      summarize(d = quantile(dist_, .1)) %>%
+      ungroup() %>%
+      arrange(d) %>%
+      slice(1) %>%
+      pull(körperteil)
+  
+})
+
+```
+
+11. Wir haben identifiziert, welches Körperteil wahrscheinlich geklickt wurde. Jetzt geht es darum unseren `körperteile` `reactiveValue` mit dieser Information anzupassen. Und zwar soll `selected` zu den ausgewählten Körperteilen hinzugefügt werden, wenn es noch nicht enthalten ist, und entfernt werden, wenn es enthalten aktiviert ist. Das bedeutet wir brauchen wieder ein `if`-`else`, das zunächst testet ob `selected` in `körperteile` bereits enthalten ist und dann entweder es hinzufügt oder es entfernt. Dieser erledigt der neue Code-Block unten mit ein paar kleinen Anpassungen. Achte darauf welche XX Klammern haben und welche nicht.   
+
+```{r}
+
+observeEvent(XX, {
+  
+  points <- nearPoints(
+      df = XX,
+      brush = XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+    selected = points  %>%
+      group_by(körperteil, id) %>%
+      summarize(d = quantile(dist_, .1)) %>%
+      ungroup() %>%
+      arrange(d) %>%
+      slice(1) %>%
+      pull(körperteil)
+  
+    if (XX %in% XX()) {
+      körperteile(XX()[XX() != XX])
+    } else {
+      körperteile(c(XX, XX()))
+    }
+    
+})
+
+```
+
+
+12. Jetzt gilt es sicherzustellen, dass sich änderne `körperteile` `reactiveVal` auch an den richtigen Stellen verwendet wird. Noch verwendet unser `server` Code den alten `input$körperteile` innerhalb des `daten` `reactive`. Tausche diese durch `körperteile()` aus. 
+
+13. Das letzte was wir machen müssen bevor wir endlich einmal die App testen können ist unseren Plot so anzupassen, dass angezeigt wird, welche `körperteile` aktuell aktiv sind. Füge dafür dieses `geom_polygon` nach dem ersten `geom_polygon` im Körper plot ein. Du kannst sehen, dass dieses Polygon `körperteile` verwendet um neue rote Polygone über die alten zu zeichnen. 
+
+```{r}
+
+  geom_polygon(
+    data = körper %>% filter(körperteil %in% körperteile()),
+    aes(group = id),
+    fill = "red",
+    col = "white"
+  ) 
+
+```
+
+14. Teste jetzt einmal die App. Wenn die Körperteile, die du anklickst rot werden und sich die Graphiken enstprechend ändern, bist du ein wahrer Shiny Master. Es bleibt dann nur noch ein einziges kleines Problem zu lösen. Der `zurücksetzen` Schalter ist noch nicht in der Lage `körperteile` zurückzusetzen. Anstatt dem obsolenten `updateInputSelect` im entsprechenden `observeEvent` setze einfach `körperteile(c())`, was alle Elemente aus `körperteile` entfernt und damit auch den Körper und die anderen Plots anpasst. 
+
+   
+## Lösung
 
 ```{r, echo = TRUE, eval = FALSE}
+
 library(shiny)
+library(tidyverse)
+library(tools)
+library(shinyFeedback)
+library(viridis)
+
+ui = navbarPage(
+  "InjuryViewer",
+  tabPanel(
+    "Dashboard",
+    fluid = TRUE,
+    icon = icon("chart-bar"),
+    
+    sidebarLayout(
+      sidebarPanel(
+        width = 3,
+        plotOutput("körper", height = 550, click = "körper_click"),
+        sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
+        actionButton("diagnose_var", "Diagnosen", width = "32.5%"),
+        actionButton("unfallort_var", "Unfallorte", width = "32.5%"),
+        actionButton("gegenstand_var", "Gegenstände", width = "32.5%"),
+        actionButton("zurücksetzen", "Zurücksetzen", width = "100%")
+      ),
+      mainPanel(
+        plotOutput("linien_plot"),
+        plotOutput("lollipop_plot")
+      ),
+    )
+  ),
+  
+  tabPanel(
+    "Daten",
+    fluid = TRUE,
+    icon = icon("clipboard"),
+    tabsetPanel(
+      tabPanel(
+        title = "Daten",
+        h2("Aktuelle daten"),
+        dataTableOutput("daten")
+        ),
+      tabPanel(
+        useShinyFeedback(),
+        title = "Upload",
+        h2("Daten hochladen"),
+        h4("Achtung Daten werden überschrieben"),
+        br(),
+        fileInput(
+          inputId = "hochladen",
+          label = "Wähle eine Datei aus",
+          buttonLabel = "Auswählen"
+        )
+      ),
+      tabPanel(
+        title = "Download",
+        h2("Daten runterladen"),
+        br(),
+        downloadButton("herunterladen",
+                       "Als .csv herunterladen",
+                       style = "font-size:20px")
+      )
+    )
+  ),
+  navbarMenu(
+    "Informationen",
+    icon = icon("info-circle"),
+    tabPanel("Datensatz",
+             fluidPage(fluidRow(
+               column(
+                 6,
+                 HTML("<h2>National Electronic Injury Surveillance System (NEISS)</h2>
+                      <h4>Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.<br><br>
+                      NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.<br><br>
+                      Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.<br><br>
+                      Mehr Informationen zu NEISS unter <a>https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data</a></h4>"
+                   )
+               )
+             ))),
+    tabPanel("About",
+             fluidPage(fluidRow(
+               column(6, HTML("<h2>The R Bootcamp</h2>
+                      <h4>Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny<br><br>
+                      Mehr Informationen zu The R Bootcamp unter <a>https://therbootcamp.github.io/</a></h4>"
+                 ))
+             ))),
+  )
+)
+
+server <- function(input, output, session) {
+  
+  verletzungen = reactiveVal(readRDS("daten/verletzungen.RDS"))
+  
+  
+  output$körper <- renderPlot({
+    körper %>%
+      ggplot(aes(x, y, group = id)) +
+      geom_polygon() +
+      geom_polygon(
+        data = körper,
+        aes(group = id),
+        fill = viridis(5, option = "G", end = .9)[5],
+        col = "white") +
+        geom_polygon(
+    data = körper %>% filter(körperteil %in% körperteile()),
+    aes(group = id),
+    fill = "red",
+    col = "white"
+  ) +
+      labs(title = "Verletzungen",
+           subtitle = "Klicke auf Körperteile") +
+      theme_void() +
+      theme(
+        legend.position = "none",
+        plot.title = element_text( 
+          hjust = .5, face = 2, size = 24),
+         plot.subtitle = element_text(hjust = .5, size = 16)
+        )
+  }, bg = "transparent")
+  
+  
+  körperteile = reactiveVal()
+  
+  observeEvent(input$körper_click, {
+    points = nearPoints(
+      körper,
+      input$körper_click,
+      xvar = "x",
+      yvar = "y",
+      addDist = TRUE,
+      threshold = 100
+    )
+    selected = points  %>%
+      group_by(körperteil, id) %>%
+      summarize(d = quantile(dist_, .1)) %>%
+      ungroup() %>%
+      arrange(d) %>%
+      slice(1) %>%
+      pull(körperteil)
+    
+    if (selected %in% körperteile()) {
+      körperteile(körperteile()[körperteile() != selected])
+    } else {
+      körperteile(c(selected, körperteile()))
+    }
+  })
+  
+  
+  daten = reactive({
+  verletzungen() %>%
+    filter(körperteil %in% körperteile(),
+           alter >= input$alter[1],
+           alter <= input$alter[2])
+  })
+  
+  output$daten = renderDataTable(verletzungen(),
+                               options = list(pageLength = 10))
+  
+  output$linien_plot = renderPlot({
+  
+  daten() %>% 
+    count(alter, geschlecht, wt = anzahl) %>%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = "cm"),
+      legend.position = "top"
+    ) +
+    scale_color_viridis_d(name = "Geschlecht",
+                          option = "G",
+                          end = .8) +
+    labs(x = "Alter",
+         y = "Geschätzte Anzahl Verletzungen")
+          })
+  
+  lollipop_var = reactiveVal("diagnose")
+  
+  observeEvent(input$diagnose_var, {
+    lollipop_var("diagnose")
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var("unfallort")
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var("gegenstand")
+  })
+  
+  output$lollipop_plot = renderPlot({
+  
+    daten() %>%
+      mutate(variable = .data[[lollipop_var()]]) %>%
+      count(variable, geschlecht, wt = anzahl) %>%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = "G", end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = "cm"),
+        legend.position = "none"
+      ) +
+      labs(y = "Geschätzte Anzahl")
+    })
+  
+  
+    observeEvent(input$hochladen, {
+      endung <- file_ext(input$hochladen$datapath)
+      if(endung == "RDS"){
+        verletzungen(readRDS(input$hochladen$datapath))
+        } else {
+        showFeedbackDanger("hochladen", "Nur RDS Dateien können geladen werden!")
+        Sys.sleep(3)
+        }
+          
+      on.exit(hideFeedback("hochladen"))
+      })
+  
+    output$herunterladen <- downloadHandler(
+      filename = function() {"verletzungen.csv"},
+      content = function(file) {write_tsv(verletzungen(), file)}
+    )
+
+    observeEvent(input$zurücksetzen, {
+    
+      körperteile(c()) 
+      updateSliderInput(inputId = "alter", value = c(0, 110))
+
+    })
+    
+     
+  }
+  
+  shinyApp(ui, server)
+
 ```
-
-4. Lade den Datensatz .
-
-```{r, eval = F, message = F}
-# Lese Daten
-mcdonalds <- readRDS('1_Data/verletzungen')
-```
-
-
-### A - Setup
 
 
 ## Datensatz
 
-Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt.      
+Der Datensatz stammt von dem National Electronic Injury Surveillance System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz wurde ins Deutsche übersetzt und angepasst.     
+Es liegen zwei Ausschnitte des Datensatzes vor. `verletzungen.RDS` beinhaltet alle 251'545 Fälle des Jahres 2017, `verletzungen_jahresende.RDS` dagegen nur die 4'181 Fälle zwischen Heiligabend und Silvester. 
 
+Die beiden Datensätze beinhalten die folgenden Variablen:
 
-
+| Name   |      Beschreibung      |
+|----------|:------------- |
+| datum |  Datum des Unfalls / der Verletzung |
+| alter |   Alter der Person   |
+| geschlecht | Geschlecht der Person |
+| körperteil | Körperteil, das verletzt wurde  |
+| diagnose | Diagnose der Verletzung |
+| unfallort | Unfallort der Verletzung |
+| gegenstand | Gegenstand, der die Verletzung herbeigeführt hat |
+| anzahl | Anzahl an Verletzungen |
 
 

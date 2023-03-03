@@ -40,7 +40,7 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ### A - Lade den Datensatz
 
-1. 
+1. Zuerst bauen wir ein `sideBarLayout` in einer fluid Page. Dabei kümmern wir uns erstmal nicht um den `server` sondern entwickeln nur die UI und lassen dann die App mit einem einer leeren `server` Funktion laufen.  
 
 ```{r}
 
@@ -510,12 +510,10 @@ ui = navbarPage(
         actionButton("unfallort_var", "Unfallorte"),
         actionButton("gegenstand_var", "Gegenstände"),
       ),
-      mainPanel(fluidRow(column(
-        12, plotOutput("linien_plot")
-      )),
-      fluidRow(
-        column(11, plotOutput("lollipop_plot")),
-      ))
+      mainPanel(
+        plotOutput("linien_plot"),
+        plotOutput("lollipop_plot")
+      ),
     )
   ),
   

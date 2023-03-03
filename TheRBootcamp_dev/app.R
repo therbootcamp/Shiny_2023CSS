@@ -157,7 +157,8 @@ ui = navbarPage(
         title = "Download",
         h3("Aktuelle Daten runterladen"),
         br(),
-        downloadButton("herunterladen", label = "Als .csv herunterladen",
+        downloadButton("herunterladen", 
+                       label = "Als .csv herunterladen",
                        style = 'font-size:20px')
       )
     )

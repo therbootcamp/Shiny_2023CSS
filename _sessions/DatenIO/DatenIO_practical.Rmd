@@ -48,7 +48,83 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ## App
 
-1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zuerst auf die UI. 
+1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze ein `fileInput` im Upload Panels innerhalb des Daten NavBar Panels. Als `inputId`, `label`, und `buttonLabel` weise `"hochladen"`, `"Wähle eine Datei aus"`, und `"Auswählen` zu. Lasse die App einmal laufen und überprüfe ob der File upload zu sehen.  
+
+
+```{r}
+
+  tabPanel(
+    title = "Upload",
+    h2("Daten hochladen"),
+    XX(XX, XX, XX)
+    )
+
+```
+
+2. Im nächsten Schritt, verbessern wir ein klein bisschen die Usability. Erstens ergänzen wir eine Unterüberschrift, die uns warnt, dass wir unsere aktuellen Daten überschrieben, wenn wir neue Daten einlesen. Hierfür ergänze `h4("Achtung Daten werden überschrieben")` direkt unterhalb der Überschrift zweiter Ordnung. Zweitens, füge eine mit `br()` eine leere Zeile zwischen der Unterüberschrift und dem `fileInput` ein. 
+
+```{r}
+
+  tabPanel(
+    title = "Upload",
+    h2("Daten hochladen"),
+    XX,
+    XX,
+    XX(XX, XX, XX)
+    )
+
+```
+
+3. Die UI des Uploads ist fertig. Jetzt gilt es den `server` entsprechend anzupassen. Als erstes muss sichergestellt werden, dass die Daten nicht wie bisher ausserhalb des `sever`s gelesen werden sonder innerhalb. Zudem müssden die Daten genau wie das Objekt `daten` reaktiv werden, sodass sie sich ändern können sobald neue Daten hochgeladen werden. Es gibt verschiedene Wege, wie dies implementiert werden könnte. Machen wir es mit einem `reactiveVal`. Ziehe dafür `verletzungen <- readRDS(daten/verletzungen.RDS)` in den `sever` und setze eine `reactiveVal` um die Lesefunktion, so dass `verletzungen` reaktiver Wert ist, der als Default den gesamenten Datensatz beinhaltet.     
+
+
+```{r}
+
+verletzungen <- reactiveVal(XX)
+
+```
+
+4. Weil `verletzungen` jetzt ein reaktiver Wert ist, muss einer Stelle im `server` eine kleine Ändeurngen vorgenommen werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer Stelle im `server` wird `verletzungen` als normales Datenobjekt werden anstatt als eine reaktiver Wert, das heisst ohne Klammer anstatt mit. Ergänze die fehlenden Klammern und lasse die App einmal laufen. Wenn kein Fehler aufkommt, dann hast du alles richtig gemacht.
+
+5. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verende dafür `input$hochladen$datapath`.    
+
+```{r}
+
+observeEvent(XX,{
+  
+  XX(readRDS(XX))
+  
+})
+
+```
+
+6. Teste nun die App. Wenn du alles richtig eingestellt hast, solltest du in der Lage sein alternative Daten einzulesen. Probiere einmal den kleineren Datensatz `verletzungen_jahresende.RDS`. Zuerst solltest du sehen, dass der Upload dir "Upload complete" rückmeldet. Dann solltest im Nachbartab Daten sehen, dass die Tabelle nur noch etwas mehr als viertausend Zeilen anstatt vorher mehreren hundertausend. Nichtsdesto sollte aber alles wie zuvor reibungslos funktionieren. Es sollte sogar möglich sein vor dem Upload Körperteile und Alter einzustellen und dass diese Einstellungen nach Upload immer noch aktiv sind und unmittelbar auf den neuen Datensatz angewendet werden. 
+
+7. Der Uploadteil ist fertig. Kümmern wir uns jetzt um den Download. Ergänze in der UI unter dem Upload `tabPanel` einen `downloadButton` mit ID `"herunterladen"` und Label `"Als .csv herunterladen"`. Ergänze zudem `style = 'font-size:20px'`, um die Schrift etwas grösser zu machen, und ein `br()` vor dem `downloadButton` für etwas mehr Platz. 
+
+```{r}
+
+  tabPanel(
+    title = "Upload",
+    h2("Daten hochladen"),
+    XX,
+    XX(XX, XX, XX)
+    )
+
+```
+
+8. Im `server` ergänze nun den `downloadHandler` wie unten dargestellt. Siehe, dass wir den Dateinamen 
+
+```{r}
+
+  output$herunterladen <- downloadHandler(
+    filename = function() {"verletzungen.csv"},
+    content = function(file) {write_tsv(verletzungen(), file)}
+  )
+
+```
+
+9. Teste nun die App. Ist der Upload zu sehen und funktioniert er? Teste mal was passiert wenn du erst den kleinen  
 
 
 ## Lösung
@@ -57,8 +133,7 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 library(shiny)
 library(tidyverse)
-
-verletzungen = readRDS("daten/verletzungen.RDS")
+library(shinyWidgets)
 
 ui = navbarPage(
   "InjuryViewer",
@@ -79,12 +154,10 @@ ui = navbarPage(
         actionButton("unfallort_var", "Unfallorte"),
         actionButton("gegenstand_var", "Gegenstände"),
       ),
-      mainPanel(fluidRow(column(
-        12, plotOutput("linien_plot")
-      )),
-      fluidRow(
-        column(11, plotOutput("lollipop_plot")),
-      ))
+      mainPanel(
+        plotOutput("linien_plot"),
+        plotOutput("lollipop_plot")
+      ),
     )
   ),
   
@@ -95,14 +168,27 @@ ui = navbarPage(
     tabsetPanel(
       tabPanel(
         title = "Daten",
-        h2("Aktuelle daten")),
+        h2("Aktuelle daten"),
+        dataTableOutput("daten")
+        ),
       tabPanel(
         title = "Upload",
-        h2("Daten hochladen")
+        h2("Daten hochladen"),
+        h4("Achtung Daten werden überschrieben"),
+        br(),
+        fileInput(
+          inputId = "hochladen",
+          label = "Wähle eine Datei aus",
+          buttonLabel = "Auswählen"
+        )
       ),
       tabPanel(
         title = "Download",
         h2("Daten runterladen"),
+        br(),
+        downloadButton("herunterladen",
+                       "Als .csv herunterladen",
+                       style = "font-size:20px")
       )
     )
   ),
@@ -133,8 +219,10 @@ ui = navbarPage(
 
 server <- function(input, output, session) {
   
+  verletzungen = reactiveVal(readRDS("daten/verletzungen.RDS"))
+  
   daten = reactive({
-  verletzungen %>%
+  verletzungen() %>%
     filter(körperteil %in% input$körperteil,
            alter >= input$alter[1],
            alter <= input$alter[2])
@@ -205,6 +293,18 @@ server <- function(input, output, session) {
       ) +
       labs(y = "Geschätzte Anzahl")
     })
+  
+  
+    observeEvent(input$hochladen, {
+      verletzungen(readRDS(input$hochladen$datapath))
+      })
+  
+    output$herunterladen <- downloadHandler(
+      filename = function() {"verletzungen.csv"},
+      content = function(file) {write_tsv(verletzungen(), file)}
+    )
+
+    
   }
   
   shinyApp(ui, server)
