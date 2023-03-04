@@ -3,7 +3,7 @@
   <head>
     <title>Willkommen</title>
     <meta charset="utf-8" />
-    <meta name="author" content="R 4 Data Science  The R Bootcamp @ CSS                 " />
+    <meta name="author" content="Dashboards mit Shiny  The R Bootcamp @ CSS                 " />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="baselrbootcamp.css" type="text/css" />
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 # Willkommen
 ]
 .author[
-### R 4 Data Science<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
+### Dashboards mit Shiny<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
 ]
 .date[
 ### März 2023
@@ -60,7 +60,7 @@ layout: true
 
 # Ziel
 
-&gt;###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
+&gt;###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Dashboards und Web-Apps und  zu vermitteln. 
 
 ]
 
@@ -74,45 +74,49 @@ layout: true
 
 ---
 
-# Dashboards
-
-
----
-
-.pull-left3[
+.pull-left35[
 
 # Shiny
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Das &lt;mono&gt;tidyverse&lt;/mono&gt; ist...&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;shiny&lt;/mono&gt; ist ein R Paket für dynamische Web-Apps und &lt;high&gt;Dashboards&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;shiny&lt;/mono&gt; ist auch ein &lt;high&gt;Ökosystem&lt;/high&gt; an Support-Paketen&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
   &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Eine Auswahl nutzerfreundlicher &lt;high&gt;Pakete&lt;/high&gt; für die Analyse von &lt;high&gt;tidy data&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Ökosystem&lt;/high&gt; für Analytics und Data Science mit konsistenten Designprinzipien&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;Ein &lt;high&gt;Dialekt&lt;/high&gt; von R&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;shinyFeedback&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;shinythemes&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;bslib&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;BT&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;reactlog&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;...&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
   &lt;/ul&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Das &lt;mono&gt;tidyverse&lt;/mono&gt; ist...&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
 
 &lt;/ul&gt;
 
 ]
 
-.pull-right65[
+.pull-right55[
 
-&lt;br&gt;&lt;br&gt;
+
 &lt;p align="center"&gt;
-&lt;img src="image/tidyverse.png" height = "520px"&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="image/shiny_hex.png" height = "420px"&gt;
 &lt;/p&gt;
 
 ]
 
 ---
 
-# Beispiele
+# Kurs Apps
 
-dashboard day 1
-dashboard day 2
-Fragezeichen (Wettbewerb)
+&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/apps_all.png"&gt;
+&lt;/p&gt;
 
+---
+
+&lt;br&gt;
+ &lt;iframe src="https://dirkwulff.shinyapps.io/InjuryViewer/" height="540px" width = "1040px" loading = "lazy"&gt;&lt;/iframe&gt;
 
 ---
 
@@ -122,15 +126,8 @@ Fragezeichen (Wettbewerb)
 # Agenda 
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Workshop&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Einführung&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Session zu Data IO&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Sessions zu Wrangling&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Sessions zu Plotting&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Wettbewerb&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Block&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Der &lt;high&gt;Workshop&lt;/high&gt; besteht aus mehreren Sessions&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Session&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;Folien-basierte Einführung&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Viele Übungen&lt;/span&gt;&lt;/li&gt;
@@ -152,23 +149,16 @@ Fragezeichen (Wettbewerb)
 
 # Einführung
 
-.pull-left45[
+.pull-left3[
 &lt;br2&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;Konzepte&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Code Beispiele&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Tag 1&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;15-30 min&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Tag 2 &amp; 3&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Dauer&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;30-60 min&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;&lt;br&gt;
@@ -176,16 +166,14 @@ Fragezeichen (Wettbewerb)
 
 ]
 
-.pull-right55[
+.pull-right6[
 
 &lt;p align="center"&gt;
-&lt;img src="image/present.jpg" style="width:420px"&gt;
-&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="www.Freepik.com"&gt;Freepik.com&lt;/a&gt;&lt;/font&gt;
+&lt;img src="image/beamer_small.png" style="width:560px"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://unsplash.com/photos/MAYsdoYpGuk"&gt;Unsplash.com&lt;/a&gt;&lt;/font&gt;
 &lt;/p&gt;
 
 ]
-
 
 ---
 
@@ -193,27 +181,18 @@ Fragezeichen (Wettbewerb)
 
 # Übungen
 
-
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;Learn-by-doing&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Steigende Schwierigkeit&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Lösungen später&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Tag 1&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Zwei Teile&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;10-20 Aufgaben in 10-20 Minuten&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Skripte im Projektordner&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Mini Apps&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;InjuryViewer&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m3"&gt;&lt;span&gt;&lt;high&gt;Tag 2 &amp; 3&lt;/high&gt;
-  &lt;br&gt;&lt;br&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;25-50 Aufgaben in 45-90 Minuten&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Links auf der Kursseite&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
 &lt;/ul&gt;
 
 ]
@@ -221,9 +200,9 @@ Fragezeichen (Wettbewerb)
 .pull-right5[
 &lt;br&gt;
 
-  &lt;iframe src="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html" height="480px" width = "500px"&gt;&lt;/iframe&gt;
+ &lt;iframe src="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html" height="480px" width = "500px" loading = "lazy"&gt;&lt;/iframe&gt;
 
-  Beispiel:&lt;a href="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html"&gt; Daten &lt;/a&gt;
+  Beispiel:&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html"&gt; Erste App &lt;/a&gt;
 
 ]
 
@@ -237,7 +216,7 @@ Fragezeichen (Wettbewerb)
   &lt;li class="m1"&gt;&lt;span&gt;Wie heisst Du?&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Was ist Deine Rolle in der CSS?&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m3"&gt;&lt;span&gt;Hast Du Programmiererfahrung mit R oder anderen Programmiersprachen?&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m4"&gt;&lt;span&gt;Welche Probleme möchtest Du mit R lösen?&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;Was motiviert Dich Shiny zu lernen?&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]

@@ -1,6 +1,6 @@
 ---
 title: "Willkommen"
-author: "R 4 Data Science<br>
+author: "Dashboards mit Shiny<br>
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
   <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
@@ -68,7 +68,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 # Ziel
 
->###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
+>###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Dashboards und Web-Apps und  zu vermitteln. 
 
 ]
 
@@ -82,45 +82,49 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Dashboards
-
-
----
-
-.pull-left3[
+.pull-left35[
 
 # Shiny
 
 <ul>
-  <li class="m1"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
+  <li class="m1"><span><mono>shiny</mono> ist ein R Paket für dynamische Web-Apps und <high>Dashboards</high></span></li><br>
+  <li class="m2"><span><mono>shiny</mono> ist auch ein <high>Ökosystem</high> an Support-Paketen</span></li><br>
   <ul class="level">
-    <li><span>Eine Auswahl nutzerfreundlicher <high>Pakete</high> für die Analyse von <high>tidy data</high></span></li><br>
-    <li><span>Ein <high>Ökosystem</high> für Analytics und Data Science mit konsistenten Designprinzipien</span></li><br>
-    <li><span>Ein <high>Dialekt</high> von R</span></li>
+    <li><span><mono>shinyFeedback</mono></span></li>
+    <li><span><mono>shinythemes</mono></span></li>
+    <li><span><mono>bslib</mono></span></li>
+    <li><span><mono>BT</mono></span></li>
+    <li><span><mono>reactlog</mono></span></li>
+    <li><span><mono>...</mono></span></li><br>
   </ul>
-  <li class="m2"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
 
 </ul>
 
 ]
 
-.pull-right65[
+.pull-right55[
 
-<br><br>
+
 <p align="center">
-<img src="image/tidyverse.png" height = "520px">
+<br><br><br>
+<img src="image/shiny_hex.png" height = "420px">
 </p>
 
 ]
 
 ---
 
-# Beispiele
+# Kurs Apps
 
-dashboard day 1
-dashboard day 2
-Fragezeichen (Wettbewerb)
+<br>
+<p align="center">
+<img src="image/apps_all.png">
+</p>
 
+---
+
+<br>
+ <iframe src="https://dirkwulff.shinyapps.io/InjuryViewer/" height="540px" width = "1040px" loading = "lazy"></iframe>
 
 ---
 
@@ -130,15 +134,8 @@ Fragezeichen (Wettbewerb)
 # Agenda 
 
 <ul>
-  <li class="m1"><span><high>Workshop</high></span></li>
-  <ul class="level">
-    <li><span>Einführung</span></li>
-    <li><span>Session zu Data IO</span></li>
-    <li><span>Sessions zu Wrangling</span></li>
-    <li><span>Sessions zu Plotting</span></li>
-    <li><span>Wettbewerb</span></li>
-  </ul><br>
-  <li class="m2"><span><high>Block</high></span></li>
+  <li class="m1"><span>Der <high>Workshop</high> besteht aus mehreren Sessions</span></li><br>
+  <li class="m2"><span><high>Session</high></span></li>
   <ul class="level">
     <li><span>Folien-basierte Einführung</span></li>
     <li><span>Viele Übungen</span></li>
@@ -160,23 +157,16 @@ Fragezeichen (Wettbewerb)
 
 # Einführung
 
-.pull-left45[
+.pull-left3[
 <br2>
 
 <ul>
-  <li class="m1"><span><high>Inhalt</high>
-  <br><br>
+  <li class="m1"><span><high>Inhalt</high></span></li>
   <ul class="level">
     <li><span>Konzepte</span></li>
     <li><span>Code Beispiele</span></li>
   </ul><br>
-  <li class="m1"><span><high>Tag 1</high>
-  <br><br>
-  <ul class="level">
-    <li><span>15-30 min</span></li>
-  </ul><br>
-  <li class="m1"><span><high>Tag 2 & 3</high>
-  <br><br>
+  <li class="m2"><span><high>Dauer</high></span></li>
   <ul class="level">
     <li><span>30-60 min</span></li>
   </ul><br>
@@ -184,45 +174,14 @@ Fragezeichen (Wettbewerb)
 
 ]
 
-.pull-right55[
+.pull-right6[
 
 <p align="center">
-<img src="image/present.jpg" style="width:420px">
-<br>
-<font style="font-size:10px">from <a href="www.Freepik.com">Freepik.com</a></font>
+<img src="image/beamer_small.png" style="width:560px"><br>
+<font style="font-size:10px">from <a href="https://unsplash.com/photos/MAYsdoYpGuk">Unsplash.com</a></font>
 </p>
 
 ]
-
----
-
-# header
-
-.pull-left4[
-
-lists
-
-]
-
-.pull-left5[
-
-```{r, eval = FALSE, echo = TRUE}
-
-
-
-
-```
-
-```{r, eval = TRUE, echo = FALSE}
-
-
-
-
-```
-
-
-]
-
 
 ---
 
@@ -231,25 +190,17 @@ lists
 # Übungen
 
 <ul>
-  <li class="m1"><span><high>Inhalt</high>
-  <br><br>
+  <li class="m1"><span><high>Inhalt</high></span></li>
   <ul class="level">
     <li><span>Learn-by-doing</span></li>
     <li><span>Steigende Schwierigkeit</span></li>
     <li><span>Lösungen später</span></li>
   </ul><br>
-  <li class="m2"><span><high>Tag 1</high>
-  <br><br>
+  <li class="m2"><span><high>Zwei Teile</high></span></li>
   <ul class="level">
-    <li><span>10-20 Aufgaben in 10-20 Minuten</span></li>
-    <li><span>Skripte im Projektordner</span></li>
+    <li><span>Mini Apps</span></li>
+    <li><span>InjuryViewer</span></li>
   </ul><br>
-  <li class="m3"><span><high>Tag 2 & 3</high>
-  <br><br>
-  <ul class="level">
-    <li><span>25-50 Aufgaben in 45-90 Minuten</span></li>
-    <li><span>Links auf der Kursseite</span></li>
-  </ul>
 </ul>
 
 ]
@@ -257,9 +208,9 @@ lists
 .pull-right5[
 <br>
 
-  <iframe src="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html" height="480px" width = "500px"></iframe>
+ <iframe src="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html" height="480px" width = "500px" loading = "lazy"></iframe>
 
-  Beispiel:<a href="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html"> Daten </a>
+  Beispiel:<a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html"> Erste App </a>
 
 ]
 
@@ -273,7 +224,7 @@ lists
   <li class="m1"><span>Wie heisst Du?</span></li>
   <li class="m2"><span>Was ist Deine Rolle in der CSS?</span></li>
   <li class="m3"><span>Hast Du Programmiererfahrung mit R oder anderen Programmiersprachen?</span></li>
-  <li class="m4"><span>Welche Probleme möchtest Du mit R lösen?</span></li>
+  <li class="m4"><span>Was motiviert Dich Shiny zu lernen?</span></li>
 </ul>
 
 ]

@@ -1,0 +1,13 @@
+name: InjuryViewer
+title: InjuryViewer
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8477219
+bundleId: 6916014
+url: https://dirkwulff.shinyapps.io/InjuryViewer/
+when: 1677955484.26137
+lastSyncTime: 1677955484.26138
+asMultiple: FALSE
+asStatic: FALSE
