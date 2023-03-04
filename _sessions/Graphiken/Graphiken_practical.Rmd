@@ -40,7 +40,7 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ### A - Puppies
 
-```{r}
+```{r, eval = }
 
 puppies = read_csv("daten/puppies.csv")
 
