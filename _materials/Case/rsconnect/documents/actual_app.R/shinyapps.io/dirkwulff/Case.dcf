@@ -1,0 +1,13 @@
+name: Case
+title: Case
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8477188
+bundleId: 6916003
+url: https://dirkwulff.shinyapps.io/Case/
+when: 1677955070.9159
+lastSyncTime: 1677955070.91592
+asMultiple: FALSE
+asStatic: FALSE

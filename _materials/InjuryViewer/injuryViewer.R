@@ -4,8 +4,6 @@ library(tools)
 library(shinyFeedback)
 library(viridis)
 
-körper <- readRDS("daten/körper.RDS")
-
 ui = navbarPage(
   "InjuryViewer",
   tabPanel(
@@ -18,9 +16,9 @@ ui = navbarPage(
         width = 3,
         plotOutput("körper", height = 550, click = "körper_click"),
         sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
-        actionButton("diagnose_var", "Diagnosen", width = "32.5%"),
-        actionButton("unfallort_var", "Unfallorte", width = "32.5%"),
-        actionButton("gegenstand_var", "Gegenstände", width = "32.5%"),
+        actionButton("diagnose_var", "Diagnosen", width = "32%"),
+        actionButton("unfallort_var", "Unfallorte", width = "32%"),
+        actionButton("gegenstand_var", "Gegenstände", width = "32%"),
         actionButton("zurücksetzen", "Zurücksetzen", width = "100%")
       ),
       mainPanel(
@@ -88,6 +86,8 @@ ui = navbarPage(
 )
 
 server <- function(input, output, session) {
+  
+  körper <- readRDS("daten/körper.RDS")
   
   verletzungen = reactiveVal(readRDS("daten/verletzungen.RDS"))
   
