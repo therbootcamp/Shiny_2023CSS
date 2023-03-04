@@ -1,7 +1,7 @@
 ---
 title: "Layout"
 subtitle: ""
-author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+author: "<font style='font-style:normal'>Dashboards mit Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -49,7 +49,7 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ### A - Normalverteilung
 
-1. Bauen wir eine App, die die Normalverteilung illustriert. Wir verwenden dafür eine `sidebarLayout`, sodass die Inputs für die Stichprobengrösse, den Mittelwert und die Streuung der Verteilung und eine Histogramm der Verteiling in einem `siderbarPanel` und einem `mainPanel` voneinander getrennt werden können. Beginnen wir mit dem `server`. Definiere ihn folgendermassen. Du kannst sehenn, dass drei Inputs verwendet werden und ein Output gerendert wird. Diese Inputs und Outputs müssen wir gleich in der `ui` aufgreifen.    
+1. Bauen wir eine App, die die Normalverteilung illustriert. Wir verwenden dafür eine `sidebarLayout`, sodass die Inputs für die Stichprobengrösse, den Mittelwert und die Streuung der Verteilung und eine Histogramm der Verteiling in einem `siderbarPanel` und einem `mainPanel` voneinander getrennt werden können. Beginnen wir mit dem `server`. Definiere ihn folgendermassen. Du kannst sehen, dass drei Inputs verwendet werden und ein Output gerendert wird. Diese Inputs und Outputs müssen wir gleich in der `ui` aufgreifen.    
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -78,7 +78,7 @@ ui <- XX(
 
 ```
 
-3. Definiere nun innerhalb des `sidebarLayout`s ein `sidebarPanel` und ein `mainPanel`. Danach solltest du die App bereits testen können, obgleich noch nicht viel zu sehen ist. Tue dies mit shinyApp(ui, server)``. Du solltest eine Überschrift sehen und darunter einen grauhinterlegtes Feld.    
+3. Definiere nun innerhalb des `sidebarLayout`s ein `sidebarPanel` und ein `mainPanel`. Danach solltest du die App bereits testen können, obgleich noch nicht viel zu sehen ist. Tue dies mit `shinyApp(ui, server)`. Du solltest eine Überschrift sehen und darunter einen grauhinterlegtes Feld.    
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -279,7 +279,7 @@ shinyApp(ui, server)
 
 ### C - Normalverteilung 3.0
 
-1. In der dritten Iteration der Normalverteilungsapp, verwenden wir etwas HTML um die Titel und Inhalte der den `tabPanel`s im `tabsetPanel` anzupassen. Zuerst die Überschriften. Erstze die Titel `"Histogramm"` und "`Dichteplot`" durch `icon("chart-column")` und `icon("chart-line")`. Lasse dann die App einmal laufen. Nun sollten passende HTML-Icons anstatt der ursprünglichen Titel zu sehen sein.  
+1. In der dritten Iteration der Normalverteilungsapp, verwenden wir etwas HTML um die Titel und Inhalte der `tabPanel` im `tabsetPanel` anzupassen. Zuerst die Überschriften. Erstze die Titel `"Histogramm"` und "`Dichteplot`" durch `icon("chart-column")` und `icon("chart-line")`. Lasse dann die App einmal laufen. Nun sollten passende HTML-Icons anstatt der ursprünglichen Titel zu sehen sein.  
 
 
 2. Im nächsten Schritt ergänze zwei HTML Paragraphen-Tags `tags$p` oberhalb der Plots im Main Panel. Lasse dann wieder App laufen. Siehst du einen Unterschied zu vorher?
@@ -454,7 +454,7 @@ ui <- XX(
 
 ```
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 
 ui <- navbarPage(
   title = "InjuryViewer",
@@ -467,7 +467,7 @@ shinyApp(ui, server = function(input, output, sesssion){})
 
 ```
 
-3. Als nächstes ergänze Icons für die drei `tabPanel`. Für das Dashboard `tabPanel` ergänze icon("chart-bar"), für das Daten `tabPanel` `icon("clipboard")`, und für das Informationen `tabPanel` icon("info-circle"). Lasse App laufen, um zu testen ob die Icons angezeigt werden. 
+3. Als nächstes ergänze Icons für die drei `tabPanel`. Für das Dashboard `tabPanel` ergänze `icon("chart-bar")`, für das Daten `tabPanel` `icon("clipboard")`, und für das Informationen `tabPanel` `icon("info-circle")`. Lasse App laufen, um zu testen ob die Icons angezeigt werden. 
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -487,7 +487,7 @@ ui <- XX(
 
 ```
 
-4. Mit dem fertigen grundgerüst können wir anfangen das Layout der einzelnen `tabPanel`s näher zu definieren. Angefangen mit dem Dashboard ergänze ein `sidebarLayout` inklusive `sidebarPanel` und `mainPanel`.
+4. Mit dem fertigen Grundgerüst können wir anfangen, das Layout der einzelnen `tabPanel`s näher zu definieren. Angefangen mit dem Dashboard, ergänze ein `sidebarLayout` inklusive `sidebarPanel` und `mainPanel`.
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -543,7 +543,7 @@ ui <- XX(
 
 ```
 
-6. Mit einer fertigen Sidebar, kümmern wir uns jetzt um das `mainPanel`. Ergänze innerhalb des Panels die zwei `plotOutput`s, den `lilien_plot` und den `lollipop_plot`, und teste die UI. 
+6. Mit einer fertigen Sidebar, kümmern wir uns jetzt um das `mainPanel`. Ergänze innerhalb des Panels die zwei `plotOutput`s, den `linien_plot` und den `lollipop_plot`, und teste die UI. 
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -577,7 +577,7 @@ ui <- XX(
 
 ```
 
-7. Das Dashboard Layout ist fertig. Nun zum Daten Navbar Panel. Ergänze ein `tabsetPanel` mit wiederum drei `tabPanel`s mit den Titel `"Daten"`, `"Upload"`, und `"Download"`. Innerhalb der `tabPanel` ergänze die folgenden Überschriften auf zweiter Ebene: `""Aktuelle daten""`, `"Daten hochladen"`, und `"Daten runterladen"`. Teste die UI. Sind die Tabs unter dem Navbar-Tab Daten zu sehen?    
+7. Das Dashboard Layout ist fertig. Nun zum Daten Navbar Panel. Ergänze ein `tabsetPanel` mit wiederum drei `tabPanel`s mit den Titel `"Daten"`, `"Upload"`, und `"Download"`. Innerhalb der `tabPanel` ergänze die folgenden Überschriften zweiter Ebene: `"Aktuelle daten"`, `"Daten hochladen"`, und `"Daten runterladen"`. Teste die UI. Sind die Tabs unter dem Navbar-Tab Daten zu sehen?    
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -671,7 +671,7 @@ ui <- XX(
 ```
 
 
-9. Bevor wir zum `server` kommen, müssen wir noch Änderungen am Informationen Navbar Panel durchführen. Ergänze innerhalb ein `navbarMenu` mit zwei `tabPanel`s mit den Titeln `"Datensatz"` und `"About"`. Teste die UI.  
+9. Bevor wir zum `server` kommen, müssen wir noch Änderungen am Informationen Navbar Panel durchführen. Ersetze das `tabPanel` durch ein `navbarMenu` mit zwei `tabPanel`s mit den Titeln `"Datensatz"` und `"About"`. Teste die UI.  
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -713,10 +713,9 @@ ui <- XX(
   
   # Informationen
   XX(title = XX, icon = XX,
-     XX(
-       XX(title = XX),
-       XX(title = XX)
-     ))
+     XX(title = XX),
+     XX(title = XX)
+     )
   )
 
 
@@ -728,7 +727,7 @@ ui <- XX(
 
 "<h2>National Electronic Injury Surveillance System (NEISS)</h2><h4>Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.<br><br>NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.<br><br>Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.<br><br>Mehr Informationen zu NEISS unter <a>https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data</a></h4>"
 
-"<h2>The R Bootcamp</h2><h4>Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny<br><br>Mehr Informationen zu The R Bootcamp unter <a>https://therbootcamp.github.io/</a></h4>""
+"<h2>The R Bootcamp</h2><h4>Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny<br><br>Mehr Informationen zu The R Bootcamp unter <a>https://therbootcamp.github.io/</a></h4>"
 
 ```
 
@@ -765,20 +764,19 @@ ui <- XX(
   
   # Informationen
   XX(title = XX, icon = XX,
-     XX(
-       XX(title = XX,
-          fluidPage(fluidRow(column(6, HTML(XX))))
-          ),
-       XX(title = XX,
-          fluidPage(fluidRow(column(6, HTML(XX))))
-          )
-     ))
+     XX(title = XX,
+        fluidPage(fluidRow(column(6, HTML(XX))))
+        ),
+     XX(title = XX,
+        fluidPage(fluidRow(column(6, HTML(XX))))
+        )
+     )
   )
 
 
 ```
  
-11. Die UI ist vorerst fertig, das heisst wir können unsere Aufmerksamkeit dem `server` widment. Da wir primär am Layout gearbeitet haben ud wir nur einen neuen Output hinzugefügt haben, bleiben die Änderungen minimal. Ausgehend vom `server` der letzten session ergänze einzig `output$daten = renderDataTable(verletzungen, options = list(pageLength = 10))` an einer passenden Stelle. Das sollte dazu führen, dass die ersten zehn Zeilen des Gesamtdatensatzes in einem Data Table angezeigt werden. Alternative könnte man natürlich auch `daten()` als erstes Argument verwenden, was dazu führe würde, dass nur der im Dashboard zu sehen ist. Nach den Änderungen lasse die App mit `shinyApp(ui, server)` laufen. Funktioniert alles?   
+11. Die UI ist vorerst fertig, das heisst wir können unsere Aufmerksamkeit dem `server` widmen. Da wir primär am Layout gearbeitet haben ud wir nur einen neuen Output hinzugefügt haben, bleiben die Änderungen minimal. Ausgehend vom `server` der letzten session ergänze einzig `output$daten = renderDataTable(verletzungen, options = list(pageLength = 10))` an einer passenden Stelle. Das sollte dazu führen, dass die ersten zehn Zeilen des Gesamtdatensatzes in einem Data Table angezeigt werden. Alternative könnte man natürlich auch `daten()` als erstes Argument verwenden, was dazu führe würde, dass nur die gewählten Daten aus dem Dashboard zu sehen sind. Nach den Änderungen, lasse die App mit `shinyApp(ui, server)` laufen. Funktioniert alles?   
 
 ```{r, echo = TRUE, eval = FALSE}
 

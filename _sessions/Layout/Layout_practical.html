@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Layout</title>
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Layout</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -221,7 +221,7 @@ die Stichprobengrösse, den Mittelwert und die Streuung der Verteilung
 und eine Histogramm der Verteiling in einem <code>siderbarPanel</code>
 und einem <code>mainPanel</code> voneinander getrennt werden können.
 Beginnen wir mit dem <code>server</code>. Definiere ihn folgendermassen.
-Du kannst sehenn, dass drei Inputs verwendet werden und ein Output
+Du kannst sehen, dass drei Inputs verwendet werden und ein Output
 gerendert wird. Diese Inputs und Outputs müssen wir gleich in der
 <code>ui</code> aufgreifen.</li>
 </ol>
@@ -250,8 +250,8 @@ in <code>titlePanel</code> auf <code>"Normalverteilung"</code>.</li>
 <li>Definiere nun innerhalb des <code>sidebarLayout</code>s ein
 <code>sidebarPanel</code> und ein <code>mainPanel</code>. Danach
 solltest du die App bereits testen können, obgleich noch nicht viel zu
-sehen ist. Tue dies mit shinyApp(ui, server)``. Du solltest eine
-Überschrift sehen und darunter einen grauhinterlegtes Feld.</li>
+sehen ist. Tue dies mit <code>shinyApp(ui, server)</code>. Du solltest
+eine Überschrift sehen und darunter einen grauhinterlegtes Feld.</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
   XX(XX = XX),
@@ -370,7 +370,7 @@ verschiedenen Plots zu sehen.</li>
 <h3>C - Normalverteilung 3.0</h3>
 <ol style="list-style-type: decimal">
 <li><p>In der dritten Iteration der Normalverteilungsapp, verwenden wir
-etwas HTML um die Titel und Inhalte der den <code>tabPanel</code>s im
+etwas HTML um die Titel und Inhalte der <code>tabPanel</code> im
 <code>tabsetPanel</code> anzupassen. Zuerst die Überschriften. Erstze
 die Titel <code>"Histogramm"</code> und “<code>Dichteplot</code>” durch
 <code>icon("chart-column")</code> und <code>icon("chart-line")</code>.
@@ -521,19 +521,12 @@ Hat’s funktioniert?</p></li>
   # Informationen
   XX(title = XX)
   )</code></pre>
-<pre class="r"><code>ui &lt;- navbarPage(
-  title = &quot;InjuryViewer&quot;,
-  tabPanel(title = &quot;Dashboard&quot;),
-  tabPanel(title = &quot;Daten&quot;),
-  tabPanel(title = &quot;Informationen&quot;)
-  )
-
-shinyApp(ui, server = function(input, output, sesssion){})</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Als nächstes ergänze Icons für die drei <code>tabPanel</code>. Für
-das Dashboard <code>tabPanel</code> ergänze icon(“chart-bar”), für das
-Daten <code>tabPanel</code> <code>icon("clipboard")</code>, und für das
-Informationen <code>tabPanel</code> icon(“info-circle”). Lasse App
+das Dashboard <code>tabPanel</code> ergänze
+<code>icon("chart-bar")</code>, für das Daten <code>tabPanel</code>
+<code>icon("clipboard")</code>, und für das Informationen
+<code>tabPanel</code> <code>icon("info-circle")</code>. Lasse App
 laufen, um zu testen ob die Icons angezeigt werden.</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
@@ -549,9 +542,9 @@ laufen, um zu testen ob die Icons angezeigt werden.</li>
   XX(title = XX, icon = XX)
   )</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Mit dem fertigen grundgerüst können wir anfangen das Layout der
+<li>Mit dem fertigen Grundgerüst können wir anfangen, das Layout der
 einzelnen <code>tabPanel</code>s näher zu definieren. Angefangen mit dem
-Dashboard ergänze ein <code>sidebarLayout</code> inklusive
+Dashboard, ergänze ein <code>sidebarLayout</code> inklusive
 <code>sidebarPanel</code> und <code>mainPanel</code>.</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
@@ -605,7 +598,7 @@ an. Passt alles?</li>
 <ol start="6" style="list-style-type: decimal">
 <li>Mit einer fertigen Sidebar, kümmern wir uns jetzt um das
 <code>mainPanel</code>. Ergänze innerhalb des Panels die zwei
-<code>plotOutput</code>s, den <code>lilien_plot</code> und den
+<code>plotOutput</code>s, den <code>linien_plot</code> und den
 <code>lollipop_plot</code>, und teste die UI.</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
@@ -639,10 +632,9 @@ an. Passt alles?</li>
 ein <code>tabsetPanel</code> mit wiederum drei <code>tabPanel</code>s
 mit den Titel <code>"Daten"</code>, <code>"Upload"</code>, und
 <code>"Download"</code>. Innerhalb der <code>tabPanel</code> ergänze die
-folgenden Überschriften auf zweiter Ebene:
-<code>""Aktuelle daten""</code>, <code>"Daten hochladen"</code>, und
-<code>"Daten runterladen"</code>. Teste die UI. Sind die Tabs unter dem
-Navbar-Tab Daten zu sehen?</li>
+folgenden Überschriften zweiter Ebene: <code>"Aktuelle daten"</code>,
+<code>"Daten hochladen"</code>, und <code>"Daten runterladen"</code>.
+Teste die UI. Sind die Tabs unter dem Navbar-Tab Daten zu sehen?</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
   title = XX,
@@ -730,9 +722,10 @@ uns erlauben wird mit den Daten in einer Tabelle zu interagieren.</li>
   )</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Bevor wir zum <code>server</code> kommen, müssen wir noch Änderungen
-am Informationen Navbar Panel durchführen. Ergänze innerhalb ein
-<code>navbarMenu</code> mit zwei <code>tabPanel</code>s mit den Titeln
-<code>"Datensatz"</code> und <code>"About"</code>. Teste die UI.</li>
+am Informationen Navbar Panel durchführen. Ersetze das
+<code>tabPanel</code> durch ein <code>navbarMenu</code> mit zwei
+<code>tabPanel</code>s mit den Titeln <code>"Datensatz"</code> und
+<code>"About"</code>. Teste die UI.</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
   title = XX,
@@ -772,10 +765,9 @@ am Informationen Navbar Panel durchführen. Ergänze innerhalb ein
   
   # Informationen
   XX(title = XX, icon = XX,
-     XX(
-       XX(title = XX),
-       XX(title = XX)
-     ))
+     XX(title = XX),
+     XX(title = XX)
+     )
   )</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Innerhalb der Datensatz und About <code>tabPanel</code>s füge jweils
@@ -786,7 +778,7 @@ wie Shiny die HTML Elemente in den Texten in Formatierung
 </ol>
 <pre class="r"><code>&quot;&lt;h2&gt;National Electronic Injury Surveillance System (NEISS)&lt;/h2&gt;&lt;h4&gt;Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.&lt;br&gt;&lt;br&gt;NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
 
-&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;&lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;&quot;</code></pre>
+&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;&lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;</code></pre>
 <pre class="r"><code>ui &lt;- XX(
   title = XX,
   
@@ -818,18 +810,17 @@ wie Shiny die HTML Elemente in den Texten in Formatierung
   
   # Informationen
   XX(title = XX, icon = XX,
-     XX(
-       XX(title = XX,
-          fluidPage(fluidRow(column(6, HTML(XX))))
-          ),
-       XX(title = XX,
-          fluidPage(fluidRow(column(6, HTML(XX))))
-          )
-     ))
+     XX(title = XX,
+        fluidPage(fluidRow(column(6, HTML(XX))))
+        ),
+     XX(title = XX,
+        fluidPage(fluidRow(column(6, HTML(XX))))
+        )
+     )
   )</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li>Die UI ist vorerst fertig, das heisst wir können unsere
-Aufmerksamkeit dem <code>server</code> widment. Da wir primär am Layout
+Aufmerksamkeit dem <code>server</code> widmen. Da wir primär am Layout
 gearbeitet haben ud wir nur einen neuen Output hinzugefügt haben,
 bleiben die Änderungen minimal. Ausgehend vom <code>server</code> der
 letzten session ergänze einzig
@@ -837,8 +828,8 @@ letzten session ergänze einzig
 an einer passenden Stelle. Das sollte dazu führen, dass die ersten zehn
 Zeilen des Gesamtdatensatzes in einem Data Table angezeigt werden.
 Alternative könnte man natürlich auch <code>daten()</code> als erstes
-Argument verwenden, was dazu führe würde, dass nur der im Dashboard zu
-sehen ist. Nach den Änderungen lasse die App mit
+Argument verwenden, was dazu führe würde, dass nur die gewählten Daten
+aus dem Dashboard zu sehen sind. Nach den Änderungen, lasse die App mit
 <code>shinyApp(ui, server)</code> laufen. Funktioniert alles?</li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
