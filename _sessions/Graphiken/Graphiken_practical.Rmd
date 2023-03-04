@@ -20,6 +20,13 @@ output:
   <font style="font-size:10px">from <a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
 </p>
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      eval = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+```
+
 # {.tabset}
 
 ## Information
@@ -40,41 +47,233 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ### A - Puppies
 
-```{r, eval = }
+1. Bauen wir die Puppies App. Die Puppy App rotiert zwischen Bildern von Welpen rotiert, wenn der Nutzer auf das Bild eines Welpen klickt. Beginnen wir mit der UI. Baue eine `fluidPage` UI mit einer `fluidRow` und drei `column`s, die jeweils eine Breite von `4` haben.  
 
-puppies = read_csv("daten/puppies.csv")
 
-ui = fluidPage(
-  fluidRow(
-    column(4),
-    column(4,
-      titlePanel("A puppy"),
-      htmlOutput("quelle"),
-      imageOutput("bild")
-    ),
-    column(4)
-    ))
+```{r, echo = TRUE, eval = FALSE}
 
-server = function(input, output, session){
-  
-  index = reactiveVal(1)
-  
-  output$bild = renderImage({
-    list(src = paste0("daten/puppies/",puppies$image[index()]),
-         width = "100%") 
-    }, deleteFile = FALSE)
-  
-  output$quelle = renderText(HTML(paste("Quelle: <a href=",puppies$url[index()],">Unsplash.com</a>")))
-  
-}
 
-shinyApp(ui, server)
+ui <- XX(
+  XX(
+    XX(XX),
+    XX(XX),
+    XX(XX)
+  )
+)
 
 ```
 
-### B - Puppies 2.0
+2. In die mittlere Column setze nun ein `titlePanel` mit `title = "A Puppy"`, einen `htmlOutput` mit ID `"quelle"` für das Anzeigen der Bildquelle, und einen `imageOutput` mit ID `"bild"` für das Anzeigen des Bildes. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
+
+
+ui <- XX(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX(XX),
+       XX(XX),
+       XX(XX)
+       ),
+    XX(XX)
+  )
+)
+
+```
+
+3. Später müssen noch ein paar Änderungen am `imageOutput` vornehmen, um Interaktivität herzustellen, zunächst kümmere dich aber ersteinmal um den `server`, damit du die App testen kannst. Kreiere einen `server` mit zwei Outputs, ein `renderText` für die Bildquelle und ein `renderImage` für das Bild. Weise die beiden den richtigen IDs im `output` zu. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+server = function(input, output, session){
+
+  XX$XX = XX()
+  XX$XX = XX()
+  
+  }
+  
+```
+
+4. Als nächstes laden den Datensatz `puppies`, damit wir im `server` darauf Bezug nehmen können. Lade vorher das `tidyverse` um die Funktion `read_csv` nutzen zu können.  
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX$XX = XX()
+  XX$XX = XX()
+  
+  }
+  
+```
+
+
+5. Innerhalb des `renderText` setze nun `HTML(paste("Quelle: <a href=",puppies$url[1],">Unsplash.com</a>"))`. Der Code führt dazu, dass für den ersten Eintrag in `puppies$url` ein HMTL Link erzeugt wird.    
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX$XX = XX(XX(XX))
+  XX$XX = XX()
+  
+  }
+  
+```
+
+6. Die Bildquelle ist vorerst fertig, nun zum Bild selber. `renderImage` muss eine Liste zur Verfügung gestellt werden, die den Bildpfad `src` und andere Bildparameter z.B. `width` oder `height` definiert. Weise `src` diesen Code zu `paste0("daten/puppies/",puppies$image[1])`, der den Pfad für das erste Bild in `puppies` zusammensetzt, und setze `width` auf `500px`, damit das Bild nicht zu gross angezeigt wird. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX$XX = XX(XX(XX))
+  XX$XX = XX(list(
+    XX = XX,
+    XX = XX
+  ))
+  
+  }
+  
+```
+
+7. Jetzt solltest du die App test `shinyApp(ui, server)` testen können. Probiere es aus. Wird ein Welpe mit Bildquelle und Überschrift angezeigt? 
+
+8. Nun zur Interaktivität. Anstatt dass immmer nur das erste Bild angezeigt wird, wollen wir, dass die Bilder ausgelöst durch Klicks des Nutzers durchrotieren. Gehe dafür zuerst in die UI und ergänze innerhalb des `renderImage` das Argument `click = "weiter"`. Dies generiert einen `input$weiter`, auf den wir im `server` zugreifen können. Später müssen wir `click` noch ein wenig anpassen, aber erst einmal gehen wir zum `server`. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+
+ui <- XX(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX(XX),
+       XX(XX),
+       XX(XX, XX)
+       ),
+    XX(XX)
+  )
+)
+
+```
+
+9. Für die klick-abhängige Rotation der, benötigen wir einen dynamischen Index anstatt des festes Indexes `1`.  Definiere dafür wieder mal einen `reactiveVal` und nenne ihn `index`.   
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX <- XX()
+  
+  XX$XX = XX(XX(XX))
+  XX$XX = XX(list(
+    XX = XX,
+    XX = XX
+  ))
+  
+  }
+  
+```
+
+9. Jetzt braucht es noch eine Mechanik, die dazu führt das `index` sich ändert, wenn der Nutzer auf das Bild klickt. Definiere dafür einen `observeEvent` in Abhängigkeit des Klick-Inputs `input$weiter`. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX <- XX()
+  
+  XX(XX, {
+    
+  })
+  
+  XX$XX = XX(XX(XX))
+  XX$XX = XX(list(
+    XX = XX,
+    XX = XX
+  ))
+  
+  }
+  
+```
+
+10. Innerhalb des `observeEvent` setze diesen Code `index((index() %% 5 + 1))`, der dazu führt, dass der index um einen heraufgesetzt wird bis die maximale Anzahl Bilder (fünf) erreicht, dann springt der Index zurück zur ersten Position. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+library(XX)
+
+puppies <- XX(XX)
+
+server = function(input, output, session){
+
+  XX <- XX()
+  
+  XX(XX, {
+    
+    XX
+    
+  })
+  
+  XX$XX = XX(XX(XX))
+  XX$XX = XX(list(
+    XX = XX,
+    XX = XX
+  ))
+  
+  }
+  
+```
+
+10. Als letztes bevor du die App testen kannst, ersetze die beiden `1`er im code durch den reaktiven Wert `index`. 
+
+11. Die Klammern nicht vergessen. Dann teste die App. Ändert sich das Bild, wenn du auf das Bild klickst? Vermutlich nicht, was daran liegt, dass die Klickbox aktuell kleiner ist als das eigentliche Bild und am oberen linken Bildrand liegt. Wenn es nicht bereits geklappt hat, versuche einmal oben links ins Bild zu klicken. Jezt sollte sich das Bild ändern. 
+
+12. Um die Klickbox zu vergrössern, müssen wir dem `click` Argument im `imageOutput` explizit die `clickOpts` zuweisen darin die `id` (immmernoch `"weiter"`) und auch `clip = FALSE` zweisen. Letztes sorgt dafür, dass die Klickbox auf das gesamte Bild ausgedehnt wird. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+
+ui <- XX(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX(XX),
+       XX(XX),
+       XX(XX, XX = XX(XX = XX, XX = XX))
+       ),
+    XX(XX)
+  )
+)
+
+```
+
+13. Lasse die App nochmal laufen. Funktioniert nun alles einwandfrei? 
+
+
+```{r, eval = FALSE}
 
 puppies = read_csv("daten/puppies.csv")
 
@@ -97,20 +296,66 @@ server = function(input, output, session){
     index((index() %% 5 + 1))
     })
   
+  output$quelle = renderText(HTML(paste("Quelle: <a href=",puppies$url[index()],">Unsplash.com</a>")))
+
   output$bild = renderImage({
     list(src = paste0("daten/puppies/",puppies$image[index()]),
          width = "500px") 
     }, deleteFile = FALSE)
   
-  output$quelle = renderText(HTML(paste("Quelle: <a href=",puppies$url[index()],">Unsplash.com</a>")))
-  
 }
 
 shinyApp(ui, server)
 
+
 ```
 
+
 ### C - Scatter
+
+1. Unten siehst du eine App, die ein Scatterplot der (logarithmierten) Anzahl der Verletzungen an Körperteilen von jüngeren (`alter < 65`) und älteren Personen (`alter >= 65`) anzeigt und erlaubt, dass Punkte über die `brush` Funktionalität ausgewählt werden. Die ausgewählten Punkte werden unter dem Scatterplot in einer Tabelle angezeigt. Leider fehlen der App einige Werte. Es sind einzusetzen die IDs, der Argumentname `brush`, und die Funktion `brushedPoints`. Kannst du die App zum laufen bringen?
+
+```{r, echo = TRUE, eval = FALSE}
+
+verletzungen_jung_alt = readRDS("daten/verletzungen.RDS")  %>% 
+    group_by(körperteil, alter = case_when(alter < 65 ~ "jünger", TRUE ~ "älter")) %>% 
+    summarize(n = log(sum(anzahl))) %>% 
+    ungroup() %>% 
+    pivot_wider(names_from = alter, values_from = n) %>% 
+    na.omit() 
+
+
+ui = fluidPage(
+  fluidRow(
+    column(3),
+    column(6,
+      plotOutput(XX, XX = XX),
+      tableOutput(XX)
+    ),
+    column(3)
+    ))
+
+server = function(input, output, session){
+
+  output$XX = renderPlot({
+    verletzungen_jung_alt %>% 
+      ggplot(aes(x = jünger, y = älter)) +
+      geom_point() +
+      theme_minimal()
+      }, res = 96)
+
+  output$XX <- renderTable({
+    XX(verletzungen_jung_alt, input$XX)
+  })
+      
+}
+
+
+shinyApp(ui, server)
+
+
+```
+
 
 ```{r}
 
@@ -134,14 +379,12 @@ ui = fluidPage(
 
 server = function(input, output, session){
 
-  
-  
   output$scatter = renderPlot({
     verletzungen_jung_alt %>% 
-    ggplot(aes(x = jünger, y = älter)) +
-    geom_point() +
-    theme_minimal()
-    }, res = 96)
+      ggplot(aes(x = jünger, y = älter)) +
+      geom_point() +
+      theme_minimal()
+      }, res = 96)
 
   output$ausgewählte_daten <- renderTable({
     brushedPoints(verletzungen_jung_alt, input$auswahl)
@@ -151,6 +394,7 @@ server = function(input, output, session){
 
 
 shinyApp(ui, server)
+
 
 
 ```
