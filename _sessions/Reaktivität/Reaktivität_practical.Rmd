@@ -195,8 +195,7 @@ server <- function(input, output, session) {
 ```
 
 
-
-```{r, eval = FALSE, echo = FALSE}
+```{r, eval = FALSE}
 
 server <- function(input, output, session) {
   

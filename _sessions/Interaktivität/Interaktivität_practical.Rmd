@@ -20,6 +20,15 @@ output:
   <font style="font-size:10px">from <a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
 </p>
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      eval = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
 # {.tabset}
 
 ## Information
@@ -37,7 +46,11 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ## Aufgaben
 
+## A - DatenViewer 4.0
+
+
 ## A - 
+
 
 ## App
 
