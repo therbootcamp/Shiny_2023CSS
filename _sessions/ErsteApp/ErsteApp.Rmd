@@ -1,20 +1,20 @@
 ---
 title: "Erste App"
 author: "Dashboards mit Shiny<br>
-  <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
+  </a>&#8239; 
+  </a>&#8239;
+  </a>&#8239;
+  </a>"
+  <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
     <i class='fas fa-clock' style='font-size:.9em;'></i>
-  </a>&#8239; 
   <a href='https://therbootcamp.github.io'>
     <i class='fas fa-home' style='font-size:.9em;' ></i>
-  </a>&#8239;
   <a href='mailto:therbootcamp@gmail.com'>
     <i class='fas fa-envelope' style='font-size: .9em;'></i>
-  </a>&#8239;
   <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
     <i class='fab fa-linkedin' style='font-size: .9em;'></i>
-  </a>"
 date: "März 2023"
 output:
   xaringan::moon_reader:
@@ -25,6 +25,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: '16:9'
+runtime: shiny
 ---
 
 layout: true
@@ -51,27 +52,18 @@ layout: true
 
 ---
 
-
-```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
-# Code to knit slides
-baselers <- readr::read_csv("1_Data/basel.csv")
-```
-
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-# see: https://github.com/yihui/xaringan
-# install.packages("xaringan")
-# see: 
-# https://github.com/yihui/xaringan/wiki
-# https://github.com/gnab/remark/wiki/Markdown
-options(width=110)
-options(digits = 4)
+
+#options(width=110)
+#options(digits = 4)
 ```
 
 ```{r, echo = FALSE ,message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
-                      message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
+knitr::opts_chunk$set(comment=NA, 
+                      echo = TRUE, eval = TRUE, 
+                      message = FALSE, warning = FALSE, 
+                      fig.align = 'center', dpi = 200)
 library(tidyverse)
 ```
 
@@ -82,31 +74,17 @@ library(tidyverse)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Erste app.</span></li>
+  <li class="m1"><span>Shiny Apps</span></li>
   <li class="m2"><span><high>Separate Funktionen</high> für verschiedene Plots</span></li>
 </ul>
 
 <br>
 
-```{r, eval = FALSE}
-# Histogram in base R
-hist(x = basel$alter,
-     xlab = "Alter",
-     ylab = "Häufigkeit",
-     main = "Histogramm Alter")
-```
 
 ]
 
 .pull-right5[
 
-```{r, echo = F}
-# Histogram in base R
-hist(x = basel$alter,
-     xlab = "Alter",
-     ylab = "Häufigkeit",
-     main = "Histogramm Alter")
-```
 
 ]
 
@@ -118,7 +96,7 @@ hist(x = basel$alter,
 .pull-left35[
 
 <ul>
-  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li>
+  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
   <ul class = "level">
     <li><span>ui - Frontend</span></li><br>
     <li><span>server - Backend</span></li><br>
@@ -143,6 +121,69 @@ hist(x = basel$alter,
 1. shinyapp
 2. template
 3. projects
+
+---
+
+# UIs
+
+
+.pull-left35[
+
+Common parameters
+
+]
+
+
+.pull-right5[
+
+numericInput
+sliderInput
+selectInput
+passwordInput
+dateInput
+dateRangeInput
+textInput
+fileInput
+
+radioButtons
+checkboxGroupInput
+
+actionButton
+
+
+]
+
+---
+
+# UIs
+
+
+.pull-left35[
+
+Common parameters
+
+]
+
+.pull-right5[
+
+```{r}
+
+library(shiny)
+
+ui <- fluidPage(
+  textInput("test", "test")
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+]
+
 
 ---
 

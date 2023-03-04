@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Willkommen</title>
+    <title>Erste App</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dashboards mit Shiny  The R Bootcamp @ CSS                 " />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Willkommen
+# Erste App
 ]
 .author[
 ### Dashboards mit Shiny<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
@@ -54,187 +54,133 @@ layout: true
 
 
 
-.pull-left6[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-
-# Ziel
-
-&gt;###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Dashboards und Web-Apps und  zu vermitteln. 
-
-]
-
-.pull-right4[
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;p align="center"&gt;&lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/target.png" height="350"&gt;&lt;/p&gt;
-
-]
+# Agenda
 
 
----
-
-.pull-left35[
-
-# Shiny
+.pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;shiny&lt;/mono&gt; ist ein R Paket für dynamische Web-Apps und &lt;high&gt;Dashboards&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;shiny&lt;/mono&gt; ist auch ein &lt;high&gt;Ökosystem&lt;/high&gt; an Support-Paketen&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;shinyFeedback&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;shinythemes&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;bslib&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;BT&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;reactlog&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;...&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;/ul&gt;
-
+  &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Separate Funktionen&lt;/high&gt; für verschiedene Plots&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-]
-
-.pull-right55[
-
-
-&lt;p align="center"&gt;
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="image/shiny_hex.png" height = "420px"&gt;
-&lt;/p&gt;
-
-]
-
----
-
-# Kurs Apps
 
 &lt;br&gt;
-&lt;p align="center"&gt;
-&lt;img src="image/apps_all.png"&gt;
-&lt;/p&gt;
 
----
-
-&lt;br&gt;
- &lt;iframe src="https://dirkwulff.shinyapps.io/InjuryViewer/" height="540px" width = "1040px" loading = "lazy"&gt;&lt;/iframe&gt;
-
----
-
-.pull-left35[
-
-&lt;br&gt;
-# Agenda 
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Der &lt;high&gt;Workshop&lt;/high&gt; besteht aus mehreren Sessions&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Session&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Folien-basierte Einführung&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Viele Übungen&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Interaktive Zusammenfassung&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-]
-
-.pull-right55[
-&lt;br&gt;&lt;br&gt;
-&lt;img src="image/schedule.png" height="525" align="center"&gt;
-
-]
-
----
-
-
-# Einführung
-
-.pull-left3[
-&lt;br2&gt;
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Konzepte&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Code Beispiele&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Dauer&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;30-60 min&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-&lt;/ul&gt;
-
-]
-
-.pull-right6[
-
-&lt;p align="center"&gt;
-&lt;img src="image/beamer_small.png" style="width:560px"&gt;&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://unsplash.com/photos/MAYsdoYpGuk"&gt;Unsplash.com&lt;/a&gt;&lt;/font&gt;
-&lt;/p&gt;
-
-]
-
----
-
-.pull-left45[
-
-# Übungen
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;high&gt;Inhalt&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Learn-by-doing&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Steigende Schwierigkeit&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Lösungen später&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Zwei Teile&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;Mini Apps&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;InjuryViewer&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;&lt;br&gt;
-&lt;/ul&gt;
 
 ]
 
 .pull-right5[
-&lt;br&gt;
 
- &lt;iframe src="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html" height="480px" width = "500px" loading = "lazy"&gt;&lt;/iframe&gt;
-
-  Beispiel:&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html"&gt; Erste App &lt;/a&gt;
 
 ]
 
 ---
 
-# Vorstellung
+# Erste App
 
-.pull-left5[
+
+.pull-left35[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Wie heisst Du?&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Was ist Deine Rolle in der CSS?&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m3"&gt;&lt;span&gt;Hast Du Programmiererfahrung mit R oder anderen Programmiersprachen?&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m4"&gt;&lt;span&gt;Was motiviert Dich Shiny zu lernen?&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps haben drei Komponenten&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;ui - Frontend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;server - Backend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;shinyApp - Starter&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;/ul&gt;
 &lt;/ul&gt;
 
 ]
 
-.pull-right45[
+.pull-right55[
 
-&lt;p align="center"&gt;
-&lt;img src="https://therbootcamp.github.io/ML_2022DHLab/_sessions/Intro/image/intro.jpg" height="360px"&gt;
-&lt;br&gt;
-&lt;font style="font-size:10px"&gt;from &lt;a href="https://unsplash.com/photos/SymZoeE8quA"&gt;unsplash.com&lt;/a&gt;&lt;/font&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/ersteapp.png" height = 420px&gt;
 &lt;/p&gt;
+
+]
+---
+
+# Workflow
+
+
+1. shinyapp
+2. template
+3. projects
+
+---
+
+# UIs
+
+
+.pull-left35[
+
+Common parameters
+
+]
+
+
+.pull-right5[
+
+numericInput
+sliderInput
+selectInput
+passwordInput
+dateInput
+dateRangeInput
+textInput
+fileInput
+
+radioButtons
+checkboxGroupInput
+
+actionButton
+
 
 ]
 
 ---
+
+# UIs
+
+
+.pull-left35[
+
+Common parameters
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("test", "test")
+)
+
+server &lt;- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+```
+
+<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+
+]
+
+
+---
+
 class: middle, center
 
-&lt;h1&gt;&lt;a href=https://therbootcamp.github.io/Shiny_2023CSS/index.html&gt;Agenda&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
