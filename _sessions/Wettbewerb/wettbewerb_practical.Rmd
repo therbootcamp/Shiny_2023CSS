@@ -87,19 +87,19 @@ var x = setInterval(function() {
 
 ## Auftrag
 
-Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für Gesundheit (BAG) nach geeineten Online-Tools, um das Infektionsgeschehen im Blick zu behalten. Nun seid ihr gefragt! Es gibt zwei Datensätze covid-daten.csv und covid-daten-alter.csv, diese stammen vom BAG und enthalten wöchentliche Zahlen zu COVID-19 Infektionen in der Schweiz von Februar 2020 bis Februar 2023. Die Infektionszahlen sind sowohl für die gesamte Schweiz als auch pro Kanton verfügbar. Der Datensatz covid-daten-alter.csv schlüsselt die Infektionszahlen zudem nach Altersgruppen auf, beinhaltet ansonsten die gleichen Daten.
+Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für Gesundheit (BAG) nach geeineten Online-Tools, um das Infektionsgeschehen im Blick zu behalten. Nun seid ihr gefragt! Es gibt einen Datensatz \`covid.csv\`, dieser stammt vom BAG und enthält wöchentliche Zahlen zu COVID-19 Infektionen in der Schweiz von Februar 2020 bis Februar 2023. Die Infektionszahlen sind sowohl für die gesamte Schweiz als auch pro Kanton verfügbar. Der Datensatz schlüsselt die Infektionszahlen zudem nach Altersgruppen auf.
 
 ### A - Vorbereitung
 
-1.  Öffne dein `TheRBootcamp` R project. Es sollte die Ordner `1_Data` und `2_Code` enthalten. Stelle sicher, dass du alle Datensätze, welche im `Datensätze` Tab aufgelisted sind, in deinem `1_Data` Ordner hast.
+1.  Öffne dein `TheRBootcamp` R project. Es sollte einen `data` Ordner enthalten, indem der im Tab `Datensatz` beschriebene Datensatz `covid.csv` zu finden ist. 
 
 2.  Erstelle eine neue Shiny App. Schreibe deinen Namen, das Datum und "COVID-19 Dashboard" als Kommentare an den Anfang des Skripts.
 
-3.  Speichere das neue Skript unter dem Namen `app.R` im `3_competition` Ordner.
+3.  Speichere das neue Skript unter dem Namen `app.R` in einen Unterordner.
 
 4.  Lade das `shiny` Paket und alle weiteren Pakete, die du verwenden möchtest.
 
-5.  Lade die beiden Datensätze `covid-daten.csv` und `covid-daten-alter.csv`.
+5.  Lade den Datensatz `covid.csv`.
 
 ```{r, eval = FALSE, echo = TRUE}
 ## NAME
@@ -109,8 +109,7 @@ Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für Gesundheit (
 library(shiny)
 library(readr)
 
-covid-daten <- read_csv("covid-daten.csv")
-covid-daten-alter <- read_csv("covid-daten-alter.csv")
+covid <- read_csv("covid.csv")
 
 ui <- fluidPage(
   
@@ -155,7 +154,11 @@ Wir informieren euch, wie ihr euer Dashboard an uns schicken könnt und wir mach
 
 ```{r, eval = FALSE, echo = TRUE}
 
-covid-daten %>% 
+covid %>% 
+  group_by(region, datum) %>% 
+  summarise(anzahl = sum(anzahl), 
+            summe = sum(summe), 
+            population = sum(population, na.rm = TRUE)) %>% 
   filter(region == "CH") %>% 
   ggplot(aes(x = datum, y = anzahl)) +
   geom_col(fill = "#ff0000") +
@@ -170,7 +173,11 @@ covid-daten %>%
 
 ```{r, eval = FALSE, echo = TRUE}
 
-covid-daten %>% 
+covid %>% 
+  group_by(region, datum) %>% 
+  summarise(anzahl = sum(anzahl), 
+            summe = sum(summe), 
+            population = sum(population, na.rm = TRUE)) %>% 
   mutate(pro_kopf = anzahl / population) %>% 
   filter(region %in% c("FR", "LU")) %>% 
   ggplot(aes(x = datum, y = pro_kopf, fill = region)) +
@@ -193,27 +200,16 @@ covid-daten %>%
 
 ![Farben und Layout Entwurf](image/color-layout.png){style="width: 75%;"}
 
-## Datensätze
+## Datensatz
 
-| Datei                     | Zeilen | Spalten |
-|---------------------------|--------|---------|
-| [covid-daten.csv]()       | 4212   | 5       |
-| [covid-daten-alter.csv]() | 42120  | 6       |
+| Datei         | Zeilen | Spalten |
+|---------------|--------|---------|
+| [covid.csv]() | 42120  | 6       |
 
-##### Variablenbeschreibungen `covid-daten.csv`
-
-| Name         | Bedeutung                                                                                     |
-|:---------------------|:-------------------------------------------------|
-| `region`     | Region auf die sich die Daten in dieser Zeile beziehen. `CH` oder einer von 26 Kantonen.      |
-| `datum`      | Datum, an dem die Woche beginnt, für welche diese Zeile Daten liefert.                        |
-| `anzahl`     | Anzahl COVID-19 Fälle, welche in dieser Woche in dieser Region gemeldet wurden.               |
-| `summe`      | Anzahl COVID-19 Fälle, welche bis zu dieser Woche in dieser Region insgesamt gemeldet wurden. |
-| `population` | Anzahl Personen in dieser Region.                                                             |
-
-##### Variablenbeschreibungen `covid-daten-alter.csv`
+##### Variablenbeschreibungen `covid.csv`
 
 | Name           | Bedeutung                                                                                                            |
-|:---------------------|:-------------------------------------------------|
+|:-----------------------|:-----------------------------------------------|
 | `altersgruppe` | Altersgruppe, auf die sich die Daten in dieser Zeile beziehen.                                                       |
 | `region`       | Region auf die sich die Daten in dieser Zeile beziehen. `CH` oder einer von 26 Kantonen.                             |
 | `datum`        | Datum, an dem die Woche beginnt, für welche diese Zeile Daten liefert.                                               |
