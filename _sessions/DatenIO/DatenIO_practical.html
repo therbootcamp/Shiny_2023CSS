@@ -212,20 +212,319 @@ Objekte erstezen musst.</p>
 </div>
 <div id="aufgaben" class="section level2">
 <h2>Aufgaben</h2>
-<div id="a---xxx" class="section level3">
-<h3>A - XXx</h3>
+<div id="a---dataviewer" class="section level3">
+<h3>A - DataViewer</h3>
+<ol style="list-style-type: decimal">
+<li>Wir bauen eine App, die Daten einliest und als Tabelle anzeigt.
+Beginne indem du eine typische <code>sidebarLayout</code> Struktur mit
+<code>sidebarPanel</code> und <code>mainPanel</code> für die UI
+baust.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage{
+  XX(
+    XX(),
+    XX()
+  )
+}</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Jetzt setze in das <code>sidebarPanel</code> einen
+<code>fileInput</code>, der uns erlauben wird Daten einzulesen. Als ID
+wähle <code>daten</code> und setze die Argumente <code>label</code>,
+<code>buttonlabel</code> und <code>placeholder</code> auf
+<code>"Daten hochladen"</code>, <code>"Suche..."</code> und
+<code>"Wähle eine Datei"</code>.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;DataViewer&quot;),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX)
+    ),
+    XX()
+  )
+)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Ergänze zudem im <code>mainPanel</code> einen
+<code>dataTableOutput</code> mit ID <code>daten_table</code>, damit wir
+später Daten zu sehen bekommen.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;DataViewer&quot;),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX)
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Teste die UI einmal mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>.
+Du solltest den Titel und den Donwload sehen, aber noch keine Tabelle,
+weil natürlich noch keine Daten geladen wurden.</p></li>
+<li><p>Nun zum <code>server</code>. Hier arbeiten wir (wiedermal) mit
+einem <code>reactiveVal</code> für die Daten (genannt
+<code>daten</code>) und einem <code>observeEvent</code>, der Code
+enthält mit dem der <code>reactiveVal</code> überschrieben, sobald der
+<code>fileInput</code> in der UI bedient wurde. Baue diese
+Grundstruktur.</p></li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+  })
+}</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Nun zun dem Codes in <code>observeEvent</code>. Da wir sowohl
+<code>.csv</code> als auch <code>.RDS</code> Daten lesen wollen, gilt es
+erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue
+dies mit <code>file_type</code> und kreiere eine Objekt names
+<code>endung</code>. Stelle als Input für <code>file_type</code> den
+eingegebenen Dateipfad aus <code>fileInput</code>
+(<code>input$daten$datapath</code>) beret.</li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX &lt;- XX(XX)
+    
+  })
+}</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Nun baue ein <code>if</code>-<code>else</code>, dass die Datei in
+<code>input$daten$datapath</code> mit <code>read_csv</code>
+(<code>tidyverse</code> lade nicht vergessen), wenn die
+<code>endung</code> gleich <code>csv</code>, und die Daten mit
+<code>readRDS</code> einliest, wenn die <code>endung</code> gleich
+<code>RDS</code> ist. Überschreibe dabei direkt den
+<code>reactiveVal</code></li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX &lt;- XX(XX)
+    
+    if(XX == &quot;csv&quot;){
+      XX(XX(XX))
+    } else if(XX == &quot;RDS&quot;) {
+      XX(XX(XX))
+    }
+  })
+  
+  
+}</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Zuletzt ergänze noch <code>renderDataTable()</code> ausserhalb des
+<code>observeEvent</code>, sodass die eingelesenen Daten auch an die
+<code>ui</code> weitergegeben werden. Damit nur 10 Zeilen dargestellt
+werde, definiere dabei
+<code>options = list(pageLength = 10)</code>.</li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX &lt;- XX(XX)
+    
+    if(XX == &quot;csv&quot;){
+      XX(XX(XX))
+    } else if(XX == &quot;RDS&quot;) {
+      XX(XX(XX))
+    }
+  })
+  
+  output$XX &lt;- XX(XX, XX)
+}</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Die erste Iteration der App ist fertig. Teste sie. Erscheinen die
+Daten in einer Tabelle, nachdem du eine Datei eingelesen hast?</li>
+</ol>
 </div>
-<div id="b---xxx" class="section level3">
-<h3>B - XXx</h3>
+<div id="b---dataviewer-2.0" class="section level3">
+<h3>B - DataViewer 2.0</h3>
+<ol style="list-style-type: decimal">
+<li>Die zweite Iteration des DataViewers soll erlauben, dass du über ein
+<code>textAreaInput</code> Code bereitstellst, der dann auf die
+eingelesenen Daten angewendet wird. Kreiere dafür zuerst den
+<code>textAreaInput</code>unterhalb des <code>fileInput</code> in der
+UI. Setze die ID auf <code>"code"</code>. Zudem kreiere darunter einen
+<code>acionButton</code> mit ID <code>code_run</code>, den wir als
+Auslöser für den Code verwenden werden.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;DataViewer&quot;),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX),
+      XX(XX),
+      XX(XX)
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Teste die UI mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>.
+Sieht alles in Ordnung aus?</p></li>
+<li><p>Definiere nun im <code>server</code> einen weiteren
+<code>observeEvent</code> in Abhängigkeit von
+<code>input$code_run</code>, sodass der Code innerhalb von
+<code>observeEvent</code> nur ausgeführt, wenn
+<code>input$code_run</code> betätigt wird. Innerhalb des
+<code>observeEvent</code> platziere dann
+<code>daten(eval(parse(text = input$code)))</code>. Dieser Code evaliert
+den Input von <code>input$code</code> und überschreibt damit den
+aktuellen Wert des <code>daten()</code>
+<code>reactiveValue</code>s.</p></li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX &lt;- XX(XX)
+    
+    if(XX == &quot;csv&quot;){
+      XX(XX(XX))
+    } else if(XX == &quot;RDS&quot;) {
+      XX(XX(XX))
+    }
+  })
+  
+  XX(XX, {
+    
+    XX
+    
+  })
+  
+  output$XX &lt;- XX(XX, XX)
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Lasse die App laufen. Lese Daten ein und teste verschiedene
+Code-Inputs. Bei der Entwicklung des Codes ist es wichtig, die Daten
+über den <code>reactiveVal</code> anzusprechen. Zum Beispiel, um den
+Datensatz in <code>puppies.csv</code> auf die erste Zeile zu reduzieren
+könnte man schreiben <code>daten() %&gt;% slice(1)</code>.</li>
+</ol>
 </div>
-<div id="c---xxx" class="section level3">
-<h3>C - XXx</h3>
+<div id="c---dataviewer-3.0" class="section level3">
+<h3>C - DataViewer 3.0</h3>
+<ol style="list-style-type: decimal">
+<li>Entwickeln wir die letzte Version des DataViewer, in dem wir eine
+Download einbauen. Setze dafür in die UI zwei
+<code>downloadButton</code> mit IDs <code>csv_download</code> und
+<code>rds_download</code> und Labels <code>.CSV</code> und
+<code>.RDS</code>. Ergänze zudem in beiden Buttons
+<code>style='width:49.5%'</code>, damit die Buttons zusammen die volle
+Breite ausnutzen. Zuletzt zwei <code>br()</code> und
+<code>h5("Download", style="font-weight:700")</code> zwischen die
+Download-Buttons und den <code>code_run</code> Action-Button
+darüber.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;DataViewer&quot;),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX),
+      XX(XX),
+      XX(XX),
+      XX(),
+      XX(),
+      XX(),
+      XX(),
+      XX()
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Teste die UI mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>.
+Sieht alles in Ordnung aus?</p></li>
+<li><p>Im <code>server</code> müssen wir uns nun um die Download-Handler
+kümmern, sodass die Download-Buttons auch einen Download auslösen. Der
+Code unten hat bereits zwei Templates Downloadhandler, denen aber noch
+ein paar Informationen fehlen. Als Output IDs stelle IDs der beiden
+<code>downloadButton</code>s bereit und für das erste Argument der
+Schreibfunktionen die Daten <code>reactiveValue</code> (Klammern nicht
+vergessen).</p></li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  XX &lt;- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX &lt;- XX(XX)
+    
+    if(XX == &quot;csv&quot;){
+      XX(XX(XX))
+    } else if(XX == &quot;RDS&quot;) {
+      XX(XX(XX))
+    }
+  })
+  
+  XX(XX, {
+    
+    XX
+    
+  })
+  
+  output$XX &lt;- XX(XX, XX)
+  
+  
+  output$XX &lt;- XX(
+    filename = function() {paste(&quot;daten.csv&quot;)},
+    content = function(file) {write_csv(XX, file)}
+    )
+ 
+  output$XX &lt;- XX(
+    filename = function() {paste(&quot;daten.RDS&quot;)},
+    content = function(file) {saveRDS(XX, file)}
+    )
+  
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Teste die App. Lese Daten ein und lade sie herunter. Versuche auch
+zwischendrin Code anzuwenden, der die angezeigten Daten verändert. Dies
+sollte auch die Daten beeinflussen, die heruntergeladen werden.</li>
+</ol>
 </div>
 </div>
 <div id="app" class="section level2">
 <h2>App</h2>
 <ol style="list-style-type: decimal">
-<li><p>Der nächste Schritt in der Entwicklung unserer App ist es das
+<li>Der nächste Schritt in der Entwicklung unserer App ist es das
 Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst
 um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze
 ein <code>fileInput</code> im Upload Panels innerhalb des Daten NavBar
@@ -233,27 +532,46 @@ Panels. Als <code>inputId</code>, <code>label</code>, und
 <code>buttonLabel</code> weise <code>"hochladen"</code>,
 <code>"Wähle eine Datei aus"</code>, und <code>"Auswählen</code> zu.
 Lasse die App einmal laufen und überprüfe ob der File upload zu
-sehen.</p></li>
-<li><p>Im nächsten Schritt, verbessern wir ein klein bisschen die
+sehen.</li>
+</ol>
+<pre class="r"><code>  tabPanel(
+    title = &quot;Upload&quot;,
+    h2(&quot;Daten hochladen&quot;),
+    XX(XX, XX, XX)
+    )</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Im nächsten Schritt, verbessern wir ein klein bisschen die
 Usability. Erstens ergänzen wir eine Unterüberschrift, die uns warnt,
 dass wir unsere aktuellen Daten überschrieben, wenn wir neue Daten
 einlesen. Hierfür ergänze
 <code>h4("Achtung Daten werden überschrieben")</code> direkt unterhalb
 der Überschrift zweiter Ordnung. Zweitens, füge eine mit
 <code>br()</code> eine leere Zeile zwischen der Unterüberschrift und dem
-<code>fileInput</code> ein.</p></li>
-<li><p>Die UI des Uploads ist fertig. Jetzt gilt es den
-<code>server</code> entsprechend anzupassen. Als erstes muss
-sichergestellt werden, dass die Daten nicht wie bisher ausserhalb des
-<code>sever</code>s gelesen werden sonder innerhalb. Zudem müssden die
-Daten genau wie das Objekt <code>daten</code> reaktiv werden, sodass sie
-sich ändern können sobald neue Daten hochgeladen werden. Es gibt
-verschiedene Wege, wie dies implementiert werden könnte. Machen wir es
-mit einem <code>reactiveVal</code>. Ziehe dafür
+<code>fileInput</code> ein.</li>
+</ol>
+<pre class="r"><code>  tabPanel(
+    title = &quot;Upload&quot;,
+    h2(&quot;Daten hochladen&quot;),
+    XX,
+    XX,
+    XX(XX, XX, XX)
+    )</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Die UI des Uploads ist fertig. Jetzt gilt es den <code>server</code>
+entsprechend anzupassen. Als erstes muss sichergestellt werden, dass die
+Daten nicht wie bisher ausserhalb des <code>sever</code>s gelesen werden
+sonder innerhalb. Zudem müssden die Daten genau wie das Objekt
+<code>daten</code> reaktiv werden, sodass sie sich ändern können sobald
+neue Daten hochgeladen werden. Es gibt verschiedene Wege, wie dies
+implementiert werden könnte. Machen wir es mit einem
+<code>reactiveVal</code>. Ziehe dafür
 <code>verletzungen &lt;- readRDS(daten/verletzungen.RDS)</code> in den
 <code>sever</code> und setze eine <code>reactiveVal</code> um die
 Lesefunktion, so dass <code>verletzungen</code> reaktiver Wert ist, der
-als Default den gesamenten Datensatz beinhaltet.</p></li>
+als Default den gesamenten Datensatz beinhaltet.</li>
+</ol>
+<pre class="r"><code>verletzungen &lt;- reactiveVal(XX)</code></pre>
+<ol start="4" style="list-style-type: decimal">
 <li><p>Weil <code>verletzungen</code> jetzt ein reaktiver Wert ist, muss
 einer Stelle im <code>server</code> eine kleine Ändeurngen vorgenommen
 werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer
@@ -270,6 +588,13 @@ Code laufen lässt wenn der Upload input (<code>input$hochladen</code>)
 sich ändert und innerhalb des Cdes <code>verletzungen</code> durch
 Einlesen der neuen Daten verändert. Verende dafür
 <code>input$hochladen$datapath</code>.</p></li>
+</ol>
+<pre class="r"><code>observeEvent(XX,{
+  
+  XX(readRDS(XX))
+  
+})</code></pre>
+<ol start="6" style="list-style-type: decimal">
 <li><p>Teste nun die App. Wenn du alles richtig eingestellt hast,
 solltest du in der Lage sein alternative Daten einzulesen. Probiere
 einmal den kleineren Datensatz <code>verletzungen_jahresende.RDS</code>.
@@ -288,11 +613,24 @@ Label <code>"Als .csv herunterladen"</code>. Ergänze zudem
 <code>style = 'font-size:20px'</code>, um die Schrift etwas grösser zu
 machen, und ein <code>br()</code> vor dem <code>downloadButton</code>
 für etwas mehr Platz.</p></li>
-<li><p>Im <code>server</code> ergänze nun den
-<code>downloadHandler</code> wie unten dargestellt. Siehe, dass wir den
-Dateinamen</p></li>
-<li><p>Teste nun die App. Ist der Upload zu sehen und funktioniert er?
-Teste mal was passiert wenn du erst den kleinen</p></li>
+</ol>
+<pre class="r"><code>  tabPanel(
+    title = &quot;Upload&quot;,
+    h2(&quot;Daten hochladen&quot;),
+    XX,
+    XX(XX, XX, XX)
+    )</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Im <code>server</code> ergänze nun den <code>downloadHandler</code>
+wie unten dargestellt. Siehe, dass wir den Dateinamen</li>
+</ol>
+<pre class="r"><code>  output$herunterladen &lt;- downloadHandler(
+    filename = function() {&quot;verletzungen.csv&quot;},
+    content = function(file) {write_tsv(verletzungen(), file)}
+  )</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Teste nun die App. Ist der Upload zu sehen und funktioniert er?
+Teste mal was passiert wenn du erst den kleinen</li>
 </ol>
 </div>
 <div id="lösung" class="section level2">

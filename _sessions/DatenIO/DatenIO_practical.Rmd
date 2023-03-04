@@ -50,7 +50,7 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 1. Wir bauen eine App, die Daten einliest und als Tabelle anzeigt. Beginne indem du eine typische `sidebarLayout` Struktur mit `sidebarPanel` und `mainPanel` für die UI baust. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 ui <- fluidPage{
   XX(
@@ -63,7 +63,7 @@ ui <- fluidPage{
 
 2. Jetzt setze in das `sidebarPanel` einen `fileInput`, der uns erlauben wird Daten einzulesen. Als ID wähle `daten` und setze die Argumente `label`, `buttonlabel` und `placeholder` auf `"Daten hochladen"`, `"Suche..."` und `"Wähle eine Datei"`.  
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -82,7 +82,7 @@ ui <- fluidPage(
 
 3. Ergänze zudem im `mainPanel` einen `dataTableOutput` mit ID `daten_table`, damit wir später Daten zu sehen bekommen. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -106,7 +106,7 @@ ui <- fluidPage(
 
 5. Nun zum `server`. Hier arbeiten wir (wiedermal) mit einem `reactiveVal` für die Daten (genannt `daten`) und einem `observeEvent`, der Code enthält mit dem der `reactiveVal` überschrieben, sobald der `fileInput` in der UI bedient wurde. Baue diese Grundstruktur.    
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -121,7 +121,7 @@ server = function(input, output, sesssion){
 
 6. Nun zun dem Codes in `observeEvent`. Da wir sowohl `.csv` als auch `.RDS` Daten lesen wollen, gilt es erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue dies mit `file_type` und kreiere eine Objekt names `endung`. Stelle als Input für `file_type` den eingegebenen Dateipfad aus `fileInput` (`input$daten$datapath`) beret.  
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -138,7 +138,7 @@ server = function(input, output, sesssion){
 
 7. Nun baue ein `if`-`else`, dass die Datei in `input$daten$datapath` mit `read_csv` (`tidyverse` lade nicht vergessen), wenn die `endung` gleich `csv`, und die Daten mit `readRDS` einliest, wenn die `endung` gleich `RDS` ist. Überschreibe dabei direkt den `reactiveVal`
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -162,7 +162,7 @@ server = function(input, output, sesssion){
 
 8. Zuletzt ergänze noch `renderDataTable()` ausserhalb des `observeEvent`, sodass die eingelesenen Daten auch an die `ui` weitergegeben werden. Damit nur 10 Zeilen dargestellt werde, definiere dabei `options = list(pageLength = 10)`. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -188,7 +188,7 @@ server = function(input, output, sesssion){
 
 
 
-```{r}
+```{r, eval = FALSE}
 
 library(tools)
 library(tidyverse)
@@ -237,7 +237,7 @@ shinyApp(ui, server)
 
 1. Die zweite Iteration des DataViewers soll erlauben, dass du über ein `textAreaInput` Code bereitstellst, der dann auf die eingelesenen Daten angewendet wird. Kreiere dafür zuerst den `textAreaInput`unterhalb des `fileInput` in der UI. Setze die ID auf `"code"`. Zudem kreiere darunter einen `acionButton` mit ID `code_run`, den wir als Auslöser für den Code verwenden werden.   
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -262,7 +262,7 @@ ui <- fluidPage(
 
 3. Definiere nun im `server` einen weiteren `observeEvent` in Abhängigkeit von `input$code_run`, sodass der Code innerhalb von `observeEvent` nur ausgeführt, wenn `input$code_run` betätigt wird. Innerhalb des `observeEvent` platziere dann `daten(eval(parse(text = input$code)))`. Dieser Code evaliert den Input von `input$code` und überschreibt damit den aktuellen Wert des `daten()` `reactiveValue`s.       
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -293,7 +293,7 @@ server = function(input, output, sesssion){
 4. Lasse die App laufen. Lese Daten ein und teste verschiedene Code-Inputs. Bei der Entwicklung des Codes ist es wichtig, die Daten über den `reactiveVal` anzusprechen. Zum Beispiel, um den Datensatz in `puppies.csv` auf die erste Zeile zu reduzieren könnte man schreiben `daten() %>% slice(1)`.  
 
 
-```{r}
+```{r, eval = FALSE}
 
 library(tools)
 library(tidyverse)
@@ -352,7 +352,7 @@ shinyApp(ui, server)
 
 1. Entwickeln wir die letzte Version des DataViewer, in dem wir eine Download einbauen. Setze dafür in die UI zwei `downloadButton` mit IDs `csv_download` und `rds_download` und Labels `.CSV` und `.RDS`. Ergänze zudem in beiden Buttons `style='width:49.5%'`, damit die Buttons zusammen die volle Breite ausnutzen. Zuletzt zwei `br()` und `h5("Download", style="font-weight:700")` zwischen die Download-Buttons und den `code_run` Action-Button darüber. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -382,7 +382,7 @@ ui <- fluidPage(
 
 3. Im `server` müssen wir uns nun um die Download-Handler kümmern, sodass die Download-Buttons auch einen Download auslösen. Der Code unten hat bereits zwei Templates Downloadhandler, denen aber noch ein paar Informationen fehlen. Als Output IDs stelle IDs der beiden `downloadButton`s bereit und für das erste Argument der Schreibfunktionen die Daten `reactiveValue` (Klammern nicht vergessen). 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 server = function(input, output, sesssion){
   
@@ -426,7 +426,7 @@ server = function(input, output, sesssion){
 
 
 
-```{r}
+```{r, eval = FALSE}
 
 library(tools)
 library(tidyverse)
@@ -499,7 +499,7 @@ shinyApp(ui, server)
 1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze ein `fileInput` im Upload Panels innerhalb des Daten NavBar Panels. Als `inputId`, `label`, und `buttonLabel` weise `"hochladen"`, `"Wähle eine Datei aus"`, und `"Auswählen` zu. Lasse die App einmal laufen und überprüfe ob der File upload zu sehen.  
 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
   tabPanel(
     title = "Upload",
@@ -511,7 +511,7 @@ shinyApp(ui, server)
 
 2. Im nächsten Schritt, verbessern wir ein klein bisschen die Usability. Erstens ergänzen wir eine Unterüberschrift, die uns warnt, dass wir unsere aktuellen Daten überschrieben, wenn wir neue Daten einlesen. Hierfür ergänze `h4("Achtung Daten werden überschrieben")` direkt unterhalb der Überschrift zweiter Ordnung. Zweitens, füge eine mit `br()` eine leere Zeile zwischen der Unterüberschrift und dem `fileInput` ein. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
   tabPanel(
     title = "Upload",
@@ -526,7 +526,7 @@ shinyApp(ui, server)
 3. Die UI des Uploads ist fertig. Jetzt gilt es den `server` entsprechend anzupassen. Als erstes muss sichergestellt werden, dass die Daten nicht wie bisher ausserhalb des `sever`s gelesen werden sonder innerhalb. Zudem müssden die Daten genau wie das Objekt `daten` reaktiv werden, sodass sie sich ändern können sobald neue Daten hochgeladen werden. Es gibt verschiedene Wege, wie dies implementiert werden könnte. Machen wir es mit einem `reactiveVal`. Ziehe dafür `verletzungen <- readRDS(daten/verletzungen.RDS)` in den `sever` und setze eine `reactiveVal` um die Lesefunktion, so dass `verletzungen` reaktiver Wert ist, der als Default den gesamenten Datensatz beinhaltet.     
 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 verletzungen <- reactiveVal(XX)
 
@@ -536,7 +536,7 @@ verletzungen <- reactiveVal(XX)
 
 5. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verende dafür `input$hochladen$datapath`.    
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 observeEvent(XX,{
   
@@ -550,7 +550,7 @@ observeEvent(XX,{
 
 7. Der Uploadteil ist fertig. Kümmern wir uns jetzt um den Download. Ergänze in der UI unter dem Upload `tabPanel` einen `downloadButton` mit ID `"herunterladen"` und Label `"Als .csv herunterladen"`. Ergänze zudem `style = 'font-size:20px'`, um die Schrift etwas grösser zu machen, und ein `br()` vor dem `downloadButton` für etwas mehr Platz. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
   tabPanel(
     title = "Upload",
@@ -563,7 +563,7 @@ observeEvent(XX,{
 
 8. Im `server` ergänze nun den `downloadHandler` wie unten dargestellt. Siehe, dass wir den Dateinamen 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
   output$herunterladen <- downloadHandler(
     filename = function() {"verletzungen.csv"},
