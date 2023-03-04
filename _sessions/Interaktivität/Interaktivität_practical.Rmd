@@ -46,17 +46,386 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ## Aufgaben
 
-## A - DatenViewer 4.0
+### A - Fasnacht
+
+1. Wir bauen eine einfache App mit zwei Frage, wo der Nutzer wohnt und ob er oder sie die lokale Fasnacht besucht hat. Dafür wird es nötig sein auf Basis der ersten Frage den Inhalt der zweiten Frage anzupassen. Beginnen wir mit der UI. Definiere die unten dargestellte UI mit einem Layout bestehend aus einer Zeile und drei `column`s mit `width = 4`. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX),
+    XX(XX)
+  )
+)
+
+```
+
+2. In die mittlere `column` füge nun diese beiden Inputs ein.
+
+- `radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0))`
+- `radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)`
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX,
+       XX
+       ),
+    XX(XX)
+  )
+)
+
+```
 
 
-## A - 
+3. Teste die UI mit `shinyApp(ui, server = function(input, output, sesssion){})`. Sieht die UI in Ordnung aus?
+
+4. Nun zum `server`. Kreiere ein `observeEvent` in Abhängigkeit von `input$wohnort`. Innerhalb des `observeEvent` verwende `updateRadioButtons`, um das Label des Buttons auf `paste0("Hast du die ",input$wohnort,"er Fasnacht besucht?")` zu ändern. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+server <- function(input, output, session){
+  
+  XX(XX, {
+    
+    XX(inputId = XX, label = XX)
+    
+  })
+  
+}
+
+
+```
+
+5. Teste die App. Ändert sich der Text der Fasnacht-Frage, wenn du eine der drei Städte in der ersten Frage auswählst?
+
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel("Fasnacht"),
+      radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0)),
+      radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0))
+          ),
+    column(4)
+    )
+  )
+
+server <- function(input, output, session){
+  
+  observeEvent(input$wohnort, {
+    
+    updateRadioButtons(inputId = "fasnacht", label = paste0("Hast du die ",input$wohnort,"er Fasnacht besucht?"))
+    
+  })
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+### B - Fasnacht 2.0
+
+1. Es ist nicht nur möglich Argumente von Inputs flexibel zu ändern, es kann die Anwesenheit oder Abwesenheit von Inputs parametrisieren werden. In der zweiten Variante der Fasnachtsapp soll die Frage nach dem Besuch der Fasnacht nur gezeigt werden, wenn `"Luzern"` oder `"Basel"` in der ersten Frage ausgewählt wurde. Tausche dafür zunächst in der UI die zweiten `radioButtons` durch einen `uiOutput` mit ID `fasnachts_frage` aus.  
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX,
+       XX
+       ),
+    XX(XX)
+  )
+)
+
+```
+
+2. Im `server` können wir ebenfalls weitgehend die Struktur der vorherigen Version übernehmen. Wir müssen jedoch innerhalb des `observeEvent` `if`-`else` aufnehmen, um zu testen welche Stadt ausgewählt wurde, und dann mit `renderUI` die richtigen `radioButtons` erstellen. Beginne mit dem `if`-`else`. Setze den richtigen input das Template ein. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+server <- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c("Luzern", "Basel")){
+      
+    } else {
+      
+      
+    }
+    
+  })
+  
+}
+
+
+```
+
+3. Nun ergänze im `if`-Teil den ein leeres `renderUI` und weise es dem richtigen `output` zu. Im `else`-Teil weise hingegen einfach `NULL` dem `output` zu, sodass keine UI generiert wird. 
+
+```{r, echo = TRUE, eval = FALSE}
+
+server <- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c("Luzern", "Basel")){
+      
+      output$XX <- XX()
+      
+    } else {
+      
+      output$XX <- XX
+      
+    }
+    
+  })
+  
+}
+
+
+```
+
+4. Zuletzt platziere die ursprünglichen `radioButtons` in der `renderUI` Funktion. 
+
+- `radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)`
+
+```{r, echo = TRUE, eval = FALSE}
+
+server <- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c("Luzern", "Basel")){
+      
+      output$XX <- XX(XX)
+      
+    } else {
+      
+      output$XX <- XX
+      
+    }
+    
+  })
+  
+}
+
+
+```
+
+5. Teste die App. erscheint die zweite Frage nur bei Luzern und Basel?
+
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel("Fasnacht"),
+      radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0)),
+      uiOutput("fasnachts_frage")
+          ),
+    column(4)
+    )
+  )
+
+server <- function(input, output, session){
+  
+  observeEvent(input$wohnort, {
+    
+    if(input$wohnort %in% c("Luzern", "Basel")){
+      
+      output$fasnachts_frage = renderUI({
+         radioButtons("fasnacht", paste0("Hast du die ",input$wohnort,"er Fasnacht besucht?"), 
+                      choices = c("ja", "nein"), selected = character(0))
+        })
+      
+      } else {
+      output$fasnacht = NULL
+    }
+    })
+  }
+
+shinyApp(ui, server)
+
+```
+
+
+### C - DataViewer 4.0
+
+1. Unter siehst du eine weitere Iteration der DataViewer App. Im Vergleich zur Version 3.0 enthält diese Version zusätzlichen Code, um den Nutzer Feedback über die Validität des Codes zu geben. Der Code ist jedoch nicht ganz vollständig (siehe die vier `XX`). Kannst du ihn zum Laufen bringen?  
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(tools)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  sidebarLayout(
+    sidebarPanel(
+      XX(),
+      fileInput("daten", 
+                label = "Daten hochladen", 
+                buttonLabel = "Suche...", 
+                placeholder = "Wähle ein Datei"),
+      textAreaInput("code", "Wrangling Code"),
+      actionButton("code_run", "Code ausführen", width = "100%"),
+      br(),br(), 
+      h5("Download", style="font-weight:700"),
+      downloadButton("csv_download", ".CSV", style='width:49.5%'),
+      downloadButton("rds_download", ".RDS", style='width:49.5%')
+    ),
+    mainPanel(
+      dataTableOutput("daten_table")
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+  
+  daten <- reactiveVal()  
+    
+  observeEvent(input$daten, {
+      endung <- file_ext(input$daten$datapath)
+      if(endung == "RDS"){
+        daten(readRDS(input$daten$datapath))
+        } else if(endung == "csv") {
+        daten(read_csv(input$daten$datapath))    
+        }
+    })
+  
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+  output$csv_download <- downloadHandler(
+    filename = function() {paste("daten.csv")},
+    content = function(file) {write_csv(daten(), file)}
+    )
+   
+  output$rds_download <- downloadHandler(
+    filename = function() {paste("daten.RDS")},
+    content = function(file) {saveRDS(daten(), file)}
+    )
+  
+  observeEvent(req(input$XX), {
+    test = try(eval(parse(text = input$code)))
+    if(class(test)[1] == "try-error"){
+      XX("code","Code funktioniert nicht.")
+      Sys.sleep(3)
+      } else {
+      daten(eval(parse(text = input$code)))
+      }
+    on.exit({
+      XX("code")
+      })
+    })
+  
+  
+  }
+
+shinyApp(ui, server)
+
+```
+
+
+
+```{r, eval = FALSE}
+
+library(tools)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  sidebarLayout(
+    sidebarPanel(
+      useShinyFeedback(),
+      fileInput("daten", 
+                label = "Daten hochladen", 
+                buttonLabel = "Suche...", 
+                placeholder = "Wähle ein Datei"),
+      textAreaInput("code", "Wrangling Code"),
+      actionButton("code_run", "Code ausführen", width = "100%"),
+      br(),br(), 
+      h5("Download", style="font-weight:700"),
+      downloadButton("csv_download", ".CSV", style='width:49.5%'),
+      downloadButton("rds_download", ".RDS", style='width:49.5%')
+    ),
+    mainPanel(
+      dataTableOutput("daten_table")
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+
+daten <- reactiveVal()  
+  
+observeEvent(input$daten, {
+    endung <- file_ext(input$daten$datapath)
+    if(endung == "RDS"){
+      daten(readRDS(input$daten$datapath))
+      } else if(endung == "csv") {
+      daten(read_csv(input$daten$datapath))    
+      }
+  })
+  
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+  output$csv_download <- downloadHandler(
+    filename = function() {paste("daten.csv")},
+    content = function(file) {write_csv(daten(), file)}
+    )
+   
+  output$rds_download <- downloadHandler(
+    filename = function() {paste("daten.RDS")},
+    content = function(file) {saveRDS(daten(), file)}
+    )
+  
+  observeEvent(req(input$code_run), {
+  test = try(eval(parse(text = input$code)))
+  if(class(test)[1] == "try-error"){
+    showFeedbackDanger("code","Code funktioniert nicht.")
+    Sys.sleep(3)
+    } else {
+    daten(eval(parse(text = input$code)))
+    }
+  on.exit({
+    hideFeedback("code")
+    })
+  })
+  
+  
+  }
+
+shinyApp(ui, server)
+
+```
+
 
 
 ## App
 
 1. Jetzt geht es darum etwas mehr Interaktivität in die App einzubauen, um die Nutzerfreundlichkeit zu erhöhen. Zuerst bauen wir einen Schalter ein, der die Körperteil- und Alterseinstellung mit einem Mal zurücksetzt. Definiere einen `actionButton` unterhalb der anderen drei Schalter im `sidebarPanel`. Setze die ID auf `zurücksetzen` und das Label auf `Zurücksetzen`. Setze zudem `width = 100%`, um den Schalter über die volle Breite des `sidebarPanel`s gehen zu lassen. Bei der Gelegenheit kannst du die Bereite der drei Schalter auf `"32.5%"` setzen, damit sie dies auch tun. Beachte, dass wir im Code unten die anderen Parameter der Elemente aus *Gründen der Überssicht weggelassen haben.   
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 sidebarPanel(
   width = 3,
@@ -72,7 +441,7 @@ sidebarPanel(
 
 2. Nun zum `server`. Ergänze hier wieder einmal ein `observeEvent`, der Code triggered, wenn der Zurücksetzen-Schalter (`input$zurücksetzen`) betätigt wurde. Zum Code kommen wir gleich.  
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 observeEvent(XX, {
 
@@ -83,7 +452,7 @@ observeEvent(XX, {
 3. Der Code im `observeEvent` soll nun die Körperteile und das Alter zurücksetzen bzw. die zugehören UI Inputs. Dafür kannst die Funktionen `updateSelectInput` und `updateSliderInput` verwendent. Gebe jeweils über die InputID (`"körperteil"` bzw `"alter"`) an welcher Input genau zu ändern ist und dann verwende die anderen Argumente um die Einstellungen zurückzusetzen. Verwende `selected = character(0)` um den `selectInput` zu ändern und `value = c(0, 110` um den `sliderInput` zu ändern.  
 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
 observeEvent(XX, {
 
@@ -99,100 +468,100 @@ observeEvent(XX, {
 5. Die zweite Änderung betrifft den Upload. Beim Upload kann man einige Fehler erzeugen, wenn man zum Beispiel Daten vom falschen Dateityp hochlädt oder der eingelesene Datensatz die falschen Variablen beinhaltet. Um diese Fehler zu minimieren wollen wir etwas mehr Interaktivität einbauen. Wir uns um mögliche Fehler beim Dateityp. Gehe zum `observeEvent`, dass das Einlesen durchführt, und kreiere mittels `file_ext` aus dem `tools` Paket (Laden nicht vergessen) vor dem Einlesen ein Objekt mit der Dateiendung der einzulesenden Datei. Stelle als Argument den Dateipfad aus der Download UI zur verfügung. 
 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
-    observeEvent(input$hochladen, {
-      
-      endung <- XX(XX)
-      
-      verletzungen(readRDS(input$hochladen$datapath))
-      
-      })
+observeEvent(input$hochladen, {
+  
+  endung <- XX(XX)
+  
+  verletzungen(readRDS(input$hochladen$datapath))
+  
+  })
 
 ```
 
 6. Baue nun ein `if`-`else`-statement um das Einlesen und das Verändern des reaktiven Datensatzes `verletzungen`, dass testet, ob die Dateiendung `"RDS"` ist und damit die datei den richtigen Dateityp hat. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
-    observeEvent(input$hochladen, {
+observeEvent(input$hochladen, {
+  
+  endung <- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
+       
+     } else {
       
-      endung <- XX(XX)
-      
-      if(endung == XX)
-      
-         verletzungen(readRDS(input$hochladen$datapath)) {
-           
-         } else {
-          
-            
-           
-         }
-      
-      })
+        
+       
+     }
+  
+  })
 
 ```
 
 7. Der `if`-Teil ist fertig. Im `else`-Teil gilt es jedoch noch etwas Arbeit zu verrichten. Der `else`-Teil soll eine Nachricht auslösen, die uns verrät, dass wir den falschen Dateitüp hochgeladen haben. Dies machst du am besten mit `showFeedbackWarning` oder `showFeedbackDanger` aus dem `shinyFeedback` Paket. Stelle als Argumente die ID des UI Elements, für das die Warnung ausgegeben werden soll, und einen Text (z.B. `"Nur RDS Dateien können geladen werden!"`) als Warnung oder Fehlernachricht bereit.   
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
-    observeEvent(input$hochladen, {
+observeEvent(input$hochladen, {
+  
+  endung <- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
+       
+     } else {
       
-      endung <- XX(XX)
-      
-      if(endung == XX)
-      
-         verletzungen(readRDS(input$hochladen$datapath)) {
-           
-         } else {
-          
-         XX(XX, XX)    
-           
-         }
-      
-      })
+     XX(XX, XX)    
+       
+     }
+  
+  })
 
 ```
 
 8. Bevor die Fehlermeldung nun angezeigt werden kann, gilt es eine spezielle Funktion in das `tabPanel` einzubauen, die im Hintergrund den nötigen javascript Code lädt. Setze dafür als erstes Element des `tabPanel` die Funktion `useShinyFeedback()`. Teste danach die App. Versuche zum Beispiel den Covid Datensatz (`"covid.csv"`) hochzuladen. Erscheint eine Fehlermeldung?
 
       
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
-      # Upload
-      tabPanel(
-        useShinyFeedback(),
-        title,
-        h2(),
-        h4(),
-        br(),
-        fileInput()
-      )
+# Upload
+tabPanel(
+  useShinyFeedback(),
+  title,
+  h2(),
+  h4(),
+  br(),
+  fileInput()
+)
 
 ```
     
 9. Als letztes wollen, dass die Fehlermeldung irgendwann wieder verschwindet. Ein Weg dies zu Implementieren, ist mit `Sys.sleep` eine Systempause einzulegen und dann `on.exit()` `hideFeedback()` laufen zu lassen. Setze dies einmal um, indem du eine 3-sekündige Pause (`Sys.sleep(3)`) innerhalb des `else`-statements setzt, sodass sie nur ausgeführt wird, wenn es ein Problem gab, und du das `on.exit` ausserhalb setzts. Vergiss nicht die richtige ID im `hideFeedback` zu setzen. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
 
-    observeEvent(input$hochladen, {
+observeEvent(input$hochladen, {
+  
+  endung <- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
       
-      endung <- XX(XX)
+     } else {
       
-      if(endung == XX)
-      
-         verletzungen(readRDS(input$hochladen$datapath)) {
-          
-         } else {
-          
-         XX(XX, XX)    
-         XX  
-         }
-      
-      XX(XX(inputId = XX))
-      
-      })
+     XX(XX, XX)    
+     XX  
+     }
+  
+  XX(XX(inputId = XX))
+  
+  })
 
 ```
 

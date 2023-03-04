@@ -183,62 +183,749 @@ R Bootcamp @ CSS</font></a><br>
 </p>
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
-<div id="überblick" class="section level2">
-<h2>Überblick</h2>
-<p>In diesem Practical wirst du üben mit <code>ggplot2</code> Grafiken
-zu erstellen.</p>
-<p>Am Ende des Practicals wirst du wissen wie man:</p>
+<div id="information" class="section level2">
+<h2>Information</h2>
+<p>Dieses Practical besteht aus zwei Teilen.</p>
 <ol style="list-style-type: decimal">
-<li>Einen Plot Schritt-für-Schritt aufbaut.</li>
-<li>Verschiedene <code>geom</code>s verwendet.</li>
-<li>Farben verändert.</li>
+<li>Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte
+der Präsentation.<br />
+</li>
+<li>App: Über die Sessions hinweg entwickelst Du die
+<a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a>
+App</li>
 </ol>
+<p>Wie viel Zeit du in <em>Aufgaben</em> oder <em>App</em> verbringst
+ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit
+Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in
+einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue
+Themen einsteigen kannst ohne notwendigerweise alle Schritte der
+Appentwicklung abgeschlossen zu haben.</p>
+<p>Für jede App in Aufgaben erstelle bitte ein <strong>neues
+Skript</strong> und speichere es unter dem Namen der
+Abschnittsberschrift. Denk dran bei jedem neuen Skript
+<code>library(shiny)</code> an den Anfang zu setzen. Falls weitere
+Pakete nötig sind, werden sie in der jeweileigen Abschnitten
+erwähnt.</p>
+<p>Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du
+allein die <code>XX</code> durch den richtigen Code bzw. die richtigen
+Objekte erstezen musst.</p>
 </div>
 <div id="aufgaben" class="section level2">
 <h2>Aufgaben</h2>
-<div id="a---setup" class="section level3">
-<h3>A - Setup</h3>
+<div id="a---fasnacht" class="section level3">
+<h3>A - Fasnacht</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>erste_app.R</code> im <code>2_Code</code> Ordner.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
+<li>Wir bauen eine einfache App mit zwei Frage, wo der Nutzer wohnt und
+ob er oder sie die lokale Fasnacht besucht hat. Dafür wird es nötig sein
+auf Basis der ersten Frage den Inhalt der zweiten Frage anzupassen.
+Beginnen wir mit der UI. Definiere die unten dargestellte UI mit einem
+Layout bestehend aus einer Zeile und drei <code>column</code>s mit
+<code>width = 4</code>.</li>
 </ol>
-<pre class="r"><code>library(shiny)</code></pre>
+<pre class="r"><code>ui &lt;- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX),
+    XX(XX)
+  )
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>In die mittlere <code>column</code> füge nun diese beiden Inputs
+ein.</li>
+</ol>
+<ul>
+<li><code>radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0))</code></li>
+<li><code>radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)</code></li>
+</ul>
+<pre class="r"><code>ui &lt;- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX,
+       XX
+       ),
+    XX(XX)
+  )
+)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Teste die UI mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>.
+Sieht die UI in Ordnung aus?</p></li>
+<li><p>Nun zum <code>server</code>. Kreiere ein
+<code>observeEvent</code> in Abhängigkeit von
+<code>input$wohnort</code>. Innerhalb des <code>observeEvent</code>
+verwende <code>updateRadioButtons</code>, um das Label des Buttons auf
+<code>paste0("Hast du die ",input$wohnort,"er Fasnacht besucht?")</code>
+zu ändern.</p></li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session){
+  
+  XX(XX, {
+    
+    XX(inputId = XX, label = XX)
+    
+  })
+  
+}</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Teste die App. Ändert sich der Text der Fasnacht-Frage, wenn du eine
+der drei Städte in der ersten Frage auswählst?</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel(&quot;Fasnacht&quot;),
+      radioButtons(&quot;wohnort&quot;, &quot;Wohnort&quot;, choices = c(&quot;Luzern&quot;, &quot;Zürich&quot;, &quot;Basel&quot;), selected = character(0)),
+      radioButtons(&quot;fasnacht&quot;, &quot;Hast du die Fasnacht besucht?&quot;, choices = c(&quot;ja&quot;, &quot;nein&quot;), selected = character(0))
+          ),
+    column(4)
+    )
+  )
+
+server &lt;- function(input, output, session){
+  
+  observeEvent(input$wohnort, {
+    
+    updateRadioButtons(inputId = &quot;fasnacht&quot;, label = paste0(&quot;Hast du die &quot;,input$wohnort,&quot;er Fasnacht besucht?&quot;))
+    
+  })
+  
+}
+
+shinyApp(ui, server)</code></pre>
 </div>
-<div id="b---lade-den-datensatz" class="section level3">
-<h3>B - Lade den Datensatz</h3>
+<div id="b---fasnacht-2.0" class="section level3">
+<h3>B - Fasnacht 2.0</h3>
+<ol style="list-style-type: decimal">
+<li>Es ist nicht nur möglich Argumente von Inputs flexibel zu ändern, es
+kann die Anwesenheit oder Abwesenheit von Inputs parametrisieren werden.
+In der zweiten Variante der Fasnachtsapp soll die Frage nach dem Besuch
+der Fasnacht nur gezeigt werden, wenn <code>"Luzern"</code> oder
+<code>"Basel"</code> in der ersten Frage ausgewählt wurde. Tausche dafür
+zunächst in der UI die zweiten <code>radioButtons</code> durch einen
+<code>uiOutput</code> mit ID <code>fasnachts_frage</code> aus.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  XX(
+    XX(XX),
+    XX(XX,
+       XX,
+       XX
+       ),
+    XX(XX)
+  )
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Im <code>server</code> können wir ebenfalls weitgehend die Struktur
+der vorherigen Version übernehmen. Wir müssen jedoch innerhalb des
+<code>observeEvent</code> <code>if</code>-<code>else</code> aufnehmen,
+um zu testen welche Stadt ausgewählt wurde, und dann mit
+<code>renderUI</code> die richtigen <code>radioButtons</code> erstellen.
+Beginne mit dem <code>if</code>-<code>else</code>. Setze den richtigen
+input das Template ein.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c(&quot;Luzern&quot;, &quot;Basel&quot;)){
+      
+    } else {
+      
+      
+    }
+    
+  })
+  
+}</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Nun ergänze im <code>if</code>-Teil den ein leeres
+<code>renderUI</code> und weise es dem richtigen <code>output</code> zu.
+Im <code>else</code>-Teil weise hingegen einfach <code>NULL</code> dem
+<code>output</code> zu, sodass keine UI generiert wird.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c(&quot;Luzern&quot;, &quot;Basel&quot;)){
+      
+      output$XX &lt;- XX()
+      
+    } else {
+      
+      output$XX &lt;- XX
+      
+    }
+    
+  })
+  
+}</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Zuletzt platziere die ursprünglichen <code>radioButtons</code> in
+der <code>renderUI</code> Funktion.</li>
+</ol>
+<ul>
+<li><code>radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)</code></li>
+</ul>
+<pre class="r"><code>server &lt;- function(input, output, session){
+  
+  XX(XX, {
+    
+    if(XX %in% c(&quot;Luzern&quot;, &quot;Basel&quot;)){
+      
+      output$XX &lt;- XX(XX)
+      
+    } else {
+      
+      output$XX &lt;- XX
+      
+    }
+    
+  })
+  
+}</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Teste die App. erscheint die zweite Frage nur bei Luzern und
+Basel?</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  fluidRow(
+    column(4),
+    column(4,
+      titlePanel(&quot;Fasnacht&quot;),
+      radioButtons(&quot;wohnort&quot;, &quot;Wohnort&quot;, choices = c(&quot;Luzern&quot;, &quot;Zürich&quot;, &quot;Basel&quot;), selected = character(0)),
+      uiOutput(&quot;fasnachts_frage&quot;)
+          ),
+    column(4)
+    )
+  )
+
+server &lt;- function(input, output, session){
+  
+  observeEvent(input$wohnort, {
+    
+    if(input$wohnort %in% c(&quot;Luzern&quot;, &quot;Basel&quot;)){
+      
+      output$fasnachts_frage = renderUI({
+         radioButtons(&quot;fasnacht&quot;, paste0(&quot;Hast du die &quot;,input$wohnort,&quot;er Fasnacht besucht?&quot;), 
+                      choices = c(&quot;ja&quot;, &quot;nein&quot;), selected = character(0))
+        })
+      
+      } else {
+      output$fasnacht = NULL
+    }
+    })
+  }
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="c---dataviewer-4.0" class="section level3">
+<h3>C - DataViewer 4.0</h3>
+<ol style="list-style-type: decimal">
+<li>Unter siehst du eine weitere Iteration der DataViewer App. Im
+Vergleich zur Version 3.0 enthält diese Version zusätzlichen Code, um
+den Nutzer Feedback über die Validität des Codes zu geben. Der Code ist
+jedoch nicht ganz vollständig (siehe die vier <code>XX</code>). Kannst
+du ihn zum Laufen bringen?</li>
+</ol>
+<pre class="r"><code>library(tools)
+library(tidyverse)
+
+ui &lt;- fluidPage(
+  titlePanel(&quot;DataViewer&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      XX(),
+      fileInput(&quot;daten&quot;, 
+                label = &quot;Daten hochladen&quot;, 
+                buttonLabel = &quot;Suche...&quot;, 
+                placeholder = &quot;Wähle ein Datei&quot;),
+      textAreaInput(&quot;code&quot;, &quot;Wrangling Code&quot;),
+      actionButton(&quot;code_run&quot;, &quot;Code ausführen&quot;, width = &quot;100%&quot;),
+      br(),br(), 
+      h5(&quot;Download&quot;, style=&quot;font-weight:700&quot;),
+      downloadButton(&quot;csv_download&quot;, &quot;.CSV&quot;, style=&#39;width:49.5%&#39;),
+      downloadButton(&quot;rds_download&quot;, &quot;.RDS&quot;, style=&#39;width:49.5%&#39;)
+    ),
+    mainPanel(
+      dataTableOutput(&quot;daten_table&quot;)
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+  
+  daten &lt;- reactiveVal()  
+    
+  observeEvent(input$daten, {
+      endung &lt;- file_ext(input$daten$datapath)
+      if(endung == &quot;RDS&quot;){
+        daten(readRDS(input$daten$datapath))
+        } else if(endung == &quot;csv&quot;) {
+        daten(read_csv(input$daten$datapath))    
+        }
+    })
+  
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+  output$csv_download &lt;- downloadHandler(
+    filename = function() {paste(&quot;daten.csv&quot;)},
+    content = function(file) {write_csv(daten(), file)}
+    )
+   
+  output$rds_download &lt;- downloadHandler(
+    filename = function() {paste(&quot;daten.RDS&quot;)},
+    content = function(file) {saveRDS(daten(), file)}
+    )
+  
+  observeEvent(req(input$XX), {
+    test = try(eval(parse(text = input$code)))
+    if(class(test)[1] == &quot;try-error&quot;){
+      XX(&quot;code&quot;,&quot;Code funktioniert nicht.&quot;)
+      Sys.sleep(3)
+      } else {
+      daten(eval(parse(text = input$code)))
+      }
+    on.exit({
+      XX(&quot;code&quot;)
+      })
+    })
+  
+  
+  }
+
+shinyApp(ui, server)</code></pre>
 </div>
 </div>
 <div id="app" class="section level2">
 <h2>App</h2>
-<div id="a---setup-1" class="section level3">
-<h3>A - Setup</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>InjuryViewer.R</code> im top-level Ordner
-<code>TheRBootcamp</code>.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
+<li>Jetzt geht es darum etwas mehr Interaktivität in die App einzubauen,
+um die Nutzerfreundlichkeit zu erhöhen. Zuerst bauen wir einen Schalter
+ein, der die Körperteil- und Alterseinstellung mit einem Mal
+zurücksetzt. Definiere einen <code>actionButton</code> unterhalb der
+anderen drei Schalter im <code>sidebarPanel</code>. Setze die ID auf
+<code>zurücksetzen</code> und das Label auf <code>Zurücksetzen</code>.
+Setze zudem <code>width = 100%</code>, um den Schalter über die volle
+Breite des <code>sidebarPanel</code>s gehen zu lassen. Bei der
+Gelegenheit kannst du die Bereite der drei Schalter auf
+<code>"32.5%"</code> setzen, damit sie dies auch tun. Beachte, dass wir
+im Code unten die anderen Parameter der Elemente aus *Gründen der
+Überssicht weggelassen haben.</li>
 </ol>
-<pre class="r"><code>library(shiny)</code></pre>
+<pre class="r"><code>sidebarPanel(
+  width = 3,
+  selectInput(),
+  sliderInput(),
+  actionButton(width = XX),
+  actionButton(width = XX),
+  actionButton(width = XX),
+  XX(XX, XX, width = XX)
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Nun zum <code>server</code>. Ergänze hier wieder einmal ein
+<code>observeEvent</code>, der Code triggered, wenn der
+Zurücksetzen-Schalter (<code>input$zurücksetzen</code>) betätigt wurde.
+Zum Code kommen wir gleich.</li>
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+
+    })</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Der Code im <code>observeEvent</code> soll nun die Körperteile und
+das Alter zurücksetzen bzw. die zugehören UI Inputs. Dafür kannst die
+Funktionen <code>updateSelectInput</code> und
+<code>updateSliderInput</code> verwendent. Gebe jeweils über die InputID
+(<code>"körperteil"</code> bzw <code>"alter"</code>) an welcher Input
+genau zu ändern ist und dann verwende die anderen Argumente um die
+Einstellungen zurückzusetzen. Verwende
+<code>selected = character(0)</code> um den <code>selectInput</code> zu
+ändern und <code>value = c(0, 110</code> um den <code>sliderInput</code>
+zu ändern.</li>
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+
+    XX(XX, XX)
+    XX(XX, XX)
+    
+    })</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Lade den Datensatz .</li>
+<li><p>Teste die App. Werden die Körper- und Altereinstellungen
+zurückgesetzt wenn du den Schalter drückst?</p></li>
+<li><p>Die zweite Änderung betrifft den Upload. Beim Upload kann man
+einige Fehler erzeugen, wenn man zum Beispiel Daten vom falschen
+Dateityp hochlädt oder der eingelesene Datensatz die falschen Variablen
+beinhaltet. Um diese Fehler zu minimieren wollen wir etwas mehr
+Interaktivität einbauen. Wir uns um mögliche Fehler beim Dateityp. Gehe
+zum <code>observeEvent</code>, dass das Einlesen durchführt, und kreiere
+mittels <code>file_ext</code> aus dem <code>tools</code> Paket (Laden
+nicht vergessen) vor dem Einlesen ein Objekt mit der Dateiendung der
+einzulesenden Datei. Stelle als Argument den Dateipfad aus der Download
+UI zur verfügung.</p></li>
 </ol>
-<pre class="r"><code># Lese Daten
-mcdonalds &lt;- readRDS(&#39;1_Data/verletzungen&#39;)</code></pre>
+<pre class="r"><code>observeEvent(input$hochladen, {
+  
+  endung &lt;- XX(XX)
+  
+  verletzungen(readRDS(input$hochladen$datapath))
+  
+  })</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Baue nun ein <code>if</code>-<code>else</code>-statement um das
+Einlesen und das Verändern des reaktiven Datensatzes
+<code>verletzungen</code>, dass testet, ob die Dateiendung
+<code>"RDS"</code> ist und damit die datei den richtigen Dateityp
+hat.</li>
+</ol>
+<pre class="r"><code>observeEvent(input$hochladen, {
+  
+  endung &lt;- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
+       
+     } else {
+      
+        
+       
+     }
+  
+  })</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Der <code>if</code>-Teil ist fertig. Im <code>else</code>-Teil gilt
+es jedoch noch etwas Arbeit zu verrichten. Der <code>else</code>-Teil
+soll eine Nachricht auslösen, die uns verrät, dass wir den falschen
+Dateitüp hochgeladen haben. Dies machst du am besten mit
+<code>showFeedbackWarning</code> oder <code>showFeedbackDanger</code>
+aus dem <code>shinyFeedback</code> Paket. Stelle als Argumente die ID
+des UI Elements, für das die Warnung ausgegeben werden soll, und einen
+Text (z.B. <code>"Nur RDS Dateien können geladen werden!"</code>) als
+Warnung oder Fehlernachricht bereit.</li>
+</ol>
+<pre class="r"><code>observeEvent(input$hochladen, {
+  
+  endung &lt;- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
+       
+     } else {
+      
+     XX(XX, XX)    
+       
+     }
+  
+  })</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Bevor die Fehlermeldung nun angezeigt werden kann, gilt es eine
+spezielle Funktion in das <code>tabPanel</code> einzubauen, die im
+Hintergrund den nötigen javascript Code lädt. Setze dafür als erstes
+Element des <code>tabPanel</code> die Funktion
+<code>useShinyFeedback()</code>. Teste danach die App. Versuche zum
+Beispiel den Covid Datensatz (<code>"covid.csv"</code>) hochzuladen.
+Erscheint eine Fehlermeldung?</li>
+</ol>
+<pre class="r"><code># Upload
+tabPanel(
+  useShinyFeedback(),
+  title,
+  h2(),
+  h4(),
+  br(),
+  fileInput()
+)</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Als letztes wollen, dass die Fehlermeldung irgendwann wieder
+verschwindet. Ein Weg dies zu Implementieren, ist mit
+<code>Sys.sleep</code> eine Systempause einzulegen und dann
+<code>on.exit()</code> <code>hideFeedback()</code> laufen zu lassen.
+Setze dies einmal um, indem du eine 3-sekündige Pause
+(<code>Sys.sleep(3)</code>) innerhalb des <code>else</code>-statements
+setzt, sodass sie nur ausgeführt wird, wenn es ein Problem gab, und du
+das <code>on.exit</code> ausserhalb setzts. Vergiss nicht die richtige
+ID im <code>hideFeedback</code> zu setzen.</li>
+</ol>
+<pre class="r"><code>observeEvent(input$hochladen, {
+  
+  endung &lt;- XX(XX)
+  
+  if(endung == XX)
+  
+     verletzungen(readRDS(input$hochladen$datapath)) {
+      
+     } else {
+      
+     XX(XX, XX)    
+     XX  
+     }
+  
+  XX(XX(inputId = XX))
+  
+  })</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Teste wieder die App. Nun sollte die Fehlermeldung nach drei
+Sekunden verschwinden.</p></li>
+<li><p>Als weiteren Interaktivität könntest Du überlegen, wie Du
+sinnvoll testest, ob die richtigen Variablen vorliegen, und dem Nutzer
+rückmeldest welche Variablen fehlen.</p></li>
+</ol>
 </div>
-<div id="a---setup-2" class="section level3">
-<h3>A - Setup</h3>
-</div>
+<div id="lösung" class="section level2">
+<h2>Lösung</h2>
+<pre class="r"><code>library(shiny)
+library(tidyverse)
+library(tools)
+library(shinyFeedback)
+
+ui = navbarPage(
+  &quot;InjuryViewer&quot;,
+  tabPanel(
+    &quot;Dashboard&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;chart-bar&quot;),
+    
+    sidebarLayout(
+      sidebarPanel(
+        width = 3,
+        selectInput(&quot;körperteil&quot;, &quot;Körperteil&quot;, 
+                    choices = unique(verletzungen$körperteil), 
+                    multiple = TRUE),
+        sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
+        actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;, width = &quot;32.5%&quot;),
+        actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;, width = &quot;32.5%&quot;),
+        actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;, width = &quot;32.5%&quot;),
+        actionButton(&quot;zurücksetzen&quot;, &quot;Zurücksetzen&quot;, width = &quot;100%&quot;)
+      ),
+      mainPanel(
+        plotOutput(&quot;linien_plot&quot;),
+        plotOutput(&quot;lollipop_plot&quot;)
+      ),
+    )
+  ),
+  
+  tabPanel(
+    &quot;Daten&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;clipboard&quot;),
+    tabsetPanel(
+      tabPanel(
+        title = &quot;Daten&quot;,
+        h2(&quot;Aktuelle daten&quot;),
+        dataTableOutput(&quot;daten&quot;)
+        ),
+      tabPanel(
+        useShinyFeedback(),
+        title = &quot;Upload&quot;,
+        h2(&quot;Daten hochladen&quot;),
+        h4(&quot;Achtung Daten werden überschrieben&quot;),
+        br(),
+        fileInput(
+          inputId = &quot;hochladen&quot;,
+          label = &quot;Wähle eine Datei aus&quot;,
+          buttonLabel = &quot;Auswählen&quot;
+        )
+      ),
+      tabPanel(
+        title = &quot;Download&quot;,
+        h2(&quot;Daten runterladen&quot;),
+        br(),
+        downloadButton(&quot;herunterladen&quot;,
+                       &quot;Als .csv herunterladen&quot;,
+                       style = &quot;font-size:20px&quot;)
+      )
+    )
+  ),
+  navbarMenu(
+    &quot;Informationen&quot;,
+    icon = icon(&quot;info-circle&quot;),
+    tabPanel(&quot;Datensatz&quot;,
+             fluidPage(fluidRow(
+               column(
+                 6,
+                 HTML(&quot;&lt;h2&gt;National Electronic Injury Surveillance System (NEISS)&lt;/h2&gt;
+                      &lt;h4&gt;Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.&lt;br&gt;&lt;br&gt;
+                      NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;
+                      Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
+                   )
+               )
+             ))),
+    tabPanel(&quot;About&quot;,
+             fluidPage(fluidRow(
+               column(6, HTML(&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;
+                      &lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;
+                 ))
+             ))),
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  verletzungen = reactiveVal(readRDS(&quot;daten/verletzungen.RDS&quot;))
+  
+  daten = reactive({
+  verletzungen() %&gt;%
+    filter(körperteil %in% input$körperteil,
+           alter &gt;= input$alter[1],
+           alter &lt;= input$alter[2])
+  })
+  
+  output$daten = renderDataTable(verletzungen(),
+                               options = list(pageLength = 10))
+  
+  output$linien_plot = renderPlot({
+  
+  daten() %&gt;% 
+    count(alter, geschlecht, wt = anzahl) %&gt;%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+      legend.position = &quot;top&quot;
+    ) +
+    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                          option = &quot;G&quot;,
+                          end = .8) +
+    labs(x = &quot;Alter&quot;,
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
+          })
+  
+  lollipop_var = reactiveVal(&quot;diagnose&quot;)
+  
+  observeEvent(input$diagnose_var, {
+    lollipop_var(&quot;diagnose&quot;)
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var(&quot;unfallort&quot;)
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var(&quot;gegenstand&quot;)
+  })
+  
+  output$lollipop_plot = renderPlot({
+  
+    daten() %&gt;%
+      mutate(variable = .data[[lollipop_var()]]) %&gt;%
+      count(variable, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = &quot;G&quot;, end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;none&quot;
+      ) +
+      labs(y = &quot;Geschätzte Anzahl&quot;)
+    })
+  
+  
+    observeEvent(input$hochladen, {
+      endung &lt;- file_ext(input$hochladen$datapath)
+      if(endung == &quot;RDS&quot;){
+        verletzungen(readRDS(input$hochladen$datapath))
+        } else {
+        showFeedbackDanger(&quot;hochladen&quot;, &quot;Nur RDS Dateien können geladen werden!&quot;)
+        Sys.sleep(3)
+        }
+          
+      on.exit(hideFeedback(&quot;hochladen&quot;))
+      })
+  
+    output$herunterladen &lt;- downloadHandler(
+      filename = function() {&quot;verletzungen.csv&quot;},
+      content = function(file) {write_tsv(verletzungen(), file)}
+    )
+
+    observeEvent(input$zurücksetzen, {
+    
+      updateSelectInput(inputId = &quot;körperteil&quot;, selected = character(0)) 
+      updateSliderInput(inputId = &quot;alter&quot;, value = c(0, 110))
+
+    })
+    
+     
+  }
+  
+  shinyApp(ui, server)</code></pre>
 </div>
 <div id="datensatz" class="section level2">
 <h2>Datensatz</h2>
 <p>Der Datensatz stammt von dem National Electronic Injury Surveillance
-System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem
-repräsentativen Stichprobe von Krankenhäusern sammelt.</p>
+System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem
+repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz
+wurde ins Deutsche übersetzt und angepasst.<br />
+Es liegen zwei Ausschnitte des Datensatzes vor.
+<code>verletzungen.RDS</code> beinhaltet alle 251’545 Fälle des Jahres
+2017, <code>verletzungen_jahresende.RDS</code> dagegen nur die 4’181
+Fälle zwischen Heiligabend und Silvester.</p>
+<p>Die beiden Datensätze beinhalten die folgenden Variablen:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datum</td>
+<td align="left">Datum des Unfalls / der Verletzung</td>
+</tr>
+<tr class="even">
+<td>alter</td>
+<td align="left">Alter der Person</td>
+</tr>
+<tr class="odd">
+<td>geschlecht</td>
+<td align="left">Geschlecht der Person</td>
+</tr>
+<tr class="even">
+<td>körperteil</td>
+<td align="left">Körperteil, das verletzt wurde</td>
+</tr>
+<tr class="odd">
+<td>diagnose</td>
+<td align="left">Diagnose der Verletzung</td>
+</tr>
+<tr class="even">
+<td>unfallort</td>
+<td align="left">Unfallort der Verletzung</td>
+</tr>
+<tr class="odd">
+<td>gegenstand</td>
+<td align="left">Gegenstand, der die Verletzung herbeigeführt hat</td>
+</tr>
+<tr class="even">
+<td>anzahl</td>
+<td align="left">Anzahl an Verletzungen</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
