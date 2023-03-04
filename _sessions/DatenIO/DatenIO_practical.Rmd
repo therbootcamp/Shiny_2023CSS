@@ -20,6 +20,14 @@ output:
   <font style="font-size:10px">from <a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
 </p>
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      eval = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
 # {.tabset}
 
 ## Information
@@ -38,12 +46,383 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 
 ## Aufgaben
 
-### A - XXx
+### A - DataViewer
+
+1. Wir bauen eine App, die Daten einliest und als Tabelle anzeigt. Beginne indem du eine typische `sidebarLayout` Struktur mit `sidebarPanel` und `mainPanel` für die UI baust. 
+
+```{r}
+
+ui <- fluidPage{
+  XX(
+    XX(),
+    XX()
+  )
+}
+
+```
+
+2. Jetzt setze in das `sidebarPanel` einen `fileInput`, der uns erlauben wird Daten einzulesen. Als ID wähle `daten` und setze die Argumente `label`, `buttonlabel` und `placeholder` auf `"Daten hochladen"`, `"Suche..."` und `"Wähle eine Datei"`.  
+
+```{r}
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX)
+    ),
+    XX()
+  )
+)
+
+```
+
+3. Ergänze zudem im `mainPanel` einen `dataTableOutput` mit ID `daten_table`, damit wir später Daten zu sehen bekommen. 
+
+```{r}
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX)
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)
+
+```
 
 
-### B - XXx
+4. Teste die UI einmal mit `shinyApp(ui, server = function(input, output, sesssion){})`. Du solltest den Titel und den Donwload sehen, aber noch keine Tabelle, weil natürlich noch keine Daten geladen wurden. 
 
-### C - XXx
+5. Nun zum `server`. Hier arbeiten wir (wiedermal) mit einem `reactiveVal` für die Daten (genannt `daten`) und einem `observeEvent`, der Code enthält mit dem der `reactiveVal` überschrieben, sobald der `fileInput` in der UI bedient wurde. Baue diese Grundstruktur.    
+
+```{r}
+
+server = function(input, output, sesssion){
+  
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
+    
+  })
+}
+
+```
+
+6. Nun zun dem Codes in `observeEvent`. Da wir sowohl `.csv` als auch `.RDS` Daten lesen wollen, gilt es erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue dies mit `file_type` und kreiere eine Objekt names `endung`. Stelle als Input für `file_type` den eingegebenen Dateipfad aus `fileInput` (`input$daten$datapath`) beret.  
+
+```{r}
+
+server = function(input, output, sesssion){
+  
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX <- XX(XX)
+    
+  })
+}
+
+```
+
+7. Nun baue ein `if`-`else`, dass die Datei in `input$daten$datapath` mit `read_csv` (`tidyverse` lade nicht vergessen), wenn die `endung` gleich `csv`, und die Daten mit `readRDS` einliest, wenn die `endung` gleich `RDS` ist. Überschreibe dabei direkt den `reactiveVal`
+
+```{r}
+
+server = function(input, output, sesssion){
+  
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX <- XX(XX)
+    
+    if(XX == "csv"){
+      XX(XX(XX))
+    } else if(XX == "RDS") {
+      XX(XX(XX))
+    }
+  })
+  
+  
+}
+
+```
+
+8. Zuletzt ergänze noch `renderDataTable()` ausserhalb des `observeEvent`, sodass die eingelesenen Daten auch an die `ui` weitergegeben werden. Damit nur 10 Zeilen dargestellt werde, definiere dabei `options = list(pageLength = 10)`. 
+
+```{r}
+
+server = function(input, output, sesssion){
+  
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX <- XX(XX)
+    
+    if(XX == "csv"){
+      XX(XX(XX))
+    } else if(XX == "RDS") {
+      XX(XX(XX))
+    }
+  })
+  
+  output$XX <- XX(XX, XX)
+}
+
+```
+
+9. Die erste Iteration der App ist fertig. Teste sie. Erscheinen die Daten in einer Tabelle, nachdem du eine Datei eingelesen hast?
+
+
+
+```{r}
+
+library(tools)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("daten", 
+                label = "Daten hochladen", 
+                buttonLabel = "Suche...", 
+                placeholder = "Wähle ein Datei")
+    ),
+    mainPanel(
+      dataTableOutput("daten_table")
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+
+daten <- reactiveVal()  
+  
+observeEvent(input$daten, {
+    
+    endung <- file_ext(input$daten$datapath)
+    if(endung == "RDS"){
+      daten(readRDS(input$daten$datapath))
+    } else if(endung == "csv") {
+      daten(read_csv(input$daten$datapath))    
+    }
+    
+  })
+  
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+
+  }
+
+shinyApp(ui, server)
+
+```
+
+### B - DataViewer 2.0
+
+1. Die zweite Iteration des DataViewers soll erlauben, dass du über ein `textAreaInput` Code bereitstellst, der dann auf die eingelesenen Daten angewendet wird. Kreiere dafür zuerst den `textAreaInput`unterhalb des `fileInput` in der UI. Setze die ID auf `"code"`. Zudem kreiere darunter einen `acionButton` mit ID `code_run`, den wir als Auslöser für den Code verwenden werden.   
+
+```{r}
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX),
+      XX(XX),
+      XX(XX)
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)
+
+```
+
+2. Teste die UI mit `shinyApp(ui, server = function(input, output, sesssion){})`. Sieht alles in Ordnung aus?
+
+3. Definiere nun im `server` einen weiteren `observeEvent` in Abhängigkeit von `input$code_run`, sodass der Code innerhalb von `observeEvent` nur ausgeführt, wenn `input$code_run` betätigt wird. Innerhalb des `observeEvent` platziere dann `daten(eval(parse(text = input$code)))`. Dieser Code evaliert den Input von `input$code` und überschreibt damit den aktuellen Wert des `daten()` `reactiveValue`s.       
+
+```{r}
+
+server = function(input, output, sesssion){
+
+daten <- reactiveVal()  
+  
+observeEvent(input$daten, {
+    
+    endung <- file_ext(input$daten$datapath)
+    if(endung == "RDS"){
+      daten(readRDS(input$daten$datapath))
+    } else if(endung == "csv") {
+      daten(read_csv(input$daten$datapath))    
+    }
+    
+  })
+  
+  observeEvent(XX, {
+    
+    XX
+    
+  })
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+  
+  }
+
+shinyApp(ui, server)
+
+```
+
+4. Lasse die App laufen. Lese Daten ein und teste verschiedene Code-Inputs. Bei der Entwicklung des Codes ist es wichtig, die Daten über den `reactiveVal` anzusprechen. Zum Beispiel, um den Datensatz in `puppies.csv` auf die erste Zeile zu reduzieren könnte man schreiben `daten() %>% slice(1)`.  
+
+
+```{r}
+
+library(tools)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("daten", 
+                label = "Daten hochladen", 
+                buttonLabel = "Suche...", 
+                placeholder = "Wähle ein Datei"),
+      textAreaInput("code", "Wrangling Code"),
+      actionButton("code_run", "Code ausführen", width = "100%")
+    ),
+    mainPanel(
+      dataTableOutput("daten_table")
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+
+daten <- reactiveVal()  
+  
+observeEvent(input$daten, {
+    
+    endung <- file_ext(input$daten$datapath)
+    if(endung == "RDS"){
+      daten(readRDS(input$daten$datapath))
+    } else if(endung == "csv") {
+      daten(read_csv(input$daten$datapath))    
+    }
+    
+  })
+  
+observeEvent(req(input$code_run), {
+    
+    daten(eval(parse(text = input$code)))
+  
+})
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+
+  }
+
+shinyApp(ui, server)
+
+```
+
+
+
+### C - DataViewer 3.0
+
+1. Entickeln wir die letzte Version des DataViewer, in dem wir eine Download einbauen. 
+
+
+```{r}
+
+library(tools)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("daten", 
+                label = "Daten hochladen", 
+                buttonLabel = "Suche...", 
+                placeholder = "Wähle ein Datei"),
+      textAreaInput("dplyr", "Wrangling Code"),
+      actionButton("dplyr_run", "Code ausführen", width = "100%"),
+      br(),br(), 
+      h5("Download", style="font-weight:700"),
+      downloadButton("csv_download", ".CSV", style='width:49.5%'),
+      downloadButton("rds_download", ".RDS", style='width:49.5%')
+    ),
+    mainPanel(
+      dataTableOutput("daten_table")
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+
+daten <- reactiveVal()  
+  
+observeEvent(input$daten, {
+    
+    endung <- file_ext(input$daten$datapath)
+    if(endung == "RDS"){
+      daten(readRDS(input$daten$datapath))
+    } else if(endung == "csv") {
+      daten(read_csv(input$daten$datapath))    
+    }
+    
+  })
+  
+observeEvent(req(input$dplyr_run), {
+    
+    daten(try(eval(parse(text = input$dplyr))))
+  
+    })
+
+  output$daten_table = renderDataTable(daten(),
+                                       options = list(pageLength = 10))  
+
+
+   output$csv_download <- downloadHandler(
+      filename = function() {paste("daten.csv")},
+      content = function(file) {write_csv(daten(), file)}
+    )
+   
+   output$rds_download <- downloadHandler(
+      filename = function() {paste("daten.RDS")},
+      content = function(file) {saveRDS(daten(), file)}
+    )
+  
+  }
+
+shinyApp(ui, server)
+
+```
 
 
 ## App

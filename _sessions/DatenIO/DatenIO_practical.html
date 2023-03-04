@@ -183,62 +183,351 @@ R Bootcamp @ CSS</font></a><br>
 </p>
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
-<div id="überblick" class="section level2">
-<h2>Überblick</h2>
-<p>In diesem Practical wirst du üben mit <code>ggplot2</code> Grafiken
-zu erstellen.</p>
-<p>Am Ende des Practicals wirst du wissen wie man:</p>
+<div id="information" class="section level2">
+<h2>Information</h2>
+<p>Dieses Practical besteht aus zwei Teilen.</p>
 <ol style="list-style-type: decimal">
-<li>Einen Plot Schritt-für-Schritt aufbaut.</li>
-<li>Verschiedene <code>geom</code>s verwendet.</li>
-<li>Farben verändert.</li>
+<li>Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte
+der Präsentation.<br />
+</li>
+<li>App: Über die Sessions hinweg entwickelst Du die
+<a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a>
+App</li>
 </ol>
+<p>Wie viel Zeit du in <em>Aufgaben</em> oder <em>App</em> verbringst
+ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit
+Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in
+einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue
+Themen einsteigen kannst ohne notwendigerweise alle Schritte der
+Appentwicklung abgeschlossen zu haben.</p>
+<p>Für jede App in Aufgaben erstelle bitte ein <strong>neues
+Skript</strong> und speichere es unter dem Namen der
+Abschnittsberschrift. Denk dran bei jedem neuen Skript
+<code>library(shiny)</code> an den Anfang zu setzen. Falls weitere
+Pakete nötig sind, werden sie in der jeweileigen Abschnitten
+erwähnt.</p>
+<p>Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du
+allein die <code>XX</code> durch den richtigen Code bzw. die richtigen
+Objekte erstezen musst.</p>
 </div>
 <div id="aufgaben" class="section level2">
 <h2>Aufgaben</h2>
-<div id="a---setup" class="section level3">
-<h3>A - Setup</h3>
-<ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>erste_app.R</code> im <code>2_Code</code> Ordner.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
-</ol>
-<pre class="r"><code>library(shiny)</code></pre>
+<div id="a---xxx" class="section level3">
+<h3>A - XXx</h3>
 </div>
-<div id="b---lade-den-datensatz" class="section level3">
-<h3>B - Lade den Datensatz</h3>
+<div id="b---xxx" class="section level3">
+<h3>B - XXx</h3>
+</div>
+<div id="c---xxx" class="section level3">
+<h3>C - XXx</h3>
 </div>
 </div>
 <div id="app" class="section level2">
 <h2>App</h2>
-<div id="a---setup-1" class="section level3">
-<h3>A - Setup</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>InjuryViewer.R</code> im top-level Ordner
-<code>TheRBootcamp</code>.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
+<li><p>Der nächste Schritt in der Entwicklung unserer App ist es das
+Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst
+um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze
+ein <code>fileInput</code> im Upload Panels innerhalb des Daten NavBar
+Panels. Als <code>inputId</code>, <code>label</code>, und
+<code>buttonLabel</code> weise <code>"hochladen"</code>,
+<code>"Wähle eine Datei aus"</code>, und <code>"Auswählen</code> zu.
+Lasse die App einmal laufen und überprüfe ob der File upload zu
+sehen.</p></li>
+<li><p>Im nächsten Schritt, verbessern wir ein klein bisschen die
+Usability. Erstens ergänzen wir eine Unterüberschrift, die uns warnt,
+dass wir unsere aktuellen Daten überschrieben, wenn wir neue Daten
+einlesen. Hierfür ergänze
+<code>h4("Achtung Daten werden überschrieben")</code> direkt unterhalb
+der Überschrift zweiter Ordnung. Zweitens, füge eine mit
+<code>br()</code> eine leere Zeile zwischen der Unterüberschrift und dem
+<code>fileInput</code> ein.</p></li>
+<li><p>Die UI des Uploads ist fertig. Jetzt gilt es den
+<code>server</code> entsprechend anzupassen. Als erstes muss
+sichergestellt werden, dass die Daten nicht wie bisher ausserhalb des
+<code>sever</code>s gelesen werden sonder innerhalb. Zudem müssden die
+Daten genau wie das Objekt <code>daten</code> reaktiv werden, sodass sie
+sich ändern können sobald neue Daten hochgeladen werden. Es gibt
+verschiedene Wege, wie dies implementiert werden könnte. Machen wir es
+mit einem <code>reactiveVal</code>. Ziehe dafür
+<code>verletzungen &lt;- readRDS(daten/verletzungen.RDS)</code> in den
+<code>sever</code> und setze eine <code>reactiveVal</code> um die
+Lesefunktion, so dass <code>verletzungen</code> reaktiver Wert ist, der
+als Default den gesamenten Datensatz beinhaltet.</p></li>
+<li><p>Weil <code>verletzungen</code> jetzt ein reaktiver Wert ist, muss
+einer Stelle im <code>server</code> eine kleine Ändeurngen vorgenommen
+werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer
+Stelle im <code>server</code> wird <code>verletzungen</code> als
+normales Datenobjekt werden anstatt als eine reaktiver Wert, das heisst
+ohne Klammer anstatt mit. Ergänze die fehlenden Klammern und lasse die
+App einmal laufen. Wenn kein Fehler aufkommt, dann hast du alles richtig
+gemacht.</p></li>
+<li><p>Da nun <code>verletzungen</code> ein reaktiver Wert ist, können
+wir Code schreiben der dazu führt, dass <code>verletzungen</code> sich
+ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich
+<code>observeEvent</code> Block. Ergänze einen solchen, der dann seinen
+Code laufen lässt wenn der Upload input (<code>input$hochladen</code>)
+sich ändert und innerhalb des Cdes <code>verletzungen</code> durch
+Einlesen der neuen Daten verändert. Verende dafür
+<code>input$hochladen$datapath</code>.</p></li>
+<li><p>Teste nun die App. Wenn du alles richtig eingestellt hast,
+solltest du in der Lage sein alternative Daten einzulesen. Probiere
+einmal den kleineren Datensatz <code>verletzungen_jahresende.RDS</code>.
+Zuerst solltest du sehen, dass der Upload dir “Upload complete”
+rückmeldet. Dann solltest im Nachbartab Daten sehen, dass die Tabelle
+nur noch etwas mehr als viertausend Zeilen anstatt vorher mehreren
+hundertausend. Nichtsdesto sollte aber alles wie zuvor reibungslos
+funktionieren. Es sollte sogar möglich sein vor dem Upload Körperteile
+und Alter einzustellen und dass diese Einstellungen nach Upload immer
+noch aktiv sind und unmittelbar auf den neuen Datensatz angewendet
+werden.</p></li>
+<li><p>Der Uploadteil ist fertig. Kümmern wir uns jetzt um den Download.
+Ergänze in der UI unter dem Upload <code>tabPanel</code> einen
+<code>downloadButton</code> mit ID <code>"herunterladen"</code> und
+Label <code>"Als .csv herunterladen"</code>. Ergänze zudem
+<code>style = 'font-size:20px'</code>, um die Schrift etwas grösser zu
+machen, und ein <code>br()</code> vor dem <code>downloadButton</code>
+für etwas mehr Platz.</p></li>
+<li><p>Im <code>server</code> ergänze nun den
+<code>downloadHandler</code> wie unten dargestellt. Siehe, dass wir den
+Dateinamen</p></li>
+<li><p>Teste nun die App. Ist der Upload zu sehen und funktioniert er?
+Teste mal was passiert wenn du erst den kleinen</p></li>
 </ol>
-<pre class="r"><code>library(shiny)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Lade den Datensatz .</li>
-</ol>
-<pre class="r"><code># Lese Daten
-mcdonalds &lt;- readRDS(&#39;1_Data/verletzungen&#39;)</code></pre>
 </div>
-<div id="a---setup-2" class="section level3">
-<h3>A - Setup</h3>
-</div>
+<div id="lösung" class="section level2">
+<h2>Lösung</h2>
+<pre class="r"><code>library(shiny)
+library(tidyverse)
+library(shinyWidgets)
+
+ui = navbarPage(
+  &quot;InjuryViewer&quot;,
+  
+  tabPanel(
+    &quot;Dashboard&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;chart-bar&quot;),
+    
+    sidebarLayout(
+      sidebarPanel(
+        width = 3,
+        selectInput(&quot;körperteil&quot;, &quot;Körperteil&quot;, 
+                    choices = unique(verletzungen$körperteil), 
+                    multiple = TRUE),
+        sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
+        actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;),
+        actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;),
+        actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;),
+      ),
+      mainPanel(
+        plotOutput(&quot;linien_plot&quot;),
+        plotOutput(&quot;lollipop_plot&quot;)
+      ),
+    )
+  ),
+  
+  tabPanel(
+    &quot;Daten&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;clipboard&quot;),
+    tabsetPanel(
+      tabPanel(
+        title = &quot;Daten&quot;,
+        h2(&quot;Aktuelle daten&quot;),
+        dataTableOutput(&quot;daten&quot;)
+        ),
+      tabPanel(
+        title = &quot;Upload&quot;,
+        h2(&quot;Daten hochladen&quot;),
+        h4(&quot;Achtung Daten werden überschrieben&quot;),
+        br(),
+        fileInput(
+          inputId = &quot;hochladen&quot;,
+          label = &quot;Wähle eine Datei aus&quot;,
+          buttonLabel = &quot;Auswählen&quot;
+        )
+      ),
+      tabPanel(
+        title = &quot;Download&quot;,
+        h2(&quot;Daten runterladen&quot;),
+        br(),
+        downloadButton(&quot;herunterladen&quot;,
+                       &quot;Als .csv herunterladen&quot;,
+                       style = &quot;font-size:20px&quot;)
+      )
+    )
+  ),
+  navbarMenu(
+    &quot;Informationen&quot;,
+    icon = icon(&quot;info-circle&quot;),
+    tabPanel(&quot;Datensatz&quot;,
+             fluidPage(fluidRow(
+               column(
+                 6,
+                 HTML(&quot;&lt;h2&gt;National Electronic Injury Surveillance System (NEISS)&lt;/h2&gt;
+                      &lt;h4&gt;Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.&lt;br&gt;&lt;br&gt;
+                      NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;
+                      Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
+                   )
+               )
+             ))),
+    tabPanel(&quot;About&quot;,
+             fluidPage(fluidRow(
+               column(6, HTML(&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;
+                      &lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;
+                 ))
+             ))),
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  verletzungen = reactiveVal(readRDS(&quot;daten/verletzungen.RDS&quot;))
+  
+  daten = reactive({
+  verletzungen() %&gt;%
+    filter(körperteil %in% input$körperteil,
+           alter &gt;= input$alter[1],
+           alter &lt;= input$alter[2])
+  })
+  
+  output$daten = renderDataTable(verletzungen(),
+                               options = list(pageLength = 10))
+  
+  output$linien_plot = renderPlot({
+  
+  daten() %&gt;% 
+    count(alter, geschlecht, wt = anzahl) %&gt;%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+      legend.position = &quot;top&quot;
+    ) +
+    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                          option = &quot;G&quot;,
+                          end = .8) +
+    labs(x = &quot;Alter&quot;,
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
+          })
+  
+  lollipop_var = reactiveVal(&quot;diagnose&quot;)
+  
+  observeEvent(input$diagnose_var, {
+    lollipop_var(&quot;diagnose&quot;)
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var(&quot;unfallort&quot;)
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var(&quot;gegenstand&quot;)
+  })
+  
+  output$lollipop_plot = renderPlot({
+  
+    daten() %&gt;%
+      mutate(variable = .data[[lollipop_var()]]) %&gt;%
+      count(variable, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = &quot;G&quot;, end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;none&quot;
+      ) +
+      labs(y = &quot;Geschätzte Anzahl&quot;)
+    })
+  
+  
+    observeEvent(input$hochladen, {
+      verletzungen(readRDS(input$hochladen$datapath))
+      })
+  
+    output$herunterladen &lt;- downloadHandler(
+      filename = function() {&quot;verletzungen.csv&quot;},
+      content = function(file) {write_tsv(verletzungen(), file)}
+    )
+
+    
+  }
+  
+  shinyApp(ui, server)</code></pre>
 </div>
 <div id="datensatz" class="section level2">
 <h2>Datensatz</h2>
 <p>Der Datensatz stammt von dem National Electronic Injury Surveillance
-System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem
-repräsentativen Stichprobe von Krankenhäusern sammelt.</p>
+System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem
+repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz
+wurde ins Deutsche übersetzt und angepasst.<br />
+Es liegen zwei Ausschnitte des Datensatzes vor.
+<code>verletzungen.RDS</code> beinhaltet alle 251’545 Fälle des Jahres
+2017, <code>verletzungen_jahresende.RDS</code> dagegen nur die 4’181
+Fälle zwischen Heiligabend und Silvester.</p>
+<p>Die beiden Datensätze beinhalten die folgenden Variablen:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datum</td>
+<td align="left">Datum des Unfalls / der Verletzung</td>
+</tr>
+<tr class="even">
+<td>alter</td>
+<td align="left">Alter der Person</td>
+</tr>
+<tr class="odd">
+<td>geschlecht</td>
+<td align="left">Geschlecht der Person</td>
+</tr>
+<tr class="even">
+<td>körperteil</td>
+<td align="left">Körperteil, das verletzt wurde</td>
+</tr>
+<tr class="odd">
+<td>diagnose</td>
+<td align="left">Diagnose der Verletzung</td>
+</tr>
+<tr class="even">
+<td>unfallort</td>
+<td align="left">Unfallort der Verletzung</td>
+</tr>
+<tr class="odd">
+<td>gegenstand</td>
+<td align="left">Gegenstand, der die Verletzung herbeigeführt hat</td>
+</tr>
+<tr class="even">
+<td>anzahl</td>
+<td align="left">Anzahl an Verletzungen</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
