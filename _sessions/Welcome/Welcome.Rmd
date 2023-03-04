@@ -68,7 +68,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 # Ziel
 
->###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Datendashboard zu vermitteln. 
+>###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Dashboards und Web-Apps und  zu vermitteln. 
 
 ]
 
@@ -82,45 +82,42 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Dashboards
-
-
----
-
-.pull-left3[
+.pull-left35[
 
 # Shiny
 
 <ul>
-  <li class="m1"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
+  <li class="m1"><span><mono>shiny</mono> ist ein R Paket für dynamische Web-Apps und <high>Dashboards</high></span></li><br>
+  <li class="m2"><span><mono>shiny</mono> ist auch ein <high>Ökosystem</high> an Support-Paketen</span></li><br>
   <ul class="level">
-    <li><span>Eine Auswahl nutzerfreundlicher <high>Pakete</high> für die Analyse von <high>tidy data</high></span></li><br>
-    <li><span>Ein <high>Ökosystem</high> für Analytics und Data Science mit konsistenten Designprinzipien</span></li><br>
-    <li><span>Ein <high>Dialekt</high> von R</span></li>
+    <li><span><mono>shinyFeedback</mono></span></li>
+    <li><span><mono>shinythemes</mono></span></li>
+    <li><span><mono>bslib</mono></span></li>
+    <li><span><mono>BT</mono></span></li>
+    <li><span><mono>reactlog</mono></span></li>
+    <li><span><mono>...</mono></span></li><br>
   </ul>
-  <li class="m2"><span>Das <mono>tidyverse</mono> ist...</span></li><br>
 
 </ul>
 
 ]
 
-.pull-right65[
+.pull-right55[
 
-<br><br>
+<br>
 <p align="center">
-<img src="image/tidyverse.png" height = "520px">
+<img src="image/shiny.png" height = "520px">
 </p>
 
 ]
 
 ---
 
-# Beispiele
 
-dashboard day 1
-dashboard day 2
-Fragezeichen (Wettbewerb)
-
+<br><br>
+<p align="center">
+<img src="image/apps.png">
+</p>
 
 ---
 
@@ -196,36 +193,6 @@ Fragezeichen (Wettbewerb)
 
 ---
 
-# header
-
-.pull-left4[
-
-lists
-
-]
-
-.pull-left5[
-
-```{r, eval = FALSE, echo = TRUE}
-
-
-
-
-```
-
-```{r, eval = TRUE, echo = FALSE}
-
-
-
-
-```
-
-
-]
-
-
----
-
 .pull-left45[
 
 # Übungen
@@ -257,9 +224,9 @@ lists
 .pull-right5[
 <br>
 
-  <iframe src="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html" height="480px" width = "500px"></iframe>
+ <iframe src="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html" height="480px" width = "500px" loading = "lazy"></iframe>
 
-  Beispiel:<a href="https://therbootcamp.github.io/R4DS_2022CSS/_sessions/Data/Data_practical.html"> Daten </a>
+  Beispiel:<a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html"> Daten </a>
 
 ]
 
