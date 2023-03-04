@@ -1,6 +1,6 @@
 ---
 title: "Willkommen"
-author: "R 4 Data Science<br>
+author: "Dashboards mit Shiny<br>
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
   <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
