@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Daten IO</title>
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Daten IO</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -286,13 +286,14 @@ Grundstruktur.</p></li>
   })
 }</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>Nun zun dem Codes in <code>observeEvent</code>. Da wir sowohl
+<li>Nun zun dem Code in <code>observeEvent</code>. Da wir sowohl
 <code>.csv</code> als auch <code>.RDS</code> Daten lesen wollen, gilt es
 erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue
-dies mit <code>file_type</code> und kreiere eine Objekt names
-<code>endung</code>. Stelle als Input für <code>file_type</code> den
-eingegebenen Dateipfad aus <code>fileInput</code>
-(<code>input$daten$datapath</code>) beret.</li>
+dies mit <code>file_ext()</code> aus dem Paket <code>tools</code> (laden
+nicht vergessen) und kreiere eine Objekt names <code>endung</code>.
+Stelle als Input für <code>file_ext()</code> den eingegebenen Dateipfad
+aus <code>fileInput</code> (<code>input$daten$datapath</code>)
+bereit.</li>
 </ol>
 <pre class="r"><code>server = function(input, output, sesssion){
   
@@ -307,7 +308,7 @@ eingegebenen Dateipfad aus <code>fileInput</code>
 <ol start="7" style="list-style-type: decimal">
 <li>Nun baue ein <code>if</code>-<code>else</code>, dass die Datei in
 <code>input$daten$datapath</code> mit <code>read_csv</code>
-(<code>tidyverse</code> lade nicht vergessen), wenn die
+(<code>tidyverse</code> laden nicht vergessen), wenn die
 <code>endung</code> gleich <code>csv</code>, und die Daten mit
 <code>readRDS</code> einliest, wenn die <code>endung</code> gleich
 <code>RDS</code> ist. Überschreibe dabei direkt den
@@ -368,7 +369,8 @@ eingelesenen Daten angewendet wird. Kreiere dafür zuerst den
 <code>textAreaInput</code>unterhalb des <code>fileInput</code> in der
 UI. Setze die ID auf <code>"code"</code>. Zudem kreiere darunter einen
 <code>acionButton</code> mit ID <code>code_run</code>, den wir als
-Auslöser für den Code verwenden werden.</li>
+Auslöser für den Code verwenden werden. Gibt den beiden Inputs passende
+Labels.</li>
 </ol>
 <pre class="r"><code>ui &lt;- fluidPage(
   titlePanel(&quot;DataViewer&quot;),
@@ -525,14 +527,14 @@ sollte auch die Daten beeinflussen, die heruntergeladen werden.</li>
 <h2>App</h2>
 <ol style="list-style-type: decimal">
 <li>Der nächste Schritt in der Entwicklung unserer App ist es das
-Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst
+Einlesen und Speichern der Daten zu ermöglichen. Kümmern wir uns zuerst
 um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze
 ein <code>fileInput</code> im Upload Panels innerhalb des Daten NavBar
 Panels. Als <code>inputId</code>, <code>label</code>, und
 <code>buttonLabel</code> weise <code>"hochladen"</code>,
-<code>"Wähle eine Datei aus"</code>, und <code>"Auswählen</code> zu.
-Lasse die App einmal laufen und überprüfe ob der File upload zu
-sehen.</li>
+<code>"Wähle eine Datei aus"</code>, und <code>"Auswählen"</code> zu.
+Lasse die App einmal laufen und überprüfe ob der File upload zu sehen
+ist.</li>
 </ol>
 <pre class="r"><code>  tabPanel(
     title = &quot;Upload&quot;,
@@ -586,7 +588,7 @@ wir Code schreiben der dazu führt, dass <code>verletzungen</code> sich
 <code>observeEvent</code> Block. Ergänze einen solchen, der dann seinen
 Code laufen lässt wenn der Upload input (<code>input$hochladen</code>)
 sich ändert und innerhalb des Cdes <code>verletzungen</code> durch
-Einlesen der neuen Daten verändert. Verende dafür
+Einlesen der neuen Daten verändert. Verwende dafür
 <code>input$hochladen$datapath</code>.</p></li>
 </ol>
 <pre class="r"><code>observeEvent(XX,{
@@ -630,7 +632,8 @@ wie unten dargestellt. Siehe, dass wir den Dateinamen</li>
   )</code></pre>
 <ol start="9" style="list-style-type: decimal">
 <li>Teste nun die App. Ist der Upload zu sehen und funktioniert er?
-Teste mal was passiert wenn du erst den kleinen</li>
+Teste mal was passiert wenn du erst den kleinen Datensatz hochlädst und
+dann wieder herunterlädst.</li>
 </ol>
 </div>
 <div id="lösung" class="section level2">
