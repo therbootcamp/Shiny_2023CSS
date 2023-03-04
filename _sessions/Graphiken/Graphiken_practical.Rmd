@@ -617,6 +617,8 @@ library(tools)
 library(shinyFeedback)
 library(viridis)
 
+körper <- readRDS("daten/körper.RDS")
+
 ui = navbarPage(
   "InjuryViewer",
   tabPanel(

@@ -104,20 +104,28 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 .pull-right55[
 
-<br>
+
 <p align="center">
-<img src="image/shiny.png" height = "520px">
+<br><br><br>
+<img src="image/shiny_hex.png" height = "420px">
 </p>
 
 ]
 
 ---
 
+# Kurs Apps
 
-<br><br>
+<br>
 <p align="center">
-<img src="image/apps.png">
+<img src="image/apps_all.png">
 </p>
+
+---
+
+# Kurs Apps
+
+ <iframe src="https://dirkwulff.shinyapps.io/TheRBootcamp/" height="480px" width = "1000px" loading = "lazy"></iframe>
 
 ---
 
