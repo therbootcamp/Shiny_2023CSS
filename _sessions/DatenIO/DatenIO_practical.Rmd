@@ -265,32 +265,28 @@ ui <- fluidPage(
 ```{r}
 
 server = function(input, output, sesssion){
-
-daten <- reactiveVal()  
   
-observeEvent(input$daten, {
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
     
-    endung <- file_ext(input$daten$datapath)
-    if(endung == "RDS"){
-      daten(readRDS(input$daten$datapath))
-    } else if(endung == "csv") {
-      daten(read_csv(input$daten$datapath))    
+    XX <- XX(XX)
+    
+    if(XX == "csv"){
+      XX(XX(XX))
+    } else if(XX == "RDS") {
+      XX(XX(XX))
     }
-    
   })
   
-  observeEvent(XX, {
+  XX(XX, {
     
     XX
     
   })
-
-  output$daten_table = renderDataTable(daten(),
-                                       options = list(pageLength = 10))  
   
-  }
-
-shinyApp(ui, server)
+  output$XX <- XX(XX, XX)
+}
 
 ```
 
@@ -354,7 +350,80 @@ shinyApp(ui, server)
 
 ### C - DataViewer 3.0
 
-1. Entickeln wir die letzte Version des DataViewer, in dem wir eine Download einbauen. 
+1. Entwickeln wir die letzte Version des DataViewer, in dem wir eine Download einbauen. Setze dafür in die UI zwei `downloadButton` mit IDs `csv_download` und `rds_download` und Labels `.CSV` und `.RDS`. Ergänze zudem in beiden Buttons `style='width:49.5%'`, damit die Buttons zusammen die volle Breite ausnutzen. Zuletzt zwei `br()` und `h5("Download", style="font-weight:700")` zwischen die Download-Buttons und den `code_run` Action-Button darüber. 
+
+```{r}
+
+ui <- fluidPage(
+  titlePanel("DataViewer"),
+  XX(
+    XX(
+      XX(XX, 
+         XX = XX, 
+         XX = XX,
+         XX = XX),
+      XX(XX),
+      XX(XX),
+      XX(),
+      XX(),
+      XX(),
+      XX(),
+      XX()
+    ),
+    XX(
+      XX(XX)
+    )
+  )
+)
+
+```
+
+2. Teste die UI mit `shinyApp(ui, server = function(input, output, sesssion){})`. Sieht alles in Ordnung aus?
+
+3. Im `server` müssen wir uns nun um die Download-Handler kümmern, sodass die Download-Buttons auch einen Download auslösen. Der Code unten hat bereits zwei Templates Downloadhandler, denen aber noch ein paar Informationen fehlen. Als Output IDs stelle IDs der beiden `downloadButton`s bereit und für das erste Argument der Schreibfunktionen die Daten `reactiveValue` (Klammern nicht vergessen). 
+
+```{r}
+
+server = function(input, output, sesssion){
+  
+  XX <- reactiveVal()  
+  
+  XX(input$XX, {
+    
+    XX <- XX(XX)
+    
+    if(XX == "csv"){
+      XX(XX(XX))
+    } else if(XX == "RDS") {
+      XX(XX(XX))
+    }
+  })
+  
+  XX(XX, {
+    
+    XX
+    
+  })
+  
+  output$XX <- XX(XX, XX)
+  
+  
+  output$XX <- XX(
+    filename = function() {paste("daten.csv")},
+    content = function(file) {write_csv(XX, file)}
+    )
+ 
+  output$XX <- XX(
+    filename = function() {paste("daten.RDS")},
+    content = function(file) {saveRDS(XX, file)}
+    )
+  
+}
+
+```
+
+4. Teste die App. Lese Daten ein und lade sie herunter. Versuche auch zwischendrin Code anzuwenden, der die angezeigten Daten verändert. Dies sollte auch die Daten beeinflussen, die heruntergeladen werden. 
+
 
 
 ```{r}
@@ -370,8 +439,8 @@ ui <- fluidPage(
                 label = "Daten hochladen", 
                 buttonLabel = "Suche...", 
                 placeholder = "Wähle ein Datei"),
-      textAreaInput("dplyr", "Wrangling Code"),
-      actionButton("dplyr_run", "Code ausführen", width = "100%"),
+      textAreaInput("code", "Wrangling Code"),
+      actionButton("code_run", "Code ausführen", width = "100%"),
       br(),br(), 
       h5("Download", style="font-weight:700"),
       downloadButton("csv_download", ".CSV", style='width:49.5%'),
@@ -398,9 +467,9 @@ observeEvent(input$daten, {
     
   })
   
-observeEvent(req(input$dplyr_run), {
+observeEvent(req(input$code_run), {
     
-    daten(try(eval(parse(text = input$dplyr))))
+    daten(try(eval(parse(text = input$code))))
   
     })
 
