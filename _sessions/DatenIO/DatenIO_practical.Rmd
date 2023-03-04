@@ -1,7 +1,7 @@
 ---
 title: "Daten IO"
 subtitle: ""
-author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+author: "<font style='font-style:normal'>Dashboards mit Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -119,7 +119,7 @@ server = function(input, output, sesssion){
 
 ```
 
-6. Nun zun dem Codes in `observeEvent`. Da wir sowohl `.csv` als auch `.RDS` Daten lesen wollen, gilt es erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue dies mit `file_type` und kreiere eine Objekt names `endung`. Stelle als Input für `file_type` den eingegebenen Dateipfad aus `fileInput` (`input$daten$datapath`) beret.  
+6. Nun zun dem Code in `observeEvent`. Da wir sowohl `.csv` als auch `.RDS` Daten lesen wollen, gilt es erst einmal die Dateiendung einer einzulesenden Datei zu testen. Tue dies mit `file_ext()` aus dem Paket `tools` (laden nicht vergessen) und kreiere eine Objekt names `endung`. Stelle als Input für `file_ext()` den eingegebenen Dateipfad aus `fileInput` (`input$daten$datapath`) bereit.  
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -136,7 +136,7 @@ server = function(input, output, sesssion){
 
 ```
 
-7. Nun baue ein `if`-`else`, dass die Datei in `input$daten$datapath` mit `read_csv` (`tidyverse` lade nicht vergessen), wenn die `endung` gleich `csv`, und die Daten mit `readRDS` einliest, wenn die `endung` gleich `RDS` ist. Überschreibe dabei direkt den `reactiveVal`
+7. Nun baue ein `if`-`else`, dass die Datei in `input$daten$datapath` mit `read_csv` (`tidyverse` laden nicht vergessen), wenn die `endung` gleich `csv`, und die Daten mit `readRDS` einliest, wenn die `endung` gleich `RDS` ist. Überschreibe dabei direkt den `reactiveVal`
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -235,7 +235,7 @@ shinyApp(ui, server)
 
 ### B - DataViewer 2.0
 
-1. Die zweite Iteration des DataViewers soll erlauben, dass du über ein `textAreaInput` Code bereitstellst, der dann auf die eingelesenen Daten angewendet wird. Kreiere dafür zuerst den `textAreaInput`unterhalb des `fileInput` in der UI. Setze die ID auf `"code"`. Zudem kreiere darunter einen `acionButton` mit ID `code_run`, den wir als Auslöser für den Code verwenden werden.   
+1. Die zweite Iteration des DataViewers soll erlauben, dass du über ein `textAreaInput` Code bereitstellst, der dann auf die eingelesenen Daten angewendet wird. Kreiere dafür zuerst den `textAreaInput`unterhalb des `fileInput` in der UI. Setze die ID auf `"code"`. Zudem kreiere darunter einen `acionButton` mit ID `code_run`, den wir als Auslöser für den Code verwenden werden. Gibt den beiden Inputs passende Labels.
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -496,7 +496,7 @@ shinyApp(ui, server)
 
 ## App
 
-1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze ein `fileInput` im Upload Panels innerhalb des Daten NavBar Panels. Als `inputId`, `label`, und `buttonLabel` weise `"hochladen"`, `"Wähle eine Datei aus"`, und `"Auswählen` zu. Lasse die App einmal laufen und überprüfe ob der File upload zu sehen.  
+1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und Speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze ein `fileInput` im Upload Panels innerhalb des Daten NavBar Panels. Als `inputId`, `label`, und `buttonLabel` weise `"hochladen"`, `"Wähle eine Datei aus"`, und `"Auswählen"` zu. Lasse die App einmal laufen und überprüfe ob der File upload zu sehen ist.  
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -534,7 +534,7 @@ verletzungen <- reactiveVal(XX)
 
 4. Weil `verletzungen` jetzt ein reaktiver Wert ist, muss einer Stelle im `server` eine kleine Ändeurngen vorgenommen werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer Stelle im `server` wird `verletzungen` als normales Datenobjekt werden anstatt als eine reaktiver Wert, das heisst ohne Klammer anstatt mit. Ergänze die fehlenden Klammern und lasse die App einmal laufen. Wenn kein Fehler aufkommt, dann hast du alles richtig gemacht.
 
-5. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verende dafür `input$hochladen$datapath`.    
+5. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verwende dafür `input$hochladen$datapath`.    
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -572,7 +572,7 @@ observeEvent(XX,{
 
 ```
 
-9. Teste nun die App. Ist der Upload zu sehen und funktioniert er? Teste mal was passiert wenn du erst den kleinen  
+9. Teste nun die App. Ist der Upload zu sehen und funktioniert er? Teste mal was passiert wenn du erst den kleinen Datensatz hochlädst und dann wieder herunterlädst.
 
 
 ## Lösung
