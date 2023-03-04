@@ -183,62 +183,914 @@ R Bootcamp @ CSS</font></a><br>
 </p>
 <div id="section" class="section level1 tabset">
 <h1 class="tabset"></h1>
-<div id="überblick" class="section level2">
-<h2>Überblick</h2>
-<p>In diesem Practical wirst du üben mit <code>ggplot2</code> Grafiken
-zu erstellen.</p>
-<p>Am Ende des Practicals wirst du wissen wie man:</p>
+<div id="information" class="section level2">
+<h2>Information</h2>
+<p>Dieses Practical besteht aus zwei Teilen.</p>
 <ol style="list-style-type: decimal">
-<li>Einen Plot Schritt-für-Schritt aufbaut.</li>
-<li>Verschiedene <code>geom</code>s verwendet.</li>
-<li>Farben verändert.</li>
+<li>Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte
+der Präsentation.<br />
+</li>
+<li>App: Über die Sessions hinweg entwickelst Du die
+<a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a>
+App</li>
 </ol>
+<p>Wie viel Zeit du in <em>Aufgaben</em> oder <em>App</em> verbringst
+ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit
+Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in
+einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue
+Themen einsteigen kannst ohne notwendigerweise alle Schritte der
+Appentwicklung abgeschlossen zu haben.</p>
+<p>Für jede App in Aufgaben erstelle bitte ein <strong>neues
+Skript</strong> und speichere es unter dem Namen der
+Abschnittsberschrift. Denk dran bei jedem neuen Skript
+<code>library(shiny)</code> an den Anfang zu setzen. Falls weitere
+Pakete nötig sind, werden sie in der jeweileigen Abschnitten
+erwähnt.</p>
+<p>Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du
+allein die <code>XX</code> durch den richtigen Code bzw. die richtigen
+Objekte erstezen musst.</p>
 </div>
 <div id="aufgaben" class="section level2">
 <h2>Aufgaben</h2>
-<div id="a---setup" class="section level3">
-<h3>A - Setup</h3>
+<div id="a---normalverteilung" class="section level3">
+<h3>A - Normalverteilung</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>erste_app.R</code> im <code>2_Code</code> Ordner.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
+<li>Bauen wir eine App, die die Normalverteilung illustriert. Wir
+verwenden dafür eine <code>sidebarLayout</code>, sodass die Inputs für
+die Stichprobengrösse, den Mittelwert und die Streuung der Verteilung
+und eine Histogramm der Verteiling in einem <code>siderbarPanel</code>
+und einem <code>mainPanel</code> voneinander getrennt werden können.
+Beginnen wir mit dem <code>server</code>. Definiere ihn folgendermassen.
+Du kannst sehenn, dass drei Inputs verwendet werden und ein Output
+gerendert wird. Diese Inputs und Outputs müssen wir gleich in der
+<code>ui</code> aufgreifen.</li>
 </ol>
-<pre class="r"><code>library(shiny)</code></pre>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  daten &lt;- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm &lt;- renderPlot(hist(daten()))
+  
+}</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Kommen wir zur UI. Definiere zuerst das grobe Gerüst mit
+<code>fluidPage</code>, <code>titlePanel</code>, und
+<code>sidebarLayout</code>. Setze zudem das <code>title</code> Argument
+in <code>titlePanel</code> auf <code>"Normalverteilung"</code>.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX()
+)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Definiere nun innerhalb des <code>sidebarLayout</code>s ein
+<code>sidebarPanel</code> und ein <code>mainPanel</code>. Danach
+solltest du die App bereits testen können, obgleich noch nicht viel zu
+sehen ist. Tue dies mit shinyApp(ui, server)``. Du solltest eine
+Überschrift sehen und darunter einen grauhinterlegtes Feld.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX(
+    XX(),
+    XX()
+  )
+)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Das Layout ist fertig. Ergänze nun die folgenden Elemente im
+<code>sidebarPanel</code> und dem <code>mainPanel</code>. Die Inputs
+gehören in die Sidebar, der Output in das Main Panel. Setze die
+richtigen IDs und versuche die Einstellungen der Inputs
+nachzuvollziehen.</li>
+</ol>
+<ul>
+<li><code>sliderInput(XX, "Beobachtungen:", min = 0, max = 100, value = 30)</code></li>
+<li><code>sliderInput(XX, "Mittelwert:", min = -5, max = 5, value = 0, step = .5)</code></li>
+<li><code>sliderInput(XX, "Streuung:", min = 0, max = 2, value = 1, step = .1)</code></li>
+<li><code>plotOutput(XX)</code></li>
+</ul>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(XX)
+  )
+)</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Die erste Version ist fertig. Teste die App mit
+<code>shinyApp(ui, server)</code> und beobachte wie Änderungen der
+Inputs das Histogramm beeinflussen.</li>
+</ol>
 </div>
-<div id="b---lade-den-datensatz" class="section level3">
-<h3>B - Lade den Datensatz</h3>
+<div id="b---normalverteilung-2.0" class="section level3">
+<h3>B - Normalverteilung 2.0</h3>
+<ol style="list-style-type: decimal">
+<li>In der zweiten Version der Normalverteilungsapp, soll ein zweiter
+Plot integriert werden und der Nutzer soll zwischen den Plots über ein
+<code>tabsetPanel</code> wählen können. Definiere zuerst den neuen
+<code>server</code>. Er enthält einen zweiten Plot, der die
+Normalverteilung als Dichte darstellt.</li>
+</ol>
+<pre class="r"><code>server = function(input, output, sesssion){
+  
+  daten &lt;- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm &lt;- renderPlot(hist(daten()))
+  output$dichte &lt;- renderPlot(plot(density(daten())))
+  
+}</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Erweitere nun das Layout unserer Normalverteilungsapp mit einem
+<code>tabsetPanel</code> auf oberster Ebene im <code>mainPanel</code>
+und ergänze zwei <code>tabPanel</code> mit Titeln
+<code>"Histogramm"</code> und <code>"Dichteplot"</code>.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX),
+        XX(XX)
+        )
+      )
+    )
+  )</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Platziere nun den bisherigen <code>plotOutput</code> im ersten
+<code>tabPanel</code> und platziere einen <code>plotOutput</code> für
+den Dichteplot im zweiten <code>tabPanel</code>. Achte darauf, dass du
+den <code>plotOutputs</code> die richtigen IDs gibts (siehe
+<code>server</code>).</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX,
+           XX(XX)
+           ),
+        XX(XX,
+           XX(XX)
+           )
+        )
+      )
+    )
+  )</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Lasse jezt die App einmal laufen. Du solltest nun zwei Tabs im Main
+Panel sehen, zwischen denen du wechselt kannst, um die zwei
+verschiedenen Plots zu sehen.</li>
+</ol>
+</div>
+<div id="c---normalverteilung-3.0" class="section level3">
+<h3>C - Normalverteilung 3.0</h3>
+<ol style="list-style-type: decimal">
+<li><p>In der dritten Iteration der Normalverteilungsapp, verwenden wir
+etwas HTML um die Titel und Inhalte der den <code>tabPanel</code>s im
+<code>tabsetPanel</code> anzupassen. Zuerst die Überschriften. Erstze
+die Titel <code>"Histogramm"</code> und “<code>Dichteplot</code>” durch
+<code>icon("chart-column")</code> und <code>icon("chart-line")</code>.
+Lasse dann die App einmal laufen. Nun sollten passende HTML-Icons
+anstatt der ursprünglichen Titel zu sehen sein.</p></li>
+<li><p>Im nächsten Schritt ergänze zwei HTML Paragraphen-Tags
+<code>tags$p</code> oberhalb der Plots im Main Panel. Lasse dann wieder
+App laufen. Siehst du einen Unterschied zu vorher?</p></li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX,
+           XX$XX(),
+           XX(XX)
+           ),
+        XX(XX,
+           XX$XX(),
+           XX(XX)
+           )
+        )
+      )
+    )
+  )</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Der Ergänzen der <code>tags$p</code> sollte keinen grossen
+Unterschied erzeugt haben, weil noch kein Inhalt vorhanden war. Das
+ändern wir jetzt. Setze folgenden Code in <code>HTML</code> Funkionen
+innerhalb der beiden Paragraphen. Du siehst, dass der Code mehrere HTML
+Elemente beinhaltet. Das Element <code>&lt;br&gt;</code> fügt Leerzeilen
+ein und <code>&lt;a&gt;</code> sorgt für Link mit hinterlegter
+Link-URL.</li>
+</ol>
+<ul>
+<li><code>"&lt;br&gt;&lt;br&gt;Die Graphik zeigt ein Histogramm einer Normalverteilung. Lerne mehr über Histogrammer &lt;a href='https://de.wikipedia.org/wiki/Histogramm'&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;."</code></li>
+<li><code>"&lt;br&gt;&lt;br&gt;Die Graphik zeigt einen Dichteplot einer Normalverteilung. Lerne mehr über Dichte &lt;a href='https://de.wikipedia.org/wiki/Wahrscheinlichkeitsdichtefunktion'&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;."</code></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Lasse die App laufen. Ist der neue Text zu sehen und funktioniert
+der Link zu den jeweiligen Wikipediaseiten?</li>
+</ol>
+</div>
+<div id="d---verteilungen" class="section level3">
+<h3>D - Verteilungen</h3>
+<ol style="list-style-type: decimal">
+<li>Unten ist eine App zu sehen, die über eine <code>navbarPage</code>
+die Normalverteilungsapp und eine vergleichbare App für
+Exponentialverteilungen integriert. Hier und da fehlen allerdings Code
+Elemente. Kannst du App wieder zum laufen bringen?</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  &quot;Verteilungen&quot;,
+  XX(&quot;Normalverteilung&quot;, 
+    titlePanel(&quot;Normalverteilung&quot;),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput(&quot;norm_stichprobengrösse&quot;, &quot;Beobachtungen:&quot;, min = 0, max = 100, value = 30),
+        sliderInput(&quot;mittelwert&quot;, &quot;Mittelwert:&quot;, min = -5, max = 5, value = 0, step = .5),
+        sliderInput(&quot;streuung&quot;, &quot;Streuung:&quot;, min = 0, max = 2, value = 1, step = .1)
+  
+      ),
+      mainPanel(
+        tabsetPanel(
+          tabPanel(icon(&quot;chart-column&quot;), plotOutput(XX)),
+          tabPanel(icon(&quot;chart-line&quot;), plotOutput(XX))
+        )
+      )
+    )
+  ),
+  XX(&quot;Exponentialverteilung&quot;, 
+    titlePanel(&quot;Exponentialverteilung&quot;),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput(&quot;exp_stichprobengrösse&quot;, &quot;Beobachtungen:&quot;, min = 0, max = 100, value = 10),
+        sliderInput(&quot;rate&quot;, &quot;Rate:&quot;, min = 0, max = 5, value = 1, step = .5),
+      ),
+      mainPanel(
+        tabsetPanel(
+          tabPanel(icon(&quot;chart-column&quot;), plotOutput(XX)),
+          tabPanel(icon(&quot;chart-line&quot;), plotOutput(XX))
+        )
+      )
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+  
+  normalverteilung &lt;- reactive({
+    rnorm(n = input$norm_stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$norm_histogramm &lt;- renderPlot(hist(normalverteilung()))
+  output$norm_dichte &lt;- renderPlot(plot(density(normalverteilung())))
+  
+  exponentialverteilung &lt;- reactive({
+    rexp(n = input$exp_stichprobengrösse,
+         rate = input$rate)
+    })
+    
+  output$exp_histogramm &lt;- renderPlot(hist(exponentialverteilung()))
+  output$exp_dichte &lt;- renderPlot(plot(density(exponentialverteilung())))
+  
+}
+
+shinyApp(ui, server)</code></pre>
 </div>
 </div>
 <div id="app" class="section level2">
 <h2>App</h2>
-<div id="a---setup-1" class="section level3">
-<h3>A - Setup</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne ein neues R Skript in deinem <code>TheRBootcamp</code>
-Projekt.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen
-<code>InjuryViewer.R</code> im top-level Ordner
-<code>TheRBootcamp</code>.</p></li>
-<li><p>Lade <code>shiny</code>.</p></li>
+<li><p>Es ist an der Zeit das Layout der InjuryViewer App anzupassen. Es
+sind einige Änderungen nötig. Erstens, muss die UI in eine
+<code>navbarPage</code> mit drei <code>tabPanels</code> geändert werden.
+Zweitens muss im Hauptpanel ein <code>sidebarLayout</code> eingezogen
+werden. Drittens muss in den zusätzlichen Panels ein
+<code>tabsetPanel</code> erstellt werden und HTML eingesetzt werden um
+Spalten einzurücken und Überschriften zu setzen.</p></li>
+<li><p>Beginnen wir mit der <code>navbarPage</code>. Kreiere eine neue
+UI mit drei <code>tabPanel</code>s innerhalb einer
+<code>navbarPage</code>. Setze den <code>title</code> der
+<code>navbarPage</code> auf <code>InjuryViewer</code> und die der
+<code>tabPanels</code> auf <code>Dashboard</code>, <code>Daten</code>,
+und <code>Informationen</code>. Siehe die enstprechenden Kommentare, die
+uns später dabei helfen werden die UI Komponenten auseinander zu halten.
+Teste die App mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>.
+Hat’s funktioniert?</p></li>
 </ol>
-<pre class="r"><code>library(shiny)</code></pre>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX),
+  
+  # Daten
+  XX(title = XX),
+  
+  # Informationen
+  XX(title = XX)
+  )</code></pre>
+<pre class="r"><code>ui &lt;- navbarPage(
+  title = &quot;InjuryViewer&quot;,
+  tabPanel(title = &quot;Dashboard&quot;),
+  tabPanel(title = &quot;Daten&quot;),
+  tabPanel(title = &quot;Informationen&quot;)
+  )
+
+shinyApp(ui, server = function(input, output, sesssion){})</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Als nächstes ergänze Icons für die drei <code>tabPanel</code>. Für
+das Dashboard <code>tabPanel</code> ergänze icon(“chart-bar”), für das
+Daten <code>tabPanel</code> <code>icon("clipboard")</code>, und für das
+Informationen <code>tabPanel</code> icon(“info-circle”). Lasse App
+laufen, um zu testen ob die Icons angezeigt werden.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Lade den Datensatz .</li>
+<li>Mit dem fertigen grundgerüst können wir anfangen das Layout der
+einzelnen <code>tabPanel</code>s näher zu definieren. Angefangen mit dem
+Dashboard ergänze ein <code>sidebarLayout</code> inklusive
+<code>sidebarPanel</code> und <code>mainPanel</code>.</li>
 </ol>
-<pre class="r"><code># Lese Daten
-mcdonalds &lt;- readRDS(&#39;1_Data/verletzungen&#39;)</code></pre>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(),
+       XX()
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Innerhalb des <code>sidebarPanel</code>s setze zunächst
+<code>width = 3</code> und liste dann die fünf Inputelemente der letzten
+App, den Select, den Slider, und die drei Schalter. Schaue dir die UI
+wieder mal mit
+<code>shinyApp(ui, server = function(input, output, sesssion){})</code>
+an. Passt alles?</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX()
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Mit einer fertigen Sidebar, kümmern wir uns jetzt um das
+<code>mainPanel</code>. Ergänze innerhalb des Panels die zwei
+<code>plotOutput</code>s, den <code>lilien_plot</code> und den
+<code>lollipop_plot</code>, und teste die UI.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Das Dashboard Layout ist fertig. Nun zum Daten Navbar Panel. Ergänze
+ein <code>tabsetPanel</code> mit wiederum drei <code>tabPanel</code>s
+mit den Titel <code>"Daten"</code>, <code>"Upload"</code>, und
+<code>"Download"</code>. Innerhalb der <code>tabPanel</code> ergänze die
+folgenden Überschriften auf zweiter Ebene:
+<code>""Aktuelle daten""</code>, <code>"Daten hochladen"</code>, und
+<code>"Daten runterladen"</code>. Teste die UI. Sind die Tabs unter dem
+Navbar-Tab Daten zu sehen?</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Innerhalb des neuen <code>tabPanel</code> Daten innerhalb des
+<code>tabsetPabel</code>, ergänze den Output
+<code>dataTableOutput("daten")</code>, was sobald wir im
+<code>server</code> einen entsprechenden <code>renderDataTable</code>
+uns erlauben wird mit den Daten in einer Tabelle zu interagieren.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX),
+          XX
+          )
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX)
+  )</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Bevor wir zum <code>server</code> kommen, müssen wir noch Änderungen
+am Informationen Navbar Panel durchführen. Ergänze innerhalb ein
+<code>navbarMenu</code> mit zwei <code>tabPanel</code>s mit den Titeln
+<code>"Datensatz"</code> und <code>"About"</code>. Teste die UI.</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, 
+          h2(XX),
+          XX
+          ),
+       XX(title = XX, 
+          h2(XX)
+          ),
+       XX(title = XX, 
+          h2(XX)
+          )
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX),
+       XX(title = XX)
+     ))
+  )</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Innerhalb der Datensatz und About <code>tabPanel</code>s füge jweils
+<code>fluidPage(fluidRow(column(6, HTML(XX))))</code> hinzu und ergänze
+die folgenden zwei Texte in an Stelle des XX ein. Teste die UI und siehe
+wie Shiny die HTML Elemente in den Texten in Formatierung
+übersetzt.</li>
+</ol>
+<pre class="r"><code>&quot;&lt;h2&gt;National Electronic Injury Surveillance System (NEISS)&lt;/h2&gt;&lt;h4&gt;Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.&lt;br&gt;&lt;br&gt;NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
+
+&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;&lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;&quot;</code></pre>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX))
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          ),
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          )
+     ))
+  )</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>Die UI ist vorerst fertig, das heisst wir können unsere
+Aufmerksamkeit dem <code>server</code> widment. Da wir primär am Layout
+gearbeitet haben ud wir nur einen neuen Output hinzugefügt haben,
+bleiben die Änderungen minimal. Ausgehend vom <code>server</code> der
+letzten session ergänze einzig
+<code>output$daten = renderDataTable(verletzungen, options = list(pageLength = 10))</code>
+an einer passenden Stelle. Das sollte dazu führen, dass die ersten zehn
+Zeilen des Gesamtdatensatzes in einem Data Table angezeigt werden.
+Alternative könnte man natürlich auch <code>daten()</code> als erstes
+Argument verwenden, was dazu führe würde, dass nur der im Dashboard zu
+sehen ist. Nach den Änderungen lasse die App mit
+<code>shinyApp(ui, server)</code> laufen. Funktioniert alles?</li>
+</ol>
+<pre class="r"><code>ui &lt;- XX(
+  title = XX,
+  
+  # Dashboard
+  XX(title = XX, icon = XX
+     XX(
+       XX(
+         XX,
+         XX,
+         XX,
+         XX,
+         XX
+       ),
+       XX(
+         XX,
+         XX
+       )
+     )
+     ),
+  
+  # Daten
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX)),
+       XX(title = XX, h2(XX))
+     )
+     ),
+  
+  # Informationen
+  XX(title = XX, icon = XX,
+     XX(
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          ),
+       XX(title = XX,
+          fluidPage(fluidRow(column(6, HTML(XX))))
+          )
+     ))
+  )</code></pre>
 </div>
-<div id="a---setup-2" class="section level3">
-<h3>A - Setup</h3>
-</div>
+<div id="lösung" class="section level2">
+<h2>Lösung</h2>
+<pre class="r"><code>library(shiny)
+library(tidyverse)
+
+verletzungen = readRDS(&quot;daten/verletzungen.RDS&quot;)
+
+ui = navbarPage(
+  &quot;InjuryViewer&quot;,
+  
+  tabPanel(
+    &quot;Dashboard&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;chart-bar&quot;),
+    
+    sidebarLayout(
+      sidebarPanel(
+        width = 3,
+        selectInput(&quot;körperteil&quot;, &quot;Körperteil&quot;, 
+                    choices = unique(verletzungen$körperteil), 
+                    multiple = TRUE),
+        sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
+        actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;),
+        actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;),
+        actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;),
+      ),
+      mainPanel(
+        plotOutput(&quot;linien_plot&quot;),
+        plotOutput(&quot;lollipop_plot&quot;)
+      ),
+    )
+  ),
+  
+  tabPanel(
+    &quot;Daten&quot;,
+    fluid = TRUE,
+    icon = icon(&quot;clipboard&quot;),
+    tabsetPanel(
+      tabPanel(
+        title = &quot;Daten&quot;,
+        h2(&quot;Aktuelle daten&quot;),
+        dataTableOutput(&quot;daten&quot;)
+        ),
+      tabPanel(
+        title = &quot;Upload&quot;,
+        h2(&quot;Daten hochladen&quot;)
+      ),
+      tabPanel(
+        title = &quot;Download&quot;,
+        h2(&quot;Daten runterladen&quot;),
+      )
+    )
+  ),
+  navbarMenu(
+    &quot;Informationen&quot;,
+    icon = icon(&quot;info-circle&quot;),
+    tabPanel(&quot;Datensatz&quot;,
+             fluidPage(fluidRow(
+               column(
+                 6,
+                 HTML(&quot;&lt;h2&gt;National Electronic Injury Surveillance System (NEISS)&lt;/h2&gt;
+                      &lt;h4&gt;Das National Electronic Injury Surveillance System (NEISS) Datenbank wird seit über 45 Jahren von der Consumer Product Safety Commission (CPSC) betrieben. Ihr Zweck ist die Sammlung von verletzungen, die im Zusammenhang von Konsumprodukten entstehen. Das CPSC nutzt die Daten um eine landesweite in Schätzung von produktabhängigen Verletzungen zu liefern.&lt;br&gt;&lt;br&gt;
+                      NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;
+                      Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
+                   )
+               )
+             ))),
+    tabPanel(&quot;About&quot;,
+             fluidPage(fluidRow(
+               column(6, HTML(&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;
+                      &lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;
+                      Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;
+                 ))
+             ))),
+  )
+)
+
+server &lt;- function(input, output, session) {
+  
+  daten = reactive({
+  verletzungen %&gt;%
+    filter(körperteil %in% input$körperteil,
+           alter &gt;= input$alter[1],
+           alter &lt;= input$alter[2])
+  })
+  
+  output$daten = renderDataTable(verletzungen,
+                                 options = list(pageLength = 10))
+  
+  output$linien_plot = renderPlot({
+  
+  daten() %&gt;% 
+    count(alter, geschlecht, wt = anzahl) %&gt;%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+      legend.position = &quot;top&quot;
+    ) +
+    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                          option = &quot;G&quot;,
+                          end = .8) +
+    labs(x = &quot;Alter&quot;,
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
+          })
+  
+  lollipop_var = reactiveVal(&quot;diagnose&quot;)
+  
+  observeEvent(input$diagnose_var, {
+    lollipop_var(&quot;diagnose&quot;)
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var(&quot;unfallort&quot;)
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var(&quot;gegenstand&quot;)
+  })
+  
+  output$lollipop_plot = renderPlot({
+  
+    daten() %&gt;%
+      mutate(variable = .data[[lollipop_var()]]) %&gt;%
+      count(variable, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = &quot;G&quot;, end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;none&quot;
+      ) +
+      labs(y = &quot;Geschätzte Anzahl&quot;)
+    })
+  }
+  
+  shinyApp(ui, server)</code></pre>
 </div>
 <div id="datensatz" class="section level2">
 <h2>Datensatz</h2>
 <p>Der Datensatz stammt von dem National Electronic Injury Surveillance
-System (NEISS) in den USA, das seit vielen Jahren Unfalle aus einem
-repräsentativen Stichprobe von Krankenhäusern sammelt.</p>
+System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem
+repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz
+wurde ins Deutsche übersetzt und angepasst.<br />
+Es liegen zwei Ausschnitte des Datensatzes vor.
+<code>verletzungen.RDS</code> beinhaltet alle 251’545 Fälle des Jahres
+2017, <code>verletzungen_jahresende.RDS</code> dagegen nur die 4’181
+Fälle zwischen Heiligabend und Silvester.</p>
+<p>Die beiden Datensätze beinhalten die folgenden Variablen:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datum</td>
+<td align="left">Datum des Unfalls / der Verletzung</td>
+</tr>
+<tr class="even">
+<td>alter</td>
+<td align="left">Alter der Person</td>
+</tr>
+<tr class="odd">
+<td>geschlecht</td>
+<td align="left">Geschlecht der Person</td>
+</tr>
+<tr class="even">
+<td>körperteil</td>
+<td align="left">Körperteil, das verletzt wurde</td>
+</tr>
+<tr class="odd">
+<td>diagnose</td>
+<td align="left">Diagnose der Verletzung</td>
+</tr>
+<tr class="even">
+<td>unfallort</td>
+<td align="left">Unfallort der Verletzung</td>
+</tr>
+<tr class="odd">
+<td>gegenstand</td>
+<td align="left">Gegenstand, der die Verletzung herbeigeführt hat</td>
+</tr>
+<tr class="even">
+<td>anzahl</td>
+<td align="left">Anzahl an Verletzungen</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

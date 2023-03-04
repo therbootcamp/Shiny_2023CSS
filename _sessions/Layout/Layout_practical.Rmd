@@ -20,6 +20,15 @@ output:
   <font style="font-size:10px">from <a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
 </p>
 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      eval = FALSE, 
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
 # {.tabset}
 
 ## Information
@@ -38,49 +47,386 @@ Gerade am Anfang stellen wir Code-Templates zur verfügung in denen du allein di
 ## Aufgaben
 
 
-### A - Lade den Datensatz
+### A - Normalverteilung
 
-1. Zuerst bauen wir ein `sideBarLayout` in einer fluid Page. Dabei kümmern wir uns erstmal nicht um den `server` sondern entwickeln nur die UI und lassen dann die App mit einem einer leeren `server` Funktion laufen.  
+1. Bauen wir eine App, die die Normalverteilung illustriert. Wir verwenden dafür eine `sidebarLayout`, sodass die Inputs für die Stichprobengrösse, den Mittelwert und die Streuung der Verteilung und eine Histogramm der Verteiling in einem `siderbarPanel` und einem `mainPanel` voneinander getrennt werden können. Beginnen wir mit dem `server`. Definiere ihn folgendermassen. Du kannst sehenn, dass drei Inputs verwendet werden und ein Output gerendert wird. Diese Inputs und Outputs müssen wir gleich in der `ui` aufgreifen.    
 
-```{r}
 
-fluidPage(
-  titlePanel("Hallo Shiny!"),
+```{r, echo = TRUE, eval = FALSE}
+server = function(input, output, sesssion){
+  
+  daten <- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm <- renderPlot(hist(daten()))
+  
+}
+
+```
+
+2. Kommen wir zur UI. Definiere zuerst das grobe Gerüst mit `fluidPage`, `titlePanel`, und `sidebarLayout`. Setze zudem das `title` Argument in `titlePanel` auf `"Normalverteilung"`.
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX()
+)
+
+```
+
+3. Definiere nun innerhalb des `sidebarLayout`s ein `sidebarPanel` und ein `mainPanel`. Danach solltest du die App bereits testen können, obgleich noch nicht viel zu sehen ist. Tue dies mit shinyApp(ui, server)``. Du solltest eine Überschrift sehen und darunter einen grauhinterlegtes Feld.    
+
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX(
+    XX(),
+    XX()
+  )
+)
+
+```
+
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel(title = "Normalverteilung"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel()
+  )
+)
+
+shinyApp(ui, server)
+
+```
+
+4. Das Layout ist fertig. Ergänze nun die folgenden Elemente im `sidebarPanel` und dem `mainPanel`. Die Inputs gehören in die Sidebar, der Output in das Main Panel. Setze die richtigen IDs und versuche die Einstellungen der Inputs nachzuvollziehen. 
+
+- `sliderInput(XX, "Beobachtungen:", min = 0, max = 100, value = 30)`
+- `sliderInput(XX, "Mittelwert:", min = -5, max = 5, value = 0, step = .5)`
+- `sliderInput(XX, "Streuung:", min = 0, max = 2, value = 1, step = .1)`
+- `plotOutput(XX)`
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(XX)
+  )
+)
+
+```
+
+5. Die erste Version ist fertig. Teste die App mit `shinyApp(ui, server)` und beobachte wie Änderungen der Inputs das Histogramm beeinflussen. 
+
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel("Normalverteilung"),
   sidebarLayout(
     sidebarPanel(
-      sliderInput("beobachtungen", "Beobachtungen:", min = 0, max = 1000, value = 500)
+      sliderInput("stichprobengrösse", "Beobachtungen:", min = 0, max = 100, value = 30),
+      sliderInput("mittelwert", "Mittelwert:", min = -5, max = 5, value = 0, step = .5),
+      sliderInput("streuung", "Streuung:", min = 0, max = 2, value = 1, step = .1)
+
     ),
     mainPanel(
-      plotOutput("distPlot")
+      plotOutput("histogramm")
     )
   )
 )
 
-shinyApp(ui, server = function(input, output, sesssion){})
+server = function(input, output, sesssion){
+  
+  daten <- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm <- renderPlot(hist(daten()))
+  
+}
+
+shinyApp(ui, server)
 
 ```
 
+### B - Normalverteilung 2.0
 
-### B - Something with Tab / Nav
+1. In der zweiten Version der Normalverteilungsapp, soll ein zweiter Plot integriert werden und der Nutzer soll zwischen den Plots über ein `tabsetPanel` wählen können. Definiere zuerst den neuen `server`. Er enthält einen zweiten Plot, der die Normalverteilung als Dichte darstellt. 
 
-```{r}
+```{r, echo = TRUE, eval = FALSE}
+
+server = function(input, output, sesssion){
+  
+  daten <- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm <- renderPlot(hist(daten()))
+  output$dichte <- renderPlot(plot(density(daten())))
+  
+}
+
+```
+
+2. Erweitere nun das Layout unserer Normalverteilungsapp mit einem `tabsetPanel` auf oberster Ebene im `mainPanel` und ergänze zwei `tabPanel` mit Titeln `"Histogramm"` und `"Dichteplot"`. 
+
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX),
+        XX(XX)
+        )
+      )
+    )
+  )
+
+```
+
+3. Platziere nun den bisherigen `plotOutput` im ersten `tabPanel` und platziere einen `plotOutput` für den Dichteplot im zweiten `tabPanel`. Achte darauf, dass du den `plotOutputs` die richtigen IDs gibts (siehe `server`). 
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX,
+           XX(XX)
+           ),
+        XX(XX,
+           XX(XX)
+           )
+        )
+      )
+    )
+  )
+
+```
+
+4. Lasse jezt die App einmal laufen. Du solltest nun zwei Tabs im Main Panel sehen, zwischen denen du wechselt kannst, um die zwei verschiedenen Plots zu sehen.  
+
+
+```{r, eval = FALSE}
 
 ui <- fluidPage(
-  tabsetPanel(
-    tabPanel("Import data", 
-      fileInput("file", "Data", buttonLabel = "Upload..."),
-      textInput("delim", "Delimiter (leave blank to guess)", ""),
-      numericInput("skip", "Rows to skip", 0, min = 0),
-      numericInput("rows", "Rows to preview", 10, min = 1)
+  titlePanel("Normalverteilung"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("stichprobengrösse", "Beobachtungen:", min = 0, max = 100, value = 30),
+      sliderInput("mittelwert", "Mittelwert:", min = -5, max = 5, value = 0, step = .5),
+      sliderInput("streuung", "Streuung:", min = 0, max = 2, value = 1, step = .1)
+
     ),
-    tabPanel("Set parameters"),
-    tabPanel("Visualise results")
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Histogramm", plotOutput("histogramm")),
+        tabPanel("Dichteplot", plotOutput("dichte"))
+      )
+    )
   )
 )
 
+server = function(input, output, sesssion){
+  
+  daten <- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm <- renderPlot(hist(daten()))
+  output$dichte <- renderPlot(plot(density(daten())))
+  
+}
+
+shinyApp(ui, server)
+
 ```
 
-### C - Something with HTML
+### C - Normalverteilung 3.0
+
+1. In der dritten Iteration der Normalverteilungsapp, verwenden wir etwas HTML um die Titel und Inhalte der den `tabPanel`s im `tabsetPanel` anzupassen. Zuerst die Überschriften. Erstze die Titel `"Histogramm"` und "`Dichteplot`" durch `icon("chart-column")` und `icon("chart-line")`. Lasse dann die App einmal laufen. Nun sollten passende HTML-Icons anstatt der ursprünglichen Titel zu sehen sein.  
+
+
+2. Im nächsten Schritt ergänze zwei HTML Paragraphen-Tags `tags$p` oberhalb der Plots im Main Panel. Lasse dann wieder App laufen. Siehst du einen Unterschied zu vorher?
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  XX(XX = XX),
+  XX(
+    XX(
+      XX,
+      XX,
+      XX
+    ),
+    XX(
+      XX(
+        XX(XX,
+           XX$XX(),
+           XX(XX)
+           ),
+        XX(XX,
+           XX$XX(),
+           XX(XX)
+           )
+        )
+      )
+    )
+  )
+
+```
+
+3. Der Ergänzen der `tags$p` sollte keinen grossen Unterschied erzeugt haben, weil noch kein Inhalt vorhanden war. Das ändern wir jetzt. Setze folgenden Code in `HTML` Funkionen innerhalb der beiden Paragraphen. Du siehst, dass der Code mehrere HTML Elemente beinhaltet. Das Element `<br>` fügt Leerzeilen ein und `<a>` sorgt für Link mit hinterlegter Link-URL.  
+
+- `"<br><br>Die Graphik zeigt ein Histogramm einer Normalverteilung. Lerne mehr über Histogrammer <a href='https://de.wikipedia.org/wiki/Histogramm'><b>hier</b></a>."`
+- `"<br><br>Die Graphik zeigt einen Dichteplot einer Normalverteilung. Lerne mehr über Dichte <a href='https://de.wikipedia.org/wiki/Wahrscheinlichkeitsdichtefunktion'><b>hier</b></a>."`
+
+
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel(HTML("<font style='color:grey;text-transform:uppercase'>Normalverteilung</font>")),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("stichprobengrösse", "grey:", min = 0, max = 100, value = 30),
+      sliderInput("mittelwert", "Mittelwert:", min = -5, max = 5, value = 0, step = .5),
+      sliderInput("streuung", "Streuung:", min = 0, max = 2, value = 1, step = .1)
+
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel(icon("chart-column"), 
+                 tags$p(HTML("<br><br>Die Graphik zeigt ein Histogramm einer Normalverteilung. Lerne mehr über Histogrammer <a href='https://de.wikipedia.org/wiki/Histogramm'><b>hier</b></a>.")),
+                 plotOutput("histogramm")),
+        tabPanel(icon("chart-line"), 
+                 tags$p(HTML("<br><br>Die Graphik zeigt einen Dichteplot einer Normalverteilung. Lerne mehr über Dichte <a href='https://de.wikipedia.org/wiki/Wahrscheinlichkeitsdichtefunktion'><b>hier</b></a>.")),
+                 plotOutput("dichte"))
+      )
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+  
+  daten <- reactive({
+    rnorm(n = input$stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$histogramm <- renderPlot(hist(daten()))
+  output$dichte <- renderPlot(plot(density(daten())))
+  
+}
+
+shinyApp(ui, server)
+
+```
+
+4. Lasse die App laufen. Ist der neue Text zu sehen und funktioniert der Link zu den jeweiligen Wikipediaseiten?
+
+
+### D - Verteilungen
+
+1. Unten ist eine App zu sehen, die über eine `navbarPage` die Normalverteilungsapp und eine vergleichbare App für Exponentialverteilungen integriert. Hier und da fehlen allerdings Code Elemente. Kannst du App wieder zum laufen bringen?
+
+```{r, echo = TRUE, eval = FALSE}
+
+ui <- XX(
+  "Verteilungen",
+  XX("Normalverteilung", 
+    titlePanel("Normalverteilung"),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput("norm_stichprobengrösse", "Beobachtungen:", min = 0, max = 100, value = 30),
+        sliderInput("mittelwert", "Mittelwert:", min = -5, max = 5, value = 0, step = .5),
+        sliderInput("streuung", "Streuung:", min = 0, max = 2, value = 1, step = .1)
+  
+      ),
+      mainPanel(
+        tabsetPanel(
+          tabPanel(icon("chart-column"), plotOutput(XX)),
+          tabPanel(icon("chart-line"), plotOutput(XX))
+        )
+      )
+    )
+  ),
+  XX("Exponentialverteilung", 
+    titlePanel("Exponentialverteilung"),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput("exp_stichprobengrösse", "Beobachtungen:", min = 0, max = 100, value = 10),
+        sliderInput("rate", "Rate:", min = 0, max = 5, value = 1, step = .5),
+      ),
+      mainPanel(
+        tabsetPanel(
+          tabPanel(icon("chart-column"), plotOutput(XX)),
+          tabPanel(icon("chart-line"), plotOutput(XX))
+        )
+      )
+    )
+  )
+)
+
+server = function(input, output, sesssion){
+  
+  normalverteilung <- reactive({
+    rnorm(n = input$norm_stichprobengrösse, 
+          mean = input$mittelwert,
+          sd = input$streuung)
+    })
+  
+  output$norm_histogramm <- renderPlot(hist(normalverteilung()))
+  output$norm_dichte <- renderPlot(plot(density(normalverteilung())))
+  
+  exponentialverteilung <- reactive({
+    rexp(n = input$exp_stichprobengrösse,
+         rate = input$rate)
+    })
+    
+  output$exp_histogramm <- renderPlot(hist(exponentialverteilung()))
+  output$exp_dichte <- renderPlot(plot(density(exponentialverteilung())))
+  
+}
+
+shinyApp(ui, server)
+
+```
 
 
 
