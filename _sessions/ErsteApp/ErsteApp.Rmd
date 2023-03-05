@@ -911,7 +911,7 @@ shinyApp(ui, server)
     <li><span> (2) Speichere die App</span></li>
     <li><span> (3) Teste mit Cmd/Ctrl + Shift + Enter</span></li>
     <li><span> (4) Teste die App häufig</span></li>
-  <uul>
+  <ul>
 </ul>
 
 ]

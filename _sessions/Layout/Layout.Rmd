@@ -86,18 +86,19 @@ library(tidyverse)
 .pull-right5[
 <br><br><br>
 <p align = "center">
-  <img src = "image/agenda.png" height = 460px>
+  <img src = "image/agenda.png" height = 500px>
 </p>
 
 ]
 ---
 
-# Einseitige Layouts
+# Layoutelemente
 
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Einseitige Layouts können durch eine <high>Kombination</high> mehrere Elemente erstellt werden</span></li>
+  <li class="m1"><span>Layouts können ein- oder mehrsetig sein</span></li>
+  <li class="m2"><span>Die einzelnene Elemente können <high>flexibel kombinert</high> werden</span></li>
 </ul>
 
 ]
@@ -116,7 +117,7 @@ library(tidyverse)
     <td><mono>fluidPage() fixedPage()</mono></td>
   </tr>
   <tr style="padding:20px;background-color:white">
-    <td style="padding:20pxr">Laouts</td>
+    <td style="padding:20pxr">Layouts</td>
     <td><mono>sidebarLayout() splitLayout() verticalLayout</mono></td>
   </tr> 
   <tr style="padding:20px;background-color:white">
@@ -127,6 +128,10 @@ library(tidyverse)
     <td style="padding:20pxr">Grid</td>
     <td><mono>fluidRow() fixedRow() column()</mono></td>
   </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr">Mehrseiten</td>
+    <td><mono>tabsetPanel() navlistPanel()  navbarPage()</mono></td>
+  </tr>
 </table>
 
 
@@ -136,12 +141,11 @@ library(tidyverse)
 
 .pull-left4[
 
-# <mono>*Page()</mono>
+# Pages
 
 <ul>
-  <li class="m1"><span><mono>*Page()</mono> Funktionen kreieren leere Webseiten</span></li>
+  <li class="m1"><span>Page-Funktionen kreieren leere HTML-Seite</span></li>
   <li class="m2"><span>Funktionen variieren darin wie sie mit unterschiedlichen <high>Displaygrössen</high> umgehen.</span></li>
-  <li class="m3"><span><mono>fixedPage()</mono> hat eine feste Breite.</span></li>
 </ul>
 
 <br>
@@ -158,7 +162,7 @@ ui <- fluidPage()
 
 <br><br><br>
 <p align = "center">
-  <img src = "image/fluidPage.png" height = 460px>
+  <img src = "image/fluidPage.png" height = 500px>
 </p>
 
 ]
@@ -167,7 +171,227 @@ ui <- fluidPage()
 
 .pull-left4[
 
-# <mono>*Page()</mono>
+# Layout
+
+<ul>
+  <li class="m1"><span>Layout-Funktionen <high>strukturieren</high> die HTML-Seite</span></li>
+  <li class="m2"><span>Funktionen variieren darin wie sie die Seite strukturieren.</span></li>
+
+
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  sidebarLayout(sidebarPanel = ..., 
+                mainPanel = ... ,
+                position = ...)
+)
+
+```
+
+
+]
+
+.pull-right5[
+
+<br><br><br>
+<p align = "center">
+  <img src = "image/sidebar.png" height = 500px>
+</p>
+
+]
+
+
+---
+
+.pull-left4[
+
+# Panels
+
+<ul>
+  <li class="m1"><span>Panels kreieren spezifische Container innerhalb der HTML-Seite oder Layoutstruktur</span></li>
+  <li class="m2"><span>Panels können innerhalb oder ausserhalb von Layouts plaziert werden.</span></li>
+
+
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel(),
+  sidebarLayout(sidebarPanel(), 
+                mainPanel())
+)
+
+```
+
+
+]
+
+.pull-right5[
+
+<br><br><br>
+<p align = "center">
+  <img src = "image/sidebarpanels.png" height = 460px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Grid
+
+<ul>
+  <li class="m1"><span><mono>*Row</mono> und <mono>column</mono> Funktionen kreieren ein Container-Grid</span></li>
+  <li class="m2"><span>Funktionieren auf jeder Ebene.</span></li>
+  <li class="m3"><span>`column` addiere zu max 12.</span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel(),
+  sidebarLayout(
+    sidebarPanel(), 
+    mainPanel(
+      fluidRow(
+        column(8),
+        column(4)
+        ),
+      fluidRow()
+      )))
+
+```
+
+
+]
+
+.pull-right5[
+
+<br><br><br>
+<p align = "center">
+  <img src = "image/grid.png" height = 500px>
+</p>
+
+]
+
+
+---
+
+# Tabs
+
+.pull-right4[
+
+<ul>
+  <li class="m1"><span>Tabs kreieren ein mehrseitiges Layout innerhalb einer Seite</span></li>
+  <li class="m2"><span>Die Tab-Seiten sind <high>Panels</high></span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel("Tabset Layout"),
+  tabsetPanel(
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+  )
+
+```
+
+
+]
+
+.pull-right5[
+
+<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tabset"></iframe>
+
+]
+
+---
+
+# Navlist
+
+.pull-right4[
+
+<ul>
+  <li class="m1"><span>Navlist kreieren ein mehrseitiges Layout innerhalb einer Seite</span></li>
+  <li class="m2"><span>Die List-Seiten sind <high>Panels</high></span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage(
+  titlePanel("Nalist Layout"),
+  navlistPanel(
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+  )
+
+```
+
+
+]
+
+.pull-right5[
+
+<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/navlist"></iframe>
+
+]
+
+---
+
+# Navbar
+
+.pull-right4[
+
+<ul>
+  <li class="m1"><span>Navbar ist (anders als Tabset oder Navbar) eine <high>Seite</high>.</span></li>
+  <li class="m2"><span>Die Tab-Seiten sind <high>Panels</high></span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- navbarPage(
+    title = "Navbar Page"
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+
+```
+
+
+]
+
+.pull-right5[
+
+<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/navbar"></iframe>
+
+]
+
+
 
 ---
 

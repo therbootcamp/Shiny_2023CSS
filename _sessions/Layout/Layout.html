@@ -73,18 +73,19 @@ layout: true
 .pull-right5[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;p align = "center"&gt;
-  &lt;img src = "image/agenda.png" height = 460px&gt;
+  &lt;img src = "image/agenda.png" height = 500px&gt;
 &lt;/p&gt;
 
 ]
 ---
 
-# Einseitige Layouts
+# Layoutelemente
 
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Einseitige Layouts können durch eine &lt;high&gt;Kombination&lt;/high&gt; mehrere Elemente erstellt werden&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Layouts können ein- oder mehrsetig sein&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Die einzelnene Elemente können &lt;high&gt;flexibel kombinert&lt;/high&gt; werden&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -103,7 +104,7 @@ layout: true
     &lt;td&gt;&lt;mono&gt;fluidPage() fixedPage()&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr style="padding:20px;background-color:white"&gt;
-    &lt;td style="padding:20pxr"&gt;Laouts&lt;/td&gt;
+    &lt;td style="padding:20pxr"&gt;Layouts&lt;/td&gt;
     &lt;td&gt;&lt;mono&gt;sidebarLayout() splitLayout() verticalLayout&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt; 
   &lt;tr style="padding:20px;background-color:white"&gt;
@@ -114,6 +115,10 @@ layout: true
     &lt;td style="padding:20pxr"&gt;Grid&lt;/td&gt;
     &lt;td&gt;&lt;mono&gt;fluidRow() fixedRow() column()&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;Mehrseiten&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;tabsetPanel() navlistPanel()  navbarPage()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/table&gt;
 
 
@@ -123,12 +128,11 @@ layout: true
 
 .pull-left4[
 
-# &lt;mono&gt;*Page()&lt;/mono&gt;
+# Pages
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;*Page()&lt;/mono&gt; Funktionen kreieren leere Webseiten&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Page-Funktionen kreieren leere HTML-Seite&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Funktionen variieren darin wie sie mit unterschiedlichen &lt;high&gt;Displaygrössen&lt;/high&gt; umgehen.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m3"&gt;&lt;span&gt;&lt;mono&gt;fixedPage()&lt;/mono&gt; hat eine feste Breite.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -144,10 +148,230 @@ ui &lt;- fluidPage()
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;p align = "center"&gt;
-  &lt;img src = "image/fluidPage.png" height = 460px&gt;
+  &lt;img src = "image/fluidPage.png" height = 500px&gt;
 &lt;/p&gt;
 
 ]
+
+---
+
+.pull-left4[
+
+# Layout
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Layout-Funktionen &lt;high&gt;strukturieren&lt;/high&gt; die HTML-Seite&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Funktionen variieren darin wie sie die Seite strukturieren.&lt;/span&gt;&lt;/li&gt;
+
+
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  sidebarLayout(sidebarPanel = ..., 
+                mainPanel = ... ,
+                position = ...)
+)
+```
+
+
+]
+
+.pull-right5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/sidebar.png" height = 500px&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+.pull-left4[
+
+# Panels
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Panels kreieren spezifische Container innerhalb der HTML-Seite oder Layoutstruktur&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Panels können innerhalb oder ausserhalb von Layouts plaziert werden.&lt;/span&gt;&lt;/li&gt;
+
+
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  titlePanel(),
+  sidebarLayout(sidebarPanel(), 
+                mainPanel())
+)
+```
+
+
+]
+
+.pull-right5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/sidebarpanels.png" height = 460px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+.pull-left4[
+
+# Grid
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;*Row&lt;/mono&gt; und &lt;mono&gt;column&lt;/mono&gt; Funktionen kreieren ein Container-Grid&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Funktionieren auf jeder Ebene.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;`column` addiere zu max 12.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  titlePanel(),
+  sidebarLayout(
+    sidebarPanel(), 
+    mainPanel(
+      fluidRow(
+        column(8),
+        column(4)
+        ),
+      fluidRow()
+      )))
+```
+
+
+]
+
+.pull-right5[
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/grid.png" height = 500px&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+# Tabs
+
+.pull-right4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Tabs kreieren ein mehrseitiges Layout innerhalb einer Seite&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Die Tab-Seiten sind &lt;high&gt;Panels&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  titlePanel("Tabset Layout"),
+  tabsetPanel(
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+  )
+```
+
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tabset"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# Navlist
+
+.pull-right4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Navlist kreieren ein mehrseitiges Layout innerhalb einer Seite&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Die List-Seiten sind &lt;high&gt;Panels&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  titlePanel("Nalist Layout"),
+  navlistPanel(
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+  )
+```
+
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/navlist"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# Navbar
+
+.pull-right4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Navbar ist (anders als Tabset oder Navbar) eine &lt;high&gt;Seite&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Die Tab-Seiten sind &lt;high&gt;Panels&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- navbarPage(
+    title = "Navbar Page"
+    tabPanel("Panel A",
+             "Das ist Panel A"),
+    tabPanel("Panel B",
+             "Das ist Panel B"),
+    tabPanel("Panel C",
+             "Das ist Panel C")
+    )
+```
+
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/navbar"&gt;&lt;/iframe&gt;
+
+]
+
+
 
 ---
 

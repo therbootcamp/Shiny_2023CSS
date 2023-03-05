@@ -1,0 +1,13 @@
+name: navlist
+title: navlist
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8480970
+bundleId: 6917933
+url: https://dirkwulff.shinyapps.io/navlist/
+when: 1678030438.56895
+lastSyncTime: 1678030438.56897
+asMultiple: FALSE
+asStatic: FALSE

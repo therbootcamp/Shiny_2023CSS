@@ -1,0 +1,13 @@
+name: navbar
+title: navbar
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8480940
+bundleId: 6917922
+url: https://dirkwulff.shinyapps.io/navbar/
+when: 1678030160.42728
+lastSyncTime: 1678030160.4273
+asMultiple: FALSE
+asStatic: FALSE
