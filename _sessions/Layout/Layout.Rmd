@@ -97,7 +97,7 @@ library(tidyverse)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Layouts können ein- oder mehrsetig sein</span></li>
+  <li class="m1"><span>Layouts können ein- oder mehrseitig sein</span></li>
   <li class="m2"><span>Die einzelnene Elemente können <high>flexibel kombinert</high> werden</span></li>
 </ul>
 
@@ -249,7 +249,7 @@ ui <- fluidPage(
 <ul>
   <li class="m1"><span><mono>*Row</mono> und <mono>column</mono> Funktionen kreieren ein Container-Grid</span></li>
   <li class="m2"><span>Funktionieren auf jeder Ebene.</span></li>
-  <li class="m3"><span>`column` addiere zu max 12.</span></li>
+  <li class="m3"><span><mono>column</mono> addieren zu 12</span></li>
 </ul>
 
 <br>
@@ -398,9 +398,9 @@ ui <- navbarPage(
 # HTML
 
 <ul>
-  <li class="m1"><span>Shiny wird in HTML, CSS und javascript <high>übersetzt</high></span></li>
+  <li class="m1"><span>Shiny wird in HTML, CSS und JavaScript <high>übersetzt</high></span></li>
   <li class="m2"><span>Shiny is kompatibel mit Code in diesen Sprachen</high></span></li>
-  <li class="m3"><span>Shiny verwendet den <a href="https://getbootstrap.com/">Bootstrap</a> Framework</high></span></li>
+  <li class="m3"><span>Shiny verwendet das <a href="https://getbootstrap.com/">Bootstrap</a> Framework</high></span></li>
 </ul>
 
 ]
@@ -420,7 +420,7 @@ ui <- navbarPage(
 # <mono>tags</mono>
 
 <ul>
-  <li class="m1"><span>Die <mono>tags</mono>stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
+  <li class="m1"><span>Die <mono>tags</mono> Liste stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
   <li class="m2"><span>Diese <mono>tags</mono> können mit Shiny <high>austauschbar</high> verwendet werden.</span></li>
 </ul>
 
@@ -448,7 +448,7 @@ names(tags)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Die <mono>tags</mono>stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
+  <li class="m1"><span>Die <mono>tags</mono> Liste stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
   <li class="m2"><span>Diese <mono>tags</mono> können mit Shiny <high>austauschbar</high> verwendet werden.</span></li>
 </ul>
 

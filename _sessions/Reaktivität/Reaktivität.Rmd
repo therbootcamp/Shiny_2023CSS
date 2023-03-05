@@ -339,7 +339,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>reactive()</mono> kreiert ein "einfaches" reaktives Objekte</span></li>
+  <li class="m1"><span><mono>reactive()</mono> kreiert ein "einfaches" reaktives Objekt</span></li>
   <li class="m2"><span>Ein <mono>reactive</mono> kann nicht überschrieben werden.</span></li>
 </ul>
 
@@ -359,7 +359,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>eventReactive()</mono> kreiert eine `reactive` in Abhängigkeit einer Bedingung</span></li>
+  <li class="m1"><span><mono>eventReactive()</mono> kreiert eine <mono>reactive</mono> in Abhängigkeit einer Bedingung</span></li>
 </ul>
 
 ]
@@ -441,7 +441,7 @@ server <- function(input, output, session) {
     string(paste0("Hallo ", input$name, "!"))
   })
   
-  output$grüsse <- renderText(string$x)
+  output$grüsse <- renderText(string())
 }
 
 shinyApp(ui, server)
@@ -482,7 +482,7 @@ server <- function(input, output, session) {
     string$x = paste0("Hallo ", input$name, "!")
   })
   
-  output$grüsse <- renderText(string())
+  output$grüsse <- renderText(string$x)
 }
 
 shinyApp(ui, server)
@@ -561,7 +561,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>req()</mono> steht für <i>required</i> und auf verschiedene Wege als Bedingung eingesetzt werden</span></li>
+  <li class="m1"><span><mono>req()</mono> steht für <i>required</i> und kann auf verschiedene Wege als Bedingung eingesetzt werden</span></li>
   <li class="m2"><span>Es kann identifizieren, ob ein Input bereits verwendet wurde</span></li>
 </ul>
 
@@ -575,18 +575,16 @@ library(shiny)
 
 ui <- fluidPage(
   textInput("name", "Wie heisst Du?"),
-  actionButton("grüsse_mich", "Grüsse mich"),
   textOutput("grüsse")
-  )
+)
 
 server <- function(input, output, session) {
-  string = reactiveVal()
-  observeEvent(input$grüsse_mich, {
-    string(paste0("Hallo ", input$name, "!"))
-    })
+
+  output$grüsse <- renderText(
+    paste("Hallo", req(input$name))
+    )
   
-  output$grüsse <- renderText(string())
-  }
+}
 
 shinyApp(ui, server)
 
@@ -623,7 +621,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>observe()</mono> und <mono>isolate</mono> sind <high>fortgeschrittenere Tools</high>, die selten zum Einsatz kommen</span></li>
+  <li class="m1"><span><mono>observe()</mono> und <mono>isolate()</mono> sind <high>fortgeschrittenere Tools</high>, die selten zum Einsatz kommen</span></li>
 </ul>
 
 ]
