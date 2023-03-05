@@ -257,7 +257,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Mehrere reaktiver Funktionen für <high>verschiedene Zwecke</high></span></li>
+  <li class="m1"><span>Mehrere reaktive Funktionen für <high>verschiedene Zwecke</high></span></li>
   <li class="m2"><span>Ermöglichen <high>komplexe Interaktionen</high></span></li>
   <li class="m3"><span>Denken als Funktionen</high></span></li>
 </ul>
@@ -301,7 +301,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>reactive()</mono> kreiert ein "einfaches" reaktives Objekte</span></li>
+  <li class="m1"><span><mono>reactive()</mono> kreiert ein "einfaches" reaktives Objekt</span></li>
   <li class="m2"><span>Ein <mono>reactive</mono> kann nicht überschrieben werden.</span></li>
 </ul>
 
