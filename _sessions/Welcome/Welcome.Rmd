@@ -68,7 +68,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 # Ziel
 
->###Das Ziel dieses Kurses ist Euch den kompetenten Shiny für die Erstellung von Dashboards und Web-Apps und  zu vermitteln. 
+>###Das Ziel dieses Kurses ist, Euch den kompetenten Umgang mit Shiny für die Erstellung von Dashboards und Web-Apps und zu vermitteln. 
 
 ]
 
