@@ -68,20 +68,32 @@ library(tidyverse)
 ```
 
 
+.pull-left3[
+
 # Agenda
 
 
-showError
+<ul>
+  <li class="m1"><span>Upload</span></li>
+  <li class="m2"><span>Download</span></li>
+</ul>
 
-renderUI...
+]
 
+.pull-right6[
+<br><br><br>
+<p align = "center">
+  <img src = "image/agenda.jpg" height = 420px><br>
+  from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</>
+</p>
 
+]
 
 ---
 
 class: middle, center
 
-<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html">Practical</a></h1>
+<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Interaktivität/Interaktivität_practical.html">Practical</a></h1>
 
 
 

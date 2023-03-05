@@ -67,7 +67,7 @@ library(tidyverse)
 ```
 
 
-.pull-left4[
+.pull-left3[
 
 # Agenda
 
@@ -85,14 +85,14 @@ library(tidyverse)
 
 ]
 
-.pull-right5[
+.pull-right6[
 <br><br><br>
 <p align = "center">
-  <img src = "image/agenda.png" height = 460px>
+  <img src = "image/agenda.jpg" height = 420px><br>
+  from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</>
 </p>
 
 ]
-
 ---
 
 # Erste App
