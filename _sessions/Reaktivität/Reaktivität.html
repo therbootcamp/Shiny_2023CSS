@@ -359,7 +359,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactive()&lt;/mono&gt; kreiert ein "einfaches" reaktives Objekte&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactive()&lt;/mono&gt; kreiert ein "einfaches" reaktives Objekt&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Ein &lt;mono&gt;reactive&lt;/mono&gt; kann nicht überschrieben werden.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -379,7 +379,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;eventReactive()&lt;/mono&gt; kreiert eine `reactive` in Abhängigkeit einer Bedingung&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;eventReactive()&lt;/mono&gt; kreiert eine &lt;mono&gt;reactive&lt;/mono&gt; in Abhängigkeit einer Bedingung&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -460,7 +460,7 @@ server &lt;- function(input, output, session) {
     string(paste0("Hallo ", input$name, "!"))
   })
   
-  output$grüsse &lt;- renderText(string$x)
+  output$grüsse &lt;- renderText(string())
 }
 
 shinyApp(ui, server)
@@ -500,7 +500,7 @@ server &lt;- function(input, output, session) {
     string$x = paste0("Hallo ", input$name, "!")
   })
   
-  output$grüsse &lt;- renderText(string())
+  output$grüsse &lt;- renderText(string$x)
 }
 
 shinyApp(ui, server)
@@ -577,7 +577,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;req()&lt;/mono&gt; steht für &lt;i&gt;required&lt;/i&gt; und auf verschiedene Wege als Bedingung eingesetzt werden&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;req()&lt;/mono&gt; steht für &lt;i&gt;required&lt;/i&gt; und kann auf verschiedene Wege als Bedingung eingesetzt werden&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Es kann identifizieren, ob ein Input bereits verwendet wurde&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -591,18 +591,16 @@ library(shiny)
 
 ui &lt;- fluidPage(
   textInput("name", "Wie heisst Du?"),
-  actionButton("grüsse_mich", "Grüsse mich"),
   textOutput("grüsse")
-  )
+)
 
 server &lt;- function(input, output, session) {
-  string = reactiveVal()
-  observeEvent(input$grüsse_mich, {
-    string(paste0("Hallo ", input$name, "!"))
-    })
+
+  output$grüsse &lt;- renderText(
+    paste("Hallo", req(input$name))
+    )
   
-  output$grüsse &lt;- renderText(string())
-  }
+}
 
 shinyApp(ui, server)
 ```
@@ -638,7 +636,7 @@ shinyApp(ui, server)
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;observe()&lt;/mono&gt; und &lt;mono&gt;isolate&lt;/mono&gt; sind &lt;high&gt;fortgeschrittenere Tools&lt;/high&gt;, die selten zum Einsatz kommen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;observe()&lt;/mono&gt; und &lt;mono&gt;isolate()&lt;/mono&gt; sind &lt;high&gt;fortgeschrittenere Tools&lt;/high&gt;, die selten zum Einsatz kommen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
