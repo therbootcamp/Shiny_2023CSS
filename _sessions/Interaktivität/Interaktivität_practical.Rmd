@@ -1,7 +1,7 @@
 ---
 title: "Interaktivität"
 subtitle: ""
-author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+author: "<font style='font-style:normal'>Dashboards mit Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -62,10 +62,10 @@ ui <- fluidPage(
 
 ```
 
-2. In die mittlere `column` füge nun diese beiden Inputs ein.
+2. In die mittleren `column` füge nun diese beiden Inputs ein.
 
 - `radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0))`
-- `radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)`
+- `radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0))`
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -105,7 +105,7 @@ server <- function(input, output, session){
 5. Teste die App. Ändert sich der Text der Fasnacht-Frage, wenn du eine der drei Städte in der ersten Frage auswählst?
 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 
 ui <- fluidPage(
   fluidRow(
@@ -226,10 +226,10 @@ server <- function(input, output, session){
 
 ```
 
-5. Teste die App. erscheint die zweite Frage nur bei Luzern und Basel?
+5. Teste die App. Erscheint die zweite Frage nur bei Luzern und Basel?
 
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 
 ui <- fluidPage(
   fluidRow(
@@ -273,6 +273,7 @@ shinyApp(ui, server)
 
 library(tools)
 library(tidyverse)
+library(shinyFeedback)
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -349,6 +350,7 @@ shinyApp(ui, server)
 
 library(tools)
 library(tidyverse)
+library(shinyFeedback)
 
 ui <- fluidPage(
   titlePanel("DataViewer"),
@@ -423,7 +425,7 @@ shinyApp(ui, server)
 
 ## App
 
-1. Jetzt geht es darum etwas mehr Interaktivität in die App einzubauen, um die Nutzerfreundlichkeit zu erhöhen. Zuerst bauen wir einen Schalter ein, der die Körperteil- und Alterseinstellung mit einem Mal zurücksetzt. Definiere einen `actionButton` unterhalb der anderen drei Schalter im `sidebarPanel`. Setze die ID auf `zurücksetzen` und das Label auf `Zurücksetzen`. Setze zudem `width = 100%`, um den Schalter über die volle Breite des `sidebarPanel`s gehen zu lassen. Bei der Gelegenheit kannst du die Bereite der drei Schalter auf `"32.5%"` setzen, damit sie dies auch tun. Beachte, dass wir im Code unten die anderen Parameter der Elemente aus *Gründen der Überssicht weggelassen haben.   
+1. Jetzt geht es darum etwas mehr Interaktivität in die App einzubauen, um die Nutzerfreundlichkeit zu erhöhen. Zuerst bauen wir einen Schalter ein, der die Körperteil- und Alterseinstellung mit einem Mal zurücksetzt. Definiere einen `actionButton` unterhalb der anderen drei Schalter im `sidebarPanel`. Setze die ID auf `zurücksetzen` und das Label auf `Zurücksetzen`. Setze zudem `width = "100%"`, um den Schalter über die volle Breite des `sidebarPanel`s gehen zu lassen. Bei der Gelegenheit kannst du die Bereite der drei Schalter auf `"32.5%"` setzen, damit sie dies auch tun. Beachte, dass wir im Code unten die anderen Parameter der Elemente aus *Gründen der Übersicht* weggelassen haben.   
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -449,7 +451,7 @@ observeEvent(XX, {
 
 ```
 
-3. Der Code im `observeEvent` soll nun die Körperteile und das Alter zurücksetzen bzw. die zugehören UI Inputs. Dafür kannst die Funktionen `updateSelectInput` und `updateSliderInput` verwendent. Gebe jeweils über die InputID (`"körperteil"` bzw `"alter"`) an welcher Input genau zu ändern ist und dann verwende die anderen Argumente um die Einstellungen zurückzusetzen. Verwende `selected = character(0)` um den `selectInput` zu ändern und `value = c(0, 110` um den `sliderInput` zu ändern.  
+3. Der Code im `observeEvent` soll nun die Körperteile und das Alter zurücksetzen bzw. die zugehören UI Inputs. Dafür kannst die Funktionen `updateSelectInput` und `updateSliderInput` verwenden. Gebe jeweils über die InputID (`"körperteil"` bzw `"alter"`) an, welcher Input genau zu ändern ist und dann verwende die anderen Argumente um die Einstellungen zurückzusetzen. Verwende `selected = character(0)` um den `selectInput` zu ändern und `value = c(0, 110)` um den `sliderInput` zu ändern.  
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -465,7 +467,7 @@ observeEvent(XX, {
 
 4. Teste die App. Werden die Körper- und Altereinstellungen zurückgesetzt wenn du den Schalter drückst?
 
-5. Die zweite Änderung betrifft den Upload. Beim Upload kann man einige Fehler erzeugen, wenn man zum Beispiel Daten vom falschen Dateityp hochlädt oder der eingelesene Datensatz die falschen Variablen beinhaltet. Um diese Fehler zu minimieren wollen wir etwas mehr Interaktivität einbauen. Wir uns um mögliche Fehler beim Dateityp. Gehe zum `observeEvent`, dass das Einlesen durchführt, und kreiere mittels `file_ext` aus dem `tools` Paket (Laden nicht vergessen) vor dem Einlesen ein Objekt mit der Dateiendung der einzulesenden Datei. Stelle als Argument den Dateipfad aus der Download UI zur verfügung. 
+5. Die zweite Änderung betrifft den Upload. Beim Upload kann man einige Fehler erzeugen, wenn man zum Beispiel Daten vom falschen Dateityp hochlädt oder der eingelesene Datensatz die falschen Variablen beinhaltet. Um diese Fehler zu minimieren wollen wir etwas mehr Interaktivität einbauen. Wir kümmern uns um mögliche Fehler beim Dateityp. Gehe zum `observeEvent`, dass das Einlesen durchführt, und kreiere mittels `file_ext` aus dem `tools` Paket (Laden nicht vergessen) vor dem Einlesen ein Objekt mit der Dateiendung der einzulesenden Datei. Stelle als Argument den Dateipfad aus der Download UI zur Verfügung. 
 
 
 ```{r, echo = TRUE, eval = FALSE}
@@ -502,7 +504,7 @@ observeEvent(input$hochladen, {
 
 ```
 
-7. Der `if`-Teil ist fertig. Im `else`-Teil gilt es jedoch noch etwas Arbeit zu verrichten. Der `else`-Teil soll eine Nachricht auslösen, die uns verrät, dass wir den falschen Dateitüp hochgeladen haben. Dies machst du am besten mit `showFeedbackWarning` oder `showFeedbackDanger` aus dem `shinyFeedback` Paket. Stelle als Argumente die ID des UI Elements, für das die Warnung ausgegeben werden soll, und einen Text (z.B. `"Nur RDS Dateien können geladen werden!"`) als Warnung oder Fehlernachricht bereit.   
+7. Der `if`-Teil ist fertig. Im `else`-Teil gilt es jedoch noch etwas Arbeit zu verrichten. Der `else`-Teil soll eine Nachricht auslösen, die uns verrät, dass wir den falschen Dateityp hochgeladen haben. Dies machst du am besten mit `showFeedbackWarning` oder `showFeedbackDanger` aus dem `shinyFeedback` Paket. Stelle als Argumente die ID des UI Elements, für das die Warnung ausgegeben werden soll, und einen Text (z.B. `"Nur RDS Dateien können geladen werden!"`) als Warnung oder Fehlernachricht bereit.   
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -524,15 +526,15 @@ observeEvent(input$hochladen, {
 
 ```
 
-8. Bevor die Fehlermeldung nun angezeigt werden kann, gilt es eine spezielle Funktion in das `tabPanel` einzubauen, die im Hintergrund den nötigen javascript Code lädt. Setze dafür als erstes Element des `tabPanel` die Funktion `useShinyFeedback()`. Teste danach die App. Versuche zum Beispiel den Covid Datensatz (`"covid.csv"`) hochzuladen. Erscheint eine Fehlermeldung?
+8. Bevor die Fehlermeldung nun angezeigt werden kann, gilt es eine spezielle Funktion in das `tabPanel` einzubauen, die im Hintergrund den nötigen javascript Code lädt. Setze dafür als zweites Element des `tabPanel` die Funktion `useShinyFeedback()`. Teste danach die App. Versuche zum Beispiel den Covid Datensatz (`"covid.csv"`) hochzuladen. Erscheint eine Fehlermeldung?
 
       
 ```{r, echo = TRUE, eval = FALSE}
 
 # Upload
 tabPanel(
-  useShinyFeedback(),
   title,
+  useShinyFeedback(),
   h2(),
   h4(),
   br(),
@@ -541,7 +543,7 @@ tabPanel(
 
 ```
     
-9. Als letztes wollen, dass die Fehlermeldung irgendwann wieder verschwindet. Ein Weg dies zu Implementieren, ist mit `Sys.sleep` eine Systempause einzulegen und dann `on.exit()` `hideFeedback()` laufen zu lassen. Setze dies einmal um, indem du eine 3-sekündige Pause (`Sys.sleep(3)`) innerhalb des `else`-statements setzt, sodass sie nur ausgeführt wird, wenn es ein Problem gab, und du das `on.exit` ausserhalb setzts. Vergiss nicht die richtige ID im `hideFeedback` zu setzen. 
+9. Als letztes wollen wir, dass die Fehlermeldung irgendwann wieder verschwindet. Ein Weg dies zu Implementieren, ist mit `Sys.sleep` eine Systempause einzulegen und dann `on.exit()` `hideFeedback()` laufen zu lassen. Setze dies einmal um, indem du eine 3-sekündige Pause (`Sys.sleep(3)`) innerhalb des `else`-statements setzt, sodass sie nur ausgeführt wird, wenn es ein Problem gab, und du das `on.exit` ausserhalb setzt. Vergiss nicht die richtige ID im `hideFeedback` zu setzen. 
 
 ```{r, echo = TRUE, eval = FALSE}
 

@@ -9,18 +9,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Interaktivität</title>
 
-<script src="Interaktivität_practical_files/header-attrs-2.20/header-attrs.js"></script>
-<script src="Interaktivität_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="Interaktivität_practical_files/header-attrs-2.20/header-attrs.js"></script>
+<script src="Interaktivität_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="Interaktivität_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="Interaktivität_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="Interaktivität_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="Interaktivität_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="Interaktivität_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="Interaktivität_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="Interaktivität_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="Interaktivität_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -30,9 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="Interaktivität_practical_files/navigation-1.1/tabsets.js"></script>
-<link href="Interaktivität_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="Interaktivität_practical_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="Interaktivität_practical_files/navigation-1.1/tabsets.js"></script>
+<link href="Interaktivität_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="Interaktivität_practical_files/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Interaktivität</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -230,12 +230,12 @@ Layout bestehend aus einer Zeile und drei <code>column</code>s mit
   )
 )</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>In die mittlere <code>column</code> füge nun diese beiden Inputs
+<li>In die mittleren <code>column</code> füge nun diese beiden Inputs
 ein.</li>
 </ol>
 <ul>
 <li><code>radioButtons("wohnort", "Wohnort", choices = c("Luzern", "Zürich", "Basel"), selected = character(0))</code></li>
-<li><code>radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0)</code></li>
+<li><code>radioButtons("fasnacht", "Hast du die Fasnacht besucht?", choices = c("ja", "nein"), selected = character(0))</code></li>
 </ul>
 <pre class="r"><code>ui &lt;- fluidPage(
   XX(
@@ -271,29 +271,6 @@ zu ändern.</p></li>
 <li>Teste die App. Ändert sich der Text der Fasnacht-Frage, wenn du eine
 der drei Städte in der ersten Frage auswählst?</li>
 </ol>
-<pre class="r"><code>ui &lt;- fluidPage(
-  fluidRow(
-    column(4),
-    column(4,
-      titlePanel(&quot;Fasnacht&quot;),
-      radioButtons(&quot;wohnort&quot;, &quot;Wohnort&quot;, choices = c(&quot;Luzern&quot;, &quot;Zürich&quot;, &quot;Basel&quot;), selected = character(0)),
-      radioButtons(&quot;fasnacht&quot;, &quot;Hast du die Fasnacht besucht?&quot;, choices = c(&quot;ja&quot;, &quot;nein&quot;), selected = character(0))
-          ),
-    column(4)
-    )
-  )
-
-server &lt;- function(input, output, session){
-  
-  observeEvent(input$wohnort, {
-    
-    updateRadioButtons(inputId = &quot;fasnacht&quot;, label = paste0(&quot;Hast du die &quot;,input$wohnort,&quot;er Fasnacht besucht?&quot;))
-    
-  })
-  
-}
-
-shinyApp(ui, server)</code></pre>
 </div>
 <div id="b---fasnacht-2.0" class="section level3">
 <h3>B - Fasnacht 2.0</h3>
@@ -387,39 +364,9 @@ der <code>renderUI</code> Funktion.</li>
   
 }</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>Teste die App. erscheint die zweite Frage nur bei Luzern und
+<li>Teste die App. Erscheint die zweite Frage nur bei Luzern und
 Basel?</li>
 </ol>
-<pre class="r"><code>ui &lt;- fluidPage(
-  fluidRow(
-    column(4),
-    column(4,
-      titlePanel(&quot;Fasnacht&quot;),
-      radioButtons(&quot;wohnort&quot;, &quot;Wohnort&quot;, choices = c(&quot;Luzern&quot;, &quot;Zürich&quot;, &quot;Basel&quot;), selected = character(0)),
-      uiOutput(&quot;fasnachts_frage&quot;)
-          ),
-    column(4)
-    )
-  )
-
-server &lt;- function(input, output, session){
-  
-  observeEvent(input$wohnort, {
-    
-    if(input$wohnort %in% c(&quot;Luzern&quot;, &quot;Basel&quot;)){
-      
-      output$fasnachts_frage = renderUI({
-         radioButtons(&quot;fasnacht&quot;, paste0(&quot;Hast du die &quot;,input$wohnort,&quot;er Fasnacht besucht?&quot;), 
-                      choices = c(&quot;ja&quot;, &quot;nein&quot;), selected = character(0))
-        })
-      
-      } else {
-      output$fasnacht = NULL
-    }
-    })
-  }
-
-shinyApp(ui, server)</code></pre>
 </div>
 <div id="c---dataviewer-4.0" class="section level3">
 <h3>C - DataViewer 4.0</h3>
@@ -432,6 +379,7 @@ du ihn zum Laufen bringen?</li>
 </ol>
 <pre class="r"><code>library(tools)
 library(tidyverse)
+library(shinyFeedback)
 
 ui &lt;- fluidPage(
   titlePanel(&quot;DataViewer&quot;),
@@ -510,12 +458,12 @@ ein, der die Körperteil- und Alterseinstellung mit einem Mal
 zurücksetzt. Definiere einen <code>actionButton</code> unterhalb der
 anderen drei Schalter im <code>sidebarPanel</code>. Setze die ID auf
 <code>zurücksetzen</code> und das Label auf <code>Zurücksetzen</code>.
-Setze zudem <code>width = 100%</code>, um den Schalter über die volle
+Setze zudem <code>width = "100%"</code>, um den Schalter über die volle
 Breite des <code>sidebarPanel</code>s gehen zu lassen. Bei der
 Gelegenheit kannst du die Bereite der drei Schalter auf
 <code>"32.5%"</code> setzen, damit sie dies auch tun. Beachte, dass wir
-im Code unten die anderen Parameter der Elemente aus *Gründen der
-Überssicht weggelassen haben.</li>
+im Code unten die anderen Parameter der Elemente aus <em>Gründen der
+Übersicht</em> weggelassen haben.</li>
 </ol>
 <pre class="r"><code>sidebarPanel(
   width = 3,
@@ -539,13 +487,13 @@ Zum Code kommen wir gleich.</li>
 <li>Der Code im <code>observeEvent</code> soll nun die Körperteile und
 das Alter zurücksetzen bzw. die zugehören UI Inputs. Dafür kannst die
 Funktionen <code>updateSelectInput</code> und
-<code>updateSliderInput</code> verwendent. Gebe jeweils über die InputID
-(<code>"körperteil"</code> bzw <code>"alter"</code>) an welcher Input
+<code>updateSliderInput</code> verwenden. Gebe jeweils über die InputID
+(<code>"körperteil"</code> bzw <code>"alter"</code>) an, welcher Input
 genau zu ändern ist und dann verwende die anderen Argumente um die
 Einstellungen zurückzusetzen. Verwende
 <code>selected = character(0)</code> um den <code>selectInput</code> zu
-ändern und <code>value = c(0, 110</code> um den <code>sliderInput</code>
-zu ändern.</li>
+ändern und <code>value = c(0, 110)</code> um den
+<code>sliderInput</code> zu ändern.</li>
 </ol>
 <pre class="r"><code>observeEvent(XX, {
 
@@ -560,12 +508,12 @@ zurückgesetzt wenn du den Schalter drückst?</p></li>
 einige Fehler erzeugen, wenn man zum Beispiel Daten vom falschen
 Dateityp hochlädt oder der eingelesene Datensatz die falschen Variablen
 beinhaltet. Um diese Fehler zu minimieren wollen wir etwas mehr
-Interaktivität einbauen. Wir uns um mögliche Fehler beim Dateityp. Gehe
-zum <code>observeEvent</code>, dass das Einlesen durchführt, und kreiere
-mittels <code>file_ext</code> aus dem <code>tools</code> Paket (Laden
-nicht vergessen) vor dem Einlesen ein Objekt mit der Dateiendung der
-einzulesenden Datei. Stelle als Argument den Dateipfad aus der Download
-UI zur verfügung.</p></li>
+Interaktivität einbauen. Wir kümmern uns um mögliche Fehler beim
+Dateityp. Gehe zum <code>observeEvent</code>, dass das Einlesen
+durchführt, und kreiere mittels <code>file_ext</code> aus dem
+<code>tools</code> Paket (Laden nicht vergessen) vor dem Einlesen ein
+Objekt mit der Dateiendung der einzulesenden Datei. Stelle als Argument
+den Dateipfad aus der Download UI zur Verfügung.</p></li>
 </ol>
 <pre class="r"><code>observeEvent(input$hochladen, {
   
@@ -600,7 +548,7 @@ hat.</li>
 <li>Der <code>if</code>-Teil ist fertig. Im <code>else</code>-Teil gilt
 es jedoch noch etwas Arbeit zu verrichten. Der <code>else</code>-Teil
 soll eine Nachricht auslösen, die uns verrät, dass wir den falschen
-Dateitüp hochgeladen haben. Dies machst du am besten mit
+Dateityp hochgeladen haben. Dies machst du am besten mit
 <code>showFeedbackWarning</code> oder <code>showFeedbackDanger</code>
 aus dem <code>shinyFeedback</code> Paket. Stelle als Argumente die ID
 des UI Elements, für das die Warnung ausgegeben werden soll, und einen
@@ -625,7 +573,7 @@ Warnung oder Fehlernachricht bereit.</li>
 <ol start="8" style="list-style-type: decimal">
 <li>Bevor die Fehlermeldung nun angezeigt werden kann, gilt es eine
 spezielle Funktion in das <code>tabPanel</code> einzubauen, die im
-Hintergrund den nötigen javascript Code lädt. Setze dafür als erstes
+Hintergrund den nötigen javascript Code lädt. Setze dafür als zweites
 Element des <code>tabPanel</code> die Funktion
 <code>useShinyFeedback()</code>. Teste danach die App. Versuche zum
 Beispiel den Covid Datensatz (<code>"covid.csv"</code>) hochzuladen.
@@ -633,23 +581,23 @@ Erscheint eine Fehlermeldung?</li>
 </ol>
 <pre class="r"><code># Upload
 tabPanel(
-  useShinyFeedback(),
   title,
+  useShinyFeedback(),
   h2(),
   h4(),
   br(),
   fileInput()
 )</code></pre>
 <ol start="9" style="list-style-type: decimal">
-<li>Als letztes wollen, dass die Fehlermeldung irgendwann wieder
+<li>Als letztes wollen wir, dass die Fehlermeldung irgendwann wieder
 verschwindet. Ein Weg dies zu Implementieren, ist mit
 <code>Sys.sleep</code> eine Systempause einzulegen und dann
 <code>on.exit()</code> <code>hideFeedback()</code> laufen zu lassen.
 Setze dies einmal um, indem du eine 3-sekündige Pause
 (<code>Sys.sleep(3)</code>) innerhalb des <code>else</code>-statements
 setzt, sodass sie nur ausgeführt wird, wenn es ein Problem gab, und du
-das <code>on.exit</code> ausserhalb setzts. Vergiss nicht die richtige
-ID im <code>hideFeedback</code> zu setzen.</li>
+das <code>on.exit</code> ausserhalb setzt. Vergiss nicht die richtige ID
+im <code>hideFeedback</code> zu setzen.</li>
 </ol>
 <pre class="r"><code>observeEvent(input$hochladen, {
   

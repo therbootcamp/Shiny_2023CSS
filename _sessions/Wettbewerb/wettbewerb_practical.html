@@ -232,29 +232,27 @@ var x = setInterval(function() {
 <h2>Auftrag</h2>
 <p>Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für
 Gesundheit (BAG) nach geeineten Online-Tools, um das Infektionsgeschehen
-im Blick zu behalten. Nun seid ihr gefragt! Es gibt zwei Datensätze
-covid-daten.csv und covid-daten-alter.csv, diese stammen vom BAG und
-enthalten wöchentliche Zahlen zu COVID-19 Infektionen in der Schweiz von
-Februar 2020 bis Februar 2023. Die Infektionszahlen sind sowohl für die
-gesamte Schweiz als auch pro Kanton verfügbar. Der Datensatz
-covid-daten-alter.csv schlüsselt die Infektionszahlen zudem nach
-Altersgruppen auf, beinhaltet ansonsten die gleichen Daten.</p>
+im Blick zu behalten. Nun seid ihr gefragt! Es gibt einen Datensatz
+`covid.csv`, dieser stammt vom BAG und enthält wöchentliche Zahlen zu
+COVID-19 Infektionen in der Schweiz von Februar 2020 bis Februar 2023.
+Die Infektionszahlen sind sowohl für die gesamte Schweiz als auch pro
+Kanton verfügbar. Der Datensatz schlüsselt die Infektionszahlen zudem
+nach Altersgruppen auf.</p>
 <div id="a---vorbereitung" class="section level3">
 <h3>A - Vorbereitung</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne dein <code>TheRBootcamp</code> R project. Es sollte die
-Ordner <code>1_Data</code> und <code>2_Code</code> enthalten. Stelle
-sicher, dass du alle Datensätze, welche im <code>Datensätze</code> Tab
-aufgelisted sind, in deinem <code>1_Data</code> Ordner hast.</p></li>
+<li><p>Öffne dein <code>TheRBootcamp</code> R project. Es sollte einen
+<code>data</code> Ordner enthalten, indem der im Tab
+<code>Datensatz</code> beschriebene Datensatz <code>covid.csv</code> zu
+finden ist.</p></li>
 <li><p>Erstelle eine neue Shiny App. Schreibe deinen Namen, das Datum
 und “COVID-19 Dashboard” als Kommentare an den Anfang des
 Skripts.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen <code>app.R</code> im
-<code>3_competition</code> Ordner.</p></li>
+<li><p>Speichere das neue Skript unter dem Namen <code>app.R</code> in
+einen Unterordner.</p></li>
 <li><p>Lade das <code>shiny</code> Paket und alle weiteren Pakete, die
 du verwenden möchtest.</p></li>
-<li><p>Lade die beiden Datensätze <code>covid-daten.csv</code> und
-<code>covid-daten-alter.csv</code>.</p></li>
+<li><p>Lade den Datensatz <code>covid.csv</code>.</p></li>
 </ol>
 <pre class="r"><code>## NAME
 ## DATE
@@ -263,8 +261,7 @@ du verwenden möchtest.</p></li>
 library(shiny)
 library(readr)
 
-covid-daten &lt;- read_csv(&quot;covid-daten.csv&quot;)
-covid-daten-alter &lt;- read_csv(&quot;covid-daten-alter.csv&quot;)
+covid &lt;- read_csv(&quot;covid.csv&quot;)
 
 ui &lt;- fluidPage(
   
@@ -321,7 +318,11 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
 <h2>Beispiele</h2>
 <div id="plots" class="section level3">
 <h3>Plots</h3>
-<pre class="r"><code>covid-daten %&gt;% 
+<pre class="r"><code>covid %&gt;% 
+  group_by(region, datum) %&gt;% 
+  summarise(anzahl = sum(anzahl), 
+            summe = sum(summe), 
+            population = sum(population, na.rm = TRUE)) %&gt;% 
   filter(region == &quot;CH&quot;) %&gt;% 
   ggplot(aes(x = datum, y = anzahl)) +
   geom_col(fill = &quot;#ff0000&quot;) +
@@ -329,12 +330,15 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche&quot;) +
   theme_minimal()</code></pre>
-<div class="float">
-<img src="image/timeline_schweiz.png" style="width: 75%;"
-alt="Beispielplot Schweiz" />
-<div class="figcaption">Beispielplot Schweiz</div>
+<div class="figure">
+<img src="image/timeline_schweiz.png" style="width: 75%;" alt="" />
+<p class="caption">Beispielplot Schweiz</p>
 </div>
-<pre class="r"><code>covid-daten %&gt;% 
+<pre class="r"><code>covid %&gt;% 
+  group_by(region, datum) %&gt;% 
+  summarise(anzahl = sum(anzahl), 
+            summe = sum(summe), 
+            population = sum(population, na.rm = TRUE)) %&gt;% 
   mutate(pro_kopf = anzahl / population) %&gt;% 
   filter(region %in% c(&quot;FR&quot;, &quot;LU&quot;)) %&gt;% 
   ggplot(aes(x = datum, y = pro_kopf, fill = region)) +
@@ -344,31 +348,28 @@ alt="Beispielplot Schweiz" />
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche pro Kopf&quot;) +
   theme_minimal()</code></pre>
-<div class="float">
-<img src="image/timeline_fr_lu.png" style="width: 75%;"
-alt="Beispielplot Kantone" />
-<div class="figcaption">Beispielplot Kantone</div>
+<div class="figure">
+<img src="image/timeline_fr_lu.png" style="width: 75%;" alt="" />
+<p class="caption">Beispielplot Kantone</p>
 </div>
 </div>
 <div id="interaktivität" class="section level3">
 <h3>Interaktivität</h3>
-<div class="float">
-<img src="image/slider-plot.png" style="width: 75%;"
-alt="Beispiel für Inputs und Outputs" />
-<div class="figcaption">Beispiel für Inputs und Outputs</div>
+<div class="figure">
+<img src="image/slider-plot.png" style="width: 75%;" alt="" />
+<p class="caption">Beispiel für Inputs und Outputs</p>
 </div>
 </div>
 <div id="layouts" class="section level3">
 <h3>Layouts</h3>
-<div class="float">
-<img src="image/color-layout.png" style="width: 75%;"
-alt="Farben und Layout Entwurf" />
-<div class="figcaption">Farben und Layout Entwurf</div>
+<div class="figure">
+<img src="image/color-layout.png" style="width: 75%;" alt="" />
+<p class="caption">Farben und Layout Entwurf</p>
 </div>
 </div>
 </div>
-<div id="datensätze" class="section level2">
-<h2>Datensätze</h2>
+<div id="datensatz" class="section level2">
+<h2>Datensatz</h2>
 <table>
 <thead>
 <tr class="header">
@@ -379,66 +380,18 @@ alt="Farben und Layout Entwurf" />
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="">covid-daten.csv</a></td>
-<td>4212</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td><a href="">covid-daten-alter.csv</a></td>
+<td><a href="">covid.csv</a></td>
 <td>42120</td>
 <td>6</td>
 </tr>
 </tbody>
 </table>
-<div id="variablenbeschreibungen-covid-daten.csv"
-class="section level5">
-<h5>Variablenbeschreibungen <code>covid-daten.csv</code></h5>
+<div id="variablenbeschreibungen-covid.csv" class="section level5">
+<h5>Variablenbeschreibungen <code>covid.csv</code></h5>
 <table>
 <colgroup>
-<col width="29%" />
-<col width="70%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Name</th>
-<th align="left">Bedeutung</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>region</code></td>
-<td align="left">Region auf die sich die Daten in dieser Zeile beziehen.
-<code>CH</code> oder einer von 26 Kantonen.</td>
-</tr>
-<tr class="even">
-<td align="left"><code>datum</code></td>
-<td align="left">Datum, an dem die Woche beginnt, für welche diese Zeile
-Daten liefert.</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>anzahl</code></td>
-<td align="left">Anzahl COVID-19 Fälle, welche in dieser Woche in dieser
-Region gemeldet wurden.</td>
-</tr>
-<tr class="even">
-<td align="left"><code>summe</code></td>
-<td align="left">Anzahl COVID-19 Fälle, welche bis zu dieser Woche in
-dieser Region insgesamt gemeldet wurden.</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>population</code></td>
-<td align="left">Anzahl Personen in dieser Region.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="variablenbeschreibungen-covid-daten-alter.csv"
-class="section level5">
-<h5>Variablenbeschreibungen <code>covid-daten-alter.csv</code></h5>
-<table>
-<colgroup>
-<col width="29%" />
-<col width="70%" />
+<col width="33%" />
+<col width="66%" />
 </colgroup>
 <thead>
 <tr class="header">
