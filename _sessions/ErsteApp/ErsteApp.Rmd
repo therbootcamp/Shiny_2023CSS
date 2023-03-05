@@ -131,7 +131,7 @@ library(tidyverse)
   <ul class = "level">
     <li><span>Layout</span></li>
     <li><span>Nutzerinputs</span></li>
-    <li><span>Sichtbare outputs</span></li>
+    <li><span>Sichtbare Outputs</span></li>
   </ul>
 </ul>
 
@@ -163,7 +163,7 @@ library(tidyverse)
 
 ]
 
-.pull-right6[
+.pull-right65[
 
 <p align = "center">
   <img src = "image/server.png" height = 300px>
@@ -295,7 +295,7 @@ shinyApp(ui, server)
   </tr>
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center">special</td>
-    <td><mono>fileInput(), downloadButton, actionButton</mono></td>
+    <td><mono>fileInput(), downloadButton(), actionButton()</mono></td>
   </tr>
 </table>
 ]
@@ -407,9 +407,9 @@ ui <- fluidPage(
 <br><br>
 ```{r, eval = FALSE}
 ui <- fluidPage(
-  textAreaInput(inputId = "wohnort", 
-                label = "Wo wohnst du?",
-                choices = c("Luzern", ...)),
+  selectInput(inputId = "wohnort", 
+              label = "Wo wohnst du?",
+              choices = c("Luzern", ...)),
   textAreaInput(inputId = "wohnort", 
                 label = "Wo wohnst du?",
                 choices = c("Luzern", ...),
@@ -888,7 +888,7 @@ shinyApp(ui, server)
   </tr>
   <tr style="padding:20px;background-color:white">
     <td style="padding:20pxr"><mono>uiOuput()</mono></td>
-    <td><mono>renderUi()</mono></td>
+    <td><mono>renderUI()</mono></td>
   </tr>
 </table>
 

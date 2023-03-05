@@ -118,7 +118,7 @@ layout: true
   &lt;ul class = "level"&gt;
     &lt;li&gt;&lt;span&gt;Layout&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;Nutzerinputs&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;Sichtbare outputs&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Sichtbare Outputs&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/ul&gt;
 
@@ -150,7 +150,7 @@ layout: true
 
 ]
 
-.pull-right6[
+.pull-right65[
 
 &lt;p align = "center"&gt;
   &lt;img src = "image/server.png" height = 300px&gt;
@@ -280,7 +280,7 @@ shinyApp(ui, server)
   &lt;/tr&gt;
   &lt;tr style="padding:20px;background-color:white"&gt;
     &lt;td style="padding:20px;text-align:center"&gt;special&lt;/td&gt;
-    &lt;td&gt;&lt;mono&gt;fileInput(), downloadButton, actionButton&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;fileInput(), downloadButton(), actionButton()&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 ]
@@ -395,9 +395,9 @@ ui &lt;- fluidPage(
 
 ```r
 ui &lt;- fluidPage(
-  textAreaInput(inputId = "wohnort", 
-                label = "Wo wohnst du?",
-                choices = c("Luzern", ...)),
+  selectInput(inputId = "wohnort", 
+              label = "Wo wohnst du?",
+              choices = c("Luzern", ...)),
   textAreaInput(inputId = "wohnort", 
                 label = "Wo wohnst du?",
                 choices = c("Luzern", ...),
@@ -883,7 +883,7 @@ shinyApp(ui, server)
   &lt;/tr&gt;
   &lt;tr style="padding:20px;background-color:white"&gt;
     &lt;td style="padding:20pxr"&gt;&lt;mono&gt;uiOuput()&lt;/mono&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;mono&gt;renderUi()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderUI()&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
 
