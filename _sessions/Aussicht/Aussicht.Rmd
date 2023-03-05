@@ -256,6 +256,26 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
+.pull-left3[
+
+# <mono>shinyWidgets</mono>
+
+<ul>
+  <li class="m1"><span>Paket mit erweiterten UI Elementen</span></li>
+</ul>
+]
+
+.pull-right55[
+<br>
+<p align="center">
+<img src="image/shinyWidgets.png"><br>
+<font style="font-size:10px">from <a href="https://github.com/dreamRs/shinyWidgets">https://github.com</a></font>
+</p>
+]
+
+
+---
+
 # Datenquellen
 
 .pull-left4[
@@ -276,7 +296,7 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 .pull-left4[
 
-# Modularität
+# Modularität & Funktionen
 
 <ul>
   <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
@@ -295,12 +315,13 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 .pull-left4[
 
-# Modularität
+# Modularität & Funktionen
 
 <ul>
   <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
   <li class="m2"><span>Shiny Modules helfen, die App in kleinere, unabhängige Module zu unterteilen.</span></li>
   <li class="m3"><span>Besonders für die parallele Zusammenarbeit von mehreren Entwickler:innen sinnvoll.</span></li>
+  <li class="m4"><span>Zudem reduziert das Auslagern von wiederholtem Code in Funktionen Redundanz und Fehleranfälligkeit</span></li>
 </ul>
 ]
 
@@ -312,7 +333,110 @@ knitr::opts_chunk$set(fig.align = 'center')
 </p>
 ]
 
+---
 
+.pull-left4[
+
+# Deployment
+
+<ul>
+  <li class="m1"><span>In unserem Kurs haben wir alle Apps lokal auf dem eigenen Computer laufen lassen</span></li>
+  <li class="m2"><span>Der Sinn von Shiny ist natürlich, die App mehreren Usern übers Internet zur Verfügung zu stellen</span></li>
+  <li class="m3"><span>Es verschiedene Wege, um deine App zu deployen, die unterschiedlich komplex und kostspielig sind</span></li>
+
+</ul>
+]
+
+.pull-right5[
+<br>
+<p align="center">
+<img src="image/servers.jpg"><br>
+<font style="font-size:10px">from <a href="https://www.unsplash.com">https://www.unsplash.com</a></font>
+</p>
+]
+
+
+---
+
+.pull-left4[
+
+# Deployment Optionen
+
+<ul>
+  <li class="m1"><span><a href="https://shinyapps.io">shinyapps.io</a> </span></li>
+  <ul class="level">
+    <li><span>einfacher (und kostenloser) Einstieg für kleine Projekte und Testing ohne Server-Kenntnisse</span></li>
+  </ul>
+  <li class="m2"><span><a href="https://posit.co/products/open-source/shinyserver/">Shiny Server </a> (Open Source Edition)</span></li>
+  <ul class="level">
+    <li><span>Shiny Server von der eigenen IT gehostet</span></li>
+  </ul>
+  <li class="m3"><span><a href="https://posit.co/products/enterprise/connect/">Posit Connect</a></span></li>
+  <ul class="level">
+    <li><span>Umfangreiches Angebot von Posit für Unternehmen mit sehr umfangreichen Funktionen</span></li>
+  </ul>
+  <li class="m4"><span>weitere Optionen</span></li>
+</ul>
+]
+
+.pull-right5[
+<br><br>
+<p align="center">
+<img src="image/deploy.png"><br>
+<font style="font-size:10px">from <a href="https://posit.co/products/open-source/shinyserver/">https://posit.co</a></font>
+</p>
+]
+
+---
+
+.pull-left5[
+
+# Shiny Extensions
+
+<ul>
+  <li class="m1"><span>Es gibt unzählige Pakete, die Shiny erweitern</span></li>
+  <li class="m2"><span><a href="https://github.com/nanxstats/awesome-shiny-extensions">Shiny Awesome</a> ist eine aktuell gehaltene Liste von Shiny Erweiterungen, sortiert nach Themen</span></li>
+  <ul class="level">
+    <li><span>Nicht alle Pakete sind aktiv entwickelt</span></li>
+    <li><span>Es gibt viele spannende Projekte zu entdecken</span></li>
+  </ul>
+</ul>
+]
+
+.pull-right4[
+<br>
+<p align="center">
+<img src="image/shinyAwesome.png"><br>
+<font style="font-size:10px">from <a href="https://github.com/nanxstats/awesome-shiny-extensions">https://github.com</a></font>
+</p>
+]
+
+---
+
+.pull-left5[
+
+# Shiny Ressources
+
+<ul>
+  <li class="m1"><span>Genauso, gibt es unzählige Ressourcen zu Shiny</span></li>
+  <li class="m2"><span><a href="https://github.com/grabear/awesome-rshiny">Awesome Shiny</a> ist eine aktuell gehaltene Liste von Shiny Ressourcen</span></li>
+  <ul class="level">
+    <li><span>Tutorials</span></li>
+    <li><span>Bücher</span></li>
+    <li><span>Websites</span></li>
+    <li><span>Personen</span></li>
+    <li><span>...</span></li>
+  </ul>
+</ul>
+]
+
+.pull-right4[
+<br>
+<p align="center">
+<img src="image/awesome-rshiny-logo.svg"><br>
+<font style="font-size:10px">from <a href="https://github.com/grabear/awesome-rshiny">https://github.com</a></font>
+</p>
+]
 
 
 
