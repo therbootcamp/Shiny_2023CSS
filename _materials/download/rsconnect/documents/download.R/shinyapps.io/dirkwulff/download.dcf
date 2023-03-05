@@ -1,0 +1,13 @@
+name: download
+title: download
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8482101
+bundleId: 6918370
+url: https://dirkwulff.shinyapps.io/download/
+when: 1678044225.72278
+lastSyncTime: 1678044225.72279
+asMultiple: FALSE
+asStatic: FALSE

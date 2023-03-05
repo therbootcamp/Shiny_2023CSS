@@ -1,0 +1,13 @@
+name: fileupload
+title: fileupload
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8481643
+bundleId: 6918206
+url: https://dirkwulff.shinyapps.io/fileupload/
+when: 1678038853.62924
+lastSyncTime: 1678038853.62925
+asMultiple: FALSE
+asStatic: FALSE

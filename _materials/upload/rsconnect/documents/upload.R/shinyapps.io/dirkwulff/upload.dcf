@@ -1,0 +1,13 @@
+name: upload
+title: upload
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8481548
+bundleId: 6918202
+url: https://dirkwulff.shinyapps.io/upload/
+when: 1678038653.65215
+lastSyncTime: 1678038653.65216
+asMultiple: FALSE
+asStatic: FALSE
