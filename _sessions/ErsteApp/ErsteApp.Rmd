@@ -179,12 +179,8 @@ library(tidyverse)
 # Prozess
 
 <ul>
-  <li class="m1"><span>Shiny Apps</span></li><br>
-  <ul class = "level">
-    <li><span>ui - Frontend</span></li><br>
-    <li><span>server - Backend</span></li><br>
-    <li><span>shinyApp - Starter</span></li><br>
-  </ul>
+  <li class="m1"><span>UI und Server bedingen sich gegenseitig in einem fortlaufenden Prozess</span></li>
+  <li class="m2"><span>Der Reibungslose Ablauf wird über <high>IDs</high> bewerkstelligt. </span></li><br>
 </ul>
 
 ]
@@ -200,19 +196,14 @@ library(tidyverse)
 
 ---
 
-.pull-left4[
+.pull-left3[
 
 # Prozess
 
 <ul>
-  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
-  <ul class = "level">
-    <li><span>ui - Frontend</span></li><br>
-    <li><span>server - Backend</span></li><br>
-    <li><span>shinyApp - Starter</span></li><br>
-  </ul>
+  <li class="m1"><span>UI und Server bedingen sich gegenseitig in einem fortlaufenden Prozess</span></li>
+  <li class="m2"><span>Der Reibungslose Ablauf wird über <high>IDs</high> bewerkstelligt. </span></li><br>
 </ul>
-
 ]
 
 
@@ -794,7 +785,7 @@ ui <- fluidPage(
 
 .pull-left4[
 
-# Ouputs
+# Outputs
 
 <ul>
   <li class="m1"><span>UI-Outputs sind Platzhalter für Inhalte, die vom <high>Server</high> generiert werden.</span></li><br>
@@ -842,7 +833,7 @@ shinyApp(ui, server)
 
 ---
 
-# Ouputs
+# Outputs
 
 .pull-left4[
 
