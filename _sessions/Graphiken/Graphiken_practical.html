@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Graphiken</title>
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Graphiken</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -216,8 +216,8 @@ Objekte erstezen musst.</p>
 <h3>A - Puppies</h3>
 <ol style="list-style-type: decimal">
 <li>Bauen wir die Puppies App. Die Puppy App rotiert zwischen Bildern
-von Welpen rotiert, wenn der Nutzer auf das Bild eines Welpen klickt.
-Beginnen wir mit der UI. Baue eine <code>fluidPage</code> UI mit einer
+von Welpen, wenn der Nutzer auf das Bild eines Welpen klickt. Beginnen
+wir mit der UI. Baue eine <code>fluidPage</code> UI mit einer
 <code>fluidRow</code> und drei <code>column</code>s, die jeweils eine
 Breite von <code>4</code> haben.</li>
 </ol>
@@ -262,8 +262,8 @@ IDs im <code>output</code> zu.</li>
   
   }</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Als nächstes laden den Datensatz <code>puppies</code>, damit wir im
-<code>server</code> darauf Bezug nehmen können. Lade vorher das
+<li>Als nächstes laden den Datensatz <code>puppies.csv</code>, damit wir
+im <code>server</code> darauf Bezug nehmen können. Lade vorher das
 <code>tidyverse</code> um die Funktion <code>read_csv</code> nutzen zu
 können.</li>
 </ol>
@@ -299,7 +299,7 @@ server = function(input, output, session){
 die den Bildpfad <code>src</code> und andere Bildparameter z.B.
 <code>width</code> oder <code>height</code> definiert. Weise
 <code>src</code> diesen Code zu
-<code>paste0("daten/puppies/",puppies$image[1])</code>, der den Pfad für
+<code>paste0("data/puppies/", puppies$image[1])</code>, der den Pfad für
 das erste Bild in <code>puppies</code> zusammensetzt, und setze
 <code>width</code> auf <code>500px</code>, damit das Bild nicht zu gross
 angezeigt wird.</li>
@@ -324,7 +324,7 @@ testen können. Probiere es aus. Wird ein Welpe mit Bildquelle und
 <li><p>Nun zur Interaktivität. Anstatt dass immmer nur das erste Bild
 angezeigt wird, wollen wir, dass die Bilder ausgelöst durch Klicks des
 Nutzers durchrotieren. Gehe dafür zuerst in die UI und ergänze innerhalb
-des <code>renderImage</code> das Argument <code>click = "weiter"</code>.
+des <code>imageOutput</code> das Argument <code>click = "weiter"</code>.
 Dies generiert einen <code>input$weiter</code>, auf den wir im
 <code>server</code> zugreifen können. Später müssen wir
 <code>click</code> noch ein wenig anpassen, aber erst einmal gehen wir
@@ -342,10 +342,12 @@ zum <code>server</code>.</p></li>
   )
 )</code></pre>
 <ol start="9" style="list-style-type: decimal">
-<li>Für die klick-abhängige Rotation der, benötigen wir einen
+<li>Für die klick-abhängige Rotation der Bilder, benötigen wir einen
 dynamischen Index anstatt des festes Indexes <code>1</code>. Definiere
 dafür wieder mal einen <code>reactiveVal</code> und nenne ihn
-<code>index</code>.</li>
+<code>index</code>. Setze in der Definition des <code>reactiveVal</code>
+den default Wert <code>1</code> sodass, der index am Anfang
+<code>1</code> ist.</li>
 </ol>
 <pre class="r"><code>library(XX)
 
@@ -425,10 +427,11 @@ oberen linken Bildrand liegt. Wenn es nicht bereits geklappt hat,
 versuche einmal oben links ins Bild zu klicken. Jezt sollte sich das
 Bild ändern.</p></li>
 <li><p>Um die Klickbox zu vergrössern, müssen wir dem <code>click</code>
-Argument im <code>imageOutput</code> explizit die <code>clickOpts</code>
-zuweisen darin die <code>id</code> (immmernoch <code>"weiter"</code>)
-und auch <code>clip = FALSE</code> zweisen. Letztes sorgt dafür, dass
-die Klickbox auf das gesamte Bild ausgedehnt wird.</p></li>
+Argument im <code>imageOutput</code> explizit die
+<code>clickOpts()</code> Funktion zuweisen. Darin die <code>id</code>
+(immmernoch <code>"weiter"</code>) und auch <code>clip = FALSE</code>
+zweisen. Letztes sorgt dafür, dass die Klickbox auf das gesamte Bild
+ausgedehnt wird.</p></li>
 </ol>
 <pre class="r"><code>ui &lt;- XX(
   XX(
@@ -446,8 +449,8 @@ die Klickbox auf das gesamte Bild ausgedehnt wird.</p></li>
 einwandfrei?</li>
 </ol>
 </div>
-<div id="c---scatter" class="section level3">
-<h3>C - Scatter</h3>
+<div id="b---scatter" class="section level3">
+<h3>B - Scatter</h3>
 <ol style="list-style-type: decimal">
 <li>Unten siehst du eine App, die ein Scatterplot der (logarithmierten)
 Anzahl der Verletzungen an Körperteilen von jüngeren
@@ -455,11 +458,11 @@ Anzahl der Verletzungen an Körperteilen von jüngeren
 (<code>alter &gt;= 65</code>) anzeigt und erlaubt, dass Punkte über die
 <code>brush</code> Funktionalität ausgewählt werden. Die ausgewählten
 Punkte werden unter dem Scatterplot in einer Tabelle angezeigt. Leider
-fehlen der App einige Werte. Es sind einzusetzen die IDs, der
+fehlen der App einige Werte. Es sind einzusetzen: die IDs, der
 Argumentname <code>brush</code>, und die Funktion
 <code>brushedPoints</code>. Kannst du die App zum laufen bringen?</li>
 </ol>
-<pre class="r"><code>verletzungen_jung_alt = readRDS(&quot;daten/verletzungen.RDS&quot;)  %&gt;% 
+<pre class="r"><code>verletzungen_jung_alt = readRDS(&quot;data/verletzungen.RDS&quot;)  %&gt;% 
     group_by(körperteil, alter = case_when(alter &lt; 65 ~ &quot;jünger&quot;, TRUE ~ &quot;älter&quot;)) %&gt;% 
     summarize(n = log(sum(anzahl))) %&gt;% 
     ungroup() %&gt;% 
@@ -499,60 +502,130 @@ shinyApp(ui, server)</code></pre>
 <div id="app" class="section level2">
 <h2>App</h2>
 <ol style="list-style-type: decimal">
-<li><p>Jetzt geht es darum eine schematische Visualisierung des
+<li>Jetzt geht es darum eine schematische Visualisierung des
 menschlichen Körpers als Teil des UI einzubauen. Als erster Schritt lade
-den <code>körper</code>. Printe dann den Datensatz in die Console, um
-ein Gefühl für dessen Inhalte zu entwickeln.</p></li>
-<li><p>Der <code>körper</code> Datensatz beinhaltet Körperteil Polygone,
+den <code>körper.csv</code> Datensatz. Printe dann den Datensatz in die
+Console, um ein Gefühl für dessen Inhalte zu entwickeln.</li>
+</ol>
+<pre class="r"><code>körper &lt;- readRDS(&quot;data/körper.RDS&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Der <code>körper</code> Datensatz beinhaltet Körperteil Polygone,
 die über mehrere Zeilen von x und y Koordinaten definiert sind. Diese
 Struktur erlaubt uns den Körper sehr einfach zu plotten. Dabei
 behilflich ist die Tatsache, dass die zwei Variablen
 <code>körperteil</code> und <code>id</code> als Faktoren formatiert
 sind, die die richtige Plotreihenfolge erzeugen. Plotte den Körper mit
 folgendem Code. Stelle vorher jedoch sicher, dass <code>tidyverse</code>
-und <code>viridis</code> geladen wurden.</p></li>
-<li><p>Die Graphik sollte zeigen, dass die Polygone verschiedene
+und <code>viridis</code> geladen wurden.</li>
+</ol>
+<pre class="r"><code>library(tidyverse)
+library(viridis)
+library(shiny)
+
+körper %&gt;%
+  ggplot(aes(x, y, group = id)) +
+  geom_polygon(
+    data = körper,
+    aes(group = id),
+    fill = viridis(5, option = &quot;G&quot;, end = .9)[5],
+    col = &quot;white&quot;) +
+  labs(title = &quot;Verletzungen&quot;,
+       subtitle = &quot;Klicke auf Körperteile&quot;) +
+  theme_void() +
+  theme(
+    legend.position = &quot;none&quot;,
+    plot.title = element_text( 
+      hjust = .5, face = 2, size = 24),
+     plot.subtitle = element_text(hjust = .5, size = 16)
+    )</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Die Graphik sollte zeigen, dass die Polygone verschiedene
 Körperteile oder Körperbereiche abdecken, die zu mit den
 Körperteilwerten in unserem Verletzungen Datensatz korrespondieren. Das
 erlaubt uns die Visualisierun als Alternative für
 <code>selectInput("körperteil")</code> zu verwenden. Vorausgesetzt
 natürlich, dass wir aus der Abbildung eine interaktive Abbildung machen.
-Bevor wir dazu kommen müssen wir jedoch erst einmal die Abbildung in
-unser <code>ui</code> und unseren <code>server</code>einbauen. Setze
+Bevor wir dazu kommen, müssen wir jedoch erst einmal die Abbildung in
+unser <code>ui</code> und unseren <code>server</code> einbauen. Setze
 dafür zunächst einen <code>plotOutput</code> mit ID <code>körper</code>
 in die <code>ui</code> (nicht den <code>server</code>) und zwar anstelle
-des <code>selectInput</code>.</p></li>
-<li><p>Als nächstes sorge dafür das Plot erscheint indem du das Einlesen
-des Körpers in dein App Skript und den Code der Graphic in den
+des <code>selectInput</code>.</li>
+</ol>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(
+    width = 3,
+    XX(XX),
+    sliderInput(),
+    actionButton(),
+    actionButton(),
+    actionButton(),
+    actionButton()
+  ),
+  mainPanel(
+    plotOutput(),
+    plotOutput(),
+  )
+)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Als nächstes sorge dafür, dass der Plot erscheint indem du das
+Einlesen des Körpers in dein App Skript und den Code der Graphik in den
 <code>sever</code> bewegst. Denk dran da <code>viridis</code> Paket
-neben den bisherigen Paketen zu laden.</p></li>
-<li><p>Jetzte teste die App. Erscheint der Körper in der UI? Wenn das
+neben den bisherigen Paketen zu laden.</li>
+</ol>
+<pre class="r"><code>XX &lt;- readRDS(XX)
+
+ui &lt;- navbarPage()
+
+server &lt;- function() {
+  
+  output$XX &lt;- renderPlot({XX})
+  
+}</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Jetzte teste die App. Erscheint der Körper in der UI? Wenn das
 funktioniert hat, ist dir vielleicht aufgefallen, dass die Graphik
 keinen passenden Hintergrund hat. Das kannst du ändern, indem innerhalb
 <code>renderPlot</code> <code>bg</code> auf <code>"transparent"</code>
 setzt. Zudem könntest du innerhalb von <code>plotOutput</code> die Höhe
-mit <code>height = 550px</code> etwas raufsetzen.</p></li>
-<li><p>Als letzte Anpassung der UI setze innerhalb von
+mit <code>height = 550px</code> etwas raufsetzen.</li>
+</ol>
+<pre class="r"><code>XX &lt;- readRDS(XX)
+
+ui &lt;- navbarPage()
+
+server &lt;- function() {
+  
+  output$XX &lt;- renderPlot({XX}, XX = XX)
+  
+}</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Als letzte Anpassung der UI, setze innerhalb von
 <code>plotOutput("körper")</code> das Argument <code>click</code> auf
 <code>"körperclick"</code>. Damit registrieren wir den Input, den wir im
 Server verwenden können, um die Körperteile zu identifizieren die
 angeklickt wurden und um im Anschluss die Liste der angewählten
 Körperteile zu ändern.</p></li>
-<li><p>Kommen wir zum <code>server</code>. Als erstes gilt einmal wieder
+<li><p>Kommen wir zum <code>server</code>. Als erstes gilt es wieder
 einen <code>reactiveVal</code> zu kreieren. Tue dies irgendwo im
 <code>server</code> und nenne ihn <code>körperteile</code>. Dieser
-<code>reactiveVal</code> wird uns erlauben das Menge der ausgewählten
-Körperteile als Funnktion der Klick-Inputs anzupassen.</p></li>
-<li><p>Nun können wir uns daran machen die Klick-Mechanik zu bauen.
+<code>reactiveVal</code> wird uns erlauben die Menge der ausgewählten
+Körperteile als Funktion der Klick-Inputs anzupassen.</p></li>
+<li><p>Nun können wir uns daran machen, die Klick-Mechanik zu bauen.
 Beginnen wir mit einem <code>reactiveEvent</code>, sodass unsere
 Klick-Mechanik nur dann läuft, wenn tatsächlich geklickt wurde. Setze
 den richtigen Input ein.</p></li>
-<li><p>Innerhalb des <code>observeEvent</code>s müssen wir uns zunächst
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+  
+  
+})</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Innerhalb des <code>observeEvent</code>s müssen wir uns zunächst
 darum kümmern, dass wir identifizieren welches Körperteil angeklickt
 wurde. Dies können wir mittels dem folgenden
 <code>nearPoints</code>-Code erreichen. Die Funktion nimmt als erste
-beiden Argumente den Datensatz aus dem wir Punkte auswhählen wollen,
-hier der <code>körper</code> Datensatz, und den Klick-Input, hier der
+beide Argumente den Datensatz aus dem wir Punkte auswhählen wollen, hier
+der <code>körper</code> Datensatz, und den Klick-Input, hier der
 <code>click</code> Input mit ID aus dem <code>imageOutput</code>. Als
 nächstes muss bestimmt werden auf Basis welcher Variablen der nächste
 Punkt bestimmt werden soll, hier die <code>"x"</code> und
@@ -561,17 +634,53 @@ werden zwei Einstellungen vorgenommen, die dazu führen, dass Distanz des
 Klicks zu den Punkten in <code>körper</code> aufgezeichnet wird und dass
 die Identifikation der Punkte etwas liberaler ist. Das Ergebnis von
 <code>nearPoints</code> ist ein Datensatz mit allen Punkten die
-unterhalb der <code>threshold</code> liegen.</p></li>
-<li><p>Im zweiten Schritt gilt es aus dem <code>points</code> Datensatz,
+unterhalb der <code>threshold</code> liegen.</li>
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+  
+  points &lt;- nearPoints(
+      XX,
+      XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+})</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Im zweiten Schritt gilt es aus dem <code>points</code> Datensatz,
 der eben kreiert wurde, dasjenige Körperteil zu identifizieren, dass am
 ehesten das tatsächliche Ziel des Klicks war. Dies erledigt der unten
-dargestellte Code-Block. Er identifiziert welches Körperteil die
+dargestellte Code-Block. Er identifiziert, welches Körperteil die
 niedrigste Distanz zum Klick im Sinne des ersten Dezils der Distanzen
 (<code>quantile(dist_, .1)</code>) zwischen Punkten der jeweiligen
 Polygone und dem Klick aufwies. Das in diesem Sinne nächste Körperteil
-wird dann in <code>selected</code>.</p></li>
-<li><p>Wir haben identifiziert, welches Körperteil wahrscheinlich
-geklickt wurde. Jetzt geht es darum unseren <code>körperteile</code>
+wird dann in <code>selected</code> gespeichert.</li>
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+  
+  points &lt;- nearPoints(
+      XX,
+      XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+    selected = points  %&gt;%
+      group_by(körperteil, id) %&gt;%
+      summarize(d = quantile(dist_, .1)) %&gt;%
+      ungroup() %&gt;%
+      arrange(d) %&gt;%
+      slice(1) %&gt;%
+      pull(körperteil)
+  
+})</code></pre>
+<ol start="11" style="list-style-type: decimal">
+<li>Wir haben identifiziert, welches Körperteil wahrscheinlich geklickt
+wurde. Jetzt geht es darum unseren <code>körperteile</code>
 <code>reactiveValue</code> mit dieser Information anzupassen. Und zwar
 soll <code>selected</code> zu den ausgewählten Körperteilen hinzugefügt
 werden, wenn es noch nicht enthalten ist, und entfernt werden, wenn es
@@ -580,8 +689,36 @@ enthalten aktiviert ist. Das bedeutet wir brauchen wieder ein
 <code>selected</code> in <code>körperteile</code> bereits enthalten ist
 und dann entweder es hinzufügt oder es entfernt. Dieser erledigt der
 neue Code-Block unten mit ein paar kleinen Anpassungen. Achte darauf
-welche XX Klammern haben und welche nicht.</p></li>
-<li><p>Jetzt gilt es sicherzustellen, dass sich änderne
+welche XX Klammern haben und welche nicht.</li>
+</ol>
+<pre class="r"><code>observeEvent(XX, {
+  
+  points &lt;- nearPoints(
+      XX,
+      XX,
+      xvar = XX,
+      yvar = XX,
+      addDist = TRUE,
+      threshold = 100
+    )
+  
+    selected = points  %&gt;%
+      group_by(körperteil, id) %&gt;%
+      summarize(d = quantile(dist_, .1)) %&gt;%
+      ungroup() %&gt;%
+      arrange(d) %&gt;%
+      slice(1) %&gt;%
+      pull(körperteil)
+  
+    if (XX %in% XX()) {
+      körperteile(XX()[XX() != XX])
+    } else {
+      körperteile(c(XX, XX()))
+    }
+    
+})</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li><p>Jetzt gilt es sicherzustellen, dass sich ändernde
 <code>körperteile</code> <code>reactiveVal</code> auch an den richtigen
 Stellen verwendet wird. Noch verwendet unser <code>server</code> Code
 den alten <code>input$körperteile</code> innerhalb des
@@ -594,15 +731,23 @@ welche <code>körperteile</code> aktuell aktiv sind. Füge dafür dieses
 Körper plot ein. Du kannst sehen, dass dieses Polygon
 <code>körperteile</code> verwendet um neue rote Polygone über die alten
 zu zeichnen.</p></li>
-<li><p>Teste jetzt einmal die App. Wenn die Körperteile, die du
-anklickst rot werden und sich die Graphiken enstprechend ändern, bist du
-ein wahrer Shiny Master. Es bleibt dann nur noch ein einziges kleines
+</ol>
+<pre class="r"><code>  geom_polygon(
+    data = körper %&gt;% filter(körperteil %in% körperteile()),
+    aes(group = id),
+    fill = &quot;red&quot;,
+    col = &quot;white&quot;
+  ) </code></pre>
+<ol start="14" style="list-style-type: decimal">
+<li>Teste jetzt einmal die App. Wenn die Körperteile, die du anklickst
+rot werden und sich die Graphiken enstprechend ändern, bist du ein
+wahrer Shiny Master. Es bleibt dann nur noch ein einziges kleines
 Problem zu lösen. Der <code>zurücksetzen</code> Schalter ist noch nicht
 in der Lage <code>körperteile</code> zurückzusetzen. Anstatt dem
 obsolenten <code>updateInputSelect</code> im entsprechenden
 <code>observeEvent</code> setze einfach <code>körperteile(c())</code>,
 was alle Elemente aus <code>körperteile</code> entfernt und damit auch
-den Körper und die anderen Plots anpasst.</p></li>
+den Körper und die anderen Plots anpasst.</li>
 </ol>
 </div>
 <div id="lösung" class="section level2">
@@ -625,9 +770,9 @@ ui = navbarPage(
         width = 3,
         plotOutput(&quot;körper&quot;, height = 550, click = &quot;körper_click&quot;),
         sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
-        actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;, width = &quot;32.5%&quot;),
-        actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;, width = &quot;32.5%&quot;),
-        actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;, width = &quot;32.5%&quot;),
+        actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;, width = &quot;32%&quot;),
+        actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;, width = &quot;32%&quot;),
+        actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;, width = &quot;32%&quot;),
         actionButton(&quot;zurücksetzen&quot;, &quot;Zurücksetzen&quot;, width = &quot;100%&quot;)
       ),
       mainPanel(
@@ -646,7 +791,7 @@ ui = navbarPage(
         title = &quot;Daten&quot;,
         h2(&quot;Aktuelle daten&quot;),
         dataTableOutput(&quot;daten&quot;)
-        ),
+      ),
       tabPanel(
         useShinyFeedback(),
         title = &quot;Upload&quot;,
@@ -681,7 +826,7 @@ ui = navbarPage(
                       NEISS basiert auf einer landesweit repräsentativen Stichprobe an Krankenhäusern in den Vereinigten Staaten und seinen Territorien. Jedes teilnehmende Krankenhaus berichtet Patienteninformationen für jeden Besuch einer Notfallabteilung. Mit den NEISS-Daten können landesweite Schätzungen von Besuchen in Notfallabteilungen von Krankenhäusern ermittelt werden.&lt;br&gt;&lt;br&gt;
                       Der aktuelle Datensatz ist ein Ausschnitt der NEISS-Daten. Die Daten wurden auf das Jahr 2017 begrenzt.&lt;br&gt;&lt;br&gt;
                       Mehr Informationen zu NEISS unter &lt;a&gt;https://www.cpsc.gov/Research--Statistics/NEISS-Injury-Data&lt;/a&gt;&lt;/h4&gt;&quot;
-                   )
+                 )
                )
              ))),
     tabPanel(&quot;About&quot;,
@@ -689,15 +834,16 @@ ui = navbarPage(
                column(6, HTML(&quot;&lt;h2&gt;The R Bootcamp&lt;/h2&gt;
                       &lt;h4&gt;Die App wurde erstellt von The R Bootcamp im Rahmen des Kurses Dashboards mit Shiny&lt;br&gt;&lt;br&gt;
                       Mehr Informationen zu The R Bootcamp unter &lt;a&gt;https://therbootcamp.github.io/&lt;/a&gt;&lt;/h4&gt;&quot;
-                 ))
+               ))
              ))),
   )
 )
 
 server &lt;- function(input, output, session) {
   
-  verletzungen = reactiveVal(readRDS(&quot;daten/verletzungen.RDS&quot;))
+  körper &lt;- readRDS(&quot;daten/körper.RDS&quot;)
   
+  verletzungen = reactiveVal(readRDS(&quot;daten/verletzungen.RDS&quot;))
   
   output$körper &lt;- renderPlot({
     körper %&gt;%
@@ -708,12 +854,12 @@ server &lt;- function(input, output, session) {
         aes(group = id),
         fill = viridis(5, option = &quot;G&quot;, end = .9)[5],
         col = &quot;white&quot;) +
-        geom_polygon(
-    data = körper %&gt;% filter(körperteil %in% körperteile()),
-    aes(group = id),
-    fill = &quot;red&quot;,
-    col = &quot;white&quot;
-  ) +
+      geom_polygon(
+        data = körper %&gt;% filter(körperteil %in% körperteile()),
+        aes(group = id),
+        fill = &quot;red&quot;,
+        col = &quot;white&quot;
+      ) +
       labs(title = &quot;Verletzungen&quot;,
            subtitle = &quot;Klicke auf Körperteile&quot;) +
       theme_void() +
@@ -721,8 +867,8 @@ server &lt;- function(input, output, session) {
         legend.position = &quot;none&quot;,
         plot.title = element_text( 
           hjust = .5, face = 2, size = 24),
-         plot.subtitle = element_text(hjust = .5, size = 16)
-        )
+        plot.subtitle = element_text(hjust = .5, size = 16)
+      )
   }, bg = &quot;transparent&quot;)
   
   
@@ -754,36 +900,36 @@ server &lt;- function(input, output, session) {
   
   
   daten = reactive({
-  verletzungen() %&gt;%
-    filter(körperteil %in% körperteile(),
-           alter &gt;= input$alter[1],
-           alter &lt;= input$alter[2])
+    verletzungen() %&gt;%
+      filter(körperteil %in% körperteile(),
+             alter &gt;= input$alter[1],
+             alter &lt;= input$alter[2])
   })
   
   output$daten = renderDataTable(verletzungen(),
-                               options = list(pageLength = 10))
+                                 options = list(pageLength = 10))
   
   output$linien_plot = renderPlot({
-  
-  daten() %&gt;% 
-    count(alter, geschlecht, wt = anzahl) %&gt;%
-    ggplot(aes(x = alter, y = n, col = geschlecht)) +
-    geom_line(linewidth = 1.5) +
-    theme_minimal() +
-    theme(
-      axis.text = element_text(size = 12),
-      axis.title = element_text(size = 16),
-      legend.text = element_text(size = 12),
-      legend.title = element_text(size = 16),
-      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
-      legend.position = &quot;top&quot;
-    ) +
-    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
-                          option = &quot;G&quot;,
-                          end = .8) +
-    labs(x = &quot;Alter&quot;,
-         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
-          })
+    
+    daten() %&gt;% 
+      count(alter, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = alter, y = n, col = geschlecht)) +
+      geom_line(linewidth = 1.5) +
+      theme_minimal() +
+      theme(
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 16),
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 16),
+        plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;top&quot;
+      ) +
+      scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                            option = &quot;G&quot;,
+                            end = .8) +
+      labs(x = &quot;Alter&quot;,
+           y = &quot;Geschätzte Anzahl Verletzungen&quot;)
+  })
   
   lollipop_var = reactiveVal(&quot;diagnose&quot;)
   
@@ -798,7 +944,7 @@ server &lt;- function(input, output, session) {
   })
   
   output$lollipop_plot = renderPlot({
-  
+    
     daten() %&gt;%
       mutate(variable = .data[[lollipop_var()]]) %&gt;%
       count(variable, geschlecht, wt = anzahl) %&gt;%
@@ -824,37 +970,37 @@ server &lt;- function(input, output, session) {
         legend.position = &quot;none&quot;
       ) +
       labs(y = &quot;Geschätzte Anzahl&quot;)
-    })
+  })
   
   
-    observeEvent(input$hochladen, {
-      endung &lt;- file_ext(input$hochladen$datapath)
-      if(endung == &quot;RDS&quot;){
-        verletzungen(readRDS(input$hochladen$datapath))
-        } else {
-        showFeedbackDanger(&quot;hochladen&quot;, &quot;Nur RDS Dateien können geladen werden!&quot;)
-        Sys.sleep(3)
-        }
-          
-      on.exit(hideFeedback(&quot;hochladen&quot;))
-      })
-  
-    output$herunterladen &lt;- downloadHandler(
-      filename = function() {&quot;verletzungen.csv&quot;},
-      content = function(file) {write_tsv(verletzungen(), file)}
-    )
-
-    observeEvent(input$zurücksetzen, {
+  observeEvent(input$hochladen, {
+    endung &lt;- file_ext(input$hochladen$datapath)
+    if(endung == &quot;RDS&quot;){
+      verletzungen(readRDS(input$hochladen$datapath))
+    } else {
+      showFeedbackDanger(&quot;hochladen&quot;, &quot;Nur RDS Dateien können geladen werden!&quot;)
+      Sys.sleep(3)
+    }
     
-      körperteile(c()) 
-      updateSliderInput(inputId = &quot;alter&quot;, value = c(0, 110))
-
-    })
-    
-     
-  }
+    on.exit(hideFeedback(&quot;hochladen&quot;))
+  })
   
-  shinyApp(ui, server)</code></pre>
+  output$herunterladen &lt;- downloadHandler(
+    filename = function() {&quot;verletzungen.csv&quot;},
+    content = function(file) {write_tsv(verletzungen(), file)}
+  )
+  
+  observeEvent(input$zurücksetzen, {
+    
+    körperteile(c()) 
+    updateSliderInput(inputId = &quot;alter&quot;, value = c(0, 110))
+    
+  })
+  
+  
+}
+
+shinyApp(ui, server)</code></pre>
 </div>
 <div id="datensatz" class="section level2">
 <h2>Datensatz</h2>
