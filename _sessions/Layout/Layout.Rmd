@@ -73,9 +73,9 @@ library(tidyverse)
 
 
 <ul>
-  <li class="m1"><span>Reaktivität Progammieren</span></li>
-  <li class="m3"><span>Reaktiver Graph</span></li>
-  <li class="m4"><span>Reaktive Funktionen</span></li>
+  <li class="m1"><span>Einseitige Layouts</span></li>
+  <li class="m2"><span>Mehrseitige Layouts</span></li>
+  <li class="m3"><span>HTML / CSS</span></li>
 </ul>
 
 <br>
@@ -92,11 +92,16 @@ library(tidyverse)
 ]
 ---
 
-# Pages
+# Einseitige Apps
+
+.pull-left4[
+
+]
+
 
 ---
 
-# Layouts
+# Mehrseitige Layouts
 
 
 
@@ -104,6 +109,20 @@ library(tidyverse)
 
 # HTML
 
+html translation
+
+---
+
+# HTML
+
+html tags
+
+
+---
+
+# HTML
+
+HTML function
 
 
 
