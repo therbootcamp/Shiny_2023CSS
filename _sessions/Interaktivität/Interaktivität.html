@@ -114,7 +114,7 @@ layout: true
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateSliderInput()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateTextInput()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;etc.&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
+  &lt;/ul&gt;&lt;br&gt;
   &lt;li class="m2"&gt;&lt;span&gt;"Drei" Argumente&lt;/span&gt;&lt;/li&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;session&lt;/mono&gt; - kann i.d.R. ignoriert werden&lt;/span&gt;&lt;/li&gt;
@@ -150,6 +150,171 @@ server &lt;- function(input, output, session){
 ```
 
 ]
+
+---
+
+.pull-left4[
+
+# Render
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;renderUI&lt;/mono&gt; render UI Element nach beliebigen Spezifikationen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;renderUI&lt;/mono&gt; benötigt &lt;mono&gt;outputUI&lt;/mono&gt; mit passender ID in der UI&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+&lt;br&gt;&lt;br&gt;
+
+
+```r
+ui &lt;- fluidPage(
+  
+  actionButton("ändern", label = "Radio"),
+  br(), br(),
+  uiOutput("wohnen")
+  
+  )
+
+server &lt;- function(input, output, session){
+  
+  labels = c("Radio", "Check", "Select")
+  uis = c("radioButtons", "checkboxGroupInput", "selectInput")  
+  index &lt;- reactiveVal(1)
+  
+  observeEvent(input$ändern, {
+    index(1 + (index() %% 3))
+    updateActionButton(inputId = "ändern", 
+                       label = labels[index()])
+    })
+  
+  output$wohnen = renderUI({
+    get(uis[index()])(inputId = "wohnen",
+                      label = labels[index()],
+                      choices = c("Luzern", "Zürich", "Basel"))
+    })
+  }
+```
+
+]
+
+---
+
+# Feedback
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Es ist nützlich dem Nutzer Feedback über dessen inputs zu geben.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zwei Wege&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;validate()&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;shinyFeedback&lt;/span&gt;&lt;/li&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+
+&lt;iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/feedback/"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# &lt;mono&gt;validate&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;validate&lt;/mono&gt; präsentiert &lt;high&gt;einfache Nachrichten&lt;/high&gt;&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;validate&lt;/mono&gt; ist &lt;high&gt;Output-bezogen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  textInput("name_in", "Wie heisst du?"),
+  textOutput("name_out")
+  )
+
+server &lt;- function(input, output, session){
+  
+  output$name_out &lt;- renderText({
+    
+    if(nchar(input$name_in) &lt;= 2){
+      validate("Name muss länger als 2 Zeichen sein")
+      }
+    
+    paste("Du heisst", input$name_in)
+    })
+  }
+```
+
+]
+
+
+---
+
+.pull-left4[
+
+# &lt;mono&gt;shinyFeedback&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Das shinyFeedback liefert Funktionen für verschiedene Nachrichten&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;feedback&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;feedbackWarning&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;feedbackDanger&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;feedbackSuccess&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;shinyFeedback&lt;/mono&gt; ist &lt;high&gt;Input-bezogen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Erfordert &lt;mono&gt;useShinyFeedback&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  useShinyFeedback(),
+  textInput("name_in", "Wie heisst du?"),
+  textOutput("name_out")
+  )
+
+server &lt;- function(input, output, session){
+  
+  observe({
+    feedbackDanger("name_in", 
+                   nchar(input$name_in)&gt;5,
+                   "Der Name ist zu lang")
+    })
+  
+  output$name_out &lt;- renderText({
+    
+    if(nchar(input$name_in) &lt;= 2){
+      validate("Name muss länger als 2 Zeichen sein")
+      }
+    
+    paste("Du heisst", input$name_in)
+    })
+  }
+```
+
+]
+
 
 ---
 

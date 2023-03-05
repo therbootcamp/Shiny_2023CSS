@@ -127,7 +127,7 @@ library(tidyverse)
     <li><span><mono>updateSliderInput()</moono></span></li>
     <li><span><mono>updateTextInput()</moono></span></li>
     <li><span>etc.</span></li>
-  </ul>
+  </ul><br>
   <li class="m2"><span>"Drei" Argumente</span></li>
   <ul>
     <li><span><mono>session</mono> - kann i.d.R. ignoriert werden</span></li>
@@ -218,13 +218,111 @@ server <- function(input, output, session){
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>Es ist nützlich dem Nutzer Feedback über dessen inputs zu geben.</li>
+  <li class="m1"><span>Es ist nützlich dem Nutzer Feedback über dessen inputs zu geben.</span></li>
   <li class="m2"><span>Zwei Wege</span></li>
   <ul class = "level">
     <li><span><mono>validate()</mono></span></li>
     <li><span>shinyFeedback</span></li>
   </li>
 </ul>
+
+]
+
+
+.pull-right5[
+
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/feedback/"></iframe>
+
+]
+
+---
+
+# <mono>validate</mono>
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span><mono>validate</mono> präsentiert <high>einfache Nachrichten</high></mono></span></li>
+  <li class="m2"><span><mono>validate</mono> ist <high>Output-bezogen</high></span></li>
+</ul>
+
+]
+
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  textInput("name_in", "Wie heisst du?"),
+  textOutput("name_out")
+  )
+
+server <- function(input, output, session){
+  
+  output$name_out <- renderText({
+    
+    if(nchar(input$name_in) <= 2){
+      validate("Name muss länger als 2 Zeichen sein")
+      }
+    
+    paste("Du heisst", input$name_in)
+    })
+  }
+
+```
+
+]
+
+
+---
+
+.pull-left4[
+
+# <mono>shinyFeedback</mono>
+
+<ul>
+  <li class="m1"><span>Das shinyFeedback liefert Funktionen für verschiedene Nachrichten</span></li>
+  <ul class = "level">
+    <li><span><mono>feedback</mono></span></li>
+    <li><span><mono>feedbackWarning</mono></span></li>
+    <li><span><mono>feedbackDanger</mono></span></li>
+    <li><span><mono>feedbackSuccess</mono></span></li>
+  </ul>
+  <li class="m2"><span><mono>shinyFeedback</mono> ist <high>Input-bezogen</high></span></li>
+  <li class="m3"><span>Erfordert <mono>useShinyFeedback</mono></span></li>
+</ul>
+
+]
+
+
+.pull-right5[
+<br><br><br>
+```{r, eval = FALSE}
+ui <- fluidPage(
+  useShinyFeedback(),
+  textInput("name_in", "Wie heisst du?"),
+  textOutput("name_out")
+  )
+
+server <- function(input, output, session){
+  
+  observe({
+    feedbackDanger("name_in", 
+                   nchar(input$name_in)>5,
+                   "Der Name ist zu lang")
+    })
+  
+  output$name_out <- renderText({
+    
+    if(nchar(input$name_in) <= 2){
+      validate("Name muss länger als 2 Zeichen sein")
+      }
+    
+    paste("Du heisst", input$name_in)
+    })
+  }
+
+```
 
 ]
 

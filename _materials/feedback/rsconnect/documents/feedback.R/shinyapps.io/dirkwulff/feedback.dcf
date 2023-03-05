@@ -1,0 +1,13 @@
+name: feedback
+title: feedback
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8483134
+bundleId: 6918768
+url: https://dirkwulff.shinyapps.io/feedback/
+when: 1678056279.92905
+lastSyncTime: 1678056279.92906
+asMultiple: FALSE
+asStatic: FALSE
