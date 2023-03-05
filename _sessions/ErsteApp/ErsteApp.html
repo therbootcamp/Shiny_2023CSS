@@ -63,6 +63,7 @@ layout: true
   &lt;li class="m1"&gt;&lt;span&gt;Erste App&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;UI und Server&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m3"&gt;&lt;span&gt;UI Inputs&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;UI Outputs&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m4"&gt;&lt;span&gt;Workflow&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -784,6 +785,111 @@ ui &lt;- fluidPage(
 &lt;/p&gt;
 
 ]
+
+
+---
+
+.pull-left4[
+
+# Ouputs
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;UI-Outputs sind Platzhalter für Inhalte, die vom &lt;high&gt;Server&lt;/high&gt; generiert werden.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Der Server generiert die Inhalte mit passenden &lt;highm&gt;render*&lt;/highm&gt;-Funktionen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+]
+
+.pull-right5[
+
+&lt;br&gt;
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("variable", 
+                  "Wähle eine Variable")
+      ),
+    mainPanel(
+      plotOutput("scatterplot")
+      )
+    )
+  )
+
+server &lt;- function(input, output, session) {
+  
+  daten &lt;- read_csv("datensatz.csv")
+  
+  output$scatterplot &lt;- renderPlot({
+    plot(daten$x, 
+         daten[[input$variable]])
+  })
+  
+}
+
+shinyApp(ui, server)
+```
+]
+
+---
+
+# Ouputs
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;UI-Outputs sind Platzhalter für Inhalte, die vom &lt;high&gt;Server&lt;/high&gt; generiert werden.&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Der Server generiert die Inhalte mit passenden &lt;highm&gt;render*&lt;/highm&gt;-Funktionen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+&lt;table style="cellspacing:0; cellpadding:0; border:none; width:70%"&gt;
+&lt;col width="20%"&gt;
+  &lt;col width="60%"&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;th style="padding:20px;text-align:left"&gt;Output&lt;br&gt;&lt;font style="font-weight:100"&gt;(in UI)&lt;/font&gt;&lt;/td&gt;
+    &lt;th style="padding:20px;text-align:left"&gt;Render&lt;br&gt;&lt;font style="font-weight:100"&gt;(in Server)&lt;/font&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;textOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderText()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;htmlOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderText()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt; 
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;plotOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderPlot()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt; 
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;imageOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderImage()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;tableOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderTable()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;dataTableOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderDataTable()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20pxr"&gt;&lt;mono&gt;uiOuput()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;renderUi()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+]
+
+
 
 
 ---

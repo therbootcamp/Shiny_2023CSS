@@ -92,18 +92,82 @@ library(tidyverse)
 ]
 ---
 
-# Einseitige Apps
+# Einseitige Layouts
 
 .pull-left4[
 
+<ul>
+  <li class="m1"><span>Einseitige Layouts können durch eine <high>Kombination</high> mehrere Elemente erstellt werden</span></li>
+</ul>
+
 ]
 
+.pull-right5[
+
+<table style="cellspacing:0; cellpadding:0; border:none; width:70%">
+<col width="20%">
+  <col width="60%">
+  <tr style="padding:20px;background-color:white">
+    <th style="padding:20px;text-align:left">Kategorie</td>
+    <th style="padding:20px;text-align:left">Funktion</td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr">Page</td>
+    <td><mono>fluidPage() fixedPage()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr">Laouts</td>
+    <td><mono>sidebarLayout() splitLayout() verticalLayout</mono></td>
+  </tr> 
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr">Panels</td>
+    <td><mono>titlePanel() mainPanel() sidebarPanel() fixedPanel()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr">Grid</td>
+    <td><mono>fluidRow() fixedRow() column()</mono></td>
+  </tr>
+</table>
+
+
+]
 
 ---
 
-# Mehrseitige Layouts
+.pull-left4[
+
+# <mono>*Page()</mono>
+
+<ul>
+  <li class="m1"><span><mono>*Page()</mono> Funktionen kreieren leere Webseiten</span></li>
+  <li class="m2"><span>Funktionen variieren darin wie sie mit unterschiedlichen <high>Displaygrössen</high> umgehen.</span></li>
+  <li class="m3"><span><mono>fixedPage()</mono> hat eine feste Breite.</span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+
+ui <- fluidPage()
+
+```
 
 
+]
+
+.pull-right5[
+
+<br><br><br>
+<p align = "center">
+  <img src = "image/fluidPage.png" height = 460px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# <mono>*Page()</mono>
 
 ---
 

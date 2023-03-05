@@ -76,6 +76,7 @@ library(tidyverse)
   <li class="m1"><span>Erste App</span></li>
   <li class="m2"><span>UI und Server</span></li>
   <li class="m3"><span>UI Inputs</span></li>
+  <li class="m3"><span>UI Outputs</span></li>
   <li class="m4"><span>Workflow</span></li>
 </ul>
 
@@ -787,6 +788,113 @@ ui <- fluidPage(
 </p>
 
 ]
+
+
+---
+
+.pull-left4[
+
+# Ouputs
+
+<ul>
+  <li class="m1"><span>UI-Outputs sind Platzhalter für Inhalte, die vom <high>Server</high> generiert werden.</span></li><br>
+  <li class="m2"><span>Der Server generiert die Inhalte mit passenden <highm>render*</highm>-Funktionen</span></li>
+</ul>
+
+
+]
+
+.pull-right5[
+
+<br>
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("variable", 
+                  "Wähle eine Variable")
+      ),
+    mainPanel(
+      plotOutput("scatterplot")
+      )
+    )
+  )
+
+server <- function(input, output, session) {
+  
+  daten <- read_csv("datensatz.csv")
+  
+  output$scatterplot <- renderPlot({
+    plot(daten$x, 
+         daten[[input$variable]])
+  })
+  
+}
+
+shinyApp(ui, server)
+
+
+```
+]
+
+---
+
+# Ouputs
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>UI-Outputs sind Platzhalter für Inhalte, die vom <high>Server</high> generiert werden.</span></li><br>
+  <li class="m2"><span>Der Server generiert die Inhalte mit passenden <highm>render*</highm>-Funktionen</span></li>
+</ul>
+
+]
+
+.pull-right5[
+
+<table style="cellspacing:0; cellpadding:0; border:none; width:70%">
+<col width="20%">
+  <col width="60%">
+  <tr style="padding:20px;background-color:white">
+    <th style="padding:20px;text-align:left">Output<br><font style="font-weight:100">(in UI)</font></td>
+    <th style="padding:20px;text-align:left">Render<br><font style="font-weight:100">(in Server)</font></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>textOuput()</mono></td>
+    <td><mono>renderText()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>htmlOuput()</mono></td>
+    <td><mono>renderText()</mono></td>
+  </tr> 
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>plotOuput()</mono></td>
+    <td><mono>renderPlot()</mono></td>
+  </tr> 
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>imageOuput()</mono></td>
+    <td><mono>renderImage()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>tableOuput()</mono></td>
+    <td><mono>renderTable()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>dataTableOuput()</mono></td>
+    <td><mono>renderDataTable()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20pxr"><mono>uiOuput()</mono></td>
+    <td><mono>renderUi()</mono></td>
+  </tr>
+</table>
+
+]
+
+
 
 
 ---
