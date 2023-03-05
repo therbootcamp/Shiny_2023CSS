@@ -206,7 +206,7 @@ ui &lt;- fluidPage(
 
 ```r
 ui &lt;- fluidPage(
-  titlePanel(),
+  titlePanel("Sidebar Layout"),
   sidebarLayout(sidebarPanel(), 
                 mainPanel())
 )
@@ -240,7 +240,7 @@ ui &lt;- fluidPage(
 
 ```r
 ui &lt;- fluidPage(
-  titlePanel(),
+  titlePanel("Sidebar Layout"),
   sidebarLayout(
     sidebarPanel(), 
     mainPanel(
@@ -269,7 +269,7 @@ ui &lt;- fluidPage(
 
 # Tabs
 
-.pull-right4[
+.pull-left4[
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Tabs kreieren ein mehrseitiges Layout innerhalb einer Seite&lt;/span&gt;&lt;/li&gt;
@@ -305,7 +305,7 @@ ui &lt;- fluidPage(
 
 # Navlist
 
-.pull-right4[
+.pull-left4[
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Navlist kreieren ein mehrseitiges Layout innerhalb einer Seite&lt;/span&gt;&lt;/li&gt;
@@ -341,7 +341,7 @@ ui &lt;- fluidPage(
 
 # Navbar
 
-.pull-right4[
+.pull-left4[
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Navbar ist (anders als Tabset oder Navbar) eine &lt;high&gt;Seite&lt;/high&gt;.&lt;/span&gt;&lt;/li&gt;
@@ -371,27 +371,118 @@ ui &lt;- navbarPage(
 
 ]
 
+---
 
+.pull-left25[
+
+# HTML
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Shiny wird in HTML, CSS und javascript &lt;high&gt;übersetzt&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Shiny is kompatibel mit Code in diesen Sprachen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Shiny verwendet den &lt;a href="https://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; Framework&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right65[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/shiny_html.png" height="390px"&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+.pull-left3[
+
+# &lt;mono&gt;tags&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Die &lt;mono&gt;tags&lt;/mono&gt;stellt alle geläufigen &lt;high&gt;HTML-tags&lt;/high&gt; zur Verfügung&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Diese &lt;mono&gt;tags&lt;/mono&gt; können mit Shiny &lt;high&gt;austauschbar&lt;/high&gt; verwendet werden.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right6[
+
+
+
+
+
+```r
+library(shiny)
+names(tags)
+```
+
+```
+ [1] "a"                   "abbr"                "address"            
+ [4] "animate"             "animateMotion"       "animateTransform"   
+ [7] "area"                "article"             "aside"              
+[10] "audio"               "b"                   "base"               
+[13] "bdi"                 "bdo"                 "blockquote"         
+[16] "body"                "br"                  "button"             
+[19] "canvas"              "caption"             "circle"             
+[22] "cite"                "clipPath"            "code"               
+[25] "col"                 "colgroup"            "color-profile"      
+[28] "command"             "data"                "datalist"           
+[31] "dd"                  "defs"                "del"                
+[34] "desc"                "details"             "dfn"                
+[37] "dialog"              "discard"             "div"                
+[40] "dl"                  "dt"                  "ellipse"            
+[43] "em"                  "embed"               "eventsource"        
+[46] "feBlend"             "feColorMatrix"       "feComponentTransfer"
+[49] "feComposite"         "feConvolveMatrix"    "feDiffuseLighting"  
+[52] "feDisplacementMap"   "feDistantLight"      "feDropShadow"       
+[55] "feFlood"             "feFuncA"             "feFuncB"            
+[58] "feFuncG"             "feFuncR"             "feGaussianBlur"     
+[61] "feImage"             "feMerge"             "feMergeNode"        
+[64] "feMorphology"        "feOffset"            "fePointLight"       
+[67] "feSpecularLighting"  "feSpotLight"         "feTile"             
+[70] "feTurbulence"        "fieldset"            "figcaption"         
+ [ reached getOption("max.print") -- omitted 109 entries ]
+```
+
+
+]
 
 ---
 
 # HTML
 
-html translation
+.pull-left4[
 
----
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Die &lt;mono&gt;tags&lt;/mono&gt;stellt alle geläufigen &lt;high&gt;HTML-tags&lt;/high&gt; zur Verfügung&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Diese &lt;mono&gt;tags&lt;/mono&gt; können mit Shiny &lt;high&gt;austauschbar&lt;/high&gt; verwendet werden.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-# HTML
-
-html tags
 
 
----
+```r
+ui &lt;- tags$html(
+  tags$body(
+    tags$div(
+      tags$p(
+        "Hier ist ein Link zum", 
+        tags$a(href="www.therbootcamp.com", 
+               "The R Bootcamp")
+        )
+      )
+    )
+  )
+```
 
-# HTML
 
-HTML function
+]
 
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"&gt;&lt;/iframe&gt;
+
+]
 
 
 ---

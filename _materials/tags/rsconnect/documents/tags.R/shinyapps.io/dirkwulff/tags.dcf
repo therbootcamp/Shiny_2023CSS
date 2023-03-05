@@ -1,0 +1,13 @@
+name: tags
+title: tags
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8481255
+bundleId: 6918041
+url: https://dirkwulff.shinyapps.io/tags/
+when: 1678034143.38595
+lastSyncTime: 1678034143.38596
+asMultiple: FALSE
+asStatic: FALSE

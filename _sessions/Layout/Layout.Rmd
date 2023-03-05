@@ -221,7 +221,7 @@ ui <- fluidPage(
 ```{r, eval = FALSE}
 
 ui <- fluidPage(
-  titlePanel(),
+  titlePanel("Sidebar Layout"),
   sidebarLayout(sidebarPanel(), 
                 mainPanel())
 )
@@ -256,7 +256,7 @@ ui <- fluidPage(
 ```{r, eval = FALSE}
 
 ui <- fluidPage(
-  titlePanel(),
+  titlePanel("Sidebar Layout"),
   sidebarLayout(
     sidebarPanel(), 
     mainPanel(
@@ -286,7 +286,7 @@ ui <- fluidPage(
 
 # Tabs
 
-.pull-right4[
+.pull-left4[
 
 <ul>
   <li class="m1"><span>Tabs kreieren ein mehrseitiges Layout innerhalb einer Seite</span></li>
@@ -323,7 +323,7 @@ ui <- fluidPage(
 
 # Navlist
 
-.pull-right4[
+.pull-left4[
 
 <ul>
   <li class="m1"><span>Navlist kreieren ein mehrseitiges Layout innerhalb einer Seite</span></li>
@@ -360,7 +360,7 @@ ui <- fluidPage(
 
 # Navbar
 
-.pull-right4[
+.pull-left4[
 
 <ul>
   <li class="m1"><span>Navbar ist (anders als Tabset oder Navbar) eine <high>Seite</high>.</span></li>
@@ -391,27 +391,90 @@ ui <- navbarPage(
 
 ]
 
+---
 
+.pull-left25[
+
+# HTML
+
+<ul>
+  <li class="m1"><span>Shiny wird in HTML, CSS und javascript <high>übersetzt</high></span></li>
+  <li class="m2"><span>Shiny is kompatibel mit Code in diesen Sprachen</high></span></li>
+  <li class="m3"><span>Shiny verwendet den <a href="https://getbootstrap.com/">Bootstrap</a> Framework</high></span></li>
+</ul>
+
+]
+
+.pull-right65[
+<br><br><br><br>
+<p align = "center">
+  <img src = "image/shiny_html.png" height="390px">
+</p>
+
+]
+
+---
+
+.pull-left3[
+
+# <mono>tags</mono>
+
+<ul>
+  <li class="m1"><span>Die <mono>tags</mono>stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
+  <li class="m2"><span>Diese <mono>tags</mono> können mit Shiny <high>austauschbar</high> verwendet werden.</span></li>
+</ul>
+
+]
+
+.pull-right6[
+
+```{r, echo = FALSE}
+options(max.print = 72, width = 70)
+```
+
+
+```{r}
+library(shiny)
+names(tags)
+```
+
+
+]
 
 ---
 
 # HTML
 
-html translation
+.pull-left4[
 
----
+<ul>
+  <li class="m1"><span>Die <mono>tags</mono>stellt alle geläufigen <high>HTML-tags</high> zur Verfügung</span></li>
+  <li class="m2"><span>Diese <mono>tags</mono> können mit Shiny <high>austauschbar</high> verwendet werden.</span></li>
+</ul>
 
-# HTML
 
-html tags
+```{r, eval = FALSE}
+ui <- tags$html(
+  tags$body(
+    tags$div(
+      tags$p(
+        "Hier ist ein Link zum", 
+        tags$a(href="www.therbootcamp.com", 
+               "The R Bootcamp")
+        )
+      )
+    )
+  )
+```
 
 
----
+]
 
-# HTML
+.pull-right5[
 
-HTML function
+<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"></iframe>
 
+]
 
 
 ---
