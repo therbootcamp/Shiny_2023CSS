@@ -248,6 +248,26 @@ layout: true
 
 ---
 
+.pull-left3[
+
+# &lt;mono&gt;shinyWidgets&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Paket mit erweiterten UI Elementen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+]
+
+.pull-right55[
+&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/shinyWidgets.png"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://github.com/dreamRs/shinyWidgets"&gt;https://github.com&lt;/a&gt;&lt;/font&gt;
+&lt;/p&gt;
+]
+
+
+---
+
 # Datenquellen
 
 .pull-left4[
@@ -268,7 +288,7 @@ layout: true
 
 .pull-left4[
 
-# Modularität
+# Modularität &amp; Funktionen
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Sobald Apps komplexer werden, wird's schnell unübersichtlich. &lt;/span&gt;&lt;/li&gt;
@@ -287,12 +307,13 @@ layout: true
 
 .pull-left4[
 
-# Modularität
+# Modularität &amp; Funktionen
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Sobald Apps komplexer werden, wird's schnell unübersichtlich. &lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Shiny Modules helfen, die App in kleinere, unabhängige Module zu unterteilen.&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m3"&gt;&lt;span&gt;Besonders für die parallele Zusammenarbeit von mehreren Entwickler:innen sinnvoll.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;Zudem reduziert das Auslagern von wiederholtem Code in Funktionen Redundanz und Fehleranfälligkeit&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ]
 
@@ -304,7 +325,110 @@ layout: true
 &lt;/p&gt;
 ]
 
+---
 
+.pull-left4[
+
+# Deployment
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;In unserem Kurs haben wir alle Apps lokal auf dem eigenen Computer laufen lassen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Der Sinn von Shiny ist natürlich, die App mehreren Usern übers Internet zur Verfügung zu stellen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Es verschiedene Wege, um deine App zu deployen, die unterschiedlich komplex und kostspielig sind&lt;/span&gt;&lt;/li&gt;
+
+&lt;/ul&gt;
+]
+
+.pull-right5[
+&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/servers.jpg"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://www.unsplash.com"&gt;https://www.unsplash.com&lt;/a&gt;&lt;/font&gt;
+&lt;/p&gt;
+]
+
+
+---
+
+.pull-left4[
+
+# Deployment Optionen
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;a href="https://shinyapps.io"&gt;shinyapps.io&lt;/a&gt; &lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;einfacher (und kostenloser) Einstieg für kleine Projekte und Testing ohne Server-Kenntnisse&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;a href="https://posit.co/products/open-source/shinyserver/"&gt;Shiny Server &lt;/a&gt; (Open Source Edition)&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;Shiny Server von der eigenen IT gehostet&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;&lt;a href="https://posit.co/products/enterprise/connect/"&gt;Posit Connect&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;Umfangreiches Angebot von Posit für Unternehmen mit sehr umfangreichen Funktionen&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;weitere Optionen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/deploy.png"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://posit.co/products/open-source/shinyserver/"&gt;https://posit.co&lt;/a&gt;&lt;/font&gt;
+&lt;/p&gt;
+]
+
+---
+
+.pull-left5[
+
+# Shiny Extensions
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Es gibt unzählige Pakete, die Shiny erweitern&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;a href="https://github.com/nanxstats/awesome-shiny-extensions"&gt;Shiny Awesome&lt;/a&gt; ist eine aktuell gehaltene Liste von Shiny Erweiterungen, sortiert nach Themen&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;Nicht alle Pakete sind aktiv entwickelt&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Es gibt viele spannende Projekte zu entdecken&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+]
+
+.pull-right4[
+&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/shinyAwesome.png"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://github.com/nanxstats/awesome-shiny-extensions"&gt;https://github.com&lt;/a&gt;&lt;/font&gt;
+&lt;/p&gt;
+]
+
+---
+
+.pull-left5[
+
+# Shiny Ressources
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Genauso, gibt es unzählige Ressourcen zu Shiny&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;a href="https://github.com/grabear/awesome-rshiny"&gt;Awesome Shiny&lt;/a&gt; ist eine aktuell gehaltene Liste von Shiny Ressourcen&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;Tutorials&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Bücher&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Websites&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Personen&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;...&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+]
+
+.pull-right4[
+&lt;br&gt;
+&lt;p align="center"&gt;
+&lt;img src="image/awesome-rshiny-logo.svg"&gt;&lt;br&gt;
+&lt;font style="font-size:10px"&gt;from &lt;a href="https://github.com/grabear/awesome-rshiny"&gt;https://github.com&lt;/a&gt;&lt;/font&gt;
+&lt;/p&gt;
+]
 
 
 
