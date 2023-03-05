@@ -75,8 +75,8 @@ library(tidyverse)
 
 <ul>
   <li class="m1"><span>Reaktivität Progammieren</span></li>
-  <li class="m3"><span>Reaktiver Graph</span></li>
-  <li class="m4"><span>Reaktive Funktionen</span></li>
+  <li class="m2"><span>Reaktiver Graph</span></li>
+  <li class="m3"><span>Reaktive Funktionen</span></li>
   <ul class = "level">
     <li><span><mono>reactive</mono></span></li>
     <li><span><mono>reactiveVal, reactiveValues</mono></span></li>

@@ -1,5 +1,5 @@
 ---
-title: "Erste App"
+title: "Layout"
 author: "Dashboards mit Shiny<br>
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
@@ -51,104 +51,67 @@ layout: true
 
 ---
 
-
-```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
-# Code to knit slides
-baselers <- readr::read_csv("1_Data/basel.csv")
-```
-
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-# see: https://github.com/yihui/xaringan
-# install.packages("xaringan")
-# see: 
-# https://github.com/yihui/xaringan/wiki
-# https://github.com/gnab/remark/wiki/Markdown
-options(width=110)
-options(digits = 4)
+
+#options(width=110)
+#options(digits = 4)
 ```
 
 ```{r, echo = FALSE ,message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
-                      message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
+knitr::opts_chunk$set(comment=NA, 
+                      echo = TRUE, eval = TRUE, 
+                      message = FALSE, warning = FALSE, error = TRUE,
+                      fig.align = 'center', dpi = 200)
 library(tidyverse)
 ```
 
 
+.pull-left4[
+
 # Agenda
 
 
-.pull-left4[
-
 <ul>
-  <li class="m1"><span>Erste app.</span></li>
-  <li class="m2"><span><high>Separate Funktionen</high> für verschiedene Plots</span></li>
+  <li class="m1"><span>Reaktivität Progammieren</span></li>
+  <li class="m3"><span>Reaktiver Graph</span></li>
+  <li class="m4"><span>Reaktive Funktionen</span></li>
 </ul>
 
 <br>
 
-```{r, eval = FALSE}
-# Histogram in base R
-hist(x = basel$alter,
-     xlab = "Alter",
-     ylab = "Häufigkeit",
-     main = "Histogramm Alter")
-```
 
 ]
 
 .pull-right5[
-
-```{r, echo = F}
-# Histogram in base R
-hist(x = basel$alter,
-     xlab = "Alter",
-     ylab = "Häufigkeit",
-     main = "Histogramm Alter")
-```
-
-]
-
----
-
-# Erste App
-
-
-.pull-left35[
-
-<ul>
-  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li>
-  <ul class = "level">
-    <li><span>ui - Frontend</span></li><br>
-    <li><span>server - Backend</span></li><br>
-    <li><span>shinyApp - Starter</span></li><br>
-  </ul>
-</ul>
-
-]
-
-.pull-right55[
-
+<br><br><br>
 <p align = "center">
-  <img src = "image/ersteapp.png" height = 420px>
+  <img src = "image/agenda.png" height = 460px>
 </p>
 
 ]
 ---
 
-# Workflow
+# Pages
+
+---
+
+# Layouts
 
 
-1. shinyapp
-2. template
-3. projects
+
+---
+
+# HTML
+
+
+
 
 ---
 
 class: middle, center
 
-<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html">Practical</a></h1>
+<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Layout/Layout_practical.html">Practical</a></h1>
 
 
 
