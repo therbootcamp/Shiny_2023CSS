@@ -1,5 +1,5 @@
 ---
-title: "Erste App"
+title: "Interaktivität"
 author: "Dashboards mit Shiny<br>
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
@@ -52,26 +52,18 @@ layout: true
 ---
 
 
-```{r, eval = TRUE, echo = FALSE, warning=F,message=F}
-# Code to knit slides
-baselers <- readr::read_csv("1_Data/basel.csv")
-```
-
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-# see: https://github.com/yihui/xaringan
-# install.packages("xaringan")
-# see: 
-# https://github.com/yihui/xaringan/wiki
-# https://github.com/gnab/remark/wiki/Markdown
-options(width=110)
-options(digits = 4)
+
+#options(width=110)
+#options(digits = 4)
 ```
 
 ```{r, echo = FALSE ,message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(comment=NA, fig.width=6, fig.height=6, echo = TRUE, eval = TRUE, 
-                      message = FALSE, warning = FALSE, fig.align = 'center', dpi = 200)
+knitr::opts_chunk$set(comment=NA, 
+                      echo = TRUE, eval = TRUE, 
+                      message = FALSE, warning = FALSE, error = TRUE,
+                      fig.align = 'center', dpi = 200)
 library(tidyverse)
 ```
 
