@@ -87,7 +87,7 @@ library(tidyverse)
 <br><br><br>
 <p align = "center">
   <img src = "image/agenda.jpg" height = 420px><br>
-  from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</>
+  <font style="font-size:12px">from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</></font>
 </p>
 
 ]

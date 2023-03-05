@@ -74,8 +74,8 @@ library(tidyverse)
 
 
 <ul>
-  <li class="m1"><span>Upload</span></li>
-  <li class="m2"><span>Download</span></li>
+  <li class="m1"><span>Dynamisches UI</span></li>
+  <li class="m2"><span>Feedback</span></li>
 </ul>
 
 ]
@@ -84,10 +84,138 @@ library(tidyverse)
 <br><br><br>
 <p align = "center">
   <img src = "image/agenda.jpg" height = 420px><br>
-  from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</>
+  <font style="font-size:12px">from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</></font>
 </p>
 
 ]
+
+---
+
+# Dynamisches UI
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>UI Elemente können high>durch den <Server</high> geändert werden</span></li>
+  <li class="m2"><span>Zwei wege</span></li>
+  <ul>
+    <li><span><mono>update*</mono> Funktionen</span></li>
+    <li><span><mono>uiOutput()</mono> & <mono>renderUI()</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/update/"></iframe>
+
+]
+
+
+---
+
+# Update
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Für jeden Input gibt es einen <high>eigenen Update</high></span></li>
+  <ul>
+    <li><span><mono>updateActionButton()</moono></span></li>
+    <li><span><mono>updateSelectInput()</moono></span></li>
+    <li><span><mono>updateSliderInput()</moono></span></li>
+    <li><span><mono>updateTextInput()</moono></span></li>
+    <li><span>etc.</span></li>
+  </ul>
+  <li class="m2"><span>"Drei" Argumente</span></li>
+  <ul>
+    <li><span><mono>session</mono> - kann i.d.R. ignoriert werden</span></li>
+    <li><span><mono>inputId()</mono> - ID des Inputs, der geändert werden soll. </mono></span></li>
+    <li><span><mono>XX</mono> - Argumente der Inputs, die geändert werden sollen.</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  
+  actionButton("ändern", label = "Radio")
+  
+  )
+
+server <- function(input, output, session){
+  
+  labels = c("Radio", "Check", "Select")
+  index <- reactiveVal(1)
+  
+  observeEvent(input$ändern, {
+    index(1 + (index() %% 3))
+    updateActionButton(inputId = "ändern", 
+                       label = labels[index()])
+    })
+  }
+```
+
+]
+
+---
+
+.pull-left4[
+
+# Render
+
+<ul>
+  <li class="m1"><span><mono>renderUI</mono> render UI Element nach beliebigen Spezifikationen</span></li>
+  <li class="m2"><span><mono>renderUI</mono> benötigt <mono>outputUI</mono> mit passender ID in der UI</span></li>
+</ul>
+
+]
+
+.pull-right5[
+
+<br><br>
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  
+  actionButton("ändern", label = "Radio"),
+  br(), br(),
+  uiOutput("wohnen")
+  
+  )
+
+server <- function(input, output, session){
+  
+  labels = c("Radio", "Check", "Select")
+  uis = c("radioButtons", "checkboxGroupInput", "selectInput")  
+  index <- reactiveVal(1)
+  
+  observeEvent(input$ändern, {
+    index(1 + (index() %% 3))
+    updateActionButton(inputId = "ändern", 
+                       label = labels[index()])
+    })
+  
+  output$wohnen = renderUI({
+    get(uis[index()])(inputId = "wohnen",
+                      label = labels[index()],
+                      choices = c("Luzern", "Zürich", "Basel"))
+    })
+  }
+```
+
+]
+
+---
+
+# Feedback
+
+
 
 ---
 

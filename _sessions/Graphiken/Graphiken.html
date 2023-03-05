@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Interaktivität</title>
+    <title>Graphiken</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dashboards mit Shiny  The R Bootcamp @ CSS                 " />
     <script src="libs/header-attrs/header-attrs.js"></script>
@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Interaktivität
+# Graphiken
 ]
 .author[
 ### Dashboards mit Shiny<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
@@ -61,8 +61,8 @@ layout: true
 
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Dynamisches UI&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Feedback&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Upload&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Download&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -76,86 +76,21 @@ layout: true
 
 ]
 
----
-
-# Dynamisches UI
-
-.pull-left4[
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;UI Elemente können high&gt;durch den &lt;Server&lt;/high&gt; geändert werden&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Zwei wege&lt;/span&gt;&lt;/li&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;update*&lt;/mono&gt; Funktionen&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;uiOutput()&lt;/mono&gt; &amp; &lt;mono&gt;renderUI()&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/ul&gt;
-
-]
-
-.pull-right5[
-
-&lt;iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/update/"&gt;&lt;/iframe&gt;
-
-]
-
 
 ---
 
-# Update
-
-.pull-left4[
-
-&lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Für jeden Input gibt es einen &lt;high&gt;eigenen Update&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateActionButton()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateSelectInput()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateSliderInput()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;updateTextInput()&lt;/moono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;etc.&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;"Drei" Argumente&lt;/span&gt;&lt;/li&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;session&lt;/mono&gt; - kann i.d.R. ignoriert werden&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;inputId()&lt;/mono&gt; - ID des Inputs, der geändert werden soll. &lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;span&gt;&lt;mono&gt;XX&lt;/mono&gt; - Argumente der Inputs, die geändert werden sollen.&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/ul&gt;
-
-]
+# Workflow
 
 
-.pull-right5[
-
-
-```r
-ui &lt;- fluidPage(
-  
-  actionButton("ändern", label = "Radio")
-  
-  )
-
-server &lt;- function(input, output, session){
-  
-  labels = c("Radio", "Check", "Select")
-  index &lt;- reactiveVal(1)
-  
-  observeEvent(input$ändern, {
-    index(1 + (index() %% 3))
-    updateActionButton(inputId = "ändern", 
-                       label = labels[index()])
-    })
-  }
-```
-
-]
+1. shinyapp
+2. template
+3. projects
 
 ---
 
 class: middle, center
 
-&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Interaktivität/Interaktivität_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
 
 
 

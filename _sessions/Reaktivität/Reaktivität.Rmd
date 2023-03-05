@@ -97,7 +97,7 @@ library(tidyverse)
 <br><br><br>
 <p align = "center">
   <img src = "image/agenda.jpg" height = 420px><br>
-  from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</>
+  <font style="font-size:12px">from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</></font>
 </p>
 
 ]
@@ -348,7 +348,7 @@ shinyApp(ui, server)
 
 .pull-right5[
 
-<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/reactive/"></iframe>
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/reactive/"></iframe>
 
 ]
 
@@ -407,7 +407,7 @@ shinyApp(ui, server)
 
 .pull-right5[
 
-<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/eventReactive/"></iframe>
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/eventReactive/"></iframe>
 
 ]
 
@@ -550,7 +550,7 @@ shinyApp(ui, server)
 
 .pull-right5[
 
-<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent/"></iframe>
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent/"></iframe>
 
 ]
 
@@ -610,7 +610,7 @@ shinyApp(ui, server)
 
 .pull-right5[
 
-<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent2/"></iframe>
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent2/"></iframe>
 
 ]
 

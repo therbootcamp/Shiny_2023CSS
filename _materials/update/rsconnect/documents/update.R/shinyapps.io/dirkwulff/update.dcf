@@ -1,0 +1,13 @@
+name: update
+title: update
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8482835
+bundleId: 6918671
+url: https://dirkwulff.shinyapps.io/update/
+when: 1678053877.92279
+lastSyncTime: 1678053877.92282
+asMultiple: FALSE
+asStatic: FALSE
