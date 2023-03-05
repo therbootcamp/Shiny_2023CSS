@@ -168,7 +168,7 @@ knitr::opts_chunk$set(fig.align = 'center')
   </ul><br>
   <li class="m2"><span><high>Dauer</high></span></li>
   <ul class="level">
-    <li><span>30-60 min</span></li>
+    <li><span>20-40 min</span></li>
   </ul><br>
 </ul>
 

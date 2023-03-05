@@ -444,7 +444,7 @@ names(tags)
 
 ---
 
-# HTML
+# <mono>tags</mono>
 
 .pull-left4[
 
