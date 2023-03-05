@@ -179,7 +179,7 @@ library(tidyverse)
 # Prozess
 
 <ul>
-  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
+  <li class="m1"><span>Shiny Apps</span></li><br>
   <ul class = "level">
     <li><span>ui - Frontend</span></li><br>
     <li><span>server - Backend</span></li><br>
@@ -334,7 +334,7 @@ ui <- fluidPage(
 ```
 
 <p align = "left">
-  <img src = "image/textinput.png" width = 600px>
+  <img src = "image/textInput.png" width = 600px>
 </p>
 
 ]
