@@ -1,0 +1,13 @@
+name: observeEvent
+title: observeEvent
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8480170
+bundleId: 6917571
+url: https://dirkwulff.shinyapps.io/observeEvent/
+when: 1678016755.11412
+lastSyncTime: 1678016755.11414
+asMultiple: FALSE
+asStatic: FALSE

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Reaktivität</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dashboards mit Shiny  The R Bootcamp @ CSS                 " />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="baselrbootcamp.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Reaktivität
+]
+.author[
+### Dashboards mit Shiny<br> <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a> <br> <a href='https://therbootcamp.github.io/Shiny_2023CSS/'> <i class='fas fa-clock' style='font-size:.9em;'></i> </a>  <a href='https://therbootcamp.github.io'> <i class='fas fa-home' style='font-size:.9em;' ></i> </a>  <a href='mailto:therbootcamp@gmail.com'> <i class='fas fa-envelope' style='font-size: .9em;'></i> </a>  <a href='https://www.linkedin.com/company/basel-r-bootcamp/'> <i class='fab fa-linkedin' style='font-size: .9em;'></i> </a>
+]
+.date[
+### März 2023
+]
+
+---
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+  &lt;span style="text-align:center"&gt;
+    &lt;span&gt; 
+      &lt;img src="https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png" height=14 style="vertical-align: middle"/&gt;
+    &lt;/span&gt;
+    &lt;a href="https://therbootcamp.github.io/"&gt;
+      &lt;span style="padding-left:82px"&gt; 
+        &lt;font color="#7E7E7E"&gt;
+          www.therbootcamp.com
+        &lt;/font&gt;
+      &lt;/span&gt;
+    &lt;/a&gt;
+    &lt;a href="https://therbootcamp.github.io/"&gt;
+      &lt;font color="#7E7E7E"&gt;
+       Dashboards mit Shiny | März 2023
+      &lt;/font&gt;
+    &lt;/a&gt;
+    &lt;/span&gt;
+  &lt;/div&gt; 
+
+---
+
+
+
+
+
+
+
+.pull-left4[
+
+# Agenda
+
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Reaktivität Progammieren&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Reaktiver Graph&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;Reaktive Funktionen&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;reactive&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;reactiveVal, reactiveValues&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;observeEvent&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;evenReactive&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;observe&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;req&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;isolate&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/agenda.png" height = 460px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# Reaktives Programmieren
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Ein fundamental anderes Paradigma zu Programmieren&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Eigenschaften&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;high&gt;Effizient&lt;/high&gt; und performant&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Code ist &lt;high&gt;komplex&lt;/high&gt;, Verhalten schwer vorherzusagen&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+reactiveConsole(TRUE)
+
+wert &lt;- reactiveVal(10)
+wert() 
+```
+
+```
+[1] 10
+```
+
+```r
+wert(20)
+wert() 
+```
+
+```
+[1] 20
+```
+
+```r
+wert() &lt;- 10
+```
+
+```
+Error in wert() &lt;- 10: invalid (NULL) left side of assignment
+```
+
+]
+
+---
+
+# Reaktives Programmieren
+
+.pull-left5[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Ein fundamental anderes Paradigma zu Programmieren&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Eigenschaften&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;high&gt;Effizient&lt;/high&gt; und performant&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Code ist &lt;high&gt;komplex&lt;/high&gt;, Verhalten schwer vorherzusagen&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+reactiveConsole(TRUE)
+
+anderer_wert &lt;- reactive({wert() + 10})
+anderer_wert() 
+```
+
+```
+[1] 30
+```
+
+```r
+wert(50)
+anderer_wert() 
+```
+
+```
+[1] 60
+```
+
+]
+
+---
+
+# Reaktiver Graph
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Reaktive Elemente haben &lt;high&gt;gerichtete Beziehungen&lt;/high&gt; zueinander&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Wenn sich ein Element ändert, dann ändert sich auch das Element, dass von ihm abhängt&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Reaktive Elemente bleiben im &lt;high&gt;Cache&lt;/high&gt;, solange sie nicht verändert werden&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/reactive_1.png" width = "220px"&gt;
+&lt;/p&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+reactiveConsole(TRUE)
+
+wert &lt;- reactiveVal(10)
+anderer_wert &lt;- reactive({wert() + 10})
+anderer_wert()
+```
+
+```
+[1] 20
+```
+
+```r
+wert(20)
+anderer_wert()
+```
+
+```
+[1] 30
+```
+]
+
+
+---
+
+# Reaktiver Graph
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Reaktive Elemente haben &lt;high&gt;gerichtete Beziehungen&lt;/high&gt; zueinander&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Wenn sich ein Element ändert, dann ändert sich auch das Element, dass von ihm abhängt&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Reaktive Elemente bleiben im &lt;high&gt;Cache&lt;/high&gt;, solange sie nicht verändert werden&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/reactive_2.png" width = "300px"&gt;
+&lt;/p&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  textOutput("grüsse")
+)
+
+server &lt;- function(input, output, session) {
+  string = reactive(input$name)
+  
+  output$greeting &lt;- renderText({
+    paste0("Hallo ", string(), "!")
+  })
+}
+
+shinyApp(ui, server)
+```
+]
+
+---
+
+# Reaktive Funktionen
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Mehrere reaktiver Funktionen für &lt;high&gt;verschiedene Zwecke&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Ermöglichen &lt;high&gt;komplexe Interaktionen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Denken als Funktionen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table style="cellspacing:0; cellpadding:0; border:none; width:70%"&gt;
+&lt;col width="20%"&gt;
+  &lt;col width="60%"&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;Objekt&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;reactive(), eventReactive()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;Überschreibare(s) Objekt(e)&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;reactiveVal() reactiveValues()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt; 
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;Bedingungen&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;observeEvent() observe()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;Helfer&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;req() isolate()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+]
+
+
+.pull-right5[
+
+&lt;p align = "center"&gt;
+  &lt;img src = "image/switchboard_narrow.png" width = "420px"&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# &lt;mono&gt;reactive&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactive()&lt;/mono&gt; kreiert ein "einfaches" reaktives Objekte&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Ein &lt;mono&gt;reactive&lt;/mono&gt; kann nicht überschrieben werden.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  textOutput("grüsse")
+)
+
+server &lt;- function(input, output, session) {
+  string = reactive(input$name)
+  
+  output$grüsse &lt;- renderText({
+    paste0("Hallo ", string(), "!")
+  })
+}
+
+shinyApp(ui, server)
+```
+]
+
+
+
+---
+
+# &lt;mono&gt;reactive&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactive()&lt;/mono&gt; kreiert ein "einfaches" reaktives Objekte&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Ein &lt;mono&gt;reactive&lt;/mono&gt; kann nicht überschrieben werden.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/reactive/"&gt;&lt;/iframe&gt;
+
+]
+
+
+---
+
+# &lt;mono&gt;eventReactive&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;eventReactive()&lt;/mono&gt; kreiert eine `reactive` in Abhängigkeit einer Bedingung&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  actionButton("grüsse_mich", "Grüsse mich"),
+  textOutput("grüsse")
+)
+
+server &lt;- function(input, output, session) {
+  string = eventReactive(input$grüsse_mich,
+                         {input$name})
+  
+  output$grüsse &lt;- renderText({
+    paste0("Hallo ", string(), "!")
+  })
+}
+
+shinyApp(ui, server)
+```
+]
+
+
+
+---
+
+# &lt;mono&gt;eventReactive&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;eventReactive()&lt;/mono&gt; kreiert eine &lt;mono&gt;reactive&lt;/mono&gt; in Abhängigkeit einer Bedingung&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/eventReactive/"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# &lt;mono&gt;reactiveVal(ues)&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactiveVal()&lt;/mono&gt; und &lt;mono&gt;reactiveValues()&lt;/mono&gt; kreieren überschreibbare &lt;mono&gt;reactives&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;reactiveValues()&lt;/mono&gt; ist eine Generalisierung von &lt;mono&gt;reactiveVal()&lt;/mono&gt;, die &lt;high&gt;mehrere Elemente&lt;/high&gt; erlaubt und wie eine &lt;mono&gt;list&lt;/mono&gt; funktioniert&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  actionButton("grüsse_mich", "Grüsse mich"),
+  textOutput("grüsse")
+)
+
+server &lt;- function(input, output, session) {
+  string = reactiveVal()
+  observeEvent(input$grüsse_mich, {
+    string(paste0("Hallo ", input$name, "!"))
+  })
+  
+  output$grüsse &lt;- renderText(string$x)
+}
+
+shinyApp(ui, server)
+```
+
+
+]
+
+---
+
+# &lt;mono&gt;reactiveVal(ues)&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;reactiveVal()&lt;/mono&gt; und &lt;mono&gt;reactiveValues()&lt;/mono&gt; kreieren überschreibbare &lt;mono&gt;reactives&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;reactiveValues()&lt;/mono&gt; ist eine Generalisierung von &lt;mono&gt;reactiveVal()&lt;/mono&gt;, die &lt;high&gt;mehrere Elemente&lt;/high&gt; erlaubt und wie eine &lt;mono&gt;list&lt;/mono&gt; funktioniert&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  actionButton("grüsse_mich", "Grüsse mich"),
+  textOutput("grüsse")
+)
+
+server &lt;- function(input, output, session) {
+  string = reactiveValues()
+  observeEvent(input$grüsse_mich, {
+    string$x = paste0("Hallo ", input$name, "!")
+  })
+  
+  output$grüsse &lt;- renderText(string())
+}
+
+shinyApp(ui, server)
+```
+
+
+]
+
+---
+
+# &lt;mono&gt;observeEvent&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;observeEvent()&lt;/mono&gt; ist eine Art &lt;highm&gt;if-statement&lt;/highm&gt; für reaktive Objekte&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Der Code von &lt;mono&gt;observeEvent&lt;/mono&gt; wird nur ausgeführt, wenn die Bedingung invalidiert wird&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  actionButton("grüsse_mich", "Grüsse mich"),
+  textOutput("grüsse")
+  )
+
+server &lt;- function(input, output, session) {
+  string = reactiveVal()
+  observeEvent(input$grüsse_mich, {
+    string(paste0("Hallo ", input$name, "!"))
+    })
+  
+  output$grüsse &lt;- renderText(string())
+  }
+
+shinyApp(ui, server)
+```
+
+
+]
+
+---
+
+# &lt;mono&gt;observeEvent&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;observeEvent()&lt;/mono&gt; ist eine Art &lt;highm&gt;if-statement&lt;/highm&gt; für reaktive Objekte&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Der Code von &lt;mono&gt;observeEvent&lt;/mono&gt; wird nur ausgeführt, wenn die Bedingung invalidiert wird&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent/"&gt;&lt;/iframe&gt;
+
+]
+
+
+---
+
+# &lt;mono&gt;req&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;req()&lt;/mono&gt; steht für &lt;i&gt;required&lt;/i&gt; und auf verschiedene Wege als Bedingung eingesetzt werden&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Es kann identifizieren, ob ein Input bereits verwendet wurde&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  textInput("name", "Wie heisst Du?"),
+  actionButton("grüsse_mich", "Grüsse mich"),
+  textOutput("grüsse")
+  )
+
+server &lt;- function(input, output, session) {
+  string = reactiveVal()
+  observeEvent(input$grüsse_mich, {
+    string(paste0("Hallo ", input$name, "!"))
+    })
+  
+  output$grüsse &lt;- renderText(string())
+  }
+
+shinyApp(ui, server)
+```
+
+
+]
+
+---
+
+# &lt;mono&gt;req&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;req()&lt;/mono&gt; steht für &lt;i&gt;required&lt;/i&gt; und auf verschiedene Wege als Bedingung eingesetzt werden&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Es kann identifizieren, ob ein Input bereits verwendet wurde&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/observeEvent2/"&gt;&lt;/iframe&gt;
+
+]
+
+
+---
+
+# &lt;mono&gt;observe&lt;/mono&gt;, &lt;mono&gt;isolate&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;observe()&lt;/mono&gt; und &lt;mono&gt;isolate&lt;/mono&gt; sind &lt;high&gt;fortgeschrittenere Tools&lt;/high&gt;, die selten zum Einsatz kommen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+library(shiny)
+reactiveConsole(TRUE)
+
+r &lt;- reactiveValues(count = 0, x = 1)
+
+observe({
+  r$x
+  r$count &lt;- isolate(r$count) + 1
+  })
+```
+
+]
+
+
+---
+
+class: middle, center
+
+&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Reaktivität/Reaktivität_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,20 +1,20 @@
 ---
 title: "Erste App"
 author: "Dashboards mit Shiny<br>
-  <br>
-  </a>&#8239; 
-  </a>&#8239;
-  </a>&#8239;
-  </a>"
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
+  <br>
   <a href='https://therbootcamp.github.io/Shiny_2023CSS/'>
     <i class='fas fa-clock' style='font-size:.9em;'></i>
+  </a>&#8239; 
   <a href='https://therbootcamp.github.io'>
     <i class='fas fa-home' style='font-size:.9em;' ></i>
+  </a>&#8239;
   <a href='mailto:therbootcamp@gmail.com'>
     <i class='fas fa-envelope' style='font-size: .9em;'></i>
+  </a>&#8239;
   <a href='https://www.linkedin.com/company/basel-r-bootcamp/'>
     <i class='fab fa-linkedin' style='font-size: .9em;'></i>
+  </a>"
 date: "März 2023"
 output:
   xaringan::moon_reader:
@@ -25,7 +25,6 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: '16:9'
-runtime: shiny
 ---
 
 layout: true
@@ -68,14 +67,16 @@ library(tidyverse)
 ```
 
 
+.pull-left4[
+
 # Agenda
 
 
-.pull-left4[
-
 <ul>
-  <li class="m1"><span>Shiny Apps</span></li>
-  <li class="m2"><span><high>Separate Funktionen</high> für verschiedene Plots</span></li>
+  <li class="m1"><span>Erste App</span></li>
+  <li class="m2"><span>UI und Server</span></li>
+  <li class="m3"><span>UI Inputs</span></li>
+  <li class="m4"><span>Workflow</span></li>
 </ul>
 
 <br>
@@ -84,7 +85,10 @@ library(tidyverse)
 ]
 
 .pull-right5[
-
+<br><br><br>
+<p align = "center">
+  <img src = "image/agenda.png" height = 460px>
+</p>
 
 ]
 
@@ -92,15 +96,14 @@ library(tidyverse)
 
 # Erste App
 
-
 .pull-left35[
 
 <ul>
   <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
   <ul class = "level">
-    <li><span>ui - Frontend</span></li><br>
-    <li><span>server - Backend</span></li><br>
-    <li><span>shinyApp - Starter</span></li><br>
+    <li><span>ui - Frontend</span></li>
+    <li><span>server - Backend</span></li>
+    <li><span>shinyApp - Starter</span></li>
   </ul>
 </ul>
 
@@ -113,65 +116,711 @@ library(tidyverse)
 </p>
 
 ]
----
 
-# Workflow
-
-
-1. shinyapp
-2. template
-3. projects
 
 ---
 
-# UIs
+# UI
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Das <high>User Interface</high> (UI) ist das Frontend</span></li><br>
+  <li class="m2"><span>Wichtige Komponenten</span></li>
+  <ul class = "level">
+    <li><span>Layout</span></li>
+    <li><span>Nutzerinputs</span></li>
+    <li><span>Sichtbare outputs</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right6[
+
+<p align = "center">
+  <img src = "image/ui.png" height = 300px>
+</p>
+
+]
+
+---
+
+# Server
+
+.pull-left3[
+
+<ul>
+  <li class="m1"><span>Der Server ist das Backend. Hier läuft der Code. </span></li><br>
+  <li class="m2"><span>Wichtige Komponenten</span></li>
+  <ul class = "level">
+    <li><span>Datenaufbereitung</span></li>
+    <li><span>Rendering von Plots oder Tabellen</span></li>
+    <li><span>Reaktive Elemente</span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right6[
+
+<p align = "center">
+  <img src = "image/server.png" height = 300px>
+</p>
+
+]
 
 
-.pull-left35[
+---
 
-Common parameters
+.pull-left3[
+
+# Prozess
+
+<ul>
+  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
+  <ul class = "level">
+    <li><span>ui - Frontend</span></li><br>
+    <li><span>server - Backend</span></li><br>
+    <li><span>shinyApp - Starter</span></li><br>
+  </ul>
+</ul>
+
+]
+
+
+.pull-right6[
+<br><br>
+<p align = "center">
+  <img src = "image/wheel.png" height = 520px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# Prozess
+
+<ul>
+  <li class="m1"><span>Shiny Apps haben drei Komponenten</span></li><br>
+  <ul class = "level">
+    <li><span>ui - Frontend</span></li><br>
+    <li><span>server - Backend</span></li><br>
+    <li><span>shinyApp - Starter</span></li><br>
+  </ul>
+</ul>
 
 ]
 
 
 .pull-right5[
-
-numericInput
-sliderInput
-selectInput
-passwordInput
-dateInput
-dateRangeInput
-textInput
-fileInput
-
-radioButtons
-checkboxGroupInput
-
-actionButton
-
-
-]
-
----
-
-# UIs
-
-
-.pull-left35[
-
-Common parameters
-
-]
-
-.pull-right5[
-
-```{r}
+<br>
+```{r, eval = FALSE, echo = TRUE}
 
 library(shiny)
 
 ui <- fluidPage(
-  textInput("test", "test")
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("variable", 
+                  "Wähle eine Variable")
+      ),
+    mainPanel(
+      plotOutput("scatterplot")
+      )
+    )
+  )
+
+server <- function(input, output, session) {
+  
+  daten <- read_csv("datensatz.csv")
+  
+  output$scatterplot <- renderPlot({
+    plot(daten$x, 
+         daten[[input$variable]])
+  })
+  
+}
+
+shinyApp(ui, server)
+
+
+```
+]
+
+
+
+---
+
+# UIs
+
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+
+.pull-right5[
+
+<table style="cellspacing:0; cellpadding:0; border:none; width:70%">
+<col width="20%">
+  <col width="60%">
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center"></mono>character</mono> (free)</td>
+    <td><mono>textInput(), textAreaInput()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center"><mono>character</mono> (preset)</td>
+    <td><mono>selectInput() radioButtons(), checkboxInput(), checkboxGroupInput()</mono></td>
+  </tr> 
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center"><mono>numeric</mono></td>
+    <td><mono>numericInput() sliderInput()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center"><mono>date</mono></td>
+    <td><mono>dateInput() dateRangeInput()</mono></td>
+  </tr>
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center">special</td>
+    <td><mono>fileInput(), downloadButton, actionButton</mono></td>
+  </tr>
+</table>
+]
+
+---
+
+# `textInput`
+
+
+.pull-left35[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>value</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+    <li><span><mono>placeholder</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  textInput(inputId = "name", 
+            label = "Wie lautet dein Name?")
+  )
+```
+
+<p align = "left">
+  <img src = "image/textinput.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `textAreaInput`
+
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>value</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+    <li><span><mono>height</mono></span></li>
+    <li><span><mono>placeholder</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  textAreaInput(inputId = "feedback", 
+                label = "Hast du Feedback?")
+  )
+```
+
+<p align = "left">
+  <img src = "image/textarea.png" width = 600px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# `selectInput`
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>choices</mono></span></li>
+    <li><span><mono>selected</mono></span></li>
+    <li><span><mono>multiple</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+<br><br>
+```{r, eval = FALSE}
+ui <- fluidPage(
+  textAreaInput(inputId = "wohnort", 
+                label = "Wo wohnst du?",
+                choices = c("Luzern", ...)),
+  textAreaInput(inputId = "wohnort", 
+                label = "Wo wohnst du?",
+                choices = c("Luzern", ...),
+                multiple = TRUE)
+  )
+```
+
+<p align = "left">
+  <img src = "image/selectInput.png" width = 600px>
+</p>
+
+]
+
+
+---
+
+# `radioButtons`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>choices</mono></span></li>
+    <li><span><mono>selected</mono></span></li>
+    <li><span><mono>inline</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  radioButtons(inputId = "wohnort", 
+               label = "Wo wohnst du?",
+               choices = c("Luzern", ...))
+  )
+```
+
+<p align = "left">
+  <img src = "image/radiobuttons.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `checkboxGroupInput`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>choices</mono></span></li>
+    <li><span><mono>selected</mono></span></li>
+    <li><span><mono>inline</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  checkboxGroupInput(inputId = "wohnort", 
+                     label = "Wo wohnst du?",
+                     choices = c("Luzern", ...))
+  )
+```
+
+<p align = "left">
+  <img src = "image/checkBoxGroup.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `numericInput`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>value</mono></span></li>
+    <li><span><mono>min</mono></span></li>
+    <li><span><mono>max</mono></span></li>
+    <li><span><mono>step</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  numericInput(inputId = "grösse", 
+               label = "Wie gross bist du?")
+  )
+```
+
+<p align = "left">
+  <img src = "image/numericinput.png" width = 600px>
+</p>
+
+]
+
+---
+
+.pull-left4[
+
+# `sliderInput`
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>value</mono></span></li>
+    <li><span><mono>min</mono></span></li>
+    <li><span><mono>max</mono></span></li>
+    <li><span><mono>step</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+<br><br>
+```{r, eval = FALSE}
+ui <- fluidPage(
+  sliderInput(inputId = "grösse", 
+              label = "Wie gross bist du?",
+              min = 0, max = 300, 
+              value = 100),
+  sliderInput(inputId = "grösse", 
+              label = "Wie gross bist du ca?",
+              min = 0, max = 300, 
+              value = c(100, 200)),
+  )
+```
+
+<p align = "left">
+  <img src = "image/sliderinput.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `dateInput`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>value</mono></span></li>
+    <li><span><mono>min</mono></span></li>
+    <li><span><mono>max</mono></span></li>
+    <li><span><mono>format</mono></span></li>
+    <li><span><mono>startview</mono></span></li>
+    <li><span><mono>language</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  dateInput(inputId = "geburtstag", 
+              label = "Geburtstag?")
+  )
+```
+
+<p align = "left">
+  <img src = "image/dateinput.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `dateRangeInput`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>start</mono></span></li>
+    <li><span><mono>end</mono></span></li>
+    <li><span><mono>min</mono></span></li>
+    <li><span><mono>max</mono></span></li>
+    <li><span><mono>format</mono></span></li>
+    <li><span><mono>startview</mono></span></li>
+    <li><span><mono>language</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  dateInput(inputId = "geburtstag", 
+              label = "Geburtstag circa?")
+  )
+```
+
+<p align = "left">
+  <img src = "image/daterange.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `fileInput`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>buttonLabel</mono></span></li>
+    <li><span><mono>placeholder</mono></span></li>
+    <li><span><mono>accept</mono></span></li>
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  fileInput(inputId = "geburtstag", 
+            label = "Daten-Upload"
+            buttonLabel = "Suche..", 
+            placeholder = "Wähle Datei aus.")
+  )
+```
+
+<p align = "left">
+  <img src = "image/fileinput.png" width = 600px>
+</p>
+
+]
+
+---
+
+# `downloadButton`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>icon</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  actionButton(inputId = "download", 
+               label = "Download")
+  )
+```
+
+<p align = "left">
+  <img src = "image/download.png" width = 600px>
+</p>
+
+]
+
+
+---
+
+# `actionButton`
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Viele verschiedene Inputs sind verfügbar</span></li><br>
+  <li class="m2"><span>Zentrale Argumente</span></li>
+  <ul class = "level">
+    <li><span><highm>inputId</highm></span></li>
+    <li><span><mono>label</mono></span></li>
+  </ul>
+  <li class="m2"><span>Weitere Argumente</span></li>
+  <ul class = "level">
+    <li><span><mono>width</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  actionButton(inputId = "zurücksetzen", 
+               label = "Zurücksetzen")
+  )
+```
+
+<p align = "left">
+  <img src = "image/action.png" width = 600px>
+</p>
+
+]
+
+
+---
+
+# Workflow
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Im laufe dieses Kurses werdet ihr viele Apps kreieren. </span></li><br>
+  <li class="m2"><span>Workflow</span></li>
+  <ul class = "level">
+    <li><span>(1) Kreiere App-Templates mit <mono>shinyapp</mono> + Shift + tab</span></li>
+    <li><span> (2) Speichere die App</span></li>
+    <li><span> (3) Teste mit Cmd/Ctrl + Shift + Enter</span></li>
+    <li><span> (4) Teste die App häufig</span></li>
+  <uul>
+</ul>
+
+]
+
+
+.pull-right5[
+
+```{r, eval = FALSE}
+shinyapp # + Shift + TAB
+```
+
+```{r, eval = FALSE}
+
+library(shiny)
+
+ui <- fluidPage(
+  
 )
 
 server <- function(input, output, session) {
@@ -184,12 +833,11 @@ shinyApp(ui, server)
 
 ]
 
-
 ---
 
 class: middle, center
 
-<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html">Practical</a></h1>
+<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/ErsteApp/ErsteApp_practical.html">Practical</a></h1>
 
 
 

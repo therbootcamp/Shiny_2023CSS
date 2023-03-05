@@ -1,0 +1,13 @@
+name: eventReactive
+title: eventReactive
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8480116
+bundleId: 6917541
+url: https://dirkwulff.shinyapps.io/eventReactive/
+when: 1678015407.65132
+lastSyncTime: 1678015407.65133
+asMultiple: FALSE
+asStatic: FALSE

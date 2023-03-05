@@ -54,14 +54,16 @@ layout: true
 
 
 
+.pull-left4[
+
 # Agenda
 
 
-.pull-left4[
-
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;&lt;high&gt;Separate Funktionen&lt;/high&gt; für verschiedene Plots&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Erste App&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;UI und Server&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;UI Inputs&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m4"&gt;&lt;span&gt;Workflow&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -70,7 +72,10 @@ layout: true
 ]
 
 .pull-right5[
-
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/agenda.png" height = 460px&gt;
+&lt;/p&gt;
 
 ]
 
@@ -78,15 +83,14 @@ layout: true
 
 # Erste App
 
-
 .pull-left35[
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps haben drei Komponenten&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
   &lt;ul class = "level"&gt;
-    &lt;li&gt;&lt;span&gt;ui - Frontend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;server - Backend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
-    &lt;li&gt;&lt;span&gt;shinyApp - Starter&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;ui - Frontend&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;server - Backend&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;shinyApp - Starter&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/ul&gt;
 
@@ -99,54 +103,208 @@ layout: true
 &lt;/p&gt;
 
 ]
+
+
 ---
 
-# Workflow
+# UI
+
+.pull-left3[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Das &lt;high&gt;User Interface&lt;/high&gt; (UI) ist das Frontend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Wichtige Komponenten&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;Layout&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Nutzerinputs&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Sichtbare outputs&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right6[
+
+&lt;p align = "center"&gt;
+  &lt;img src = "image/ui.png" height = 300px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# Server
+
+.pull-left3[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Der Server ist das Backend. Hier läuft der Code. &lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Wichtige Komponenten&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;Datenaufbereitung&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Rendering von Plots oder Tabellen&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;Reaktive Elemente&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right6[
+
+&lt;p align = "center"&gt;
+  &lt;img src = "image/server.png" height = 300px&gt;
+&lt;/p&gt;
+
+]
 
 
-1. shinyapp
-2. template
-3. projects
+---
+
+.pull-left3[
+
+# Prozess
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps haben drei Komponenten&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;ui - Frontend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;server - Backend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;shinyApp - Starter&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right6[
+&lt;br&gt;&lt;br&gt;
+&lt;p align = "center"&gt;
+  &lt;img src = "image/wheel.png" height = 520px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+.pull-left4[
+
+# Prozess
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Shiny Apps haben drei Komponenten&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;ui - Frontend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;server - Backend&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+    &lt;li&gt;&lt;span&gt;shinyApp - Starter&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+&lt;br&gt;
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("variable", 
+                  "Wähle eine Variable")
+      ),
+    mainPanel(
+      plotOutput("scatterplot")
+      )
+    )
+  )
+
+server &lt;- function(input, output, session) {
+  
+  daten &lt;- read_csv("datensatz.csv")
+  
+  output$scatterplot &lt;- renderPlot({
+    plot(daten$x, 
+         daten[[input$variable]])
+  })
+  
+}
+
+shinyApp(ui, server)
+```
+]
+
+
 
 ---
 
 # UIs
 
 
-.pull-left35[
+.pull-left4[
 
-Common parameters
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
 
 ]
 
 
 .pull-right5[
 
-numericInput
-sliderInput
-selectInput
-passwordInput
-dateInput
-dateRangeInput
-textInput
-fileInput
-
-radioButtons
-checkboxGroupInput
-
-actionButton
-
-
+&lt;table style="cellspacing:0; cellpadding:0; border:none; width:70%"&gt;
+&lt;col width="20%"&gt;
+  &lt;col width="60%"&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;&lt;/mono&gt;character&lt;/mono&gt; (free)&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;textInput(), textAreaInput()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;&lt;mono&gt;character&lt;/mono&gt; (preset)&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;selectInput() radioButtons(), checkboxInput(), checkboxGroupInput()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt; 
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;&lt;mono&gt;numeric&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;numericInput() sliderInput()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;&lt;mono&gt;date&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;dateInput() dateRangeInput()&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr style="padding:20px;background-color:white"&gt;
+    &lt;td style="padding:20px;text-align:center"&gt;special&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;fileInput(), downloadButton, actionButton&lt;/mono&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
 ]
 
 ---
 
-# UIs
+# `textInput`
 
 
 .pull-left35[
 
-Common parameters
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;value&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;placeholder&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
 
 ]
 
@@ -154,10 +312,513 @@ Common parameters
 
 
 ```r
+ui &lt;- fluidPage(
+  textInput(inputId = "name", 
+            label = "Wie lautet dein Name?")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/textinput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `textAreaInput`
+
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;value&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;height&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;placeholder&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  textAreaInput(inputId = "feedback", 
+                label = "Hast du Feedback?")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/textarea.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+.pull-left4[
+
+# `selectInput`
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;choices&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;selected&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;multiple&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  textAreaInput(inputId = "wohnort", 
+                label = "Wo wohnst du?",
+                choices = c("Luzern", ...)),
+  textAreaInput(inputId = "wohnort", 
+                label = "Wo wohnst du?",
+                choices = c("Luzern", ...),
+                multiple = TRUE)
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/selectInput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+# `radioButtons`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;choices&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;selected&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;inline&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  radioButtons(inputId = "wohnort", 
+               label = "Wo wohnst du?",
+               choices = c("Luzern", ...))
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/radiobuttons.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `checkboxGroupInput`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;choices&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;selected&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;inline&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  checkboxGroupInput(inputId = "wohnort", 
+                     label = "Wo wohnst du?",
+                     choices = c("Luzern", ...))
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/checkBoxGroup.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `numericInput`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;value&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;min&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;max&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;step&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  numericInput(inputId = "grösse", 
+               label = "Wie gross bist du?")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/numericinput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+.pull-left4[
+
+# `sliderInput`
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;value&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;min&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;max&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;step&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+&lt;br&gt;&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  sliderInput(inputId = "grösse", 
+              label = "Wie gross bist du?",
+              min = 0, max = 300, 
+              value = 100),
+  sliderInput(inputId = "grösse", 
+              label = "Wie gross bist du ca?",
+              min = 0, max = 300, 
+              value = c(100, 200)),
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/sliderinput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `dateInput`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;value&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;min&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;max&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;format&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;startview&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;language&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  dateInput(inputId = "geburtstag", 
+              label = "Geburtstag?")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/dateinput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `dateRangeInput`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;start&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;end&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;min&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;max&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;format&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;startview&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;language&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  dateInput(inputId = "geburtstag", 
+              label = "Geburtstag circa?")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/daterange.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `fileInput`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;buttonLabel&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;placeholder&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;accept&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  fileInput(inputId = "geburtstag", 
+            label = "Daten-Upload"
+            buttonLabel = "Suche..", 
+            placeholder = "Wähle Datei aus.")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/fileinput.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+---
+
+# `downloadButton`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;icon&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  actionButton(inputId = "download", 
+               label = "Download")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/download.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+# `actionButton`
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Viele verschiedene Inputs sind verfügbar&lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zentrale Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;highm&gt;inputId&lt;/highm&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;label&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Weitere Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;width&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  actionButton(inputId = "zurücksetzen", 
+               label = "Zurücksetzen")
+  )
+```
+
+&lt;p align = "left"&gt;
+  &lt;img src = "image/action.png" width = 600px&gt;
+&lt;/p&gt;
+
+]
+
+
+---
+
+# Workflow
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Im laufe dieses Kurses werdet ihr viele Apps kreieren. &lt;/span&gt;&lt;/li&gt;&lt;br&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Workflow&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class = "level"&gt;
+    &lt;li&gt;&lt;span&gt;(1) Kreiere App-Templates mit &lt;mono&gt;shinyapp&lt;/mono&gt; + Shift + tab&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt; (2) Speichere die App&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt; (3) Teste mit Cmd/Ctrl + Shift + Enter&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt; (4) Teste die App häufig&lt;/span&gt;&lt;/li&gt;
+  &lt;uul&gt;
+&lt;/ul&gt;
+
+]
+
+
+.pull-right5[
+
+
+```r
+shinyapp # + Shift + TAB
+```
+
+
+```r
 library(shiny)
 
 ui &lt;- fluidPage(
-  textInput("test", "test")
+  
 )
 
 server &lt;- function(input, output, session) {
@@ -167,10 +828,7 @@ server &lt;- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
-
 ]
-
 
 ---
 

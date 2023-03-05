@@ -1,0 +1,13 @@
+name: reactive_app
+title: reactive_app
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8480071
+bundleId: 6917520
+url: https://dirkwulff.shinyapps.io/reactive_app/
+when: 1678014658.28744
+lastSyncTime: 1678014658.28745
+asMultiple: FALSE
+asStatic: FALSE
