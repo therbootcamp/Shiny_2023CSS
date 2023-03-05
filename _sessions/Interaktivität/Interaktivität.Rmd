@@ -215,6 +215,18 @@ server <- function(input, output, session){
 
 # Feedback
 
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Es ist nützlich dem Nutzer Feedback über dessen inputs zu geben.</li>
+  <li class="m2"><span>Zwei Wege</span></li>
+  <ul class = "level">
+    <li><span><mono>validate()</mono></span></li>
+    <li><span>shinyFeedback</span></li>
+  </li>
+</ul>
+
+]
 
 
 ---
