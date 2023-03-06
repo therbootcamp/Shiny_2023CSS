@@ -74,8 +74,9 @@ library(tidyverse)
 
 
 <ul>
-  <li class="m1"><span>Upload</span></li>
-  <li class="m2"><span>Download</span></li>
+  <li class="m1"><span>Interaktive Graphiken</span></li>
+  <li class="m2"><span>Downloads</span></li>
+  <li class="m3"><span>Bilder</span></li>
 </ul>
 
 ]
@@ -92,18 +93,281 @@ library(tidyverse)
 
 ---
 
-# Workflow
+# Interaktive Graphiken
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Interaktive Graphiken reagieren auf <high>Klicks</high> oder <high>Markierungen</high></span></li>
+  <li class="m2"><span><mono>plotOutput</mono> Argumente</span></li>
+  <ul class="level">
+    <li><span><mono>click</mono></span></li>
+    <li><span><mono>brush</mono></span></li>
+    <li><span><mono>dbclick</mono></span></li>
+    <li><span><mono>hover</mono></span></li>
+  </ul>
+</ul>
 
 
-1. shinyapp
-2. template
-3. projects
+]
 
+
+.pull-right5[
+
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/click_brush/"></iframe>
+
+]
+
+---
+
+# <mono>near_points</mono><br><mono>brushed_points</mono>
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+  <li class="m2"><span>Argumente</span></li>
+  <ul class="level">
+    <li><span><mono>xvar</mono></span></li>
+    <li><span><mono>yvar</mono></span></li>
+    <li><span><mono>threshold (nearpoints)</mono></span></li>
+    <li><span><mono>maxpoints (nearpoints)</mono></span></li>
+    <li><span><mono>addDist (nearpoints)</mono></span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right5[
+
+```{r, eval = FALSE}
+
+plotOutput("scatter", 
+           click = "plot_click",
+           brush = "plot_brush"),
+
+brushedPoints(daten,
+              input$plot_click,
+              xvar = pos_x,
+              yvar = pos_y) 
+
+brushedPoints(daten,
+              input$plot_click,
+              xvar = pos_x,
+              yvar = pos_y) 
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>near_points</mono><br><mono>brushed_points</mono>
+
+
+<ul>
+  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+ui <- fluidPage(
+  plotOutput("scatter", 
+             click = "plot_click",
+             brush = "plot_brush"),
+             )
+
+```
+
+]
+
+.pull-right45[
+```{r, eval = FALSE}
+server <- function(input, output, session) {
+  
+  click = brush = reactiveVal()
+  
+  observeEvent(input$plot_click, {
+    nearPoints(covid,
+               input$plot_click,
+               xvar = "Basel",
+               yvar = "Luzern") %>% 
+      click()})
+  
+  observeEvent(input$plot_brush, {
+    brushedPoints(covid,
+                  input$plot_brush,
+                  xvar = "Basel",
+                  yvar = "Luzern") %>% 
+      brush()})
+  
+  output$scatter <- renderPlot({
+    covid %>% ggplot(aes(Basel, Luzern)) +
+      geom_point() + 
+      geom_text(data = covid %>% 
+                  filter(monat %in% click() |
+                         monat %in% brush()), 
+                mapping = aes(label = monat),
+                nudge_y = 5000) +
+      theme_minimal() +
+      labs(title = "Covid Fälle")})
+}
+```
+
+]
+
+---
+
+.pull-left45[
+
+# <mono>near_points</mono><br><mono>brushed_points</mono>
+
+<ul>
+  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+</ul>
+
+<br>
+```{r, eval = FALSE}
+ui <- fluidPage(
+  plotOutput("scatter", 
+             click = "plot_click",
+             brush = "plot_brush"),
+             )
+
+```
+
+]
+
+.pull-right45[
+<br><br><br>
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/click_brush/"></iframe>
+
+]
+
+---
+
+# Download
+
+.pull-left45[
+
+<ul>
+  <li class="m1"><span>Plot-Downloads können können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
+  <li class="m1"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
+</ul>
+
+]
+
+.pull-right45[
+
+<iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/download_plot"></iframe>
+
+]
+
+
+---
+
+.pull-left4[
+
+# Download
+
+<ul>
+  <li class="m1"><span>Plot-Downloads können können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
+  <li class="m1"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
+</ul>
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  plotOutput("scatter", 
+             brush = "plot_click"),
+  downloadLink("download", 
+               icon("download",
+                 style="font-size:16px;
+                  color:black
+                  position:relative;
+                  top:-394px;
+                  right:-96%"))
+)
+```
+
+
+]
+
+.pull-right5[
+
+```{r}
+server <- function(input, output, session) {
+  
+  brush = reactiveVal()
+  
+  observeEvent(input$plot_click, {
+    brushedPoints(covid,
+                  input$plot_click,
+                  xvar = "Basel",
+                  yvar = "Luzern") %>% 
+      pull(monat) %>% 
+      near_brush()})
+  
+  scatter = reactive({covid %>% 
+    ggplot(aes(Basel, Luzern)) +
+    geom_point() + 
+    geom_text(data = covid %>% 
+                filter(monat %in% brush()), 
+              mapping = aes(label = monat),
+              nudge_y = 5000) +
+    theme_minimal() +
+    labs(title = "Covid Fälle") })
+  
+  output$scatter <- renderPlot(scatter())
+  
+  output$download <- downloadHandler(
+    filename = function() { "plot.pdf" },
+    content = function(file) {
+      ggsave(file, plot = scatter(), 
+             device = "pdf")})}
+```
+
+
+]
+
+---
+
+# Bilder
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Für die Implementation von Bildern gibt es eigene Output- und Render-Funktionen</span></li>
+  <li class="m1"><span><mono>renderImage</mono> nimmt eine Liste als Input.</span></li>
+</ul>
+
+] 
+
+
+.pull-right5[
+
+```{r, eval = FALSE}
+ui <- fluidPage(
+  imageOutput("bild")
+)
+server <- function(input, output, session) {
+  output$bild <- renderImage({
+    list(
+      src = "puppies/bernese.jpg",
+      width = 400,
+      height = 650
+      )
+    }, deleteFile = FALSE)
+  } 
+```
+
+
+]
 ---
 
 class: middle, center
 
-<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html">Practical</a></h1>
+<h1><a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Graphiken/Graphiken_practical.html">Practical</a></h1>
 
 
 

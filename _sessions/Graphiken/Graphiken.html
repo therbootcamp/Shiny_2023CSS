@@ -61,8 +61,9 @@ layout: true
 
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Upload&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Download&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Interaktive Graphiken&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Downloads&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;Bilder&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -79,18 +80,285 @@ layout: true
 
 ---
 
-# Workflow
+# Interaktive Graphiken
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Interaktive Graphiken reagieren auf &lt;high&gt;Klicks&lt;/high&gt; oder &lt;high&gt;Markierungen&lt;/high&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;plotOutput&lt;/mono&gt; Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;click&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;brush&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;dbclick&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;hover&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
 
 
-1. shinyapp
-2. template
-3. projects
+]
 
+
+.pull-right5[
+
+&lt;iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/click_brush/"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Argumente&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;xvar&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;yvar&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;threshold (nearpoints)&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;maxpoints (nearpoints)&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span&gt;&lt;mono&gt;addDist (nearpoints)&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right5[
+
+
+```r
+plotOutput("scatter", 
+           click = "plot_click",
+           brush = "plot_brush"),
+
+brushedPoints(daten,
+              input$plot_click,
+              xvar = pos_x,
+              yvar = pos_y) 
+
+brushedPoints(daten,
+              input$plot_click,
+              xvar = pos_x,
+              yvar = pos_y) 
+```
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  plotOutput("scatter", 
+             click = "plot_click",
+             brush = "plot_brush"),
+             )
+```
+
+]
+
+.pull-right45[
+
+```r
+server &lt;- function(input, output, session) {
+  
+  click = brush = reactiveVal()
+  
+  observeEvent(input$plot_click, {
+    nearPoints(covid,
+               input$plot_click,
+               xvar = "Basel",
+               yvar = "Luzern") %&gt;% 
+      click()})
+  
+  observeEvent(input$plot_brush, {
+    brushedPoints(covid,
+                  input$plot_brush,
+                  xvar = "Basel",
+                  yvar = "Luzern") %&gt;% 
+      brush()})
+  
+  output$scatter &lt;- renderPlot({
+    covid %&gt;% ggplot(aes(Basel, Luzern)) +
+      geom_point() + 
+      geom_text(data = covid %&gt;% 
+                  filter(monat %in% click() |
+                         monat %in% brush()), 
+                mapping = aes(label = monat),
+                nudge_y = 5000) +
+      theme_minimal() +
+      labs(title = "Covid Fälle")})
+}
+```
+
+]
+
+---
+
+.pull-left45[
+
+# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;br&gt;
+
+```r
+ui &lt;- fluidPage(
+  plotOutput("scatter", 
+             click = "plot_click",
+             brush = "plot_brush"),
+             )
+```
+
+]
+
+.pull-right45[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/click_brush/"&gt;&lt;/iframe&gt;
+
+]
+
+---
+
+# Download
+
+.pull-left45[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+]
+
+.pull-right45[
+
+&lt;iframe width = "500px" height = "440px" src = "https://dirkwulff.shinyapps.io/download_plot"&gt;&lt;/iframe&gt;
+
+]
+
+
+---
+
+.pull-left4[
+
+# Download
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+```r
+ui &lt;- fluidPage(
+  plotOutput("scatter", 
+             brush = "plot_click"),
+  downloadLink("download", 
+               icon("download",
+                 style="font-size:16px;
+                  color:black
+                  position:relative;
+                  top:-394px;
+                  right:-96%"))
+)
+```
+
+
+]
+
+.pull-right5[
+
+
+```r
+server &lt;- function(input, output, session) {
+  
+  brush = reactiveVal()
+  
+  observeEvent(input$plot_click, {
+    brushedPoints(covid,
+                  input$plot_click,
+                  xvar = "Basel",
+                  yvar = "Luzern") %&gt;% 
+      pull(monat) %&gt;% 
+      near_brush()})
+  
+  scatter = reactive({covid %&gt;% 
+    ggplot(aes(Basel, Luzern)) +
+    geom_point() + 
+    geom_text(data = covid %&gt;% 
+                filter(monat %in% brush()), 
+              mapping = aes(label = monat),
+              nudge_y = 5000) +
+    theme_minimal() +
+    labs(title = "Covid Fälle") })
+  
+  output$scatter &lt;- renderPlot(scatter())
+  
+  output$download &lt;- downloadHandler(
+    filename = function() { "plot.pdf" },
+    content = function(file) {
+      ggsave(file, plot = scatter(), 
+             device = "pdf")})}
+```
+
+
+]
+
+---
+
+# Bilder
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Für die Implementation von Bildern gibt es eigene Output- und Render-Funktionen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;renderImage&lt;/mono&gt; nimmt eine Liste als Input.&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+] 
+
+
+.pull-right5[
+
+
+```r
+ui &lt;- fluidPage(
+  imageOutput("bild")
+)
+server &lt;- function(input, output, session) {
+  output$bild &lt;- renderImage({
+    list(
+      src = "puppies/bernese.jpg",
+      width = 400,
+      height = 650
+      )
+    }, deleteFile = FALSE)
+  } 
+```
+
+
+]
 ---
 
 class: middle, center
 
-&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Plotting/Plotting_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;a href="https://therbootcamp.github.io/Shiny_2023CSS/_sessions/Graphiken/Graphiken_practical.html"&gt;Practical&lt;/a&gt;&lt;/h1&gt;
 
 
 

@@ -1,0 +1,13 @@
+name: download_plot
+title: download_plot
+username:
+account: dirkwulff
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8494984
+bundleId: 6923222
+url: https://dirkwulff.shinyapps.io/download_plot/
+when: 1678140212.59396
+lastSyncTime: 1678140212.59398
+asMultiple: FALSE
+asStatic: FALSE
