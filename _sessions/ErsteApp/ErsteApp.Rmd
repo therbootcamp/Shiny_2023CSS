@@ -732,8 +732,8 @@ ui <- fluidPage(
 
 ```{r, eval = FALSE}
 ui <- fluidPage(
-  actionButton(inputId = "download", 
-               label = "Download")
+  downloadButton(inputId = "download", 
+                 label = "Download")
   )
 ```
 
