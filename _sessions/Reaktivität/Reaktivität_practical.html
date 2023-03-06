@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
+
+
+<title>Reaktivität</title>
+
+<script src="Reaktivität_practical_files/header-attrs-2.20/header-attrs.js"></script>
+<script src="Reaktivität_practical_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="Reaktivität_practical_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="Reaktivität_practical_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="Reaktivität_practical_files/navigation-1.1/tabsets.js"></script>
+<link href="Reaktivität_practical_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="Reaktivität_practical_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="practical.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Reaktivität</h1>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
+<a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
+<a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
+<a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
+<a href='https://www.linkedin.com/company/basel-r-bootcamp/'><i class='fab fa-linkedin' style='font-size: .9em;'></i></a>
+<a href='https://therbootcamp.github.io'><font style='font-style:normal'>The
+R Bootcamp @ CSS</font></a><br>
+<img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/></h4>
+
+</div>
+
+
+<p align="center" width="100%">
+<img src="image/switchboard.jpg" alt="Trulli" style="width:100%"> <br>
+<font style="font-size:10px">from
+<a href="https://unsplash.com/photos/ouyjDk-KdfY">unsplash.com</a></font>
+</p>
+<div id="section" class="section level1 tabset">
+<h1 class="tabset"></h1>
+<div id="information" class="section level2">
+<h2>Information</h2>
+<p>Dieses Practical besteht aus zwei Teilen.</p>
+<ol style="list-style-type: decimal">
+<li>Aufgaben: Mit mehreren kleinen Apps wiederholst du zentrale Inhalte
+der Präsentation.<br />
+</li>
+<li>App: Über die Sessions hinweg entwickelst Du die
+<a href="https://dirkwulff.shinyapps.io/TheRBootcamp/">InjuryViewer</a>
+App</li>
+</ol>
+<p>Wie viel Zeit du in <em>Aufgaben</em> oder <em>App</em> verbringst
+ist dir überlassen. Wir empfehlen aber allen mit wenig Erfahrung mit
+Shiny erst einmal in Aufgaben zu schauen. Für die App stellen wir in
+einem eigenen Tab die Lösungen zur Verfügungen, so dass du in neue
+Themen einsteigen kannst ohne notwendigerweise alle Schritte der
+Appentwicklung abgeschlossen zu haben.</p>
+<p>Für jede App in Aufgaben erstelle bitte ein <strong>neues
+Skript</strong> und speichere es unter dem Namen der
+Abschnittsberschrift. Denk dran bei jedem neuen Skript
+<code>library(shiny)</code> an den Anfang zu setzen. Falls weitere
+Pakete nötig sind, werden sie in der jeweileigen Abschnitten
+erwähnt.</p>
+<p>Gerade am Anfang stellen wir Code-Templates zur Verfügung in denen du
+allein die <code>XX</code> durch den richtigen Code bzw. die richtigen
+Objekte erstezen musst.</p>
+</div>
+<div id="aufgaben" class="section level2">
+<h2>Aufgaben</h2>
+<div id="a---wie-heisst-du-2.0" class="section level3">
+<h3>A - Wie heisst Du? 2.0</h3>
+<ol style="list-style-type: decimal">
+<li>Bauen wir eine reaktive Variante der “Wie heisst Du”-App. Definiere
+hierzu erstmal folgende UI, die wir unverändert weiter verwenden
+können.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  textInput(&quot;name&quot;, &quot;Wie heisst Du?&quot;),
+  textOutput(&quot;gruss&quot;)
+  )</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Definiere nun einen <code>server</code>, der als erstes den
+Grusstext als <code>reactive</code> definiert.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  
+  gruss_text &lt;- XX(paste0(&quot;Hello &quot;, input$name, &quot;!&quot;))
+  
+  }</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Ergänze nun einen <code>renderText</code>, der den Inhalt des
+<code>reactive</code>s per ID dem <code>textOutput</code> der UI
+zuweist. Beachte das <code>reactive</code>s wie Funktionen
+funnktionieren und enstprechend Klammern brauchen.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  
+  gruss_text &lt;- XX(paste0(&quot;Hello &quot;, input$name, &quot;!&quot;))
+  output$XX &lt;- renderText(XX())
+  
+  }</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Lasse die App nun einmal laufen mit
+<code>shinyApp(ui, server)</code>. Alles sollte funktionieren wie zuvor.
+Dieses Beispiel illustriert, dass man Inputs in Objekten speichern kann,
+aber nur, wenn man sie z.B. als <code>reactive</code> speichert.
+Versuche einmal die App laufen zu lassen, wenn du <code>reactive</code>
+entfernst und das Ergebnis von <code>paste</code> direkt zuweist.
+Natürlich musst du dann auch die Klammern von <code>gruss_text</code> im
+renderText entfernen, da <code>gruss_text</code> nun kein
+<code>reactive</code> mehr ist. Funnktionert die App nun immer
+noch?</p></li>
+<li><p>Du siehst ein Input kann nicht einfach in ein Objekt abgelegt
+werden. Inputs können nur innerhalb eines “reactive consumers” verwendet
+werden. Mache diese Änderungen nun rückgängig, damit wir die nächste
+Iteration unserer “Wie heisst Du?” App bauen können.</p></li>
+</ol>
+</div>
+<div id="a---wie-heisst-du-3.0" class="section level3">
+<h3>A - Wie heisst Du? 3.0</h3>
+<ol style="list-style-type: decimal">
+<li>Kopiere den Code der letzten Iteration der “Wie heisst Du?” App in
+ein neues Skript (oder ändere einfach die vorherige Version). Nun wollen
+wir eine weitere Mitteilungen ergänzen, die uns rückmeldet, dass ein
+Gruss ausgerichtet wurde. Verwende hierzu <code>observeEvent</code>
+innerhalb des <code>servers</code>. Als erstes Argument stelle den Input
+bereit: <code>input$name</code>. Der Input kontrolliert dann den Code,
+den wir gleich für das zweite Argument bereitstellen. Der nachfolgende
+Code wird jedes mal ausgeführt, wenn <code>input$name</code> validiert
+wird. Als Code für das zweite Argument weise
+<code>message("Gruss ausgerichtet")</code> zu, was jedes Mal wenn der
+Input geändert, bzw. validiert wird, zu einer Nachricht in der Console
+führen sollte.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  gruss_text &lt;- XX(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
+  output$XX &lt;- renderText(XX())
+  observeEvent(XX, {
+    message(&quot;Gruss ausgerichtet&quot;)
+    })
+  }</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Du hast vielleicht gemerkt, dass die Nachricht
+<code>"Gruss ausgerichtet"</code> in die Console geprinted wurde bevor
+du etwas in den <code>textInput</code> eingegeben hast. Das hängt damit
+zusammen, dass Shiny zu Beginnn einmal den <em>reactive graph</em>
+validiert. Um dies zu verhindern, kannst du die Funktion
+<code>req</code> (für “required”) um den Input im ersten Argument von
+<code>observeEvent</code> setzen. Mach das mal und lass die App nochmal
+laufen.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  gruss_text &lt;- XX(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
+  output$XX &lt;- renderText(XX())
+  observeEvent(XX(XX), {
+    message(&quot;Gruss ausgerichtet&quot;)
+    })
+  }</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Die Konstruktion mit <code>observeEvent</code> und <code>req</code>
+ist nützlich, um streng zu kontrollieren, wann ein bestimmter Code-Block
+laufen soll. Wir können dies zum Beispiel auch verwenden, um zu
+verhinden, dass <code>"Hallo *"</code> schon dort steht, bevor wir etwas
+eingegeben haben. Dafür müssen wir jedoch zuerst <code>gruss_text</code>
+in ein anderes reaktives Format ändern, und zwar in einen
+<code>reactiveVal</code>. <code>reactiveVal</code> erlauben die
+Definition eines noch undefiniertes Wertes, der zudem im Vergleich zu
+normalen <code>reactive</code> im Code überschrieben werden kann.
+Definiere zunächst <code>gruss_text</code> als leeren
+<code>reactiveVal</code>.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  gruss_text &lt;- XX()
+  output$XX &lt;- renderText(XX())
+  observeEvent(XX(XX), {
+    message(&quot;Gruss ausgerichtet&quot;)
+    })
+  }</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Nun überschreibe den <code>reactiveVal</code> innerhalb des
+<code>observeEvent</code> mit dem ursorünglichen <code>paste</code>
+Befehl. Beachte, dass das überschreiben keine Zuweisung erfordert. Lasse
+die App jetzt nochmal laufen. Der Text sollte nun erst erscheinen,
+nachdem du einen Namen eingegeben hast.</li>
+</ol>
+<pre class="r"><code>server &lt;- function(input, output, session) {
+  gruss_text &lt;- XX()
+  output$XX &lt;- renderText(XX())
+  observeEvent(XX(XX), {
+    gruss_text(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
+    message(&quot;Gruss ausgerichtet&quot;)
+    })
+  }</code></pre>
+</div>
+<div id="c---essen-oder-trinken" class="section level3">
+<h3>C - Essen oder Trinken</h3>
+<ol style="list-style-type: decimal">
+<li>Nachdem du jetzt etwas Erfahrung mit <code>reactiveVal</code> und
+<code>observeEvent</code> gesammelt hast, versuche einmal diese App zu
+vervollständigen.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  actionButton(&quot;drink&quot;, &quot;drink me&quot;),
+  actionButton(&quot;eat&quot;, &quot;eat me&quot;),
+  textOutput(&quot;notice&quot;)
+)
+server &lt;- function(input, output, session) {
+  notice &lt;- XX()
+  observeEvent(XX$XX, {
+   notice(&quot;You are no longer thirsty&quot;)
+  })
+  observeEvent(XX$XX, {
+    notice(&quot;You are no longer hungry&quot;)
+  })
+  output$XX &lt;- renderText(XX())
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="d---fehler" class="section level3">
+<h3>D - Fehler</h3>
+<ol style="list-style-type: decimal">
+<li>Im code siehst du eine funktionierende App. Probiere sie aus und
+überlege dann wie der <em>reactive graph</em> für die App aussehen
+könnte.</li>
+</ol>
+<pre class="r"><code>ui &lt;- fluidPage(
+  checkboxInput(&quot;error&quot;, &quot;error?&quot;),
+  textOutput(&quot;result&quot;)
+)
+server &lt;- function(input, output, session) {
+  a &lt;- reactive({
+    if (input$error) {
+      stop(&quot;Error!&quot;)
+    } else {
+      1
+    }
+  })
+  b &lt;- reactive(a() + 1)
+  c &lt;- reactive(b() + 1)
+  output$result &lt;- renderText(c())
+}
+
+shinyApp(ui, server)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Du kannst dir den <em>reactive graph</em> ansehen indem du das
+<code>reactlog</code> Paket lädst und einmal
+<code>reactlog_enable()</code> ausführst. Dann lasse die App nochmal
+laufen lassen und schliesse sie wieder. Jetzt solltest du mit
+<code>reactlogShow()</code> dir den Graphen anzeigen lassen können.</li>
+</ol>
+</div>
+<div id="e---explore" class="section level3">
+<h3>E - Explore</h3>
+<ol style="list-style-type: decimal">
+<li>Baue andere Apps mit anderen Kombinationen an reaktiven
+Elementen.</li>
+</ol>
+</div>
+</div>
+<div id="app" class="section level2">
+<h2>App</h2>
+<ol style="list-style-type: decimal">
+<li><p>An zwei Stellen bauen wir im InjuryViewer Reaktivität ein.
+Erstens, bewegen wir die Daten und die Auswahl der Körperteile und des
+Alters in einen <code>reactive</code>. Zweitens, entwickeln wir einen
+<code>reactiveVal</code>, der hilft zu entscheiden welche Version eines
+zweiten Plots angezeigt wird. Öffne zunächst das Skript der InjuryViewer
+App.</p></li>
+<li><p>Zuerst kreiere im <code>server</code> das <code>reactive</code>,
+dass die ausgewählten Daten enthält. Nennen das <code>reactive</code>
+<code>daten</code>.</p></li>
+</ol>
+<pre class="r"><code>XX = XX({
+  verletzungen %&gt;%
+    filter(körperteil %in% input$körperteil,
+           alter &gt;= input$alter[1],
+           alter &lt;= input$alter[2])
+  })</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Da die Daten nun in einem <code>reactive</code> sind, müssen wir den
+Code von <code>linien_plot</code> anpassen. Anstatt innerhalb der
+Plot-Codes die Auswhal der Daten vorzunehmen, soll nun das
+<code>reactive</code> die Daten bereitsstellen. Entferne also den
+relevanten <code>dplyr</code> Code zu Beginn Plot-Codes und ersetze ihn
+durch das <code>reactive</code>. Denke dran <code>reactive</code>s sind
+(wie) Funktionen und brauchen daher Klammern.</li>
+</ol>
+<pre class="r"><code>output$linien_plot = renderPlot({
+
+  XX %&gt;% 
+    count(alter, geschlecht, wt = anzahl) %&gt;%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+      legend.position = &quot;top&quot;
+    ) +
+    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                          option = &quot;G&quot;,
+                          end = .8) +
+    labs(x = &quot;Alter&quot;,
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Nun können wir uns daran machen einen zweiten Plot zu bauen, der je
+nach Einstellung eines weiteren reaktiven Elements die Diagnosen,
+Gegenstände, oder Unfallorte der Verletzungen zeigt. Kreiere zunächst
+den Plot mit <code>diagnose</code> als angezeigte Variable unter
+Verwendung des reaktiven Elements <code>daten</code>. Nenne den Plot
+<code>lollipop_plot</code> und ergänze ein entsprechendes
+<code>plotOutput</code> in der UI unter dem
+<code>linien_plot</code>.</li>
+</ol>
+<pre class="r"><code>output$XX = renderPlot({
+    XX %&gt;%
+      mutate(variable = XX) %&gt;%
+      count(variable, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = &quot;G&quot;, end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;none&quot;
+      ) +
+      labs(y = &quot;Geschätzte Anzahl&quot;)
+    })</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Lasse die App einmal laufen. Du solltest jetzt einen zweiten Plot
+sehen, der die Diagnosen separat für männliche und weibliche Patienten
+zeigt und wie <code>linien_plot</code> sich als Funktion der Körperteil-
+und Alterseinstellung ändert, dank des <code>daten()</code>
+<code>reactive</code>s.</p></li>
+<li><p>Damit der <code>lollipop_plot</code> unterschiedliche Variablen
+anzeigen kann, benötigen wir ein weiteres reaktives Element, eines das
+wir überschreiben können. Kreiere einen <code>reactiveVal</code> namens
+<code>lollipop_var</code> und setze den anfänglichen Wert auf
+<code>"diagnose"</code>.</p></li>
+</ol>
+<pre class="r"><code> XX = XX(XX)</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li><p>Nun bauen wir drei Schalter, die jeweils dazu führen sollen, dass
+sich der Wert in <code>lollipop_var</code> ändert. Dafür brauchen wir
+später noch ein <code>observeEvent</code>, aber erstmal zu den
+Schaltern. Ergänze drei <code>actionButton</code> zwischen dem
+<code>sliderInput</code> und dem ersten plot. Vergebe die IDs
+<code>diagnose_var</code>, <code>unfallort_var</code> und
+<code>gegenstand_var</code>, sowie die Labels <code>"Diagnosen"</code>,
+<code>"Unfallorte"</code>, und <code>"Gegenstände"</code>.</p></li>
+<li><p>Mit den IDs der drei Schalter, kannst du jetzt drei
+<code>observeEvent</code> setzen, die jeweils den
+<code>lollipop_var</code> <code>reactiveVal</code> so ändern, das
+<code>lollipop_var</code> den Namen der jeweiligen Variable im Datensatz
+(<code>"diagnose"</code>, <code>"unfallort"</code>, oder
+<code>"gegenstand"</code>) trägt. Denk dran, das erste Argument
+<code>observeEvent</code> ist hier der Input, der den Code des
+<code>observeEvent</code> im zweiten Argument triggern soll.</p></li>
+</ol>
+<pre class="r"><code>  XX(XX$XX, {
+    lollipop_var(&quot;diagnose&quot;)
+  })
+  XX(XX$XX, {
+    lollipop_var(&quot;unfallort&quot;)
+  })
+  XX(XX$XX, {
+    lollipop_var(&quot;gegenstand&quot;)
+  })</code></pre>
+<ol start="9" style="list-style-type: decimal">
+<li>Zuletzt müssen wir noch eine Änderung am <code>lollipop_plot</code>
+vornehmen, damit jeweils die Variable in <code>lollipop_var</code>
+angezeigt wird. Ändere dafür die das <code>mutate</code> in der zweiten
+Zeile des <code>lollipop_plot</code> wie unten dargestellt. Anstelle von
+XX setze den <code>lollipop_var</code> <code>reactiveVal</code>. Denk an
+die Klammern.</li>
+</ol>
+<pre class="r"><code>mutate(variable = .data[[XX]])</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Fertig. Lasse die einmal laufen. Ändert sich der
+<code>lollipop_plot</code>, wenn du auf die drei neuen Schalter
+klickst?</li>
+</ol>
+</div>
+<div id="lösung" class="section level2">
+<h2>Lösung</h2>
+<pre class="r"><code>library(shiny)
+library(tidyverse)
+
+verletzungen = readRDS(&quot;data/verletzungen.RDS&quot;)
+
+ui &lt;- fluidPage(
+  
+  selectInput(&quot;körperteil&quot;, &quot;Körperteil&quot;, 
+              choices = unique(verletzungen$körperteil), 
+              multiple = TRUE),
+  sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
+  actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;),
+  actionButton(&quot;unfallort_var&quot;, &quot;Unfallorte&quot;),
+  actionButton(&quot;gegenstand_var&quot;, &quot;Gegenstände&quot;),
+  plotOutput(&quot;linien_plot&quot;),
+  plotOutput(&quot;lollipop_plot&quot;)
+  )
+
+server &lt;- function(input, output, session) {
+
+daten = reactive({
+  verletzungen %&gt;%
+    filter(körperteil %in% input$körperteil,
+           alter &gt;= input$alter[1],
+           alter &lt;= input$alter[2])
+  })
+  
+output$linien_plot = renderPlot({
+
+  daten() %&gt;% 
+    count(alter, geschlecht, wt = anzahl) %&gt;%
+    ggplot(aes(x = alter, y = n, col = geschlecht)) +
+    geom_line(linewidth = 1.5) +
+    theme_minimal() +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.title = element_text(size = 16),
+      legend.text = element_text(size = 12),
+      legend.title = element_text(size = 16),
+      plot.margin = margin(.5, .5, 1, 1, unit = &quot;cm&quot;),
+      legend.position = &quot;top&quot;
+    ) +
+    scale_color_viridis_d(name = &quot;Geschlecht&quot;,
+                          option = &quot;G&quot;,
+                          end = .8) +
+    labs(x = &quot;Alter&quot;,
+         y = &quot;Geschätzte Anzahl Verletzungen&quot;)
+          })
+
+ lollipop_var = reactiveVal(&quot;diagnose&quot;)
+ 
+  observeEvent(input$diagnose_var, {
+    lollipop_var(&quot;diagnose&quot;)
+  })
+  observeEvent(input$unfallort_var, {
+    lollipop_var(&quot;unfallort&quot;)
+  })
+  observeEvent(input$gegenstand_var, {
+    lollipop_var(&quot;gegenstand&quot;)
+  })
+  
+  output$lollipop_plot = renderPlot({
+
+    daten() %&gt;%
+      mutate(variable = .data[[lollipop_var()]]) %&gt;%
+      count(variable, geschlecht, wt = anzahl) %&gt;%
+      ggplot(aes(x = variable, y = n, col = geschlecht)) +
+      geom_pointrange(
+        aes(ymin = 0, ymax = n),
+        linewidth = 1.2,
+        size = 1.2,
+        position = position_dodge(width = .5)
+      ) +
+      scale_color_viridis_d(option = &quot;G&quot;, end = .8) +
+      theme_minimal() +
+      theme(
+        axis.title.y = element_text(size = 16),
+        axis.title.x = element_blank(),
+        axis.text.y = element_text(size = 12),
+        axis.text.x = element_text(
+          size = 16,
+          angle = 45,
+          hjust = 1
+        ),
+        plot.margin = margin(.5, .5, .5, 1, unit = &quot;cm&quot;),
+        legend.position = &quot;none&quot;
+      ) +
+      labs(y = &quot;Geschätzte Anzahl&quot;)
+    })
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="datensatz" class="section level2">
+<h2>Datensatz</h2>
+<p>Der Datensatz stammt von dem National Electronic Injury Surveillance
+System (NEISS) in den USA, das seit vielen Jahren Unfälle aus einem
+repräsentativen Stichprobe von Krankenhäusern sammelt. Der Datensatz
+wurde ins Deutsche übersetzt und angepasst.<br />
+Es liegen zwei Ausschnitte des Datensatzes vor.
+<code>verletzungen.RDS</code> beinhaltet alle 251’545 Fälle des Jahres
+2017, <code>verletzungen_jahresende.RDS</code> dagegen nur die 4’181
+Fälle zwischen Heiligabend und Silvester.</p>
+<p>Die beiden Datensätze beinhalten die folgenden Variablen:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="left">Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>datum</td>
+<td align="left">Datum des Unfalls / der Verletzung</td>
+</tr>
+<tr class="even">
+<td>alter</td>
+<td align="left">Alter der Person</td>
+</tr>
+<tr class="odd">
+<td>geschlecht</td>
+<td align="left">Geschlecht der Person</td>
+</tr>
+<tr class="even">
+<td>körperteil</td>
+<td align="left">Körperteil, das verletzt wurde</td>
+</tr>
+<tr class="odd">
+<td>diagnose</td>
+<td align="left">Diagnose der Verletzung</td>
+</tr>
+<tr class="even">
+<td>unfallort</td>
+<td align="left">Unfallort der Verletzung</td>
+</tr>
+<tr class="odd">
+<td>gegenstand</td>
+<td align="left">Gegenstand, der die Verletzung herbeigeführt hat</td>
+</tr>
+<tr class="even">
+<td>anzahl</td>
+<td align="left">Anzahl an Verletzungen</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
