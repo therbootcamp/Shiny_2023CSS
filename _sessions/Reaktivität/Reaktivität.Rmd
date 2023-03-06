@@ -265,7 +265,7 @@ shinyApp(ui, server)
     <td><mono>reactiveVal() reactiveValues()</mono></td>
   </tr> 
   <tr style="padding:20px;background-color:white">
-    <td style="padding:20px;text-align:center">Bedingungen</td>
+    <td style="padding:20px;text-align:center">Überwacher</td>
     <td><mono>observeEvent() observe()</mono></td>
   </tr>
   <tr style="padding:20px;background-color:white">
