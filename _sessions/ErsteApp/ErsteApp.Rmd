@@ -401,10 +401,10 @@ ui <- fluidPage(
   selectInput(inputId = "wohnort", 
               label = "Wo wohnst du?",
               choices = c("Luzern", ...)),
-  textAreaInput(inputId = "wohnort", 
-                label = "Wo wohnst du?",
-                choices = c("Luzern", ...),
-                multiple = TRUE)
+  selectInput(inputId = "wohnort", 
+              label = "Wo wohnst du?",
+              choices = c("Luzern", ...),
+              multiple = TRUE)
   )
 ```
 
@@ -655,8 +655,8 @@ ui <- fluidPage(
 
 ```{r, eval = FALSE}
 ui <- fluidPage(
-  dateInput(inputId = "geburtstag", 
-              label = "Geburtstag circa?")
+  dateRangeInput(inputId = "geburtstag", 
+                 label = "Geburtstag circa?")
   )
 ```
 

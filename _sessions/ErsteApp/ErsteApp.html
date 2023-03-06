@@ -389,10 +389,10 @@ ui &lt;- fluidPage(
   selectInput(inputId = "wohnort", 
               label = "Wo wohnst du?",
               choices = c("Luzern", ...)),
-  textAreaInput(inputId = "wohnort", 
-                label = "Wo wohnst du?",
-                choices = c("Luzern", ...),
-                multiple = TRUE)
+  selectInput(inputId = "wohnort", 
+              label = "Wo wohnst du?",
+              choices = c("Luzern", ...),
+              multiple = TRUE)
   )
 ```
 
@@ -649,8 +649,8 @@ ui &lt;- fluidPage(
 
 ```r
 ui &lt;- fluidPage(
-  dateInput(inputId = "geburtstag", 
-              label = "Geburtstag circa?")
+  dateRangeInput(inputId = "geburtstag", 
+                 label = "Geburtstag circa?")
   )
 ```
 
