@@ -1,7 +1,7 @@
 ---
 title: "Wettbewerb"
 subtitle: ""
-author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
+author: "<font style='font-style:normal'>Dashboards mit Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -16,8 +16,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = NA, 
-                      fig.width = 6, 
-                      fig.height = 6,
                       fig.align = 'center',
                       echo = TRUE, 
                       eval = FALSE, 
@@ -57,7 +55,7 @@ Der Wettbewerb endet in...
 ```{=html}
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Mar 8, 2023 16:20:00").getTime();
+var countDownDate = new Date("Mar 13, 2023 18:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -94,13 +92,13 @@ Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für Gesundheit (
 
 ### A - Vorbereitung
 
-1.  Erstelle einen neuen Ordner `competition` in deinem `TheRBootcamp` Projektordner. 
+1.  Erstelle einen neuen Ordner `competition` in deinem `TheRBootcamp` Projektordner.
 
-2.  Erstelle ein neues Skript für deine App und speichere es unter dem Namen `CovidExplorer.R`.
+2.  Erstelle darin ein neues Skript für deine App und speichere es unter dem Namen `CovidExplorer.R`.
 
 3.  Lade das `shiny` Paket und alle weiteren Pakete, die du verwenden möchtest.
 
-4.  Lade den Datensatz `covid.csv`. Es sollte im `data` Ordner enthalten. Im Tab `Datensatz` findest du Informationen zu den Variablen.  
+4.  Lade den Datensatz `covid.csv`. Er sollte im `data` Ordner enthalten sein. Im Tab `Datensatz` findest du Informationen zu den Variablen.
 
 ```{r, eval = FALSE, echo = TRUE}
 library(shiny)
@@ -133,9 +131,9 @@ shinyApp(ui, server)
 
 2.  Am Wettbewerb teilzunehmen ermöglicht dir die Chance viel 🍫🍫🍫 zu gewinnen.
 
-3.  Die nimmst am Wettbewerb teil indem du deinen Ordner `competition` als `.zip` Datei komprimierst und an uns schickst.
+3.  Du nimmst am Wettbewerb teil indem du deinen Ordner `competition` als `.zip` Datei komprimierst und an uns schickst. Lege alle Dateien, die deine App braucht, in diesen `competition` Ordner. Also z.B. alle verwendeten Datensätze, Bilder, R Skripte oder sonstige Dateien.
 
-4.  Reiche deine Beitrag ein indem Du deine `.zip` Datei an unsere <a href="mailto:therbootcamp@gmail.com"><b>[therbootcamp\@gmail.com](mailto:therbootcamp@gmail.com){.email}</b></a> Mail Adresse schickst.
+4.  Reiche deinen Beitrag ein indem Du deine `.zip` Datei an unsere <a href="mailto:therbootcamp@gmail.com"><b>[therbootcamp\@gmail.com](mailto:therbootcamp@gmail.com){.email}</b></a> Mail Adresse schickst.
 
 5.  Jeder Beitrag wird anonym beurteilt duch eine Jury bestehend aus den Kursteilnehmern und Kursteilnehmerinnen. Der Beitrag mit den meisten Punkten gewinnt. Die Beurteilung findet im Anschluss an den Kurs statt.
 
@@ -147,12 +145,82 @@ Wir machen alle eingereichten Dashboards online verfügbar. Danach bekommt ihr e
 
 ## Inspiration
 
+### Layouts
+
+Überlege dir, welches Layout du für deine App verwenden möchtest. Du könntest z.B. von Hand auf Papier eine Skizze anfertigen und das entsprechende Layout dann in Shiny umsetzen.
+
+Hier sind nochmal ein paar Beispiele für Layouts aus dem Kurs zur Inspiration.
+
+#### Beispiel 1
+
+Das erste Beispiel nutzt das simple aber oft übersichtliche `sidebarLayout` mit `sidebarPanel` und `mainPanel`.
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  titlePanel("COVID Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      # hier könnten einige Inputs platziert sein
+    ),
+    mainPanel(
+      # und hier könnten Graphiken platziert sein
+    )
+  )
+)
+
+```
+
+![](image/layout1.png)
+
+#### Beispiel 2
+
+Das zweite Beispiel verwendet eine navbarPage mit verschiedenen Seiten (tabPanels), darin ein Grid Layout.
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- navbarPage(
+  "COVID Explorer",
+  tabPanel(
+    "Verlauf",
+    fluidRow(
+      column(
+        8,
+        # hier könnten Graphiken platziert sein
+      ),
+      column(
+        4,
+        # und hier Inputs
+      )
+    )
+  ),
+  tabPanel("Kantone"),
+  tabPanel("Karte"),
+  tabPanel("About")
+)
+
+
+```
+
+![](image/layout2.png)
+
 ### Visualisierungen
 
+Versuch dir anhand der Variablen im Datensatz zu überlegen, welche Visualisierungen am informativsten, bzw. interessantesten sind.
 
-1. XXX
+Hier ein paar Beispiele für Plots die interessant sein könnten, und die du natürlich auch als Ausgangslage nehmen kannst zum Anpassen.
 
-```{r, eval = TRUE, echo = TRUE}
+#### Fälle über die Jahre in der Schweiz
+
+Das erste Beispiel zeigt die wöchentliche Entwicklung der Fallzahlen in der gesamten Schweiz.
+
+```{r, eval = TRUE, echo = FALSE}
+library(tidyverse)
+covid <- read_csv("data/covid.csv")
+kantone <- read_csv("data/kantone.csv")
+```
+
+```{r eval = TRUE, echo = TRUE}
 
 covid %>% 
   group_by(region, datum) %>% 
@@ -161,7 +229,8 @@ covid %>%
             population = sum(population, na.rm = TRUE)) %>% 
   filter(region == "CH") %>% 
   ggplot(aes(x = datum, y = anzahl)) +
-  geom_col(fill = "#ff0000") +
+  geom_area(fill = "#ff0000", alpha = 0.5) +
+  geom_line(color = "#ff0000", linewidth = 1) +
   labs(title = "COVID-19 Fälle pro Woche", subtitle = "ganze Schweiz") +
   xlab("Datum") +
   ylab("Fälle pro Woche") +
@@ -169,45 +238,124 @@ covid %>%
 
 ```
 
-2. XXX
+#### Fallzahlen pro Kanton auf Schweizerkarte
 
-```{r, eval = TRUE, echo = TRUE}
+Der nächste Plot zeigt eine Schweizerkarte und kummulierte Fallzahlen pro Kopf je nach Kanton, und zwar für eine bestimmte Woche (hier die erste im Datensatz). Dafür ist ein bisschen R Akrobatik nötig, um die Daten dafür in die richtige Form zu bringen. Du brauchst dafür zudem den Datensatz `kantone.csv`, in dem die Grenzen der Kantone hinterlegt sind für den Plot.
 
-covid %>% 
+```{r eval = TRUE, echo = TRUE}
+covid_first_week <- covid %>% 
   group_by(region, datum) %>% 
   summarise(anzahl = sum(anzahl), 
             summe = sum(summe), 
             population = sum(population, na.rm = TRUE)) %>% 
-  mutate(pro_kopf = anzahl / population) %>% 
-  filter(region %in% c("FR", "LU")) %>% 
-  ggplot(aes(x = datum, y = pro_kopf, fill = region)) +
-  geom_col(position = "dodge") +
-  scale_fill_manual(values = c("FR" = "black", "LU" = "#1e8ccd"), name = "Kanton") +
-  labs(title = "COVID-19 Fälle pro Kopf") +
-  xlab("Datum") +
-  ylab("Fälle pro Woche pro Kopf") +
-  theme_minimal()
+  mutate(anzahl_pro_kopf = anzahl / population,
+         summe_pro_kopf = summe / population) %>% 
+  filter(datum == min(datum)) %>% 
+  select(region, summe_pro_kopf)
+
+kantone %>%
+  left_join(covid_first_week, by = c("kurz" = "region")) %>% 
+  ggplot(aes(x = x, y = y, group = kanton_id, fill = summe_pro_kopf)) +
+  geom_polygon(col = "grey50") +
+  theme_void() +
+  theme(legend.position = "none") +
+  scale_fill_gradient(low = "white", high = "red")
+
 
 ```
 
-
 ### Interaktivität
 
-![Beispiel für Inputs und Outputs](image/slider-plot.png){style="width: 75%;"}
+Denke darüber nach, welche Elemente du interaktiv gestalten möchtest. Auch dazu hier ein paar Beispiele, die Möglichkeiten sind aber natürlich endlos.
 
-### Layouts
+#### Woche auswählen
 
-![Farben und Layout Entwurf](image/color-layout.png){style="width: 75%;"}
+Du könntest z.B. den Benutzer die Woche auswählen lassen, für welche in einem Kartenplot die Fallzahlen oder kummulierten Fallzahlen angezeigt werden. Dieses Beispiel zeigt einen Slider, der eine Woche auswählen lässt, und ein zugehöriger Plot, der Daten bis zu dieser Woche darstellt.
 
-## Datensatz
+```{r eval = FALSE, echo = TRUE}
+library(shiny)
 
+ui <- fluidPage(
+  sliderInput("datum", 
+              "Fälle bis zum", 
+              min = date("2020-02-24"), 
+              max = date("2023-02-13"), 
+              value = date("2020-02-24")),
+  plotOutput("plot")
+)
 
+server <- function(input, output, session) {
+
+  output$plot <- renderPlot({
+    covid %>% 
+      group_by(region, datum) %>% 
+      summarise(anzahl = sum(anzahl), 
+                summe = sum(summe), 
+                population = sum(population, na.rm = TRUE)) %>% 
+      filter(region == "CH") %>% 
+      filter(datum <= input$datum) %>% 
+      ggplot(aes(x = datum, y = anzahl)) +
+      geom_area()
+  })
+
+}
+
+shinyApp(ui, server)
+```
+
+#### Kantone auswählen
+
+Eine weitere Dimension, die interaktiv verändert werden könnte, ist, für welche Region sich ein User Daten anschauen möchte. Mittels `slectInput` lassen sie sich einfach auswählen. Zudem ist in diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt.
+
+```{r eval = FALSE, echo = TRUE}
+
+library(shiny)
+
+ui <- fluidPage(
+  selectInput("regionen", "Regionen", 
+              choices = c("AG", "AI", "AR", "BE", "BL", "BS", 
+                          "FR", "GE", "GL", "GR", "JU", "LU",
+                          "NE", "NW", "OW", "SG", "SH", "SO",
+                          "SZ", "TG", "TI", "UR", "VD", "VS",
+                          "ZG", "ZH", "CH"),
+              multiple = TRUE),
+  actionButton("region_zurücksetzen", "Regionen zurücksetzen", 
+               icon = icon("times"))
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$region_zurücksetzen, {
+    updateSelectInput(inputId = "regionen", selected = character(0))
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+#### The sky is the limit...
+
+Dies waren nur ein paar Beispiele um eure Covid Explorer Entwicklung zu inspirieren, setzt eure eigenen Ideen um, oder passt die Beispiele an um sie besser zu machen.
+
+## Datensätze
+
+### covid.csv
 
 | Name           | Bedeutung                                                                                                            |
-|:-----------------------|:-----------------------------------------------|
+|:------------------------|:---------------------------------------------|
 | `altersgruppe` | Altersgruppe, auf die sich die Daten in dieser Zeile beziehen.                                                       |
 | `region`       | Region auf die sich die Daten in dieser Zeile beziehen. `CH` oder einer von 26 Kantonen.                             |
 | `datum`        | Datum, an dem die Woche beginnt, für welche diese Zeile Daten liefert.                                               |
 | `anzahl`       | Anzahl COVID-19 Fälle, welche in dieser Woche in dieser Region für diese Altersgruppe gemeldet wurden.               |
 | `summe`        | Anzahl COVID-19 Fälle, welche bis zu dieser Woche in dieser Region für diese Altersgruppe insgesamt gemeldet wurden. |
 | `population`   | Anzahl Personen in dieser Region und dieser Altersgruppe.                                                            |
+
+### kantone.csv
+
+| Name        | Bedeutung                                                         |
+|---------------|---------------------------------------------------------|
+| `kanton`    | Kantonsname                                                       |
+| `kanton_id` | Kantons-id (mehrere pro Kanton, da manche Kantone "Inseln" haben) |
+| `x`         | x-Koordinate                                                      |
+| `y`         | y-Koordinate                                                      |
+| `kurz`      | Kantonskürzel (z.B. ZH, AG, LU, usw.)                             |
