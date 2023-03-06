@@ -98,7 +98,9 @@ Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für Gesundheit (
 
 3.  Lade das `shiny` Paket und alle weiteren Pakete, die du verwenden möchtest.
 
-4.  Lade den Datensatz `covid.csv`. Er sollte im `data` Ordner enthalten sein. Im Tab `Datensatz` findest du Informationen zu den Variablen.
+4.  Lade den Datensatz `covid.csv`. Er sollte im `data` Ordner enthalten sein. Im Tab `Datensatz` findest du Informationen zu den Variablen. 
+
+5.  Optional kannst du einen Datensatz herunterladen, der geographische Grenzen der Schweizer Kantone beinhaltet. Du kannst ihn hier mit Rechtsklick "Ziel speichern unter" downloaden: <a href="https://raw.githubusercontent.com/therbootcamp/Shiny_2023CSS/main/_sessions/Wettbewerb/data/kantone.csv" download="kantone.csv">kantone.csv</a>
 
 ```{r, eval = FALSE, echo = TRUE}
 library(shiny)
@@ -336,6 +338,7 @@ shinyApp(ui, server)
 #### The sky is the limit...
 
 Dies waren nur ein paar Beispiele um eure Covid Explorer Entwicklung zu inspirieren, setzt eure eigenen Ideen um, oder passt die Beispiele an um sie besser zu machen.
+
 
 ## Datensätze
 
