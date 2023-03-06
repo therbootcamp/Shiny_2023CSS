@@ -429,7 +429,6 @@ shinyApp(ui, server)
 ```
 
 
-
 ## App
 
 1. Es ist an der Zeit das Layout der InjuryViewer App anzupassen. Es sind einige Änderungen nötig. Erstens, muss die UI in eine `navbarPage` mit drei `tabPanels` geändert werden. Zweitens muss im Hauptpanel ein `sidebarLayout` eingezogen werden. Drittens muss in den zusätzlichen Panels ein `tabsetPanel` erstellt werden und HTML eingesetzt werden um Spalten einzurücken und Überschriften zu setzen.      

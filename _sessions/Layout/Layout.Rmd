@@ -335,7 +335,7 @@ ui <- fluidPage(
 ```{r, eval = FALSE}
 
 ui <- fluidPage(
-  titlePanel("Nalist Layout"),
+  titlePanel("Navlist Layout"),
   navlistPanel(
     tabPanel("Panel A",
              "Das ist Panel A"),
@@ -476,6 +476,39 @@ ui <- tags$html(
 <iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"></iframe>
 
 ]
+
+---
+
+# <mono>HTML</mono>
+
+.pull-left4[
+
+<ul>
+  <li class="m1"><span>Die <mono>HTML</mono> Funktion wrapped beliebigen HTML Code</span></li>
+</ul>
+
+
+```{r, eval = FALSE}
+ui <- tags$html(
+  tags$body(
+    tags$div(
+      HTML("Hier ist ein Link zum<a 
+           href='www.therbootcamp.com'>The R 
+           Bootcamp</a>")
+    )
+  )
+)
+```
+
+
+]
+
+.pull-right5[
+
+<iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"></iframe>
+
+]
+
 
 
 ---

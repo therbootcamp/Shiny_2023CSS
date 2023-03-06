@@ -317,7 +317,7 @@ ui &lt;- fluidPage(
 
 ```r
 ui &lt;- fluidPage(
-  titlePanel("Nalist Layout"),
+  titlePanel("Navlist Layout"),
   navlistPanel(
     tabPanel("Panel A",
              "Das ist Panel A"),
@@ -484,6 +484,40 @@ ui &lt;- tags$html(
 &lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"&gt;&lt;/iframe&gt;
 
 ]
+
+---
+
+# &lt;mono&gt;HTML&lt;/mono&gt;
+
+.pull-left4[
+
+&lt;ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Die &lt;mono&gt;HTML&lt;/mono&gt; Funktion wrapped beliebigen HTML Code&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+```r
+ui &lt;- tags$html(
+  tags$body(
+    tags$div(
+      HTML("Hier ist ein Link zum&lt;a 
+           href='www.therbootcamp.com'&gt;The R 
+           Bootcamp&lt;/a&gt;")
+    )
+  )
+)
+```
+
+
+]
+
+.pull-right5[
+
+&lt;iframe width = "400px" height = "440px" src = "https://dirkwulff.shinyapps.io/tags"&gt;&lt;/iframe&gt;
+
+]
+
 
 
 ---
