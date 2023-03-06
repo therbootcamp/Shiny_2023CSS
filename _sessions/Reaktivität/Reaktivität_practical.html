@@ -332,7 +332,7 @@ nachdem du einen Namen eingegeben hast.</li>
   gruss_text &lt;- XX()
   output$XX &lt;- renderText(XX())
   observeEvent(XX(XX), {
-    reactiveVal(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
+    gruss_text(paste0(&quot;Hallo &quot;, input$name, &quot;!&quot;))
     message(&quot;Gruss ausgerichtet&quot;)
     })
   }</code></pre>
