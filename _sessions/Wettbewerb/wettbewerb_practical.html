@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Explorative Datenanalyse      The R Bootcamp @ CSS  " />
+<meta name="author" content="Dashboards mit Shiny      The R Bootcamp @ CSS  " />
 
 
 <title>Wettbewerb</title>
@@ -163,8 +163,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Wettbewerb</h1>
-<h4 class="author"><font style='font-style:normal'>Explorative
-Datenanalyse</font><br>
+<h4 class="author"><font style='font-style:normal'>Dashboards mit
+Shiny</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
 <a href='https://therbootcamp.github.io'><i class='fas fa-home' style='font-size:.9em;'></i></a>
 <a href='mailto:therbootcamp@gmail.com'><i class='fas fa-envelope' style='font-size: .9em;'></i></a>
@@ -198,7 +198,7 @@ ermöglichen.</p>
 <p></font></p>
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Mar 8, 2023 16:20:00").getTime();
+var countDownDate = new Date("Mar 13, 2023 18:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -243,12 +243,12 @@ Infektionszahlen zudem nach Altersgruppen auf.</p>
 <ol style="list-style-type: decimal">
 <li><p>Erstelle einen neuen Ordner <code>competition</code> in deinem
 <code>TheRBootcamp</code> Projektordner.</p></li>
-<li><p>Erstelle ein neues Skript für deine App und speichere es unter
-dem Namen <code>CovidExplorer.R</code>.</p></li>
+<li><p>Erstelle darin ein neues Skript für deine App und speichere es
+unter dem Namen <code>CovidExplorer.R</code>.</p></li>
 <li><p>Lade das <code>shiny</code> Paket und alle weiteren Pakete, die
 du verwenden möchtest.</p></li>
-<li><p>Lade den Datensatz <code>covid.csv</code>. Es sollte im
-<code>data</code> Ordner enthalten. Im Tab <code>Datensatz</code>
+<li><p>Lade den Datensatz <code>covid.csv</code>. Er sollte im
+<code>data</code> Ordner enthalten sein. Im Tab <code>Datensatz</code>
 findest du Informationen zu den Variablen.</p></li>
 </ol>
 <pre class="r"><code>library(shiny)
@@ -284,10 +284,12 @@ und versuch es in der Praxis anzuwenden.</p></li>
 und <strong>schönste</strong> Dashboard-App zu erstellen.</p></li>
 <li><p>Am Wettbewerb teilzunehmen ermöglicht dir die Chance viel 🍫🍫🍫
 zu gewinnen.</p></li>
-<li><p>Die nimmst am Wettbewerb teil indem du deinen Ordner
+<li><p>Du nimmst am Wettbewerb teil indem du deinen Ordner
 <code>competition</code> als <code>.zip</code> Datei komprimierst und an
-uns schickst.</p></li>
-<li><p>Reiche deine Beitrag ein indem Du deine <code>.zip</code> Datei
+uns schickst. Lege alle Dateien, die deine App braucht, in diesen
+<code>competition</code> Ordner. Also z.B. alle verwendeten Datensätze,
+Bilder, R Skripte oder sonstige Dateien.</p></li>
+<li><p>Reiche deinen Beitrag ein indem Du deine <code>.zip</code> Datei
 an unsere <a href="mailto:therbootcamp@gmail.com"><b><a
 href="mailto:therbootcamp@gmail.com"
 class="email">therbootcamp@gmail.com</a></b></a> Mail Adresse
@@ -310,8 +312,67 @@ Dashboard Schokolade gewinnt.</p>
 </div>
 <div id="inspiration" class="section level2">
 <h2>Inspiration</h2>
-<div id="plots" class="section level3">
-<h3>Plots</h3>
+<div id="layouts" class="section level3">
+<h3>Layouts</h3>
+<p>Überlege dir, welches Layout du für deine App verwenden möchtest. Du
+könntest z.B. von Hand auf Papier eine Skizze anfertigen und das
+entsprechende Layout dann in Shiny umsetzen.</p>
+<p>Hier sind nochmal ein paar Beispiele für Layouts aus dem Kurs zur
+Inspiration.</p>
+<div id="beispiel-1" class="section level4">
+<h4>Beispiel 1</h4>
+<p>Das erste Beispiel nutzt das simple aber oft übersichtliche
+<code>sidebarLayout</code> mit <code>sidebarPanel</code> und
+<code>mainPanel</code>.</p>
+<pre class="r"><code>ui &lt;- fluidPage(
+  titlePanel(&quot;COVID Explorer&quot;),
+  sidebarLayout(
+    sidebarPanel(
+      # hier könnten einige Inputs platziert sein
+    ),
+    mainPanel(
+      # und hier könnten Graphiken platziert sein
+    )
+  )
+)</code></pre>
+<p><img src="image/layout1.png" /></p>
+</div>
+<div id="beispiel-2" class="section level4">
+<h4>Beispiel 2</h4>
+<p>Das zweite Beispiel verwendet eine navbarPage mit verschiedenen
+Seiten (tabPanels), darin ein Grid Layout.</p>
+<pre class="r"><code>ui &lt;- navbarPage(
+  &quot;COVID Explorer&quot;,
+  tabPanel(
+    &quot;Verlauf&quot;,
+    fluidRow(
+      column(
+        8,
+        # hier könnten Graphiken platziert sein
+      ),
+      column(
+        4,
+        # und hier Inputs
+      )
+    )
+  ),
+  tabPanel(&quot;Kantone&quot;),
+  tabPanel(&quot;Karte&quot;),
+  tabPanel(&quot;About&quot;)
+)</code></pre>
+<p><img src="image/layout2.png" /></p>
+</div>
+</div>
+<div id="visualisierungen" class="section level3">
+<h3>Visualisierungen</h3>
+<p>Versuch dir anhand der Variablen im Datensatz zu überlegen, welche
+Visualisierungen am informativsten, bzw. interessantesten sind.</p>
+<p>Hier ein paar Beispiele für Plots die interessant sein könnten, und
+die du natürlich auch als Ausgangslage nehmen kannst zum Anpassen.</p>
+<div id="fälle-über-die-jahre-in-der-schweiz" class="section level4">
+<h4>Fälle über die Jahre in der Schweiz</h4>
+<p>Das erste Beispiel zeigt die wöchentliche Entwicklung der Fallzahlen
+in der gesamten Schweiz.</p>
 <pre class="r"><code>covid %&gt;% 
   group_by(region, datum) %&gt;% 
   summarise(anzahl = sum(anzahl), 
@@ -319,51 +380,128 @@ Dashboard Schokolade gewinnt.</p>
             population = sum(population, na.rm = TRUE)) %&gt;% 
   filter(region == &quot;CH&quot;) %&gt;% 
   ggplot(aes(x = datum, y = anzahl)) +
-  geom_col(fill = &quot;#ff0000&quot;) +
+  geom_area(fill = &quot;#ff0000&quot;, alpha = 0.5) +
+  geom_line(color = &quot;#ff0000&quot;, linewidth = 1) +
   labs(title = &quot;COVID-19 Fälle pro Woche&quot;, subtitle = &quot;ganze Schweiz&quot;) +
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche&quot;) +
   theme_minimal()</code></pre>
-<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>covid %&gt;% 
+<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fallzahlen-pro-kanton-auf-schweizerkarte"
+class="section level4">
+<h4>Fallzahlen pro Kanton auf Schweizerkarte</h4>
+<p>Der nächste Plot zeigt eine Schweizerkarte und kummulierte Fallzahlen
+pro Kopf je nach Kanton, und zwar für eine bestimmte Woche (hier die
+erste im Datensatz). Dafür ist ein bisschen R Akrobatik nötig, um die
+Daten dafür in die richtige Form zu bringen. Du brauchst dafür zudem den
+Datensatz <code>kantone.csv</code>, in dem die Grenzen der Kantone
+hinterlegt sind für den Plot.</p>
+<pre class="r"><code>covid_first_week &lt;- covid %&gt;% 
   group_by(region, datum) %&gt;% 
   summarise(anzahl = sum(anzahl), 
             summe = sum(summe), 
             population = sum(population, na.rm = TRUE)) %&gt;% 
-  mutate(pro_kopf = anzahl / population) %&gt;% 
-  filter(region %in% c(&quot;FR&quot;, &quot;LU&quot;)) %&gt;% 
-  ggplot(aes(x = datum, y = pro_kopf, fill = region)) +
-  geom_col(position = &quot;dodge&quot;) +
-  scale_fill_manual(values = c(&quot;FR&quot; = &quot;black&quot;, &quot;LU&quot; = &quot;#1e8ccd&quot;), name = &quot;Kanton&quot;) +
-  labs(title = &quot;COVID-19 Fälle pro Kopf&quot;) +
-  xlab(&quot;Datum&quot;) +
-  ylab(&quot;Fälle pro Woche pro Kopf&quot;) +
-  theme_minimal()</code></pre>
-<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
+  mutate(anzahl_pro_kopf = anzahl / population,
+         summe_pro_kopf = summe / population) %&gt;% 
+  filter(datum == min(datum)) %&gt;% 
+  select(region, summe_pro_kopf)
+
+kantone %&gt;%
+  left_join(covid_first_week, by = c(&quot;kurz&quot; = &quot;region&quot;)) %&gt;% 
+  ggplot(aes(x = x, y = y, group = kanton_id, fill = summe_pro_kopf)) +
+  geom_polygon(col = &quot;grey50&quot;) +
+  theme_void() +
+  theme(legend.position = &quot;none&quot;) +
+  scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;)</code></pre>
+<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="interaktivität" class="section level3">
 <h3>Interaktivität</h3>
-<div class="float">
-<img src="image/slider-plot.png" style="width: 75%;"
-alt="Beispiel für Inputs und Outputs" />
-<div class="figcaption">Beispiel für Inputs und Outputs</div>
+<p>Denke darüber nach, welche Elemente du interaktiv gestalten möchtest.
+Auch dazu hier ein paar Beispiele, die Möglichkeiten sind aber natürlich
+endlos.</p>
+<div id="woche-auswählen" class="section level4">
+<h4>Woche auswählen</h4>
+<p>Du könntest z.B. den Benutzer die Woche auswählen lassen, für welche
+in einem Kartenplot die Fallzahlen oder kummulierten Fallzahlen
+angezeigt werden. Dieses Beispiel zeigt einen Slider, der eine Woche
+auswählen lässt, und ein zugehöriger Plot, der Daten bis zu dieser Woche
+darstellt.</p>
+<pre class="r"><code>library(shiny)
+
+ui &lt;- fluidPage(
+  sliderInput(&quot;datum&quot;, 
+              &quot;Fälle bis zum&quot;, 
+              min = date(&quot;2020-02-24&quot;), 
+              max = date(&quot;2023-02-13&quot;), 
+              value = date(&quot;2020-02-24&quot;)),
+  plotOutput(&quot;plot&quot;)
+)
+
+server &lt;- function(input, output, session) {
+
+  output$plot &lt;- renderPlot({
+    covid %&gt;% 
+      group_by(region, datum) %&gt;% 
+      summarise(anzahl = sum(anzahl), 
+                summe = sum(summe), 
+                population = sum(population, na.rm = TRUE)) %&gt;% 
+      filter(region == &quot;CH&quot;) %&gt;% 
+      filter(datum &lt;= input$datum) %&gt;% 
+      ggplot(aes(x = datum, y = anzahl)) +
+      geom_area()
+  })
+
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="kantone-auswählen" class="section level4">
+<h4>Kantone auswählen</h4>
+<p>Eine weitere Dimension, die interaktiv verändert werden könnte, ist,
+für welche Region sich ein User Daten anschauen möchte. Mittels
+<code>slectInput</code> lassen sie sich einfach auswählen. Zudem ist in
+diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt.</p>
+<pre class="r"><code>library(shiny)
+
+ui &lt;- fluidPage(
+  selectInput(&quot;regionen&quot;, &quot;Regionen&quot;, 
+              choices = c(&quot;AG&quot;, &quot;AI&quot;, &quot;AR&quot;, &quot;BE&quot;, &quot;BL&quot;, &quot;BS&quot;, 
+                          &quot;FR&quot;, &quot;GE&quot;, &quot;GL&quot;, &quot;GR&quot;, &quot;JU&quot;, &quot;LU&quot;,
+                          &quot;NE&quot;, &quot;NW&quot;, &quot;OW&quot;, &quot;SG&quot;, &quot;SH&quot;, &quot;SO&quot;,
+                          &quot;SZ&quot;, &quot;TG&quot;, &quot;TI&quot;, &quot;UR&quot;, &quot;VD&quot;, &quot;VS&quot;,
+                          &quot;ZG&quot;, &quot;ZH&quot;, &quot;CH&quot;),
+              multiple = TRUE),
+  actionButton(&quot;region_zurücksetzen&quot;, &quot;Regionen zurücksetzen&quot;, 
+               icon = icon(&quot;times&quot;))
+)
+
+server &lt;- function(input, output, session) {
+  observeEvent(input$region_zurücksetzen, {
+    updateSelectInput(inputId = &quot;regionen&quot;, selected = character(0))
+  })
+}
+
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="the-sky-is-the-limit" class="section level4">
+<h4>The sky is the limit…</h4>
+<p>Dies waren nur ein paar Beispiele um eure Covid Explorer Entwicklung
+zu inspirieren, setzt eure eigenen Ideen um, oder passt die Beispiele an
+um sie besser zu machen.</p>
 </div>
 </div>
-<div id="layouts" class="section level3">
-<h3>Layouts</h3>
-<div class="float">
-<img src="image/color-layout.png" style="width: 75%;"
-alt="Farben und Layout Entwurf" />
-<div class="figcaption">Farben und Layout Entwurf</div>
 </div>
-</div>
-</div>
-<div id="datensatz" class="section level2">
-<h2>Datensatz</h2>
+<div id="datensätze" class="section level2">
+<h2>Datensätze</h2>
+<div id="covid.csv" class="section level3">
+<h3>covid.csv</h3>
 <table>
 <colgroup>
-<col width="33%" />
-<col width="66%" />
+<col width="35%" />
+<col width="64%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -404,6 +542,45 @@ Altersgruppe.</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="kantone.csv" class="section level3">
+<h3>kantone.csv</h3>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>kanton</code></td>
+<td>Kantonsname</td>
+</tr>
+<tr class="even">
+<td><code>kanton_id</code></td>
+<td>Kantons-id (mehrere pro Kanton, da manche Kantone “Inseln”
+haben)</td>
+</tr>
+<tr class="odd">
+<td><code>x</code></td>
+<td>x-Koordinate</td>
+</tr>
+<tr class="even">
+<td><code>y</code></td>
+<td>y-Koordinate</td>
+</tr>
+<tr class="odd">
+<td><code>kurz</code></td>
+<td>Kantonskürzel (z.B. ZH, AG, LU, usw.)</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 
