@@ -270,11 +270,11 @@ shinyApp(ui, server)
   <col width="60%">
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center"></mono>character</mono> (free)</td>
-    <td><mono>textInput(), textAreaInput()</mono></td>
+    <td><mono>textInput() textAreaInput()</mono></td>
   </tr>
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center"><mono>character</mono> (preset)</td>
-    <td><mono>selectInput() radioButtons(), checkboxInput(), checkboxGroupInput()</mono></td>
+    <td><mono>selectInput() radioButtons() checkboxInput() checkboxGroupInput()</mono></td>
   </tr> 
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center"><mono>numeric</mono></td>
@@ -286,7 +286,7 @@ shinyApp(ui, server)
   </tr>
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center">special</td>
-    <td><mono>fileInput(), downloadButton(), actionButton()</mono></td>
+    <td><mono>fileInput() downloadButton() actionButton()</mono></td>
   </tr>
 </table>
 ]

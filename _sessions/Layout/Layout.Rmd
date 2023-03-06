@@ -93,7 +93,7 @@ library(tidyverse)
 ]
 ---
 
-# Layoutelemente
+# Elemente
 
 .pull-left4[
 
