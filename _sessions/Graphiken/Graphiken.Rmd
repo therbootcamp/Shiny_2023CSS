@@ -120,12 +120,12 @@ library(tidyverse)
 
 ---
 
-# <mono>near_points</mono><br><mono>brushed_points</mono>
+# <mono>nearPoints</mono><br><mono>brushedPoints</mono>
 
 .pull-left4[
 
 <ul>
-  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+  <li class="m1"><span><mono>nearPoints</mono> and <mono>brushedPoints</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
   <li class="m2"><span>Argumente</span></li>
   <ul class="level">
     <li><span><mono>xvar</mono></span></li>
@@ -146,13 +146,13 @@ plotOutput("scatter",
            click = "plot_click",
            brush = "plot_brush"),
 
-brushedPoints(daten,
-              input$plot_click,
-              xvar = pos_x,
-              yvar = pos_y) 
+nearPoints(covid,
+               input$plot_click,
+               xvar = pos_x,
+               yvar = pos_y)
 
 brushedPoints(daten,
-              input$plot_click,
+              input$plot_brush,
               xvar = pos_x,
               yvar = pos_y) 
 ```
@@ -161,13 +161,13 @@ brushedPoints(daten,
 
 ---
 
-.pull-left45[
+.pull-left4[
 
-# <mono>near_points</mono><br><mono>brushed_points</mono>
+# <mono>nearPoints</mono><br><mono>brushedPoints</mono>
 
 
 <ul>
-  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+  <li class="m1"><span><mono>nearPoints</mono> and <mono>brushedPoints</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
 </ul>
 
 <br>
@@ -182,7 +182,7 @@ ui <- fluidPage(
 
 ]
 
-.pull-right45[
+.pull-right5[
 ```{r, eval = FALSE}
 server <- function(input, output, session) {
   
@@ -221,10 +221,10 @@ server <- function(input, output, session) {
 
 .pull-left45[
 
-# <mono>near_points</mono><br><mono>brushed_points</mono>
+# <mono>nearPoints</mono><br><mono>brushedPoints</mono>
 
 <ul>
-  <li class="m1"><span><mono>near_points</mono> and <mono>brushed_points</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
+  <li class="m1"><span><mono>nearPoints</mono> and <mono>brushedPoints</mono> helfen bei der <high>Verarbeitung</high> der Plot-Klicks oder -Markierungen</span></li>
 </ul>
 
 <br>
@@ -252,8 +252,8 @@ ui <- fluidPage(
 .pull-left45[
 
 <ul>
-  <li class="m1"><span>Plot-Downloads können können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
-  <li class="m1"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
+  <li class="m1"><span>Plot-Downloads können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
+  <li class="m2"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
 </ul>
 
 ]
@@ -272,8 +272,8 @@ ui <- fluidPage(
 # Download
 
 <ul>
-  <li class="m1"><span>Plot-Downloads können können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
-  <li class="m1"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
+  <li class="m1"><span>Plot-Downloads können <high>analog zu File-Downloads</high> implementiert werden.</span></li>
+  <li class="m2"><span>Besonders effizient mit <mono>ggplot</mono>.</span></li>
 </ul>
 
 ```{r, eval = FALSE}
@@ -338,7 +338,7 @@ server <- function(input, output, session) {
 
 <ul>
   <li class="m1"><span>Für die Implementation von Bildern gibt es eigene Output- und Render-Funktionen</span></li>
-  <li class="m1"><span><mono>renderImage</mono> nimmt eine Liste als Input.</span></li>
+  <li class="m2"><span><mono>renderImage</mono> nimmt eine Liste als Input.</span></li>
 </ul>
 
 ] 

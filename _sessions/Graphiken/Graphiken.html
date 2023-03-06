@@ -107,12 +107,12 @@ layout: true
 
 ---
 
-# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+# &lt;mono&gt;nearPoints&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushedPoints&lt;/mono&gt;
 
 .pull-left4[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;nearPoints&lt;/mono&gt; and &lt;mono&gt;brushedPoints&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Argumente&lt;/span&gt;&lt;/li&gt;
   &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;xvar&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
@@ -133,13 +133,13 @@ plotOutput("scatter",
            click = "plot_click",
            brush = "plot_brush"),
 
-brushedPoints(daten,
-              input$plot_click,
-              xvar = pos_x,
-              yvar = pos_y) 
+nearPoints(covid,
+               input$plot_click,
+               xvar = pos_x,
+               yvar = pos_y)
 
 brushedPoints(daten,
-              input$plot_click,
+              input$plot_brush,
               xvar = pos_x,
               yvar = pos_y) 
 ```
@@ -148,13 +148,13 @@ brushedPoints(daten,
 
 ---
 
-.pull-left45[
+.pull-left4[
 
-# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+# &lt;mono&gt;nearPoints&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushedPoints&lt;/mono&gt;
 
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;nearPoints&lt;/mono&gt; and &lt;mono&gt;brushedPoints&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -169,7 +169,7 @@ ui &lt;- fluidPage(
 
 ]
 
-.pull-right45[
+.pull-right5[
 
 ```r
 server &lt;- function(input, output, session) {
@@ -209,10 +209,10 @@ server &lt;- function(input, output, session) {
 
 .pull-left45[
 
-# &lt;mono&gt;near_points&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushed_points&lt;/mono&gt;
+# &lt;mono&gt;nearPoints&lt;/mono&gt;&lt;br&gt;&lt;mono&gt;brushedPoints&lt;/mono&gt;
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;near_points&lt;/mono&gt; and &lt;mono&gt;brushed_points&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;nearPoints&lt;/mono&gt; and &lt;mono&gt;brushedPoints&lt;/mono&gt; helfen bei der &lt;high&gt;Verarbeitung&lt;/high&gt; der Plot-Klicks oder -Markierungen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;br&gt;
@@ -240,8 +240,8 @@ ui &lt;- fluidPage(
 .pull-left45[
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ]
@@ -260,8 +260,8 @@ ui &lt;- fluidPage(
 # Download
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Plot-Downloads können &lt;high&gt;analog zu File-Downloads&lt;/high&gt; implementiert werden.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Besonders effizient mit &lt;mono&gt;ggplot&lt;/mono&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
@@ -328,7 +328,7 @@ server &lt;- function(input, output, session) {
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Für die Implementation von Bildern gibt es eigene Output- und Render-Funktionen&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;renderImage&lt;/mono&gt; nimmt eine Liste als Input.&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;&lt;mono&gt;renderImage&lt;/mono&gt; nimmt eine Liste als Input.&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 ] 
