@@ -187,7 +187,7 @@ server <- function(input, output, session) {
   gruss_text <- XX()
   output$XX <- renderText(XX())
   observeEvent(XX(XX), {
-    reactiveVal(paste0("Hallo ", input$name, "!"))
+    gruss_text(paste0("Hallo ", input$name, "!"))
     message("Gruss ausgerichtet")
     })
   }
