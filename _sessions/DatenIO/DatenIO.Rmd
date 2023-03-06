@@ -314,7 +314,7 @@ shinyApp(ui, server)
   <li class="m1"><span>Der <mono>downloadHandler</mono> hat zwei Argumente, denen jeweils <high>Funktionen</high> zugeweisen werden müssen</span></li>
   <ul class="level">
     <li><span><mono>filename</mono> - Funktion ohne Argumente, die den Dateinamen generiert.</span></li>
-    <li><span><mono>content</mono> - Funktion mit Argument <mono>file</mono>, das die Datei schreibt mit Dateipfad <mono>file</mono> schreibt</span></li>
+    <li><span><mono>content</mono> - Funktion mit Argument <mono>file</mono>, das die Datei mit Dateipfad <mono>file</mono> schreibt</span></li>
   </ul>
 </ul>
 
