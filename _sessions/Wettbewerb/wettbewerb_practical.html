@@ -198,7 +198,7 @@ ermöglichen.</p>
 <p></font></p>
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Mar 8, 2023 16:40:00").getTime();
+var countDownDate = new Date("Mar 8, 2023 16:20:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -231,34 +231,27 @@ var x = setInterval(function() {
 <div id="auftrag" class="section level2">
 <h2>Auftrag</h2>
 <p>Zur Vorbereitung auf die nächste Pandemie sucht das Bundesamt für
-Gesundheit (BAG) nach geeineten Online-Tools, um das Infektionsgeschehen
-im Blick zu behalten. Nun seid ihr gefragt! Es gibt einen Datensatz
-`covid.csv`, dieser stammt vom BAG und enthält wöchentliche Zahlen zu
-COVID-19 Infektionen in der Schweiz von Februar 2020 bis Februar 2023.
-Die Infektionszahlen sind sowohl für die gesamte Schweiz als auch pro
-Kanton verfügbar. Der Datensatz schlüsselt die Infektionszahlen zudem
-nach Altersgruppen auf.</p>
+Gesundheit (BAG) nach geeigneten Online-Tools, um das
+Infektionsgeschehen im Blick zu behalten. Nun seid ihr gefragt! Es gibt
+einen Datensatz `covid.csv`, dieser stammt vom BAG und enthält
+wöchentliche Zahlen zu COVID-19 Infektionen in der Schweiz von Februar
+2020 bis Februar 2023. Die Infektionszahlen sind sowohl für die gesamte
+Schweiz als auch pro Kanton verfügbar. Der Datensatz schlüsselt die
+Infektionszahlen zudem nach Altersgruppen auf.</p>
 <div id="a---vorbereitung" class="section level3">
 <h3>A - Vorbereitung</h3>
 <ol style="list-style-type: decimal">
-<li><p>Öffne dein <code>TheRBootcamp</code> R project. Es sollte einen
-<code>data</code> Ordner enthalten, indem der im Tab
-<code>Datensatz</code> beschriebene Datensatz <code>covid.csv</code> zu
-finden ist.</p></li>
-<li><p>Erstelle eine neue Shiny App. Schreibe deinen Namen, das Datum
-und “COVID-19 Dashboard” als Kommentare an den Anfang des
-Skripts.</p></li>
-<li><p>Speichere das neue Skript unter dem Namen <code>app.R</code> in
-einen Unterordner.</p></li>
+<li><p>Erstelle einen neuen Ordner <code>competition</code> in deinem
+<code>TheRBootcamp</code> Projektordner.</p></li>
+<li><p>Erstelle ein neues Skript für deine App und speichere es unter
+dem Namen <code>CovidExplorer.R</code>.</p></li>
 <li><p>Lade das <code>shiny</code> Paket und alle weiteren Pakete, die
 du verwenden möchtest.</p></li>
-<li><p>Lade den Datensatz <code>covid.csv</code>.</p></li>
+<li><p>Lade den Datensatz <code>covid.csv</code>. Es sollte im
+<code>data</code> Ordner enthalten. Im Tab <code>Datensatz</code>
+findest du Informationen zu den Variablen.</p></li>
 </ol>
-<pre class="r"><code>## NAME
-## DATE
-## COVID-19 Dashboard
-
-library(shiny)
+<pre class="r"><code>library(shiny)
 library(readr)
 
 covid &lt;- read_csv(&quot;covid.csv&quot;)
@@ -277,8 +270,8 @@ shinyApp(ui, server)</code></pre>
 <h3>B - Vorgehen</h3>
 <ul>
 <li><p>Du bist komplett frei, wie du dein Dashboard gestaltest.</p></li>
-<li><p>Wenn du nach Inspirationen suchst, dann schau dir mal die
-Beispiele im Tab <code>Beispiele</code> an.</p></li>
+<li><p>Wenn du nach Inspirationen suchst, dann schau mal in den Tab
+<code>Inspiration</code>.</p></li>
 <li><p>Nutze dein neu erlangtes Wissen aus den Übungen der letzten Tage
 und versuch es in der Praxis anzuwenden.</p></li>
 </ul>
@@ -292,16 +285,17 @@ und <strong>schönste</strong> Dashboard-App zu erstellen.</p></li>
 <li><p>Am Wettbewerb teilzunehmen ermöglicht dir die Chance viel 🍫🍫🍫
 zu gewinnen.</p></li>
 <li><p>Die nimmst am Wettbewerb teil indem du deinen Ordner
-<code>3_competition</code> als <code>.zip</code> Datei komprimierst und
-an uns schickst.</p></li>
+<code>competition</code> als <code>.zip</code> Datei komprimierst und an
+uns schickst.</p></li>
 <li><p>Reiche deine Beitrag ein indem Du deine <code>.zip</code> Datei
 an unsere <a href="mailto:therbootcamp@gmail.com"><b><a
 href="mailto:therbootcamp@gmail.com"
 class="email">therbootcamp@gmail.com</a></b></a> Mail Adresse
 schickst.</p></li>
 <li><p>Jeder Beitrag wird anonym beurteilt duch eine Jury bestehend aus
-den Kursteilnehmern. Der Beitrag mit den meisten Punkten gewinnt. Die
-Beurteilung findet im Anschluss an den Kurs statt.</p></li>
+den Kursteilnehmern und Kursteilnehmerinnen. Der Beitrag mit den meisten
+Punkten gewinnt. Die Beurteilung findet im Anschluss an den Kurs
+statt.</p></li>
 </ol>
 <p>Wichtig: Entscheidend für den Erfolg sind verschiedene Faktoren:
 Benutzerfreundlichkeit, Funktionsumfang, Erkenntnisgewinn, Aussehen,
@@ -310,12 +304,12 @@ usw.</p>
 </div>
 <div id="rating" class="section level2">
 <h2>Rating</h2>
-<p>Wir informieren euch, wie ihr euer Dashboard an uns schicken könnt
-und wir machen alle eingereichten Dashboards online verfügbar. Danach
-könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
+<p>Wir machen alle eingereichten Dashboards online verfügbar. Danach
+bekommt ihr einen Link zu einem Fragebogen in dem ihr abstimmen, welches
+Dashboard Schokolade gewinnt.</p>
 </div>
-<div id="beispiele" class="section level2">
-<h2>Beispiele</h2>
+<div id="inspiration" class="section level2">
+<h2>Inspiration</h2>
 <div id="plots" class="section level3">
 <h3>Plots</h3>
 <pre class="r"><code>covid %&gt;% 
@@ -330,10 +324,7 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche&quot;) +
   theme_minimal()</code></pre>
-<div class="figure">
-<img src="image/timeline_schweiz.png" style="width: 75%;" alt="" />
-<p class="caption">Beispielplot Schweiz</p>
-</div>
+<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>covid %&gt;% 
   group_by(region, datum) %&gt;% 
   summarise(anzahl = sum(anzahl), 
@@ -348,46 +339,27 @@ könnt ihr abstimmen, welches Dashboard Schokolade gewinnt.</p>
   xlab(&quot;Datum&quot;) +
   ylab(&quot;Fälle pro Woche pro Kopf&quot;) +
   theme_minimal()</code></pre>
-<div class="figure">
-<img src="image/timeline_fr_lu.png" style="width: 75%;" alt="" />
-<p class="caption">Beispielplot Kantone</p>
-</div>
+<p><img src="wettbewerb_practical_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 <div id="interaktivität" class="section level3">
 <h3>Interaktivität</h3>
-<div class="figure">
-<img src="image/slider-plot.png" style="width: 75%;" alt="" />
-<p class="caption">Beispiel für Inputs und Outputs</p>
+<div class="float">
+<img src="image/slider-plot.png" style="width: 75%;"
+alt="Beispiel für Inputs und Outputs" />
+<div class="figcaption">Beispiel für Inputs und Outputs</div>
 </div>
 </div>
 <div id="layouts" class="section level3">
 <h3>Layouts</h3>
-<div class="figure">
-<img src="image/color-layout.png" style="width: 75%;" alt="" />
-<p class="caption">Farben und Layout Entwurf</p>
+<div class="float">
+<img src="image/color-layout.png" style="width: 75%;"
+alt="Farben und Layout Entwurf" />
+<div class="figcaption">Farben und Layout Entwurf</div>
 </div>
 </div>
 </div>
 <div id="datensatz" class="section level2">
 <h2>Datensatz</h2>
-<table>
-<thead>
-<tr class="header">
-<th>Datei</th>
-<th>Zeilen</th>
-<th>Spalten</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="">covid.csv</a></td>
-<td>42120</td>
-<td>6</td>
-</tr>
-</tbody>
-</table>
-<div id="variablenbeschreibungen-covid.csv" class="section level5">
-<h5>Variablenbeschreibungen <code>covid.csv</code></h5>
 <table>
 <colgroup>
 <col width="33%" />
@@ -432,7 +404,6 @@ Altersgruppe.</td>
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 

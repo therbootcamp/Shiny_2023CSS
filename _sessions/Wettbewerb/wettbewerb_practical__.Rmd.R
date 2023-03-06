@@ -1,5 +1,5 @@
 ---
-title: "Wettbewerb"
+  title: "Wettbewerb"
 subtitle: ""
 author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
 <a href='https://therbootcamp.github.io/Shiny_2023CSS/'><i class='fas fa-clock' style='font-size:.9em;' ></i></a>
@@ -10,11 +10,11 @@ author: "<font style='font-style:normal'>Explorative Datenanalyse</font><br>
 <img src='https://raw.githubusercontent.com/therbootcamp/therbootcamp.github.io/master/_sessions/_image/by-sa.png' style='height:15px;width:80px'/>"
 output:
   html_document:
-    css: practical.css
-    self_contained: no
+  css: practical.css
+self_contained: no
 ---
-
-```{r setup, include=FALSE}
+  
+  ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = NA, 
                       fig.width = 6, 
                       fig.height = 6,
@@ -31,32 +31,32 @@ covid <- read_csv("data/covid.csv")
 ```
 
 <p align="center">
-
-<img src="image/dashboard.jpg" width="100%" margin="0"/><br> <font style="font-size:10px">from [unsplash.com](https://unsplash.com/photos/qwtCeJ5cLYs)</font>
-
-</p>
-
-#  {.tabset}
-
-## Überblick
-
-Zeit eure neuen Skills praktisch anzuwenden. In diesem Teil des Kurses werdet ihr eure Kreativität und Expertise brauchen, um ein COVID-19 Dashboard zu erstellen. Versucht die nützlichsten Interfaces zu erstellen um Usern eures Dashboards die Analyse der Daten zu ermöglichen.
+  
+  <img src="image/dashboard.jpg" width="100%" margin="0"/><br> <font style="font-size:10px">from [unsplash.com](https://unsplash.com/photos/qwtCeJ5cLYs)</font>
+  
+  </p>
+  
+  #  {.tabset}
+  
+  ## Überblick
+  
+  Zeit eure neuen Skills praktisch anzuwenden. In diesem Teil des Kurses werdet ihr eure Kreativität und Expertise brauchen, um ein COVID-19 Dashboard zu erstellen. Versucht die nützlichsten Interfaces zu erstellen um Usern eures Dashboards die Analyse der Daten zu ermöglichen.
 
 Übrigens, es gibt 🍫🍫🍫 zu gewinnnen.
 
 Der Wettbewerb endet in...
 
 <font style="font-size:32px">
-
-<p id="demo" align="center">
-
-</p>
-
-</font>
-
-```{=html}
+  
+  <p id="demo" align="center">
+  
+  </p>
+  
+  </font>
+  
+  ```{=html}
 <script>
-// Set the date we're counting down to
+  // Set the date we're counting down to
 var countDownDate = new Date("Mar 8, 2023 16:20:00").getTime();
 
 // Update the count down every 1 second
@@ -191,7 +191,8 @@ covid %>%
 ```
 
 
-### Interaktivität
+
+### Layout
 
 ![Beispiel für Inputs und Outputs](image/slider-plot.png){style="width: 75%;"}
 
