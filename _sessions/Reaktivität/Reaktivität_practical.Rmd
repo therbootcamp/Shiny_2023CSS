@@ -268,6 +268,11 @@ shinyApp(ui, server)
 
 2. Du kannst dir den *reactive graph* ansehen indem du das `reactlog` Paket lädst und einmal `reactlog_enable()` ausführst. Dann lasse die App nochmal laufen lassen und schliesse sie wieder. Jetzt solltest du mit `reactlogShow()` dir den Graphen anzeigen lassen können. 
 
+
+### E - Explore
+
+1. Baue andere Apps mit anderen Kombinationen an reaktiven Elementen. 
+
 ## App
 
 1. An zwei Stellen bauen wir im InjuryViewer Reaktivität ein. Erstens, bewegen wir die Daten und die Auswahl der Körperteile und des Alters in einen `reactive`. Zweitens, entwickeln wir einen `reactiveVal`, der hilft zu entscheiden welche Version eines zweiten Plots angezeigt wird. Öffne zunächst das Skript der InjuryViewer App. 

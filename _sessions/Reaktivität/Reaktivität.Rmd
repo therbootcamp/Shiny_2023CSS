@@ -170,7 +170,7 @@ anderer_wert()
 
 <ul>
   <li class="m1"><span>Reaktive Elemente haben <high>gerichtete Beziehungen</high> zueinander</span></li>
-  <li class="m2"><span>Wenn sich ein Element ändert, dann ändert sich auch das Element, dass von ihm abhängt</span></li>
+  <li class="m2"><span>Wenn sich ein Element ändert, dann ändert sich auch das Element, das davon abhängt</span></li>
   <li class="m3"><span>Reaktive Elemente bleiben im <high>Cache</high>, solange sie nicht verändert werden</span></li>
 </ul>
 
@@ -231,7 +231,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   string = reactive(input$name)
   
-  output$greeting <- renderText({
+  output$grüsse <- renderText({
     paste0("Hallo ", string(), "!")
   })
 }
@@ -258,7 +258,7 @@ shinyApp(ui, server)
   <col width="60%">
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center">Objekt</td>
-    <td><mono>reactive(), eventReactive()</mono></td>
+    <td><mono>reactive() eventReactive()</mono></td>
   </tr>
   <tr style="padding:20px;background-color:white">
     <td style="padding:20px;text-align:center">Überschreibare(s) Objekt(e)</td>
@@ -370,7 +370,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   string = eventReactive(input$grüsse_mich,
-                         {input$name})
+                         input$name)
   
   output$grüsse <- renderText({
     paste0("Hallo ", string(), "!")

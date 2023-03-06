@@ -182,7 +182,7 @@ anderer_wert()
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Reaktive Elemente haben &lt;high&gt;gerichtete Beziehungen&lt;/high&gt; zueinander&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Wenn sich ein Element ändert, dann ändert sich auch das Element, dass von ihm abhängt&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Wenn sich ein Element ändert, dann ändert sich auch das Element, das davon abhängt&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m3"&gt;&lt;span&gt;Reaktive Elemente bleiben im &lt;high&gt;Cache&lt;/high&gt;, solange sie nicht verändert werden&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -253,7 +253,7 @@ ui &lt;- fluidPage(
 server &lt;- function(input, output, session) {
   string = reactive(input$name)
   
-  output$greeting &lt;- renderText({
+  output$grüsse &lt;- renderText({
     paste0("Hallo ", string(), "!")
   })
 }
@@ -279,7 +279,7 @@ shinyApp(ui, server)
   &lt;col width="60%"&gt;
   &lt;tr style="padding:20px;background-color:white"&gt;
     &lt;td style="padding:20px;text-align:center"&gt;Objekt&lt;/td&gt;
-    &lt;td&gt;&lt;mono&gt;reactive(), eventReactive()&lt;/mono&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;mono&gt;reactive() eventReactive()&lt;/mono&gt;&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr style="padding:20px;background-color:white"&gt;
     &lt;td style="padding:20px;text-align:center"&gt;Überschreibare(s) Objekt(e)&lt;/td&gt;
@@ -390,7 +390,7 @@ ui &lt;- fluidPage(
 
 server &lt;- function(input, output, session) {
   string = eventReactive(input$grüsse_mich,
-                         {input$name})
+                         input$name)
   
   output$grüsse &lt;- renderText({
     paste0("Hallo ", string(), "!")
