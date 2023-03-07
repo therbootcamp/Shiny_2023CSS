@@ -88,9 +88,10 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Wie geht's weiter?
+.pull-left3[
 
-.pull-left4[
+# Agenda
+
 <ul>
   <li class="m1"><span>Erweitertes theming</span></li>
   <li class="m2"><span>Zusätzliche UI Elemente</span></li>
@@ -101,54 +102,16 @@ knitr::opts_chunk$set(fig.align = 'center')
 </ul>
 ]
 
-.pull-right5[
-<p align="center">
-<img src="image/road.jpg"><br>
-<font style="font-size:10px">from <a href="https://www.pexels.com/de-de/foto/leere-autobahn-mit-blick-auf-berg-unter-dunklem-himmel-1955134/">https://www.pexels.com</a></font>
+.pull-right6[
+<br><br><br>
+<p align = "center">
+  <img src = "image/agenda.jpg" height = 420px><br>
+  <font style="font-size:12px">from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</></font>
 </p>
+
 ]
 
----
 
-# Fortgeschrittenes theming mit <mono>bslib</mono>
-
-.pull-left3[
-<ul>
-  <li class="m1"><span>Moderne und ansprechende Themes von Bootswatch</span></li>
-  <li class="m2"><span>Aktuellere Versionen des UI Frameworks Bootstrap</span></li>
-</ul>
-]
-
-.pull-right65[
-<p align="center">
-<img src="image/quartz_detail.jpg"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
-</p>
-]
-
----
-
-# Dynamisches theming mit <mono>bslib</mono>
-
-.pull-left3[
-<ul>
-  <li class="m1"><span>Lässt User in der Session das Aussehen ändern</span></li>
-  <ul class="level">
-    <li><span>z.B. dark-modes</span></li>
-  </ul>
-  <li class="m2"><span>mehr Optionen zum einfachen Anpassen von Themes in R</span></li>
-    <ul class="level">
-      <li><span>inkl. interaktivem Theme-Builder</span></li>
-    </ul>
-</ul>
-]
-
-.pull-right65[
-<p align="center">
-<img src="image/live_theming.gif"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
-</p>
-]
 
 ---
 
