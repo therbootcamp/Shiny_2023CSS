@@ -96,7 +96,7 @@ library(tidyverse)
 .pull-left4[
 
 <ul>
-  <li class="m1"><span>UI Elemente können high>durch den <Server</high> geändert werden</span></li>
+  <li class="m1"><span>UI Elemente können <high>durch den Server</high> geändert werden</span></li>
   <li class="m2"><span>Zwei Wege</span></li>
   <ul>
     <li><span><mono>update*</mono> Funktionen</span></li>
