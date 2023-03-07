@@ -193,14 +193,14 @@ server <- function(input, output, session) {
                input$plot_click,
                xvar = "Basel",
                yvar = "Luzern") %>% 
-      click()})
+      click(.data$monat)})
   
   observeEvent(input$plot_brush, {
     brushedPoints(covid,
                   input$plot_brush,
                   xvar = "Basel",
                   yvar = "Luzern") %>% 
-      brush()})
+      brush(.data$monat)})
   
   output$scatter <- renderPlot({
     covid %>% ggplot(aes(Basel, Luzern)) +
@@ -279,7 +279,7 @@ ui <- fluidPage(
 ```{r, eval = FALSE}
 ui <- fluidPage(
   plotOutput("scatter", 
-             brush = "plot_click"),
+             brush = "plot_brush"),
   downloadLink("download", 
                icon("download",
                  style="font-size:16px;
@@ -300,9 +300,9 @@ server <- function(input, output, session) {
   
   brush = reactiveVal()
   
-  observeEvent(input$plot_click, {
+  observeEvent(input$plot_brush, {
     brushedPoints(covid,
-                  input$plot_click,
+                  input$plot_brush,
                   xvar = "Basel",
                   yvar = "Luzern") %>% 
       pull(monat) %>% 
