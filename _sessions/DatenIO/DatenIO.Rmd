@@ -167,7 +167,7 @@ shinyApp(ui, server)
 .pull-left4[ 
 
 <ul>
-  <li class="m1"><span><mono>fileUpload</mono> produziert einen <mono>data.frame</mono> mi vier Argumenten</span></li>
+  <li class="m1"><span><mono>fileUpload</mono> produziert einen <mono>data.frame</mono> mit vier Argumenten</span></li>
   <ul class="level">
     <li><span><mono>name</mono> - Name</span></li>
     <li><span><mono>size</mono> - Grösse in Bytes</span></li>
@@ -290,7 +290,7 @@ shinyApp(ui, server)
   <li class="m1"><span>Dateidownloads benötigen zwei Teilen:</span></li>
   <ul class="level"><br>
     <li><span><high>UI</high>: <mono>downloadButton()</mono></span></li><br>
-    <li><span><high>Server</high>: <mono>downloadHandler</mono></span></li>
+    <li><span><high>Server</high>: <mono>downloadHandler()</mono></span></li>
   </ul>
 </ul>
 
