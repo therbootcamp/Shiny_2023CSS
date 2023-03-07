@@ -504,10 +504,34 @@ um sie besser zu machen.</p>
 <h2>Datensätze</h2>
 <div id="covid.csv" class="section level3">
 <h3>covid.csv</h3>
+<p>Der Datensatz <code>covid.csv</code> basiert auf einem Datensatz vom
+Bundesamt für Gesundheit (BAG) und kann von <a
+href="https://opendata.swiss/de/dataset/covid-19-schweiz/resource/66059516-a5ac-4b24-a78e-484809ace664">https://opendata.swiss/</a>
+heruntergeladen werden. Die Nutzungsbedingungen sehen vor, dass die
+Quelle (Bundesamt für Gesundheit) angegeben wird, dies sollte auch in
+eurer App geschehen. Der Datensatz ist für den Kurs von uns angepasst
+worden, sodass die Arbeit damit in R für euch einfacher wird.</p>
+<p>Inhaltlich bekommt ihr in dem Datensatz wöchentliche Fallzahlen
+basierend auf positiven COVID Tests. Zudem sind die Fallzahlen nach
+Altersgruppen und Region aufgeschlüsselt. Das bedeutet, dass eine Zeile
+im Datensatz jeweils Fallzahlen (oder kummulierte Fallzahlen, oder die
+Population) für die Altersgruppe und Region in dieser Woche angibt,
+welche in dieser Zeile stehen.</p>
+<p>Schauen wir uns als Beispiel die dreizehnte Zeile im Datensatz
+an:</p>
+<pre class="r"><code>covid %&gt;% slice(13)</code></pre>
+<pre><code># A tibble: 1 × 6
+  altersgruppe region datum      anzahl summe population
+  &lt;chr&gt;        &lt;chr&gt;  &lt;date&gt;      &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 20 - 29      CH     2020-03-02     42    58    1027732</code></pre>
+<p>Bedeutet: <em>In der gesamten Schweiz wurden in der Woche beginnend
+am 2. März 2020 42 positive COVID-Tests an Personen zwischen 20 und 30
+Jahren gemeldet, bis und mit dieser Woche waren es in der gleichen
+Altersgruppe in der gesamten Schweiz total 58 Fälle</em></p>
 <table>
 <colgroup>
-<col width="35%" />
-<col width="64%" />
+<col width="36%" />
+<col width="63%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -553,8 +577,8 @@ Altersgruppe.</td>
 <h3>kantone.csv</h3>
 <table>
 <colgroup>
-<col width="20%" />
-<col width="79%" />
+<col width="23%" />
+<col width="76%" />
 </colgroup>
 <thead>
 <tr class="header">
