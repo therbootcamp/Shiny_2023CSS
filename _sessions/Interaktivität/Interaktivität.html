@@ -84,7 +84,7 @@ layout: true
 
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;UI Elemente können high&gt;durch den &lt;Server&lt;/high&gt; geändert werden&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Zwei wege&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;Zwei Wege&lt;/span&gt;&lt;/li&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;update*&lt;/mono&gt; Funktionen&lt;/span&gt;&lt;/li&gt;
     &lt;li&gt;&lt;span&gt;&lt;mono&gt;uiOutput()&lt;/mono&gt; &amp; &lt;mono&gt;renderUI()&lt;/mono&gt;&lt;/span&gt;&lt;/li&gt;
@@ -252,7 +252,8 @@ server &lt;- function(input, output, session){
   output$name_out &lt;- renderText({
     
     if(nchar(input$name_in) &lt;= 2){
-      validate("Name muss länger als 2 Zeichen sein")
+      validate("Name muss länger als 2 
+               Zeichen sein")
       }
     
     paste("Du heisst", input$name_in)

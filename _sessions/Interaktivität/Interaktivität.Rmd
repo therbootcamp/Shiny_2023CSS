@@ -97,7 +97,7 @@ library(tidyverse)
 
 <ul>
   <li class="m1"><span>UI Elemente können high>durch den <Server</high> geändert werden</span></li>
-  <li class="m2"><span>Zwei wege</span></li>
+  <li class="m2"><span>Zwei Wege</span></li>
   <ul>
     <li><span><mono>update*</mono> Funktionen</span></li>
     <li><span><mono>uiOutput()</mono> & <mono>renderUI()</mono></span></li>
@@ -262,7 +262,8 @@ server <- function(input, output, session){
   output$name_out <- renderText({
     
     if(nchar(input$name_in) <= 2){
-      validate("Name muss länger als 2 Zeichen sein")
+      validate("Name muss länger als 2 
+               Zeichen sein")
       }
     
     paste("Du heisst", input$name_in)
