@@ -93,12 +93,12 @@ knitr::opts_chunk$set(fig.align = 'center')
 # Agenda
 
 <ul>
-  <li class="m1"><span>Erweitertes theming</span></li>
-  <li class="m2"><span>Zusätzliche UI Elemente</span></li>
-  <li class="m3"><span>Datenverbindungen</span></li>
-  <li class="m4"><span>Modularität</span></li>
-  <li class="m5"><span>Deployment</span></li>
-  <li class="m6"><span>Packages und Erweiterungen</span></li>
+  <li class="m1"><span><mono>bslib</mono></span></li>
+  <li class="m1"><span><mono>shinyWidgets</mono></span></li>
+  <li class="m2"><span>Modules</span></li>
+  <li class="m3"><span>Datenbanken</span></li>
+  <li class="m3"><span>Deployment</span></li>
+  <li class="m4"><span>Resourcen</span></li>
 </ul>
 ]
 
@@ -111,92 +111,81 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ]
 
-
-
 ---
-
-.pull-left100[
-<p align="center">
-<img src="image/nes.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/bslib.html">rstudio.github.io</a></font>
-</p>
-]
-
-
----
-
-.pull-left35[
-
-# Cards mit <mono>bslib</mono>
-
-<ul>
-  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
-</ul>
-]
-
-.pull-right6[
-<p align="center">
-<img src="image/cards/cards_1.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
-</p>
-]
-
-
----
-
-.pull-left35[
-
-# Cards mit <mono>bslib</mono>
-
-<ul>
-  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
-  <li class="m2"><span>Inhalte können zur besseren Ansicht vergrössert werden</span></li>
-</ul>
-]
-
-.pull-right6[
-<p align="center">
-<img src="image/cards/cards_2.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
-</p>
-]
-
----
-
-.pull-left35[
-
-# Cards mit <mono>bslib</mono>
-
-<ul>
-  <li class="m1"><span>Cards können beliebig befüllt werden</span></li>
-  <li class="m2"><span>Inhalte können zur besseren Ansicht vergrössert werden</span></li>
-</ul>
-]
-
-.pull-right6[
-<p align="center">
-<img src="image/cards/cards_3.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/cards.html">https://rstudio.github.io</a></font>
-</p>
-]
-
-
----
-
-# Valueboxes mit <mono>bslib</mono>
 
 .pull-left4[
+
+#<mono>bslib</mono>
+
+
 <ul>
-  <li class="m1"><span>Valueboxes liefern wichtige Kennzahlen auf einen Blick</span></li>
+  <li class="m1"><span><mono>bslib</mono> lieftert reichlich Funktion neben dem Theming</span></li>
+  <ul class = "level">
+    <li><span>Cards</span></li>
+    <li><span>Value boxes</span></li>
+    <li><span>Sidebars </span></li>
+    <li><span>Layouts </span></li>
+  </ul>
 </ul>
+
+]
+
+.pull-right[
+<br>
+<iframe src="https://rstudio.github.io/bslib/articles/cards.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://rstudio.github.io/bslib/articles/cards.html">rstudio.github.io/bslib</a></font>
+
+]
+
+---
+
+.pull-left4[
+
+#<mono>bslib</mono>
+
+
+<ul>
+  <li class="m1"><span><mono>bslib</mono> lieftert reichlich Funktion neben dem Theming</span></li>
+  <ul class = "level">
+    <li><span>Cards</span></li>
+    <li><span>Value boxes</span></li>
+    <li><span>Sidebars </span></li>
+    <li><span>Layouts </span></li>
+  </ul>
+</ul>
+
+]
+
+.pull-right[
+<br>
+<iframe src="https://rstudio.github.io/bslib/articles/value-boxes.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://rstudio.github.io/bslib/articles/cards.html">rstudio.github.io/bslib</a></font>
+
+]
+
+---
+
+.pull-left4[
+
+#<mono>bslib</mono>
+
+
+<ul>
+  <li class="m1"><span><mono>bslib</mono> lieftert reichlich Funktion neben dem Theming</span></li>
+  <ul class = "level">
+    <li><span>Cards</span></li>
+    <li><span>Value boxes</span></li>
+    <li><span>Sidebars </span></li>
+    <li><span>Layouts </span></li>
+  </ul>
+</ul>
+
 ]
 
 .pull-right5[
-<p align="center">
-<img src="image/valueboxes/valuebox_2.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/bslib/articles/value-boxes.html">https://rstudio.github.io</a></font>
-</p>
+<br>
+<iframe src="https://rstudio.github.io/bslib/articles/layouts.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://rstudio.github.io/bslib/articles/cards.html">rstudio.github.io/bslib</a></font>
+
 ]
+
 
 ---
 
@@ -205,182 +194,96 @@ knitr::opts_chunk$set(fig.align = 'center')
 # <mono>shinyWidgets</mono>
 
 <ul>
-  <li class="m1"><span>Paket mit erweiterten UI Elementen</span></li>
-</ul>
-]
-
-.pull-right55[
-<br>
-<p align="center">
-<img src="image/shinyWidgets.png"><br>
-<font style="font-size:10px">from <a href="https://github.com/dreamRs/shinyWidgets">https://github.com</a></font>
-</p>
-]
-
-
----
-
-# Datenquellen
-
-.pull-left4[
-<ul>
-  <li class="m1"><span>In unseren Übungen haben wir mit statischen Daten gearbeitet.</span></li>
-  <li class="m2"><span>R, und damit auch Shiny, bietet Interfaces zu vielen gängigen Datenbanken</span></li>
-</ul>
-]
-
-.pull-right5[
-<p align="center">
-<img src="image/mysql.svg"><br>
-<font style="font-size:10px">from <a href="https://www.mysql.com/">https://www.mysql.com/</a></font>
-</p>
-]
-
----
-
-.pull-left4[
-
-# Modularität & Funktionen
-
-<ul>
-  <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
+  <li class="m1"><span><mono>shinyWidgets</mono> liefert weitere UI Elementen mit <high>moderneren Designs</high> und dynamischen Inhalten</span></li>
 </ul>
 ]
 
 .pull-right5[
 <br>
-<p align="center">
-<img src="image/no_modules.png"><br>
-<font style="font-size:10px">from <a href="https://mastering-shiny.org/scaling-modules.html">https://mastering-shiny.org</a></font>
-</p>
+<iframe src="https://shinyapps.dreamrs.fr/shinyWidgets/" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://shinyapps.dreamrs.fr/shinyWidgets/">shinyapps.dreamrs.fr</a></font>
+
 ]
 
 ---
 
-.pull-left4[
+.pull-left3[
 
-# Modularität & Funktionen
+# Module
 
 <ul>
-  <li class="m1"><span>Sobald Apps komplexer werden, wird's schnell unübersichtlich. </span></li>
-  <li class="m2"><span>Shiny Modules helfen, die App in kleinere, unabhängige Module zu unterteilen.</span></li>
-  <li class="m3"><span>Besonders für die parallele Zusammenarbeit von mehreren Entwickler:innen sinnvoll.</span></li>
-  <li class="m4"><span>Zudem reduziert das Auslagern von wiederholtem Code in Funktionen Redundanz und Fehleranfälligkeit</span></li>
+  <li class="m1"><span>Grössere Apps können von einer Modularen Struktur profitieren.</span></li>
+  <li class="m2"><span>Sehr mächtig, aber weniger "what you see is what you get".</span></li>
 </ul>
 ]
 
 .pull-right5[
 <br>
-<p align="center">
-<img src="image/modules.png"><br>
-<font style="font-size:10px">from <a href="https://mastering-shiny.org/scaling-modules.html">https://mastering-shiny.org</a></font>
-</p>
+<iframe src="https://shiny.rstudio.com/articles/modules.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://shiny.rstudio.com/articles/modules.html">shiny.rstudio.com</a></font>
+
+]
+
+
+---
+
+.pull-left3[
+
+# Datenbanken
+
+<ul>
+  <li class="m1"><span><mono>DBI</mono> und <mono>dbplyr</mono> liefern einfachen Zugriff auf verschiedene Datenbanken</span></li>
+<li class="m2"><span>Dankebankzugriff in Shiny ist nich anders als in R</span></li>
+</ul>
+]
+
+.pull-right5[
+<br>
+<iframe src="https://shiny.rstudio.com/articles/overview.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://shiny.rstudio.com/articles/overview.html">shiny.rstudio.com</a></font>
+
 ]
 
 ---
 
-.pull-left4[
+.pull-left3[
 
 # Deployment
 
 <ul>
-  <li class="m1"><span>In unserem Kurs haben wir alle Apps lokal auf dem eigenen Computer laufen lassen</span></li>
-  <li class="m2"><span>Der Sinn von Shiny ist natürlich, die App mehreren Usern übers Internet zur Verfügung zu stellen</span></li>
-  <li class="m3"><span>Es verschiedene Wege, um deine App zu deployen, die unterschiedlich komplex und kostspielig sind</span></li>
-
+  <li class="m1"><span>Paket mit erweiterten UI Elementen</span></li>
 </ul>
 ]
 
 .pull-right5[
 <br>
-<p align="center">
-<img src="image/servers.jpg"><br>
-<font style="font-size:10px">from <a href="https://www.unsplash.com">https://www.unsplash.com</a></font>
-</p>
+<iframe src="https://shiny.rstudio.com/deploy/" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://shiny.rstudio.com/deploy/">shiny.rstudio.com</a></font>
+
 ]
 
 
 ---
 
-.pull-left4[
+# Resourcen
 
-# Deployment Optionen
-
-<ul>
-  <li class="m1"><span><a href="https://shinyapps.io">shinyapps.io</a> </span></li>
-  <ul class="level">
-    <li><span>einfacher (und kostenloser) Einstieg für kleine Projekte und Testing ohne Server-Kenntnisse</span></li>
-  </ul>
-  <li class="m2"><span><a href="https://posit.co/products/open-source/shinyserver/">Shiny Server </a> (Open Source Edition)</span></li>
-  <ul class="level">
-    <li><span>Shiny Server von der eigenen IT gehostet</span></li>
-  </ul>
-  <li class="m3"><span><a href="https://posit.co/products/enterprise/connect/">Posit Connect</a></span></li>
-  <ul class="level">
-    <li><span>Umfangreiches Angebot von Posit für Unternehmen mit sehr umfangreichen Funktionen</span></li>
-  </ul>
-  <li class="m4"><span>weitere Optionen</span></li>
-</ul>
-]
-
-.pull-right5[
-<br><br>
-<p align="center">
-<img src="image/deploy.png"><br>
-<font style="font-size:10px">from <a href="https://posit.co/products/open-source/shinyserver/">https://posit.co</a></font>
-</p>
-]
-
----
-
-.pull-left5[
-
-# Shiny Extensions
-
-<ul>
-  <li class="m1"><span>Es gibt unzählige Pakete, die Shiny erweitern</span></li>
-  <li class="m2"><span><a href="https://github.com/nanxstats/awesome-shiny-extensions">Shiny Awesome</a> ist eine aktuell gehaltene Liste von Shiny Erweiterungen, sortiert nach Themen</span></li>
-  <ul class="level">
-    <li><span>Nicht alle Pakete sind aktiv entwickelt</span></li>
-    <li><span>Es gibt viele spannende Projekte zu entdecken</span></li>
-  </ul>
-</ul>
-]
-
-.pull-right4[
 <br>
-<p align="center">
-<img src="image/shinyAwesome.png"><br>
-<font style="font-size:10px">from <a href="https://github.com/nanxstats/awesome-shiny-extensions">https://github.com</a></font>
-</p>
-]
-
----
-
-.pull-left5[
-
-# Shiny Ressources
-
-<ul>
-  <li class="m1"><span>Genauso, gibt es unzählige Ressourcen zu Shiny</span></li>
-  <li class="m2"><span><a href="https://github.com/grabear/awesome-rshiny">Awesome Shiny</a> ist eine aktuell gehaltene Liste von Shiny Ressourcen</span></li>
-  <ul class="level">
-    <li><span>Tutorials</span></li>
-    <li><span>Bücher</span></li>
-    <li><span>Websites</span></li>
-    <li><span>Personen</span></li>
-    <li><span>...</span></li>
-  </ul>
-</ul>
-]
-
-.pull-right4[
-<br>
-<p align="center">
-<img src="image/awesome-rshiny-logo.svg"><br>
-<font style="font-size:10px">from <a href="https://github.com/grabear/awesome-rshiny">https://github.com</a></font>
-</p>
-]
+<table style="cellspacing:0; cellpadding:0; border:none; width:95%">
+  <col width="24%">
+  <col width="24%">
+  <col width="24%">
+  <col width="24%">
+  <tr style="padding:20px;background-color:white">
+    <td style="padding:20px;text-align:center">
+      <a href="https://mastering-shiny.org/"><img src="image/shiny_book.png" height=200px><br><font style="font-size:12px">Mastering Shiny</font></a>
+    </td>
+    <td style="padding:20px;text-align:center">
+      <a href="https://shiny.rstudio.com/articles/overview.html"><img src="image/posit.png" height=200px><br><font style="font-size:12px">shiny.rstudio.com</font></a>
+    </td>
+    <td style="padding:20px;text-align:center">
+      <a href="https://github.com/grabear/awesome-rshiny"><img src="image/awesome-rshiny-logo.svg" height=200px><br><font style="font-size:12px">Awesome Shiny</font></a>
+    </td>
+    <td style="padding:20px;text-align:center">
+      <a href="https://github.com/nanxstats/awesome-shiny-extensions"><img src="image/shinyAwesome.png" height=200px><br><font style="font-size:12px">Shiny Awesome</font></a>
+    </td>
+  </tr>
+</table>
 
 
 
