@@ -62,19 +62,38 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 .pull-left3[
 
-# Einleitung
+# Agenda
+
 <ul>
-  <li class="m1">
-    <span>Was ist mit Styling gemeint?</span>
+  <li class="m1"><span>Erweitertes theming</span></li>
+  <li class="m2"><span>Zusätzliche UI Elemente</span></li>
+  <li class="m3"><span>Datenverbindungen</span></li>
+  <li class="m4"><span>Modularität</span></li>
+  <li class="m5"><span>Deployment</span></li>
+  <li class="m6"><span>Packages und Erweiterungen</span></li>
+</ul>
+]
+
+.pull-right6[
+<br><br><br>
+<p align = "center">
+  <img src = "image/agenda.jpg" height = 420px><br>
+  <font style="font-size:12px">from <a href="https://unsplash.com/photos/ETRPjvb0KM0">unsplash.com</></font>
+</p>
+
+]
+
+
+---
+
+.pull-left3[
+
+# Usability
+
+<ul>
+  <li class="m1"><span>Vorteile durch gutes Styling</span>
     <ul class="level">
-      <li><span>Aussehen des User Interfaces</span></li>
-      <li><span>Farben, Fonts, Aussehen der Elemente</span></li>
-    </ul>
-  </li>
-  <br>
-  <li class="m2"><span>Was wird damit erreicht?</span></li>
-    <ul class="level">
-      <li><span>bessere User Experience</span></li>
+      <li><span>Bessere Usability</span></li>
       <li><span>Branding</span></li>
       <li><span>Corporate Design</span></li>
     </ul>
@@ -82,31 +101,43 @@ knitr::opts_chunk$set(fig.align = 'center')
 ]
 
 .pull-right6[
-<br><br>
-<p align="center">
-<img src="image/styleguide.png"><br>
-<font style="font-size:10px">from <a href="https://www.behance.net/gallery/146851995/Design-System-Free-Download">behance.net</a></font>
+<br><br><br>
+<p align = "center">
+  <img src = "image/readthis.jpeg" height = 420px><br>
 </p>
+
 ]
 
 ---
 
-.pull-left3[
-# Default Style
+# <mono>shinythemes</mono>
+
+.pull-left4[
+
 <ul>
-  <li class="m1">
-    <span>Den default Style kennt ihr schon</span>
-    <ul class="level">
-      <li><span>macht vieles gut</span></li>
-      <li><span>eignet sich bestens zum entwickeln der App</span></li>
-    </ul>
-  </li>
-  <li class="m2"><span>ist standardmässig aktiv</span></li>
+  <li class="m1"><span>Bietet einfaches Theming "out of the box"</span></li><br>
+  <li class="m2"><span>Mehrere vordefinierte Themes: siehe <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li>
 </ul>
+
+
+<br>
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(shinythemes)
+
+ui <- fluidPage(
+  theme = shinytheme("default")
+  )
+
+
+```
+
+
 ]
 
-.pull-right6[
-<br>
+.pull-right5[
+
 <p align="center">
 <img src="image/default.png"><br>
 <font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
@@ -115,99 +146,114 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 ---
 
-# Theming mit <mono>shinythemes</mono>
+# <mono>shinythemes</mono>
 
 .pull-left4[
 <ul>
-  <li class="m1"><span>bietet einfaches Theming "out of the box"</span></li><br>
-  <li class="m2"><span>funktioniert in Umgebungen mit eingeschränktem Internetzugang</span></li>
-  <br>
+  <li class="m1"><span>Bietet einfaches Theming "out of the box"</span></li><br>
+  <li class="m2"><span>Mehrere vordefinierte Themes: siehe <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li>
 </ul>
-]
 
-.pull-right5[
-<p align="center">
-<img src="image/shinythemes.png"><br>
-<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
-</p>
-]
-
----
-
-# Theme benutzen
-
-.pull-left4[
-<ul>
-  <li class="m1"><span>Package <mono>shinythemes</mono> muss einmalig installiert werden</span></li>
-  <br>
-  <li class="m2"><span>Danach muss das Paket in <mono>app.R</mono> geladen werden</span></li>
-  <br>
-  <li class="m3"><span>und dem Argument <mono>theme</mono> in der Funktion <mono>fluidPage()</mono> die Funktion <mono>shinytheme("THEME-NAME")</mono> zugewiesen werden.</span></li>
-</ul>
-]
-
-.pull-right5[
-
-```{r, eval = FALSE, echo = TRUE}
-install.packages("shinythemes")
-```
-
-in <mono>app.R</mono>:
+<br>
 ```{r, eval = FALSE, echo = TRUE}
 
 library(shiny)
 library(shinythemes)
 
 ui <- fluidPage(
-  theme = shinytheme("THEME-NAME")
-)
-
-server <- function(input, output, session) {}
-
-shinyApp(ui, server)
+  theme = shinytheme("lumen")
+  )
 
 ```
 
-]
 
----
-
-# Theme auswählen
-
-.pull-left4[
-<ul>
-  <li class="m1"><span>Ein passendes Theme auswählen</span>
-    <ul class="level">
-      <li><span>auf der Website <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li>
-      <li><span>oder interaktiv ausprobieren auf <a href="https://gallery.shinyapps.io/117-shinythemes/">https://gallery.shinyapps.io/117-shinythemes/</a></span></li>
-    </ul>
-  </li>
-  
-  <li class="m2"><span><mono>shinytheme()</mono> den Namen (in Kleinbuchstaben) als String übergeben.</span>
-    <ul class="level">
-      <li><span>z.B. <mono>shinytheme("superhero")</mono></span></li>
-    </ul>
-  </li>
-  <br>
-</ul>
 ]
 
 .pull-right5[
+
 <p align="center">
-<img src="image/superhero.png"><br>
+<img src="image/lumen.png"><br>
 <font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
 </p>
 ]
 
 ---
 
+# <mono>shinythemes</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Bietet einfaches Theming "out of the box"</span></li><br>
+  <li class="m2"><span>Mehrere vordefinierte Themes: siehe <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li>
+</ul>
+
+  <br>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(shinythemes)
+
+ui <- fluidPage(
+  theme = shinytheme("flatly")
+  )
+```
+
+
+]
+
+.pull-right5[
+
+<p align="center">
+<img src="image/flatly.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
+</p>
+]
+
+
+---
+
+# <mono>shinythemes</mono>
+
+.pull-left4[
+<ul>
+  <li class="m1"><span>Bietet einfaches Theming "out of the box"</span></li><br>
+  <li class="m2"><span>Mehrere vordefinierte Themes: siehe <a href="https://rstudio.github.io/shinythemes/">https://rstudio.github.io/shinythemes/</a></span></li><br>
+
+  <br>
+</ul>
+
+```{r, eval = FALSE, echo = TRUE}
+
+library(shiny)
+library(shinythemes)
+
+ui <- fluidPage(
+  theme = shinytheme("superhero")
+)
+```
+
+
+]
+
+.pull-right5[
+
+<p align="center">
+<img src="image/superhero.png"><br>
+<font style="font-size:10px">from <a href="https://rstudio.github.io/shinythemes/">rstudio.github.io</a></font>
+</p>
+]
+
+
+---
+
+# <mono>bslib</mono>
+
 .pull-left35[
 
-# Manuelles Styling
-
 <ul>
-  <li class="m1"><span>Das Paket <mono>bslib</mono> erlaubt manuelles theming</span></li>
-  <li class="m2"><span>Die Funktion <mono>bs_theme()</mono> unterstützt einige Argumente für visuelle Anpassungen</span></li>
+  <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
+  <li class="m2"><span><mono>bs_theme()</mono> bietet viele Argumente</mono></span></li>
 </ul>
 
 ```{r, eval = FALSE, echo = TRUE}
@@ -225,8 +271,8 @@ ui <- fluidPage(
 
 ]
 
-.pull-right6[
-<br><br>
+.pull-right55[
+
 <p align="center">
 <img src="image/bslib/bslib.png">
 </p>
@@ -234,12 +280,13 @@ ui <- fluidPage(
 
 ---
 
+# <mono>bslib</mono>
+
 .pull-left35[
 
-# Hintergrund
-
 <ul>
-  <li class="m1"><span>Mit den Argumenten <mono>bg</mono> und <mono>fg</mono> lassen sich Hintergrund- und Vordergrundfarbe definieren</span></li>
+  <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
+  <li class="m2"><span><mono>bs_theme()</mono> bietet viele Argumente</mono></span></li>
 </ul>
 
 ```{r, eval = FALSE, echo = TRUE}
@@ -259,8 +306,8 @@ ui <- fluidPage(
 
 ]
 
-.pull-right6[
-<br><br>
+.pull-right55[
+
 <p align="center">
 <img src="image/bslib/bslib_bg.png">
 </p>
@@ -269,12 +316,13 @@ ui <- fluidPage(
 
 ---
 
-.pull-left35[
+# <mono>bslib</mono>
 
-# Akzentfarben
+.pull-left3[
 
 <ul>
-  <li class="m1"><span>Mit den Argumenten <mono>primary</mono> und <mono>danger</mono> lassen sich Akzentfarben von Buttons und anderen Elementen anpassen</span></li>
+  <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
+  <li class="m2"><span><mono>bs_theme()</mono> bietet viele Argumente</mono></span></li>
 </ul>
 
 ```{r, eval = FALSE, echo = TRUE}
@@ -296,8 +344,8 @@ ui <- fluidPage(
 
 ]
 
-.pull-right6[
-<br><br>
+.pull-right55[
+
 <p align="center">
 <img src="image/bslib/bslib_bg_statecols.png">
 </p>
@@ -305,12 +353,13 @@ ui <- fluidPage(
 
 ---
 
+# <mono>bslib</mono>
+
 .pull-left35[
 
-# Fonts
-
 <ul>
-  <li class="m1"><span>Mit den Argumenten <mono>base_font</mono> und <mono>heading_font</mono> lassen sich Fonts anpassen</span></li>
+  <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
+  <li class="m2"><span><mono>bs_theme()</mono> bietet viele Argumente</mono></span></li>
 </ul>
 
 ```{r, eval = FALSE, echo = TRUE}
@@ -334,8 +383,8 @@ ui <- fluidPage(
 
 ]
 
-.pull-right6[
-<br><br>
+.pull-right55[
+
 <p align="center">
 <img src="image/bslib/bslib_bg_statecols_fonts.png">
 </p>
@@ -343,12 +392,13 @@ ui <- fluidPage(
 
 ---
 
-.pull-left35[
+# <mono>bslib</bslib>
 
-# Schriftgrösse
+.pull-left3[
 
 <ul>
-  <li class="m1"><span>Mit dem Argument <mono>font_scale</mono> lässt sich die Schriftgrösse ändern</span></li>
+  <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
+  <li class="m2"><span><mono>bs_theme()</mono> bietet viele Argumente</mono></span></li>
 </ul>
 
 ```{r, eval = FALSE, echo = TRUE}
@@ -373,12 +423,36 @@ ui <- fluidPage(
 
 ]
 
-.pull-right6[
-<br><br>
+.pull-right55[
+
 <p align="center">
 <img src="image/bslib/bslib_bg_statecols_fonts_size.png">
 </p>
 ]
+
+---
+
+# Google Fonts
+
+.pull-left4[
+<ul>
+  <li class="m1"><span><mono>bslib</mono> erlaubt auch die Benutzung von Google Fonts</span></li>
+    <ul class="level">
+    <li><span><a href="https://fonts.google.com">https://fonts.google.com</a></span></li>
+  </ul>
+</ul>
+
+  CODE 
+
+]
+
+.pull-right5[
+<p align="center">
+<img src="image/google-fonts.png"><br>
+<font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
+</p>
+]
+
 
 
 ---
@@ -390,6 +464,9 @@ ui <- fluidPage(
   <li class="m1"><span>Moderne und ansprechende Themes von Bootswatch</span></li>
   <li class="m2"><span>Aktuellere Versionen des UI Frameworks Bootstrap</span></li>
 </ul>
+
+ZEIG CODE. STELL BEZIEHUNG ZU SHINYTHEMES HER. KÖNNTE AUCH VOR CUSTOM THEMES KOMMEN
+
 ]
 
 .pull-right65[
@@ -414,6 +491,10 @@ ui <- fluidPage(
       <li><span>inkl. interaktivem Theme-Builder</span></li>
     </ul>
 </ul>
+
+
+ÜBERLEGE OB DYNAMISCHES THEMING DER RICHTIGE BEGRIFF IST
+
 ]
 
 .pull-right65[
