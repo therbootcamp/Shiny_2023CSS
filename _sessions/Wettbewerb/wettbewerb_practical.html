@@ -412,7 +412,7 @@ hinterlegt sind für den Plot.</p>
   select(region, summe_pro_kopf)
 
 kantone %&gt;%
-  left_join(covid_first_week, by = c(&quot;kurz&quot; = &quot;region&quot;)) %&gt;% 
+  left_join(covid_first_week, by = c(&quot;kanton_code&quot; = &quot;region&quot;)) %&gt;% 
   ggplot(aes(x = x, y = y, group = kanton_id, fill = summe_pro_kopf)) +
   geom_polygon(col = &quot;grey50&quot;) +
   theme_void() +
@@ -467,7 +467,9 @@ shinyApp(ui, server)</code></pre>
 <p>Eine weitere Dimension, die interaktiv verändert werden könnte, ist,
 für welche Region sich ein User Daten anschauen möchte. Mittels
 <code>slectInput</code> lassen sie sich einfach auswählen. Zudem ist in
-diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt.</p>
+diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt.
+Alternativ könntest du überlegen die Kantonauswahl über die
+Schweizerkarte zu implementieren.</p>
 <pre class="r"><code>library(shiny)
 
 ui &lt;- fluidPage(
@@ -571,16 +573,16 @@ Altersgruppe.</td>
 haben)</td>
 </tr>
 <tr class="odd">
+<td><code>kanton_code</code></td>
+<td>Kantonskürzel (z.B. ZH, AG, LU, usw.)</td>
+</tr>
+<tr class="even">
 <td><code>x</code></td>
 <td>x-Koordinate</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>y</code></td>
 <td>y-Koordinate</td>
-</tr>
-<tr class="odd">
-<td><code>kurz</code></td>
-<td>Kantonskürzel (z.B. ZH, AG, LU, usw.)</td>
 </tr>
 </tbody>
 </table>

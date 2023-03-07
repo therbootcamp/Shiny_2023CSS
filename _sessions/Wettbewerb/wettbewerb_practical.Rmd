@@ -256,7 +256,7 @@ covid_first_week <- covid %>%
   select(region, summe_pro_kopf)
 
 kantone %>%
-  left_join(covid_first_week, by = c("kurz" = "region")) %>% 
+  left_join(covid_first_week, by = c("kanton_code" = "region")) %>% 
   ggplot(aes(x = x, y = y, group = kanton_id, fill = summe_pro_kopf)) +
   geom_polygon(col = "grey50") +
   theme_void() +
@@ -307,7 +307,7 @@ shinyApp(ui, server)
 
 #### Kantone auswählen
 
-Eine weitere Dimension, die interaktiv verändert werden könnte, ist, für welche Region sich ein User Daten anschauen möchte. Mittels `slectInput` lassen sie sich einfach auswählen. Zudem ist in diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt.
+Eine weitere Dimension, die interaktiv verändert werden könnte, ist, für welche Region sich ein User Daten anschauen möchte. Mittels `slectInput` lassen sie sich einfach auswählen. Zudem ist in diesem Beispiel ein Button definiert, der die Auswahl zurücksetzt. Alternativ könntest du überlegen die Kantonauswahl über die Schweizerkarte zu implementieren. 
 
 ```{r eval = FALSE, echo = TRUE}
 
@@ -355,10 +355,10 @@ Dies waren nur ein paar Beispiele um eure Covid Explorer Entwicklung zu inspirie
 
 ### kantone.csv
 
-| Name        | Bedeutung                                                         |
+| Name         | Bedeutung                                                         |
 |---------------|---------------------------------------------------------|
-| `kanton`    | Kantonsname                                                       |
-| `kanton_id` | Kantons-id (mehrere pro Kanton, da manche Kantone "Inseln" haben) |
-| `x`         | x-Koordinate                                                      |
-| `y`         | y-Koordinate                                                      |
-| `kurz`      | Kantonskürzel (z.B. ZH, AG, LU, usw.)                             |
+| `kanton`     | Kantonsname                                                       |
+| `kanton_id`  | Kantons-id (mehrere pro Kanton, da manche Kantone "Inseln" haben) |
+| `kanton_code`| Kantonskürzel (z.B. ZH, AG, LU, usw.)                             |
+| `x`          | x-Koordinate                                                      |
+| `y`          | y-Koordinate                                                      |
