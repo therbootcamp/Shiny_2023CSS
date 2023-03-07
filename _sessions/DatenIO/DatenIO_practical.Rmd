@@ -104,7 +104,7 @@ ui <- fluidPage(
 
 4. Teste die UI einmal mit `shinyApp(ui, server = function(input, output, sesssion){})`. Du solltest den Titel und den Donwload sehen, aber noch keine Tabelle, weil natürlich noch keine Daten geladen wurden. 
 
-5. Nun zum `server`. Hier arbeiten wir (wiedermal) mit einem `reactiveVal` für die Daten (genannt `daten`) und einem `observeEvent`, der Code enthält mit dem der `reactiveVal` überschrieben, sobald der `fileInput` in der UI bedient wurde. Baue diese Grundstruktur.    
+5. Nun zum `server`. Hier arbeiten wir (wiedermal) mit einem `reactiveVal` für die Daten (genannt `daten`) und einem `observeEvent`, der Code enthält mit dem der `reactiveVal` überschrieben wird, sobald der `fileInput` in der UI bedient wurde. Baue diese Grundstruktur.    
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -497,8 +497,6 @@ shinyApp(ui, server)
 ## App
 
 1. Der nächste Schritt in der Entwicklung unserer App ist es das Einlesen und Speichern der Daten zu ermöglichen. Kümmern wir uns zuerst um das Hochladen von Daten und fokussieren zunächst auf die UI. Ergänze ein `fileInput` im Upload Panels innerhalb des Daten NavBar Panels. Als `inputId`, `label`, und `buttonLabel` weise `"hochladen"`, `"Wähle eine Datei aus"`, und `"Auswählen"` zu. Lasse die App einmal laufen und überprüfe ob der File upload zu sehen ist.  
-
-
 ```{r, echo = TRUE, eval = FALSE}
 
   tabPanel(
@@ -532,9 +530,24 @@ verletzungen <- reactiveVal(XX)
 
 ```
 
-4. Weil `verletzungen` jetzt ein reaktiver Wert ist, muss einer Stelle im `server` eine kleine Ändeurngen vorgenommen werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer Stelle im `server` wird `verletzungen` als normales Datenobjekt werden anstatt als eine reaktiver Wert, das heisst ohne Klammer anstatt mit. Ergänze die fehlenden Klammern und lasse die App einmal laufen. Wenn kein Fehler aufkommt, dann hast du alles richtig gemacht.
+4. Weil `verletzungen` nun innerhalb des `server`s geladen wird, steht es nicht mehr ohne Weiteres für die `ui` zur Verfügung. Ersetze deshalb `unique(verletzungen$körperteil)` innerhalb des `selectInput` in der `ui` durch folgenden Vektor. Den Vektor kannst du natürlich auch ausserhalb von `ui` und `server` definieren und an die `ui` weitergeben. 
 
-5. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verwende dafür `input$hochladen$datapath`.    
+```{r}
+
+c("25-50% des Körpers",
+"Augapfel", "Ellbogen", "Finger", "Fuss", "Fussgelenk",
+"Gesamter Körper", "Gesicht", "Hals", "Hand", "Handgelenk",
+"Intern", "Knie", "Kopf", "Mund", "Nicht bekannt", "Oberarm",
+"Oberer Oberkörper", "Oberschenkel", "Ohr", "Schamgegend",
+"Schulter", "Unterarm", "Unterer Oberkörper", "Unterschenkel",
+"Zehen")
+
+```
+
+
+5. Weil `verletzungen` jetzt ein reaktiver Wert ist, muss einer Stelle im `server` eine kleine Ändeurngen vorgenommen werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer Stelle im `server` wird `verletzungen` als normales Datenobjekt werden anstatt als eine reaktiver Wert, das heisst ohne Klammer anstatt mit. Ergänze die fehlenden Klammern und lasse die App einmal laufen. Wenn kein Fehler aufkommt, dann hast du alles richtig gemacht.
+
+6. Da nun `verletzungen` ein reaktiver Wert ist, können wir Code schreiben der dazu führt, dass `verletzungen` sich ändert sobald eine neue Datei bereitgestellt wird. Hierzu eignet sich `observeEvent` Block. Ergänze einen solchen, der dann seinen Code laufen lässt wenn der Upload input (`input$hochladen`) sich ändert und innerhalb des Cdes `verletzungen` durch Einlesen der neuen Daten verändert. Verwende dafür `input$hochladen$datapath`.    
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -546,9 +559,9 @@ observeEvent(XX,{
 
 ```
 
-6. Teste nun die App. Wenn du alles richtig eingestellt hast, solltest du in der Lage sein alternative Daten einzulesen. Probiere einmal den kleineren Datensatz `verletzungen_jahresende.RDS`. Zuerst solltest du sehen, dass der Upload dir "Upload complete" rückmeldet. Dann solltest im Nachbartab Daten sehen, dass die Tabelle nur noch etwas mehr als viertausend Zeilen anstatt vorher mehreren hundertausend. Nichtsdesto sollte aber alles wie zuvor reibungslos funktionieren. Es sollte sogar möglich sein vor dem Upload Körperteile und Alter einzustellen und dass diese Einstellungen nach Upload immer noch aktiv sind und unmittelbar auf den neuen Datensatz angewendet werden. 
+7. Teste nun die App. Wenn du alles richtig eingestellt hast, solltest du in der Lage sein alternative Daten einzulesen. Probiere einmal den kleineren Datensatz `verletzungen_jahresende.RDS`. Zuerst solltest du sehen, dass der Upload dir "Upload complete" rückmeldet. Dann solltest im Nachbartab Daten sehen, dass die Tabelle nur noch etwas mehr als viertausend Zeilen anstatt vorher mehreren hundertausend. Nichtsdesto sollte aber alles wie zuvor reibungslos funktionieren. Es sollte sogar möglich sein vor dem Upload Körperteile und Alter einzustellen und dass diese Einstellungen nach Upload immer noch aktiv sind und unmittelbar auf den neuen Datensatz angewendet werden. 
 
-7. Der Uploadteil ist fertig. Kümmern wir uns jetzt um den Download. Ergänze in der UI unter dem Upload `tabPanel` einen `downloadButton` mit ID `"herunterladen"` und Label `"Als .csv herunterladen"`. Ergänze zudem `style = 'font-size:20px'`, um die Schrift etwas grösser zu machen, und ein `br()` vor dem `downloadButton` für etwas mehr Platz. 
+8. Der Uploadteil ist fertig. Kümmern wir uns jetzt um den Download. Ergänze in der UI unter dem Upload `tabPanel` einen `downloadButton` mit ID `"herunterladen"` und Label `"Als .csv herunterladen"`. Ergänze zudem `style = 'font-size:20px'`, um die Schrift etwas grösser zu machen, und ein `br()` vor dem `downloadButton` für etwas mehr Platz. 
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -561,7 +574,7 @@ observeEvent(XX,{
 
 ```
 
-8. Im `server` ergänze nun den `downloadHandler` wie unten dargestellt. Siehe, dass wir den Dateinamen 
+9. Im `server` ergänze nun den `downloadHandler` wie unten dargestellt. Siehe, dass wir den Dateinamen 
 
 ```{r, echo = TRUE, eval = FALSE}
 
@@ -583,6 +596,14 @@ library(shiny)
 library(tidyverse)
 library(shinyWidgets)
 
+körperteile_choices = c("25-50% des Körpers",
+"Augapfel", "Ellbogen", "Finger", "Fuss", "Fussgelenk",
+"Gesamter Körper", "Gesicht", "Hals", "Hand", "Handgelenk",
+"Intern", "Knie", "Kopf", "Mund", "Nicht bekannt", "Oberarm",
+"Oberer Oberkörper", "Oberschenkel", "Ohr", "Schamgegend",
+"Schulter", "Unterarm", "Unterer Oberkörper", "Unterschenkel",
+"Zehen")
+
 ui = navbarPage(
   "InjuryViewer",
   
@@ -595,7 +616,7 @@ ui = navbarPage(
       sidebarPanel(
         width = 3,
         selectInput("körperteil", "Körperteil", 
-                    choices = unique(verletzungen$körperteil), 
+                    choices = körperteile_choices, 
                     multiple = TRUE),
         sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
         actionButton("diagnose_var", "Diagnosen"),

@@ -273,8 +273,8 @@ weil natürlich noch keine Daten geladen wurden.</p></li>
 <li><p>Nun zum <code>server</code>. Hier arbeiten wir (wiedermal) mit
 einem <code>reactiveVal</code> für die Daten (genannt
 <code>daten</code>) und einem <code>observeEvent</code>, der Code
-enthält mit dem der <code>reactiveVal</code> überschrieben, sobald der
-<code>fileInput</code> in der UI bedient wurde. Baue diese
+enthält mit dem der <code>reactiveVal</code> überschrieben wird, sobald
+der <code>fileInput</code> in der UI bedient wurde. Baue diese
 Grundstruktur.</p></li>
 </ol>
 <pre class="r"><code>server = function(input, output, sesssion){
@@ -574,6 +574,14 @@ als Default den gesamenten Datensatz beinhaltet.</li>
 </ol>
 <pre class="r"><code>verletzungen &lt;- reactiveVal(XX)</code></pre>
 <ol start="4" style="list-style-type: decimal">
+<li><p>Weil <code>verletzungen</code> nun innerhalb des
+<code>server</code>s geladen wird, steht es nicht mehr ohne Weiteres für
+die <code>ui</code> zur Verfügung. Ersetze deshalb
+<code>unique(verletzungen$körperteil)</code> innerhalb des
+<code>selectInput</code> in der <code>ui</code> durch folgenden Vektor.
+Den Vektor kannst du natürlich auch ausserhalb von <code>ui</code> und
+<code>server</code> definieren und an die <code>ui</code>
+weitergeben.</p></li>
 <li><p>Weil <code>verletzungen</code> jetzt ein reaktiver Wert ist, muss
 einer Stelle im <code>server</code> eine kleine Ändeurngen vorgenommen
 werden. Anonstent treten Probleme auf. Ahnst du schon wo? An einer
@@ -596,7 +604,7 @@ Einlesen der neuen Daten verändert. Verwende dafür
   XX(readRDS(XX))
   
 })</code></pre>
-<ol start="6" style="list-style-type: decimal">
+<ol start="7" style="list-style-type: decimal">
 <li><p>Teste nun die App. Wenn du alles richtig eingestellt hast,
 solltest du in der Lage sein alternative Daten einzulesen. Probiere
 einmal den kleineren Datensatz <code>verletzungen_jahresende.RDS</code>.
@@ -622,7 +630,7 @@ für etwas mehr Platz.</p></li>
     XX,
     XX(XX, XX, XX)
     )</code></pre>
-<ol start="8" style="list-style-type: decimal">
+<ol start="9" style="list-style-type: decimal">
 <li>Im <code>server</code> ergänze nun den <code>downloadHandler</code>
 wie unten dargestellt. Siehe, dass wir den Dateinamen</li>
 </ol>
@@ -642,6 +650,14 @@ dann wieder herunterlädst.</li>
 library(tidyverse)
 library(shinyWidgets)
 
+körperteile_choices = c(&quot;25-50% des Körpers&quot;,
+&quot;Augapfel&quot;, &quot;Ellbogen&quot;, &quot;Finger&quot;, &quot;Fuss&quot;, &quot;Fussgelenk&quot;,
+&quot;Gesamter Körper&quot;, &quot;Gesicht&quot;, &quot;Hals&quot;, &quot;Hand&quot;, &quot;Handgelenk&quot;,
+&quot;Intern&quot;, &quot;Knie&quot;, &quot;Kopf&quot;, &quot;Mund&quot;, &quot;Nicht bekannt&quot;, &quot;Oberarm&quot;,
+&quot;Oberer Oberkörper&quot;, &quot;Oberschenkel&quot;, &quot;Ohr&quot;, &quot;Schamgegend&quot;,
+&quot;Schulter&quot;, &quot;Unterarm&quot;, &quot;Unterer Oberkörper&quot;, &quot;Unterschenkel&quot;,
+&quot;Zehen&quot;)
+
 ui = navbarPage(
   &quot;InjuryViewer&quot;,
   
@@ -654,7 +670,7 @@ ui = navbarPage(
       sidebarPanel(
         width = 3,
         selectInput(&quot;körperteil&quot;, &quot;Körperteil&quot;, 
-                    choices = unique(verletzungen$körperteil), 
+                    choices = körperteile_choices, 
                     multiple = TRUE),
         sliderInput(&quot;alter&quot;, &quot;Alter&quot;, min = 0, max = 110, value = c(0, 110)),
         actionButton(&quot;diagnose_var&quot;, &quot;Diagnosen&quot;),

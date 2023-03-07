@@ -581,6 +581,14 @@ library(tidyverse)
 library(tools)
 library(shinyFeedback)
 
+körperteile_choices = c("25-50% des Körpers",
+"Augapfel", "Ellbogen", "Finger", "Fuss", "Fussgelenk",
+"Gesamter Körper", "Gesicht", "Hals", "Hand", "Handgelenk",
+"Intern", "Knie", "Kopf", "Mund", "Nicht bekannt", "Oberarm",
+"Oberer Oberkörper", "Oberschenkel", "Ohr", "Schamgegend",
+"Schulter", "Unterarm", "Unterer Oberkörper", "Unterschenkel",
+"Zehen")
+
 ui = navbarPage(
   "InjuryViewer",
   tabPanel(
@@ -592,7 +600,7 @@ ui = navbarPage(
       sidebarPanel(
         width = 3,
         selectInput("körperteil", "Körperteil", 
-                    choices = unique(verletzungen$körperteil), 
+                    choices = körperteile_choices, 
                     multiple = TRUE),
         sliderInput("alter", "Alter", min = 0, max = 110, value = c(0, 110)),
         actionButton("diagnose_var", "Diagnosen", width = "32.5%"),
