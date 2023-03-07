@@ -569,7 +569,7 @@ observeEvent(input$hochladen, {
 
 10. Teste wieder die App. Nun sollte die Fehlermeldung nach drei Sekunden verschwinden. 
 
-11. Als weiteren Interaktivität könntest Du überlegen, wie Du sinnvoll testest, ob die richtigen Variablen vorliegen, und dem Nutzer rückmeldest welche Variablen fehlen. 
+11. Als weitere Interaktivität könntest Du überlegen, wie Du sinnvoll testest, ob die richtigen Variablen vorliegen, und dem Nutzer rückmeldest welche Variablen fehlen. 
 
     
 ## Lösung
