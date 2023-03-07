@@ -512,9 +512,9 @@ observeEvent(input$hochladen, {
   
   endung <- XX(XX)
   
-  if(endung == XX)
+  if(endung == XX){
   
-     verletzungen(readRDS(input$hochladen$datapath)) {
+     verletzungen(readRDS(input$hochladen$datapath)) 
        
      } else {
       
