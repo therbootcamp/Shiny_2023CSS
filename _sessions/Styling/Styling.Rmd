@@ -316,7 +316,7 @@ ui <- fluidPage(
 
 # <mono>bslib</mono>
 
-.pull-left3[
+.pull-left35[
 
 <ul>
   <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
@@ -392,7 +392,7 @@ ui <- fluidPage(
 
 # <mono>bslib</bslib>
 
-.pull-left3[
+.pull-left35[
 
 <ul>
   <li class="m1"><span>Das <mono>bslib</mono> Paket erlaubt <high>flexibles theming</high></span></li>
