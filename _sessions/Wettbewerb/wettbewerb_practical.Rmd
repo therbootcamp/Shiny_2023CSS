@@ -135,7 +135,7 @@ shinyApp(ui, server)
 
 3.  Du nimmst am Wettbewerb teil indem du deinen Ordner `competition` als `.zip` Datei komprimierst und an uns schickst. Lege alle Dateien, die deine App braucht, in diesen `competition` Ordner. Also z.B. alle verwendeten Datensätze, Bilder, R Skripte oder sonstige Dateien.
 
-4.  Reiche deinen Beitrag ein indem Du deine `.zip` Datei an unsere <a href="mailto:therbootcamp@gmail.com"><b>[therbootcamp\@gmail.com](mailto:therbootcamp@gmail.com){.email}</b></a> Mail Adresse schickst.
+4.  Reiche deinen Beitrag ein indem Du deine `.zip` Datei an unsere <a href="mailto:therbootcamp@gmail.com"><b>[therbootcamp\@gmail.com](mailto:therbootcamp@gmail.com){.email}</b></a> Mail Adresse schickst. Wähle für den Namen der `.zip` Datei ein Pseudonym (dh. nenne die Datei `_PSEUDONYM_.zip` wobei `_PSEUDONYM_` dein Pseudonym ist). Dein Pseudonym wird mit deiner  
 
 5.  Jeder Beitrag wird anonym beurteilt duch eine Jury bestehend aus den Kursteilnehmern und Kursteilnehmerinnen. Der Beitrag mit den meisten Punkten gewinnt. Die Beurteilung findet im Anschluss an den Kurs statt.
 
