@@ -245,6 +245,25 @@ knitr::opts_chunk$set(fig.align = 'center')
 
 .pull-left3[
 
+# Markdown
+
+<ul>
+  <li class="m1"><span>Shiny Apps können auch HTML oder PDF Berichte über RMarkdown erstellen.</span></li>
+<li class="m2"><span>Ein Markdown Bericht wird generiert über einen <mono>downloadHandler</mono></span></li>
+</ul>
+]
+
+.pull-right5[
+<br>
+<iframe src="https://shiny.rstudio.com/articles/generating-reports.html" height=520px  width = 600px></iframe><br><font style="font-size:12px"><a href="https://shiny.rstudio.com/articles/generating-reports.html">shiny.rstudio.com</a></font>
+
+]
+
+
+---
+
+.pull-left3[
+
 # Deployment
 
 <ul>
@@ -285,9 +304,28 @@ knitr::opts_chunk$set(fig.align = 'center')
   </tr>
 </table>
 
+---
+
+.pull-left45[
+# Bitte gebt uns Feedback
+<br><br>
+
+<p align = "center">
+  <img src="image/feedback.png" height=350px></img><br>
+  <font style="font-size:10px">from <a href="https://cdn-images-1.medium.com/max/1600/1*5OZNYAfzDZfM1lwJBZEuHQ.png">medium.com</a></font>
+</p>
+
+]
+
+.pull-right45[
+
+<p align="center"><br><br>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdRBR9MbVCO2fp1_8Lnjw-J4EmQdEXUavlBWKVwqvGhR71bTw/viewform?embedded=true" width="430" height="550" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe></p>
+
+]
 
 
 ---
-class: middle, center
+class: center, middle
 
-<h1><a href=https://therbootcamp.github.io/Shiny_2023CSS/index.html>Agenda</a></h1>
+# Herzlichen Dank!
