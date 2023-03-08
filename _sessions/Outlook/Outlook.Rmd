@@ -328,4 +328,6 @@ knitr::opts_chunk$set(fig.align = 'center')
 ---
 class: center, middle
 
+<img src="image/sticker.png" height=200px></img>
+
 # Herzlichen Dank!
