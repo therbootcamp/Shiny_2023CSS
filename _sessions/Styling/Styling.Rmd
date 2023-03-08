@@ -65,12 +65,10 @@ knitr::opts_chunk$set(fig.align = 'center')
 # Agenda
 
 <ul>
-  <li class="m1"><span>Erweitertes theming</span></li>
-  <li class="m2"><span>Zusätzliche UI Elemente</span></li>
-  <li class="m3"><span>Datenverbindungen</span></li>
+  <li class="m1"><span>Usability</span></li>
+  <li class="m2"><span>shinythemes</span></li>
+  <li class="m3"><span>bslib</span></li>
   <li class="m4"><span>Modularität</span></li>
-  <li class="m5"><span>Deployment</span></li>
-  <li class="m6"><span>Packages und Erweiterungen</span></li>
 </ul>
 ]
 
@@ -434,19 +432,31 @@ ui <- fluidPage(
 
 # Google Fonts
 
-.pull-left4[
+.pull-left5[
 <ul>
   <li class="m1"><span><mono>bslib</mono> erlaubt auch die Benutzung von Google Fonts</span></li>
     <ul class="level">
     <li><span><a href="https://fonts.google.com">https://fonts.google.com</a></span></li>
   </ul>
 </ul>
+<br>
 
-  CODE 
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  theme <- bs_theme(
+    base_font = font_google("Poppins"),
+    code_font = font_google("Fira Code"),
+    heading_font = font_google("Tilt Warp")
+  )
+)
+
+```
+
 
 ]
 
-.pull-right5[
+.pull-right45[
 <p align="center">
 <img src="image/google-fonts.png"><br>
 <font style="font-size:10px">from <a href="https://fonts.google.com">https://fonts.google.com</a></font>
@@ -462,10 +472,23 @@ ui <- fluidPage(
 .pull-left3[
 <ul>
   <li class="m1"><span>Moderne und ansprechende Themes von Bootswatch</span></li>
+  <ul class="level">
+    <li><span><a href="https://bootswatch.com/">https://bootswatch.com/</a></span></li>
+    </ul>
   <li class="m2"><span>Aktuellere Versionen des UI Frameworks Bootstrap</span></li>
 </ul>
 
-ZEIG CODE. STELL BEZIEHUNG ZU SHINYTHEMES HER. KÖNNTE AUCH VOR CUSTOM THEMES KOMMEN
+
+```{r, eval = FALSE, echo = TRUE}
+
+ui <- fluidPage(
+  theme = bs_theme(
+    bootswatch = "quartz"
+    )
+)
+
+```
+
 
 ]
 
@@ -478,22 +501,19 @@ ZEIG CODE. STELL BEZIEHUNG ZU SHINYTHEMES HER. KÖNNTE AUCH VOR CUSTOM THEMES KO
 
 ---
 
-# Dynamisches theming
+# Interaktive theme previews
 
 .pull-left3[
 <ul>
-  <li class="m1"><span>Lässt User in der Session das Aussehen ändern</span></li>
-  <ul class="level">
-    <li><span>z.B. dark-modes</span></li>
-  </ul>
-  <li class="m2"><span>mehr Optionen zum einfachen Anpassen von Themes in R</span></li>
-    <ul class="level">
-      <li><span>inkl. interaktivem Theme-Builder</span></li>
-    </ul>
+  <li class="m1"><span>Kann eine interaktive Preview App zeigen um Themes zu testen</span></li>
 </ul>
 
-
-ÜBERLEGE OB DYNAMISCHES THEMING DER RICHTIGE BEGRIFF IST
+```{r, eval=FALSE, echo=TRUE}
+library(bslib)
+bs_theme_preview(
+  theme = bs_theme()
+  )
+```
 
 ]
 
