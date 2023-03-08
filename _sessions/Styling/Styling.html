@@ -57,12 +57,10 @@ layout: true
 # Agenda
 
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Erweitertes theming&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;Zusätzliche UI Elemente&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m3"&gt;&lt;span&gt;Datenverbindungen&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Usability&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m2"&gt;&lt;span&gt;shinythemes&lt;/span&gt;&lt;/li&gt;
+  &lt;li class="m3"&gt;&lt;span&gt;bslib&lt;/span&gt;&lt;/li&gt;
   &lt;li class="m4"&gt;&lt;span&gt;Modularität&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m5"&gt;&lt;span&gt;Deployment&lt;/span&gt;&lt;/li&gt;
-  &lt;li class="m6"&gt;&lt;span&gt;Packages und Erweiterungen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 ]
 
@@ -418,19 +416,30 @@ ui &lt;- fluidPage(
 
 # Google Fonts
 
-.pull-left4[
+.pull-left5[
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;&lt;mono&gt;bslib&lt;/mono&gt; erlaubt auch die Benutzung von Google Fonts&lt;/span&gt;&lt;/li&gt;
     &lt;ul class="level"&gt;
     &lt;li&gt;&lt;span&gt;&lt;a href="https://fonts.google.com"&gt;https://fonts.google.com&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/ul&gt;
+&lt;br&gt;
 
-  CODE 
+
+```r
+ui &lt;- fluidPage(
+  theme &lt;- bs_theme(
+    base_font = font_google("Poppins"),
+    code_font = font_google("Fira Code"),
+    heading_font = font_google("Tilt Warp")
+  )
+)
+```
+
 
 ]
 
-.pull-right5[
+.pull-right45[
 &lt;p align="center"&gt;
 &lt;img src="image/google-fonts.png"&gt;&lt;br&gt;
 &lt;font style="font-size:10px"&gt;from &lt;a href="https://fonts.google.com"&gt;https://fonts.google.com&lt;/a&gt;&lt;/font&gt;
@@ -446,10 +455,22 @@ ui &lt;- fluidPage(
 .pull-left3[
 &lt;ul&gt;
   &lt;li class="m1"&gt;&lt;span&gt;Moderne und ansprechende Themes von Bootswatch&lt;/span&gt;&lt;/li&gt;
+  &lt;ul class="level"&gt;
+    &lt;li&gt;&lt;span&gt;&lt;a href="https://bootswatch.com/"&gt;https://bootswatch.com/&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;li class="m2"&gt;&lt;span&gt;Aktuellere Versionen des UI Frameworks Bootstrap&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-ZEIG CODE. STELL BEZIEHUNG ZU SHINYTHEMES HER. KÖNNTE AUCH VOR CUSTOM THEMES KOMMEN
+
+
+```r
+ui &lt;- fluidPage(
+  theme = bs_theme(
+    bootswatch = "quartz"
+    )
+)
+```
+
 
 ]
 
@@ -462,22 +483,20 @@ ZEIG CODE. STELL BEZIEHUNG ZU SHINYTHEMES HER. KÖNNTE AUCH VOR CUSTOM THEMES KO
 
 ---
 
-# Dynamisches theming
+# Interaktive theme previews
 
 .pull-left3[
 &lt;ul&gt;
-  &lt;li class="m1"&gt;&lt;span&gt;Lässt User in der Session das Aussehen ändern&lt;/span&gt;&lt;/li&gt;
-  &lt;ul class="level"&gt;
-    &lt;li&gt;&lt;span&gt;z.B. dark-modes&lt;/span&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;li class="m2"&gt;&lt;span&gt;mehr Optionen zum einfachen Anpassen von Themes in R&lt;/span&gt;&lt;/li&gt;
-    &lt;ul class="level"&gt;
-      &lt;li&gt;&lt;span&gt;inkl. interaktivem Theme-Builder&lt;/span&gt;&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li class="m1"&gt;&lt;span&gt;Kann eine interaktive Preview App zeigen um Themes zu testen&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 
-ÜBERLEGE OB DYNAMISCHES THEMING DER RICHTIGE BEGRIFF IST
+```r
+library(bslib)
+bs_theme_preview(
+  theme = bs_theme()
+  )
+```
 
 ]
 
