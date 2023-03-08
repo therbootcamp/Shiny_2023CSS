@@ -1,5 +1,5 @@
 ---
-title: "Aussicht"
+title: "Outlook"
 author: "Dashboards mit Shiny<br>
   <a href='https://therbootcamp.github.io'>The R Bootcamp @ CSS</a>
   <br>
