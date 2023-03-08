@@ -68,7 +68,6 @@ knitr::opts_chunk$set(fig.align = 'center')
   <li class="m1"><span>Usability</span></li>
   <li class="m2"><span>shinythemes</span></li>
   <li class="m3"><span>bslib</span></li>
-  <li class="m4"><span>Modularität</span></li>
 </ul>
 ]
 
